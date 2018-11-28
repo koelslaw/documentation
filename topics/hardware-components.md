@@ -30,7 +30,7 @@ Access Point
 ### Note
 
 This is just a basic layout to distribute the weight as evenly across the 5U Mobile Cases.
-
+```
 ┌────────────────────────────────────┐
 │               KIT 1                │
 │ ┌────────────────────────────────┐ │
@@ -41,7 +41,8 @@ This is just a basic layout to distribute the weight as evenly across the 5U Mob
 │ │        DELL R840 SERVER        │ │
 │ └────────────────────────────────┘ │
 └────────────────────────────────────┘
-
+```
+```
 ┌────────────────────────────────────┐
 │               KIT 2                │
 │ ┌────────────────────────────────┐ │
@@ -52,7 +53,8 @@ This is just a basic layout to distribute the weight as evenly across the 5U Mob
 │ │        DELL R840 SERVER        │ │
 │ └────────────────────────────────┘ │
 └────────────────────────────────────┘
-
+```
+```
 ┌───────────────────────────────┐
 │       CISCO ROUTER 4321       │
 ├───────────────────────────────┤
@@ -64,7 +66,8 @@ This is just a basic layout to distribute the weight as evenly across the 5U Mob
 │  └───┴───┴───┘  └───┘  └───┘  │
 │                               │
 └───────────────────────────────┘
-
+```
+```
 ┌───────────────────────────────────────────────────────────────────────┐
 │                          CISCO SWITCH C3850                           │
 ├───────────────────────────────────────────────────────────────────────┤
@@ -76,7 +79,8 @@ This is just a basic layout to distribute the weight as evenly across the 5U Mob
 │  └───┴───┴───┴───┴───┴───┘└───┴───┴───┴───┴───┴───┘                   │
 │                                                                       │
 └───────────────────────────────────────────────────────────────────────┘
-
+```
+```
 ┌─────────────────────────────────────────────────────────────────────┐
 │                         GIGAMON GIGAVUE HC1                         │
 ├─────────────────────────────────────────────────────────────────────┤
@@ -88,7 +92,8 @@ This is just a basic layout to distribute the weight as evenly across the 5U Mob
 │  └───┴───┴───┴───┘└───┘└───┴───┘└───┴───┘└───┴───┴───┴───┴───┴───┘  │
 │                                                                     │
 └─────────────────────────────────────────────────────────────────────┘
-
+```
+```
 ┌───────────────────────────────┐
 │          DELL R840            │
 ├───────────────────────────────┤
@@ -100,7 +105,8 @@ This is just a basic layout to distribute the weight as evenly across the 5U Mob
 │  │iDRAC│                      │
 │  └─────┘                      │
 └───────────────────────────────┘
-
+```
+```
 ┌──────────────────────────────┐
 │          INTEL NUC           │
 ├──────────────────────────────┤
@@ -110,7 +116,8 @@ This is just a basic layout to distribute the weight as evenly across the 5U Mob
 │  └───┘│USB│└───┘└───┘└────┘  │
 │       └───┘                  │
 └──────────────────────────────┘
-
+```
+```
 ┌────────────────────────┐
 │      ACCESS POINT      │
 ├────────────────────────┤
@@ -120,3 +127,4 @@ This is just a basic layout to distribute the weight as evenly across the 5U Mob
 │  └───┘└───┘└───┘└───┘  │
 │                        │
 └────────────────────────┘
+```
