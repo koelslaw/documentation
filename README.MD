@@ -1,4 +1,4 @@
-Documentation Repository for Domestic Operations (DOMOPS) using the Cyber Tactical Analysis Kit (CTAK).
+Documentation Repository for Domestic Operations (DOMOPS) using the Cyber Mission Assurance Team (CMAT) kit.
 
 # Domestic Operations (DOMOPS) Overview
 DOMOPS description.
