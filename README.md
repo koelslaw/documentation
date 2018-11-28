@@ -13,3 +13,5 @@ This repo serves as the main source of documentation for the Cyber Mission Assur
 - [Software Deployment](./topics/software-deployment.md)
 - [Post-Installation](./topics/post-install.md)
 - [Concept of Employment](./topics/cmat-conemp.md)
+- [Server Configuration Files](./conf/server_config.md)
+- [Client Configuration Files](./conf/client_config.md)
