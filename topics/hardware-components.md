@@ -1,35 +1,20 @@
 # Kit Config
+This includes the layout of the 2 cases for the CMAT kit.
+
+# Kit Components
+These are the components of the CMAT kit.
+
+| Component   | Make            | Model          | Case Number |
+|-------------|-----------------|----------------|-------------|
+| Server 1    | Dell            | PowerEdge R840 | 1           |
+| Router      | Cisco           | ISR 4300       | 1           |
+| Switch      | Cisco           | Catalyst 3850  | 1           |
+| Server 2    | Dell            | PowerEdge R840 | 2           |
+| Gigamon     | Gigavue         | HC1            | 2           |
+| Power Strip | Middle Atlantic |                | 2           |
+
 ## Kit Layout
 
-```
-Kit #1
-
-1.
-2. Power Strip
-3. Gigamon
-4. Server 1
-5. Server 1
-
-
-Kit #2
-
-1.
-2. Edge Router
-3. Switch
-4. Server 2
-5. Server 2
-
-Loose:
-Nuc
-Access Point
-"Home" Edge Router
-```
-
-
-
-### Note
-
-This is just a basic layout to distribute the weight as evenly across the 5U Mobile Cases.
 ```
 ┌────────────────────────────────────┐
 │               KIT 1                │
