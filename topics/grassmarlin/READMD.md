@@ -3,8 +3,8 @@ GRASSMARLIN provides IP network situational awareness of industrial control syst
 
 ## Documentation
 GrassMarlin v3.2 User Guide:  
-* [Download PDF](topics/grassmarlin/GRASSMARLIN User Guide.pdf)  
-* [Presentation on GRASSMARLIN](topics/grassmarlin/GRASSMARLIN_Briefing_20170210.pptx)
+- [Download PDF](topics/grassmarlin/GRASSMARLIN User Guide.pdf)  
+- [Presentation on GRASSMARLIN](topics/grassmarlin/GRASSMARLIN_Briefing_20170210.pptx)
 
 ## Install Instructions
 ```
