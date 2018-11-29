@@ -1,28 +1,28 @@
+![](../../images/gigamon-console.png)  
+
 # Gigamon Configuration
 
 Before you start, ensure that your Gigamon is [properly racked](../hardware-assembly.md)
 
 # Initial Configuration (Console)
+1. With a Mac or Linux system, connect a Console cable to the Console port of the Gigamon  
 ![](../../images/gigamon-console.png)  
 > Console port highlighted purple  
-
-1. With a Mac or Linux system, connect a Console cable to the Console port of the Gigamon  
 1. Connect your Console cable and go into your Terminal program (Terminal, iTerm, etc.)
-```
-ls /dev/*usb*
-crw-rw-rw-  1 root  wheel   20, 115 Nov 29 15:06 /dev/cu.usbserial-A105LRRY (this could be slightly different on your system)
-crw-rw-rw-  1 root  wheel   20, 114 Nov 29 15:06 /dev/tty.usbserial-A105LRRY (this could be slightly different on your system)
-sudo cu -l /dev/cu.usbserial-A105LRRY -s 115200
-```
+  ```
+  ls /dev/*usb*
+  crw-rw-rw-  1 root  wheel   20, 115 Nov 29 15:06 /dev/cu.usbserial-A105LRRY (this could be slightly different on your system)
+  crw-rw-rw-  1 root  wheel   20, 114 Nov 29 15:06 /dev/tty.usbserial-A105LRRY (this could be slightly different on your system)
+  sudo cu -l /dev/cu.usbserial-A105LRRY -s 115200
+  ```
 > If you are using a different console access program, the following parameters are needed:
-```
-Baud Rate: 115,200
-Data Bits: 8
-Parity: None
-Stop Bits: 1
-Flow Control: None
-```
-
+  ```
+  Baud Rate: 115,200
+  Data Bits: 8
+  Parity: None
+  Stop Bits: 1
+  Flow Control: None
+  ```
 1. This will ask you to log in with the [default credentials](../credentials.md)
 1. As soon as you log in, you'll be asked to enter the `Initial Configuration`, let's do that.
 
