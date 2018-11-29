@@ -4,16 +4,17 @@ Before you start, ensure that your Gigamon is [properly racked](../hardware-asse
 
 # Initial Configuration (Console)
 1. With a Mac or Linux system, connect a Console cable to the Console port of the Gigamon  
+
 ![](../../images/gigamon-console.png)  
 > Console port highlighted purple  
 
 1. Connect your Console cable and go into your Terminal program (Terminal, iTerm, etc.)
-  ```
-  ls /dev/*usb*
-  crw-rw-rw-  1 root  wheel   20, 115 Nov 29 15:06 /dev/cu.usbserial-A105LRRY (this could be slightly different on your system)
-  crw-rw-rw-  1 root  wheel   20, 114 Nov 29 15:06 /dev/tty.usbserial-A105LRRY (this could be slightly different on your system)
-  sudo cu -l /dev/cu.usbserial-A105LRRY -s 115200
-  ```
+```
+ls /dev/*usb*
+crw-rw-rw-  1 root  wheel   20, 115 Nov 29 15:06 /dev/cu.usbserial-A105LRRY (this could be slightly different on your system)
+crw-rw-rw-  1 root  wheel   20, 114 Nov 29 15:06 /dev/tty.usbserial-A105LRRY (this could be slightly different on your system)
+sudo cu -l /dev/cu.usbserial-A105LRRY -s 115200
+```
 > If you are using a different console access program, the following parameters are needed:
 ```
 Baud Rate: 115,200
