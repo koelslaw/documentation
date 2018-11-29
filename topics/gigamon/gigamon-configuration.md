@@ -5,7 +5,8 @@ Before you start, ensure that your Gigamon is [properly racked](../hardware-asse
 # Initial Configuration (Console)
 1. With a Mac or Linux system, connect a Console cable to the Console port of the Gigamon  
 ![](../../images/gigamon-console.png)  
-> Console port highlighted purple  
+> Console port highlighted purple
+
 1. Connect your Console cable and go into your Terminal program (Terminal, iTerm, etc.)
 ```
 ls /dev/*usb*
@@ -14,6 +15,7 @@ crw-rw-rw-  1 root  wheel   20, 114 Nov 29 15:06 /dev/tty.usbserial-A105LRRY (th
 sudo cu -l /dev/cu.usbserial-A105LRRY -s 115200
 ```
 > If you are using a different console access program, the following parameters are needed:
+
 ```
 Baud Rate: 115,200
 Data Bits: 8
@@ -55,6 +57,7 @@ Otherwise hit <enter> to save changes and exit.
  - If you decided not to change your default passphrase, you can do so in the webUI
  - If you decided to change your default passphrase, I **strongly** recommend you hop over to the webUI and make sure you can log in
 > In the event that your passphrase isn't working, you should reset here before you logout of the console
+
 ```
 tap.mo.cmat.lan > enable
 tap.mo.cmat.lan # configure terminal
@@ -65,5 +68,6 @@ tap.mo.cmat.lan (config) # username admin|monitor|operator password
 1. Connect a network cable to the management port on the front of the Gigamon
 ![](../../images/gigamon-management.png)
 > Management port highlighted purple  
+
 1. Set your local IP address to be in the same subnet as the management IP you configured above (`10.1.10.6/24` as an example).
 1. Point your browser to the management IP you set above (`https://10.1.10.5` in this example)
