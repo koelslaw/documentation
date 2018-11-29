@@ -13,7 +13,7 @@ To walk through the build steps, [check out the README](topics/README.md).
 - [Software Components](./topics/software-components.md)
 - [Hardware Components](./topics/hardware-components.md)
 - [Hardware Assembly](./topics/hardware-assembly.md)
-- [Network Configuration](topics/network_configuration.md)
+- [Hardware Configuration](./topics/hardware-configuration.md)
 - [Software Deployment](./topics/software-deployment.md)
 - [Post-Installation](./topics/post-install.md)
 - [Concept of Employment](./topics/cmat-conemp.md)
