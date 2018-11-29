@@ -1,7 +1,5 @@
 # Installation Guide
-<p align="center">
-<img src="images/install_banner.png">
-</p>
+![images/install_banner.png]
 
 ## Agenda
 - [overview](#overview)
@@ -52,9 +50,7 @@ Windows:  there are several great tools to apply a bootable image in MS land, bu
 ## Install
 
 ### First Boot
-<p align="center">
-<img src="images/rock-initialboot.jpg">
-</p>
+![images/rock-initialboot.jpg]
 
 ROCK works with both legacy BIOS and UEFI booting.  Once booted from the USB, you are presented with 2 primary paths:  
 
@@ -85,9 +81,7 @@ Ensure that the interface you intend to use for MGMT has been turned on and has 
 
 ROCK is configured with the root user disabled.  We recommend that you leave it that way.  Once you've kicked off the install, click **User Creation** at the next screen (shown above) and complete the required fields to set up a non-root admin user.  
 
-<p align="center">
-<img src="images/admin-user.jpg">
-</p>
+![images/admin-user.jpg]
 
 > If this step is not completed now do not fear, you will be prompted to create this account after first login.
 
