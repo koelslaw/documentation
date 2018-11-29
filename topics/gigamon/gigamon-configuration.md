@@ -56,7 +56,7 @@ Otherwise hit <enter> to save changes and exit.
 1. You'll be presented with a summary of your configuration changes. You can go back and make any adjustments as necessary.  
  - If you decided not to change your default passphrase, you can do so in the webUI  
  - If you decided to change your default passphrase, I **strongly** recommend you hop over to the webUI and make sure you can log in  
->>> In the event that your passphrase isn't working, you should reset here before you logout of the console
+> In the event that your passphrase isn't working, you should reset here before you logout of the console
 
 ```
 tap.mo.cmat.lan > enable
