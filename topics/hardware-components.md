@@ -1,7 +1,4 @@
-# Kit Config
-This includes the layout of the 2 cases for the CMAT kit.
-
-# Kit Components
+# Hardware Kit Components
 These are the components of the CMAT kit.
 
 | Component   | Make            | Model          | Case Number |
@@ -13,7 +10,7 @@ These are the components of the CMAT kit.
 | Gigamon     | Gigavue         | HC1            | 2           |
 | Power Strip | Middle Atlantic |                | 2           |
 
-## Kit Layout
+## Hardware Kit Layout
 
 ```
 ┌────────────────────────────────────┐

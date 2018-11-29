@@ -1,3 +1,9 @@
+# CMAT Hardware Assembly
+The CMAT kit contains [several hardware assets](topics/hardware-components.md).
+
+Here we will begin the deployment of that hardware into the stack.
+
+## Hardware Wiring
 ```
                                                     ┌──────────────────────────────┐  ┌───────────────────────────────┐
                                                     │          INTEL NUC           │  │      DELL R840 SERVER 1       │
