@@ -1,5 +1,3 @@
-![](../../images/gigamon-console.png)  
-
 # Gigamon Configuration
 
 Before you start, ensure that your Gigamon is [properly racked](../hardware-assembly.md)
