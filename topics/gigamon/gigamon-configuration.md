@@ -3,11 +3,10 @@
 Before you start, ensure that your Gigamon is [properly racked](../hardware-assembly.md)
 
 # Initial Configuration (Console)
-1. With a Mac or Linux system, connect a Console cable to the Console port of the Gigamon  
-
 ![](../../images/gigamon-console.png)  
 > Console port highlighted purple  
 
+1. With a Mac or Linux system, connect a Console cable to the Console port of the Gigamon  
 1. Connect your Console cable and go into your Terminal program (Terminal, iTerm, etc.)
 ```
 ls /dev/*usb*
