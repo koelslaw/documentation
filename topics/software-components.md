@@ -43,16 +43,6 @@ RockNSM is a collections platform, in the spirit of passive Network Security Mon
 - A messaging layer (Kafka and Logstash) that provides flexibility in scaling the platform to meet operational needs, as well as providing some degree of data reliability in transit.
 - Reliable data storage and indexing (Elasticsearch) to support rapid retrieval and analysis (Kibana) of the data.
 
-#### Hardware Requirements
-The analysis of live network data is a resource intensive task. The bottom line is this: if you throw hardware at ROCK it will use it, and use it well. The higher the IOPS the better. Here's a starting point to get you moving:
-
-| RESOURCE | RECOMMENDATION                                                  |
-|----------|-----------------------------------------------------------------|
-| CPU      | 4 or more physical cores                                        |
-| Memory   | 16GB (8GB is doable, 16 is better)                              |
-| Storage  | 256GB, with 200+ of that dedicated to /data, SSD preferred      |
-| Network  | 2 gigabit interfaces, one for management and one for collection |
-
 ## Software External References
 - [VMWare ESXi](https://www.vmware.com/products/esxi-and-esx.html)
 - [RedHat Enterprise Linux](https://www.redhat.com/en/technologies/linux-platforms/enterprise-linux)
