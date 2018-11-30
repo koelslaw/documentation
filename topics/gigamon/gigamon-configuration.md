@@ -72,4 +72,34 @@ tap.mo.cmat.lan (config) # username admin|monitor|operator password
 1. Set your local IP address to be in the same subnet as the management IP you configured above (`10.1.10.6/24` as an example).
 1. Point your browser to the management IP you set above (`https://10.1.10.5` in this example)
 
+## Enabling Interfaces
+It should be noted, these next steps...are silly. Don't blame us.
+
+1. Once you're logged in, click on the `Chasis` from the toolbar on the left
+1. You will notice that the interfaces aren't' configured and it is not inherently obvious how to enable them.
+![](../../images/gigamon-unconfigured.png)  
+> Unconfigured Gigamon interfaces
+
+1. You can either right-click on the image and select `Configure` or switch from "Chasis View" to "List View" and then select your interfaces and `Configure` them.
+![](../../images/gigamon-rightclick-configure.png)  
+![](../../images/gigamon-menu-configure.png)  
+> Configuration options for the interfaces
+
+1. Your interfaces should all have come up as Network Ports
+![](../../images/gigamon-configured.png)
+> Configured Gigamon interfaces
+
+## Port Types
+Packets arrive at the Gigamon Visibility Platform at network ports and are directed to monitoring and analysis tools connected to tool ports by flow maps.
+
+### Network (Ingress) Ports
+**Network ports** are where you connect data sources to GigaVUE nodes. For example, you could connect a switch’s SPAN port, connect an external TAP, or simply connect an open port on a hub to an open port on a line card. Regardless, the idea is the same – network ports are where data arrives at the GigaVUE node.
+
+**Note:**	In their standard configuration, network ports only accept data input – no data output is allowed.
+
+### Tool (Egress) Ports
+**Tool ports** are where you connect destinations for the data arriving on network ports on GigaVUE nodes. For example, an IT organization could assign one set of tool ports to its Security Team for an intrusion detection system, a forensic data recorder, and a traditional protocol analyzer while a separate set of tool ports assigned to the Application Performance Management team is used for a flow recorder and a long-term packet capture device. Regardless of the specific tool connected, the idea is the same – tool ports are where users select different portions of the data arriving on network ports.
+
+**Note:**	Tool ports only allow data output to a connected tool. Any data arriving at the tool port from an external source will be discarded. In addition, a tool port’s Link Status must be up for packets to be sent out of the port.
+
 Move onto [Network Configuration](../network/network-configuration.md)
