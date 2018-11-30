@@ -36,6 +36,33 @@ Router# config t
 Router(config)# username [username] privilege 15 secret 0 [password]
 ```
 
+## Router DNS Setup
+Connect to the serial port on the router
+```
+enable
+configure terminal
+ip dns server
+ip domain-lookup
+ip host [hardware].[state-abreviation].cmat.lan 10.[Kit].[VLAN].[Host]
+# example: ip host switch.mo.cmat.lan 10.1.10.3
+exit
+```
+
+## Router NTP Setup
+Connect to the serial port on the router
+```
+enable
+configure terminal
+clock timezone [timezone_abbreviation] [UTC_Offset]
+# example: clock timezone CST -6
+clock summer-time CST recurring
+clock calendar-valid
+ntp master [Stratum]
+# example: ntp master 8
+show running-config | inclkude ntp
+end
+```
+
 # Initial Switch Configuration (Console)
 1. With a Mac or Linux system, connect a Console cable to the Console port of the switch  
 ![](../../images/switch-console.png)  
