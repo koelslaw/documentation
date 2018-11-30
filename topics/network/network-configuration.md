@@ -2,6 +2,40 @@
 
 Before you start, ensure that your switch and router are [properly racked](../hardware-assembly.md)
 
+# Initial Router Configuration (Console)
+1. With a Mac or Linux system, connect a Console cable to the Console port of the switch  
+![](../../images/router-console.png)  
+> Console port highlighted purple
+
+1. Connect your Console cable and go into your Terminal program (Terminal, iTerm, etc.)
+```
+ls /dev/*usb*
+crw-rw-rw-  1 root  wheel   20, 115 Nov 29 15:06 /dev/cu.usbserial-A105LRRY (this could be slightly different on your system)
+crw-rw-rw-  1 root  wheel   20, 114 Nov 29 15:06 /dev/tty.usbserial-A105LRRY (this could be slightly different on your system)
+sudo cu -l /dev/cu.usbserial-A105LRRY -s 9600
+```
+> If you are using a different console access program, the following parameters are needed:
+
+```
+Baud Rate: 9600
+Data Bits: 8
+Parity: None
+Stop Bits: 1
+Flow Control: None
+```
+
+1. As soon as you connect, you'll be given some basic instructions on how to change the default username and passphrase. So let's do that.
+
+Remember, the credential pairs are stored in the [platform-management page](../platform-management.md). Replace `[username]` and `[passphrase]` with the proper pair from the [platform-management page](../platform-management.md).
+
+```
+User Access Verification
+Username:
+Password:
+Router# config t
+Router(config)#username [username] privilege 15 secret 0 [password]
+```
+
 # Initial Switch Configuration (Console)
 1. With a Mac or Linux system, connect a Console cable to the Console port of the switch  
 ![](../../images/switch-console.png)  
@@ -50,7 +84,7 @@ Choose (2) to save the configuration to NVRAM to use it the next time the switch
 Enter your selection [2]: 2
 ```
 
-# Initial Configuration (WebUI)
+# Initial Switch Configuration (WebUI)
 1. Connect a network cable to the management port on the front of the switch
 ![](../../images/switch-management.png)
 > Management port highlighted purple  
