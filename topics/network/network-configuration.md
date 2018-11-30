@@ -30,10 +30,10 @@ Remember, the credential pairs are stored in the [platform-management page](../p
 
 ```
 User Access Verification
-Username:
-Password:
+Username: [default username]
+Password: [default password]
 Router# config t
-Router(config)#username [username] privilege 15 secret 0 [password]
+Router(config)# username [username] privilege 15 secret 0 [password]
 ```
 
 # Initial Switch Configuration (Console)
