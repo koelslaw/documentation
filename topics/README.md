@@ -6,6 +6,6 @@
 1. [Software Deployment](software-deployment.md)
 1. [Post Installation](post-install.md)
 
-[Platform Management (IPs, hostnames, creds, etc.)](./topics/platform-management.md)
+[Platform Management (IPs, hostnames, creds, etc.)](platform-management.md)
 
 Move onto [Hardware Assembly](hardware-assembly.md)

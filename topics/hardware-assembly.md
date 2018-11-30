@@ -87,18 +87,18 @@ A Rack Unit (abbreviated U or RU) is a unit of measure defined as 1.75 in. It is
 
 ## Step 4 - Installation of Middle Atlantic Power Supply - U4
 1. Insert 4 screws to secure power supply to case
- ```
- ┌────────────────────────────────────┐
- │              CASE 2                │
- │ ┌────────────────────────────────┐ │
- │ │     MIDDLE ATLANTIC POWER      │ │
- │ ├────────────────────────────────┤ │
- │ │      GIGAMON GIGAVUE HC1       │ │
- │ ├────────────────────────────────┤ │
- │ │        DELL R840 SERVER        │ │
- │ └────────────────────────────────┘ │
- └────────────────────────────────────┘
- ```
+```
+┌────────────────────────────────────┐
+│              CASE 2                │
+│ ┌────────────────────────────────┐ │
+│ │     MIDDLE ATLANTIC POWER      │ │
+│ ├────────────────────────────────┤ │
+│ │      GIGAMON GIGAVUE HC1       │ │
+│ ├────────────────────────────────┤ │
+│ │        DELL R840 SERVER        │ │
+│ └────────────────────────────────┘ │
+└────────────────────────────────────┘
+```
 
 # Hardware Wiring
 
