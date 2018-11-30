@@ -40,3 +40,5 @@ The CMAT kits will abide by the following standard:
 | IP       | Connection  |
 |:---------|:------------|
 |10.1.20.2 | Openvas     |
+
+Move onto [Software Deployment](../software-deployment.md)
