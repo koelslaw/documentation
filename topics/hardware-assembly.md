@@ -112,6 +112,11 @@ A Rack Unit (abbreviated U or RU) is a unit of measure defined as 1.75 in. It is
 | 47          | WiFi Access Point | POE         |
 | 48          | Gigamon           | Management  |
 
+| VLAN  |  Port   | Description |
+|-------|---------|-------------|
+| 10    | 1-39    | Internal    |
+| 20    | 40 - 48 | Active      |
+
 ```
                                                     ┌──────────────────────────────┐  ┌───────────────────────────────┐
                                                     │          INTEL NUC           │  │      DELL R840 SERVER 1       │
