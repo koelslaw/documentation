@@ -119,4 +119,4 @@ Enter your selection [2]: 2
 1. Set your local IP address to be in the same subnet as the management IP you configured above (`10.1.10.6/24` as an example).
 1. Point your browser to the management IP you set above (`http://10.1.10.3` in this example)
 
-Move onto [Software Deployment](../software-deployment.md)
+Move onto [Dell Chassis Management Console (CMC) Configuration](cmc-configuration.md)
