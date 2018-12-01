@@ -69,8 +69,8 @@ tap.mo.cmat.lan (config) # username admin|monitor|operator password
 ![](../../images/gigamon-management.png)
 > Management port highlighted purple  
 
-1. Set your local IP address to be in the same subnet as the management IP you configured above (`10.1.10.6/24` as an example).
-1. Point your browser to the management IP you set above (`https://10.1.10.5` in this example)
+1. Set your local IP address to be in the same network as the management IP you configured above.
+1. Point your browser to the management IP you set above. See the [platform management](../platform-management.md) page for exact address and credentials.
 
 ## Enabling Interfaces
 It should be noted, these next steps...are silly. Don't blame us.

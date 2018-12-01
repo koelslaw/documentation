@@ -1,5 +1,5 @@
 # CMAT Hardware Assembly
-The CMAT kit contains [several hardware assets](topics/hardware-components.md).
+The CMAT kit contains [several hardware assets](hardware-components.md).
 
 Here we will begin the deployment of that hardware into the stack.
 
