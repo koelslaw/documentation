@@ -68,4 +68,11 @@ This is meant to help those who need a step-by-step build of RHEL, securing SSh,
 1. Once the installation is done, click the `Reboot` button in the bottom right to...well...reboot
 1. Login using the account you created during the Anaconda setup
 
+# Deploy Initial Configuration
+Now we are going to deploy the initial configuration for the Nuc. This will serve as a repository to build the reset of the kit, as well as to store documentation.
+
+```
+sudo sh deploy-nuc.sh
+```
+
 Move onto [Gigamon Configuration](../gigamon/gigamon-configuration.md)

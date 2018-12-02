@@ -26,6 +26,10 @@ Flow Control: None
 1. This will ask you to log in with the [default credentials](../credentials.md)
 1. As soon as you log in, you'll be asked to enter the `Initial Configuration`, let's do that.
 
+**Note:** You need to change the hostnames, octets, and insert your passwords from the [Platform Management page](../platform-management.md) before inputting this into the Gigamon.
+
+A good suggestion is to perform a "Find" for `[` and replace the `[comment]` with your specific environment variables.
+
 ```
 Gigamon GigaVUE-OS
 
@@ -33,19 +37,19 @@ GigaVUE-OS configuration wizard
 
 Do you want to use the wizard for initial configuration? yes
 
-1. Hostname: tap.mo.cmat.lan
+1. Hostname: tap.[state].cmat.lan
 2. Management Interface <eth0> : eth0
 3. Use DHCP on eth0 interface: no
 4. Use zeroconf on eth0 interface: no
-5. Primary IPv4 address and masklen: 10.1.10.5/24
-6. Default gateway: 10.1.10.1
-7. Primary DNS server: 10.1.10.1
+5. Primary IPv4 address and masklen: 10.[state].10.5/24
+6. Default gateway: 10.[state].10.1
+7. Primary DNS server: 10.[state].10.1
 8. Domain name: cmat.lan
 9. Enable IPv6: no
 10. Enable secure cryptography: no
 11. Enable secure passwords: yes
 12. Minimum password length: 16
-13. Admin password (Enter to leave unchanged): (CHANGED)
+13. Admin password: [password from Platform Management]
 14. Cluster enable: no
 15. Box-id for the chassis: 2
 
@@ -59,9 +63,9 @@ Otherwise hit <enter> to save changes and exit.
 > In the event that your passphrase isn't working, you should reset here before you logout of the console
 
 ```
-tap.mo.cmat.lan > enable
-tap.mo.cmat.lan # configure terminal
-tap.mo.cmat.lan (config) # username admin|monitor|operator password
+tap.[state].cmat.lan > enable
+tap.[state].cmat.lan # configure terminal
+tap.[state].cmat.lan (config) # username admin|monitor|operator password
 ```
 
 # Initial Configuration (WebUI)
