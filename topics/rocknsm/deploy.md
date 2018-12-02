@@ -79,7 +79,30 @@ ROCK is configured with the root user disabled.  We recommend that you leave it 
 - click **Finish Installation** and wait for reboot
 - accept license agreement: `c` + `ENTER`
 
-#### Update
+#### Update Repository
+We want to set the Nuc as the upstream repository, you can copy / paste this following code block into the Terminal.
+```
+sudo bash -c 'cat > /etc/yum.repos.d/local-repos.repo <<EOF
+[local-epel/x86_64]
+name=Extra Packages For Enterprise Linux Local Repo
+baseurl=http://nuc.mo.cmat.lan/epel/
+gpgcheck=0
+enabled=1
+
+[local-group_rocknsm-rocknsm-2.1./x68_64]
+name=Rock NSM Repo
+baseurl=http://nuc.mo.cmat.lan/rocknsm/
+gpgcheck=0
+enabled=1
+
+[local-rhel-7-server-rpms/7Server/x68_64]
+name=
+baseurl=http://nuc.mo.cmat.lan/rhel-7-server-rpms/
+gpgcheck=0
+enabled=1
+EOF'
+yum repolist all
+```
 
 The last step before configuring sensor settings is to update the base OS to current: `sudo yum update -y && reboot`  
 
@@ -296,3 +319,5 @@ After replaying some traffic, or just waiting a bit, the count should be going u
 You should have plain text bro logs showing up in /data/bro/logsM/current/:
 
 - `ls -ltr /data/bro/logs/current/`
+
+Move onto [Usage](usage.md).

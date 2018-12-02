@@ -7,3 +7,5 @@ The analysis of live network data is a resource intensive task. The bottom line 
 | Memory   | 16GB (8GB is doable, 16 is better)                              |
 | Storage  | 256GB, with 200+ of that dedicated to /data, SSD preferred      |
 | Network  | 2 gigabit interfaces, one for management and one for collection |
+
+Move onto [Deployment](deploy.md).

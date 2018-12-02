@@ -1,7 +1,5 @@
 # Dell Chassis Management Controller (CMC) Configuration
 
-In the CMC, go to the I/O Module Overview. In the line for the `R1-2210 VRTX 10Gb Switch`, click the `Launch I/O Module GUI`.
-
 If you have not already done so, press the chassis power button to turn it on. The LCD screen displays a series of initialization screens as it turns on. When it is ready, the Language Setup screen is displayed.
 
 # Initial Configuration (LCD Panel)
@@ -23,10 +21,11 @@ If you have not already done so, press the chassis power button to turn it on. T
 
 1. Set your local IP address to be in the same subnet as the management IP you configured above.
 1. Point your browser to the management IP you set above. See the [Platform Management](../platform-management.md) page for exact address and credentials.
+1. Login with the default credentials stored on the [Platform Management page](../platform-management.md). This will bring you to the Dell switch home screen.
+
+In the CMC, go to the I/O Module Overview. In the line for the `R1-2210 VRTX 10Gb Switch`, click the `Launch I/O Module GUI`.
 
 ![](../../images/cmc-gui-launch.png)
-
-Login with the default credentials stored on the [Platform Management page](../platform-management.md). This will bring you to the Dell switch home screen.
 
 ![](../../images/cmc-network-administrator.png)
 
