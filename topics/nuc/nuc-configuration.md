@@ -41,7 +41,10 @@ This is meant to help those who need a step-by-step build of RHEL, securing SSh,
     - There is the `Host Name` box at the bottom of the window, enter the hostname for the Nuc from the [Platform Management](../platform-management.md) page.  
     - Switch the toggle to enable your NIC  
       - Click `Configure`  
-      - Go to `IPv4 Settings` and change the Method from `Automatic` to `Manual`. Click `Add` and set the IP address from the [Platform Management](../platform-management.md) page.  
+      - Go to `IPv4 Settings` and change the Method from `Automatic` to `Manual`. Click `Add` and set
+        - the IP address from the [Platform Management](../platform-management.md) page
+        - `Netmask 255.255.255.0`
+        - and `Gateway 10.[state octet].10.1`  
       - Go to `IPv6 Settings` and change from `Automatic` to `Ignore`  
       - Click `Save`  
     - Click `Done` in the top left  
@@ -50,7 +53,13 @@ This is meant to help those who need a step-by-step build of RHEL, securing SSh,
     - Click `Select Profile`  
     - Click `Done`  
 1. Next click `Installation Destination`  
-    - Select the hard disk you want to install CentOS to, likely it is already selected unless you have more than 1 drive  
+    - Select the hard disk you want to install RHEL to, likely it is already selected unless you have more than 1 drive  
+      - In the `Other Storage Options`, select `I will configure partitioning`.
+      - Click `Done`
+      - Click `Click here to create automatically.`
+      - Select `/` and change the size to `20G`, click the `Update Settings` button
+      - Select `/home` and change the size to `50G`, click the `Update Settings` button
+      - Click the `+` and make the `Mount Point` `/var`, leave the size blank, it will take all remaining size
     - Click `Done`  
 1. Click `kdump`  
     - Uncheck `Enable kdump`  
