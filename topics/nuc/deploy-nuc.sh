@@ -103,6 +103,8 @@ Type=simple
 User=gitea
 Group=gitea
 WorkingDirectory=/opt/gitea
+# Find the current IP address of an interface and assign it to gitea in this example it is interface ens33 which may need to change based on your system
+ExecStartPre=bin/bash -c '/bin/sed -i "s,^ROOT_URL.*,$(echo "ROOT_URL = http://$(/sbin/ip -o -4 addr list ens33 | awk '\''{print $4}'\'' | cut -d/ -f1 ):4000/")," /opt/gitea/custom/conf/app.ini'
 ExecStart=/opt/gitea/gitea web -p 4000
 Restart=always
 Environment=USER=gitea HOME=/home/gitea
