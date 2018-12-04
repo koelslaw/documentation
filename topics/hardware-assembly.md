@@ -54,7 +54,7 @@ A Rack Unit (abbreviated U or RU) is a unit of measure defined as 1.75 in. It is
 
 # Case 2
 
-## Step 1 - Disassemble Case
+## Step 1 - Dissemble Case
 1. Remove doors from case - front and back
 1. Turn knobs until unlatched
  - Open doors

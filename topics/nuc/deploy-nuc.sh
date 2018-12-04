@@ -9,7 +9,6 @@
 # To fix this, we are going to disable the GPG signature and local RPM GPG signature checking.
 # I'm open to other options here.
 # RHEL's official statement on this: https://access.redhat.com/solutions/2850911
-sudo sed -i 's/repo_gpgcheck=1/repo_gpgcheck=0/' /etc/yum.conf
 sudo sed -i 's/localpkg_gpgcheck=1/localpkg_gpgcheck=0/' /etc/yum.conf
 
 ################################
@@ -17,7 +16,6 @@ sudo sed -i 's/localpkg_gpgcheck=1/localpkg_gpgcheck=0/' /etc/yum.conf
 ################################
 
 # Create your Gitea passphrase
-
 echo "Create your Gitea passphrase for the MySQL database and press [Enter]. You will create your Gitea administration credentials after the installation."
 read -s giteapassphrase
 
@@ -25,25 +23,37 @@ read -s giteapassphrase
 IP="$(hostname -I | sed -e 's/[[:space:]]*$//')"
 
 ################################
-##### Prep for local repo ######
+### Create Local Repository ####
 ################################
+sudo yum install http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+yum install yum-utils createrepo httpd
+sudo reposync -n --gpgcheck -l --repoid=epel --repoid=rhel-7-server-rpms --repoid=rhel-7-server-optional-rpms --repoid=rhel-7-server-extras-rpms --download_path=/var/www/html --downloadcomps --download-metadata
+sudo su -
+cd /var/www/html/epel
+createrepo -v  /var/www/html/epel -g comps.xml
+cd /var/www/html/rhel-7-server-rpms
+createrepo -v  /var/www/html/rhel-7-server-rpms -g comps.xml
+cd /var/www/html/rhel-7-server-optional-rpms
+createrepo -v  /var/www/html/rhel-7-server-optional-rpms -g comps.xml
+cd /var/www/html/rhel-7-server-extras-rpms
+createrepo -v  /var/www/html/rhel-7-server-extras-rpms -g comps.xml
+
 sudo mkdir -p /var/www/html/repo/capes
 sudo mkdir -p /var/www/html/repo/grassmarlin
 sudo mkdir -p /var/www/html/repo/nmap
 sudo curl -L https://github.com/nsacyber/GRASSMARLIN/releases/download/v3.2.1/grassmarlin-3.2.1-1.el6.x86_64.rpm -o /var/www/html/repo/grassmarlin/grassmarlin-3.2.1-1.el6.x86_64.rpm
 sudo curl -L https://github.com/mumble-voip/mumble/releases/download/1.2.19/murmur-static_x86-1.2.19.tar.bz2 -o /var/www/html/repo/capes/mattermost.tar.gz
 sudo curl -L http://opensource.wandisco.com/centos/7/git/x86_64/wandisco-git-release-7-2.noarch.rpm -o /var/www/html/repo/capes/wandisco-git-release-7-2.noarch.rpm
-sudo yum groupinstall "Development Tools" --downloadonly --downloaddir=/var/www/html/repo/capes
+# sudo yum groupinstall "Development Tools" --downloadonly --downloaddir=/var/www/html/repo/capes
 sudo rpm --import https://artifacts.elastic.co/GPG-KEY-elasticsearch
-sudo rpm --import https://dl.bintray.com/cert-bdf/rpm/repodata/repomd.xml.key
+# sudo rpm --import https://dl.bintray.com/cert-bdf/rpm/repodata/repomd.xml.key
 sudo curl -L https://dl.bintray.com/thehive-project/rpm-stable/thehive-project-release-1.1.0-1.noarch.rpm -o /var/www/html/repo/capes/thehive-project-release-1.1.0-1.noarch.rpm
 sudo curl -L https://dl.gitea.io/gitea/master/gitea-master-linux-amd64 -o /var/www/html/repo/capes/gitea-master-linux-amd64
 sudo curl -L https://artifacts.elastic.co/downloads/beats/heartbeat/heartbeat-5.6.5-x86_64.rpm -o /var/www/html/repo/capes/heartbeat-5.6.5-x86_64.rpm
 sudo curl -L https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-5.6.5-x86_64.rpm -o /var/www/html/repo/capes/filebeat-5.6.5-x86_64.rpm
 sudo curl -L https://artifacts.elastic.co/downloads/beats/metricbeat/metricbeat-5.6.5-x86_64.rpm -o /var/www/html/repo/capes/metricbeat-5.6.5-x86_64.rpm
 sudo curl -L https://artifacts.elastic.co/downloads/kibana/kibana-5.6.5-x86_64.rpm -o /var/www/html/repo/capes/kibana-5.6.5-x86_64.rpm
-sudo yum install --downloadonly --downloaddir=/var/www/html/repo/capes epel-release
-sudo yum install --downloadonly --downloaddir=/var/www/html/repo/capes mariadb-server firewalld bzip2 npm gcc-c++ git java-1.8.0-openjdk.x86_64 python36u python36u-pip python36u-devel thehive cortex https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.6.0.rpm https://centos7.iuscommunity.org/ius-release.rpm libffi-devel python-devel python-pip ssdeep-devel ssdeep-libs perl-Image-ExifTool file-devel nginx httpd-tools
+# sudo yum install --downloadonly --downloaddir=/var/www/html/repo/capes mariadb-server firewalld bzip2 npm gcc-c++ git java-1.8.0-openjdk.x86_64 python36u python36u-pip python36u-devel thehive cortex https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.6.0.rpm https://centos7.iuscommunity.org/ius-release.rpm libffi-devel python-devel python-pip ssdeep-devel ssdeep-libs perl-Image-ExifTool file-devel nginx httpd-tools
 
 ################################
 ########## Gitea ###############
@@ -52,11 +62,12 @@ sudo yum install --downloadonly --downloaddir=/var/www/html/repo/capes mariadb-s
 # Big thanks to @seven62 for fixing the Git 2.x and MariaDB issues and getting the service back in the green!
 
 # Install dependencies
-sudo yum install /var/www/html/repo/capes/wandisco-git-release-7-2.noarch.rpm /var/www/html/repo/capes/[mariadb-server????.repo] -y
+sudo yum install epel-release -y
+sudo yum install mariadb-server http://opensource.wandisco.com/centos/7/git/x86_64/wandisco-git-release-7-2.noarch.rpm firewalld -y
 sudo yum update git -y
+sudo systemctl start mariadb.service
 
 # Configure MariaDB
-sudo systemctl start mariadb.service
 mysql -u root -e "CREATE DATABASE gitea;"
 mysql -u root -e "GRANT ALL PRIVILEGES ON gitea.* TO 'gitea'@'localhost' IDENTIFIED BY '$giteapassphrase';"
 mysql -u root -e "FLUSH PRIVILEGES;"
@@ -119,6 +130,8 @@ sudo sh -c 'echo bind-address=127.0.0.1 >> /etc/my.cnf.d/bind-address.cnf'
 sudo systemctl restart mariadb.service
 mysql_secure_installation
 
+<<<<<<< HEAD
+=======
 # Prepare the service environment
 sudo systemctl daemon-reload
 
@@ -147,17 +160,27 @@ EOF
 # Start Gitea
 sudo systemctl start gitea.service
 
+>>>>>>> de7cdbebe5b668f1f28cb9be25fc3dae97a55c42
 # Allow the services through the firewall
-sudo firewall-cmd --add-service=ftp --add-service=http --add-service=https --add-port=69/tcp --add-port=69/udp --permanent
+sudo firewall-cmd --add-service=http --add-port=4000/tcp --permanent
 sudo firewall-cmd --reload
 
-# Enable xinetd and Apache at startup
-# sudo systemctl enable xinetd
-# sudo systemctl enable httpd
+################################
+######## Services e#############
+################################
 
-# Start xinetd and Apache
-# sudo systemctl start xinetd
-# sudo systemctl start httpd
+# Prepare the service environment
+sudo systemctl daemon-reload
+
+# Set Gitea and Apache to start at boot
+sudo systemctl enable gitea.service
+sudo systemctl enable httpd
+sudo systemctl enable mariadb
+
+# Start services
+sudo systemctl start gitea.service
+sudo systemctl start httpd.service
+sudo systemctl start mariadb.service
 
 ################################
 ########## Remove gcc ##########
