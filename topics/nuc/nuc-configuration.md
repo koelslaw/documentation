@@ -24,7 +24,7 @@ If you live in the terminal, use `dd` to apply the image.  These instructions ar
 `diskutil unmountDisk /dev/disk#`  
 
 3. write the image to drive:  
-`sudo dd bs=8M if=path/to/rockiso of=/dev/disk#`  
+`sudo dd bs=8m if=path/to/rockiso of=/dev/disk#`  
 
 ### Via GUI
 
@@ -41,9 +41,9 @@ This is meant to help those who need a step-by-step build of RHEL, securing SSh,
     - There is the `Host Name` box at the bottom of the window, enter the hostname for the Nuc from the [Platform Management](../platform-management.md) page.  
     - Switch the toggle to enable your NIC  
       - Click `Configure`  
-      - Go to `IPv4 Settings` and change the Method from `Automatic` to `Manual`. Click `Add` and set
-        - the IP address from the [Platform Management](../platform-management.md) page
-        - `Netmask 255.255.255.0`
+      - Go to `IPv4 Settings` and change the Method from `Automatic` to `Manual`. Click `Add` and set  
+        - the IP address from the [Platform Management](../platform-management.md) page  
+        - `Netmask 255.255.255.0`  
         - and `Gateway 10.[state octet].10.1`  
       - Go to `IPv6 Settings` and change from `Automatic` to `Ignore`  
       - Click `Save`  
@@ -54,17 +54,28 @@ This is meant to help those who need a step-by-step build of RHEL, securing SSh,
     - Click `Done`  
 1. Next click `Installation Destination`  
     - Select the hard disk you want to install RHEL to, likely it is already selected unless you have more than 1 drive  
-      - In the `Other Storage Options`, select `I will configure partitioning`.
-      - Click `Done`
-      - Click `Click here to create automatically.`
-      - Select `/` and change the size to `20G`, click the `Update Settings` button
-      - Select `/home` and change the size to `50G`, click the `Update Settings` button
-      - Click the `+` and make the `Mount Point` `/var`, leave the size blank, it will take all remaining size
+      - In the `Other Storage Options`, select `I will configure partitioning`.  
+      - Click `Done`  
+      - Click `Click here to create automatically.`  
+      - Click on the `Red Hat Enterprise Linux Installation` carrot to dropdown your current partitions  
+      - Click on `/home` and change the size to `50 G` and click `Update Settings`  
+      - Click on `/` and change the size to `50 G` and click `Update Settings`  
+      - Click on the `+` and set the mount point to `/var` and leave the `Desired Capacity` blank  
+      - You should have 7 partitions  
+        - `/home` with `50 GiB`  
+        - `/var/log/audit` with `10 GiB`  
+        - `/tmp` with `10 GiB`
+        - `/boot` with 1% of your total drive space  
+        - `/` with `50 GiB`  
+        - `/swap` with about 1/2 of your total RAM  
+        - `/var` with everything else  
     - Click `Done`  
+    - Click `Accept Changes`  
 1. Click `kdump`  
     - Uncheck `Enable kdump`  
     - Click `Done`  
 1. `Installation Source` should say `Local media` and `Software Selection` should say `Minimal install` - no need to change this  
+1. Validate `Software Selection` says `Minimal Install`  
 1. Click `Date & Time`  
     - `Region` should be changed to `Etc`  
     - `City` should be changed to `Coordinated Universal Time`  
@@ -81,6 +92,7 @@ This is meant to help those who need a step-by-step build of RHEL, securing SSh,
 Now we are going to deploy the initial configuration for the Nuc. This will serve as a repository to build the reset of the kit, as well as to store documentation.  
 
 ```
+sudo subscription-manager register --username [see Platform Management] --password [see Platform Management] --auto-attach
 sudo sh deploy-nuc.sh
 ```
 
