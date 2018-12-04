@@ -103,7 +103,8 @@ Type=simple
 User=gitea
 Group=gitea
 WorkingDirectory=/opt/gitea
-ExecStart=/opt/gitea/gitea web -p 4000
+# We are going to load a custom script that makes sure our dhcp obtained IP address is bound to gitea
+ExecStart=/opt/gitea/bind_ip.sh
 Restart=always
 Environment=USER=gitea HOME=/home/gitea
 [Install]
@@ -120,6 +121,28 @@ mysql_secure_installation
 
 # Prepare the service environment
 sudo systemctl daemon-reload
+
+
+# Create gitea bind ip script
+cat > /etc/systemd/system/gitea.service <<EOF
+#!/bin/bash
+
+# Interface that obtains routable IP addresses
+INTERFACE=eno1
+
+### Don't touch below
+BIND_IP=$(/sbin/ip -o -4 addr list $INTERFACE | awk '{print $4}' | cut -d/ -f1)
+GITEA_ROOT_URL="ROOT_URL = http://$BIND_IP:4000/"
+GITEA_SSH_DOMAIN="SSH_DOMAIN = $BIND_IP"
+GITEA_DOMAIN="DOMAIN = $BIND_IP"
+/bin/sed -i "s|ROOT_URL.*|$GITEA_ROOT_URL|" /opt/gitea/custom/conf/app.ini
+/bin/sed -i "s|^SSH_DOMAIN.*|$GITEA_SSH_DOMAIN|" /opt/gitea/custom/conf/app.ini
+/bin/sed -i "s|^DOMAIN.*|$GITEA_DOMAIN|" /opt/gitea/custom/conf/app.ini
+
+
+/opt/gitea/gitea web -p 4000
+EOF
+
 
 # Start Gitea
 sudo systemctl start gitea.service
