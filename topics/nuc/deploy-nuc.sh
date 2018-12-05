@@ -28,7 +28,7 @@ IP="$(hostname -I | sed -e 's/[[:space:]]*$//')"
 sudo mkdir -p /var/www/html/repo/capes
 sudo mkdir -p /var/www/html/repo/grassmarlin
 sudo mkdir -p /var/www/html/repo/nmap
-sudo curl -o /var/www/html/repo/capes/gitea https://dl.gitea.io/gitea/master/gitea-master-linux-amd64
+sudo curl -o /var/www/html/repo/capes/ https://dl.gitea.io/gitea/master/gitea-master-linux-amd64
 sudo curl -L https://github.com/nsacyber/GRASSMARLIN/releases/download/v3.2.1/grassmarlin-3.2.1-1.el6.x86_64.rpm -o /var/www/html/repo/grassmarlin/grassmarlin-3.2.1-1.el6.x86_64.rpm
 sudo curl -L https://github.com/mumble-voip/mumble/releases/download/1.2.19/murmur-static_x86-1.2.19.tar.bz2 -o /var/www/html/repo/capes/mattermost.tar.gz
 sudo rpm --import https://artifacts.elastic.co/GPG-KEY-elasticsearch
@@ -43,7 +43,6 @@ sudo curl -L https://artifacts.elastic.co/downloads/kibana/kibana-5.6.5-x86_64.r
 
 sudo yum install http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm -y
 sudo yum install yum-utils createrepo httpd -y
-sudo yum update git -y
 sudo rpm --import /etc/pki/rpm-gpg/*
 sudo reposync -n --gpgcheck -l --repoid=epel --repoid=rhel-7-server-rpms --repoid=WANdisco-git --repoid=rhel-7-server-optional-rpms --repoid=rhel-7-server-extras-rpms --download_path=/var/www/html --downloadcomps --download-metadata
 cd /var/www/html/epel
@@ -94,29 +93,30 @@ sudo useradd -s /usr/sbin/nologin gitea
 
 # Grab Gitea and make it a home
 sudo mkdir -p /opt/gitea
-sudo cp /var/www/html/repo/capes/gitea /opt/gitea/gitea
-sudo chown -R gitea:gitea /opt/gitea
+sudo cp /var/www/html/repo/capes/gitea-master-linux-amd64 /opt/gitea/gitea
 sudo chmod 744 /opt/gitea/gitea
 
 # Create gitea bind ip script
-sudo tee /opt/gitea/bind_ip.sh <<EOF
-#!/bin/bash
-
-# Interface that obtains routable IP addresses
-INTERFACE=eno1
-
-# Updates the /opt/gitea/custom/conf/app.ini with your current IP
-BIND_IP=$(/sbin/ip -o -4 addr list $INTERFACE | awk '{print $4}' | cut -d/ -f1)
-GITEA_ROOT_URL="ROOT_URL = http://$BIND_IP:4000/"
-GITEA_SSH_DOMAIN="SSH_DOMAIN = $BIND_IP"
-GITEA_DOMAIN="DOMAIN = $BIND_IP"
-/bin/sed -i "s|ROOT_URL.*|$GITEA_ROOT_URL|" /opt/gitea/custom/conf/app.ini
-/bin/sed -i "s|^SSH_DOMAIN.*|$GITEA_SSH_DOMAIN|" /opt/gitea/custom/conf/app.ini
-/bin/sed -i "s|^DOMAIN.*|$GITEA_DOMAIN|" /opt/gitea/custom/conf/app.ini
-
-# Executes the Gitea biary
-/opt/gitea/gitea web -p 4000
-EOF
+#sudo tee /opt/gitea/bind_ip.sh <<EOF
+##!/bin/bash
+#
+## Interface that obtains routable IP addresses
+#INTERFACE=eno1
+#
+## Updates the /opt/gitea/custom/conf/app.ini with your current IP
+#BIND_IP=$(/sbin/ip -o -4 addr list $INTERFACE | awk '{print $4}' | cut -d/ -f1)
+#GITEA_ROOT_URL="ROOT_URL = http://$BIND_IP:4000/"
+#GITEA_SSH_DOMAIN="SSH_DOMAIN = $BIND_IP"
+#GITEA_DOMAIN="DOMAIN = $BIND_IP"
+#/bin/sed -i "s|ROOT_URL.*|$GITEA_ROOT_URL|" /opt/gitea/custom/conf/app.ini
+#/bin/sed -i "s|^SSH_DOMAIN.*|$GITEA_SSH_DOMAIN|" /opt/gitea/custom/conf/app.ini
+#/bin/sed -i "s|^DOMAIN.*|$GITEA_DOMAIN|" /opt/gitea/custom/conf/app.ini
+#
+## Executes the Gitea biary
+#/opt/gitea/gitea web -p 4000
+#EOF
+#sudo chmod +x /opt/gitea/bind_ip.sh
+sudo chown -R gitea:gitea /opt/gitea
 
 # Create the Gitea service
 sudo bash -c 'cat > /etc/systemd/system/gitea.service <<EOF
@@ -125,6 +125,7 @@ Description=Gitea (Git with a cup of tea)
 After=syslog.target
 After=network.target
 After=mariadb.service
+
 [Service]
 # Modify these two values and uncomment them if you have
 # repos with lots of files and get an HTTP error 500 because
@@ -138,9 +139,12 @@ User=gitea
 Group=gitea
 WorkingDirectory=/opt/gitea
 # We are going to load a custom script that makes sure our dhcp obtained IP address is bound to gitea
-ExecStart=/opt/gitea/bind_ip.sh
+# ExecStart=/opt/gitea/bind_ip.sh
+# When the "bind_ip.sh" process works, the below "ExecStart" line will be replaced with the one above
+ExecStart=/opt/gitea/gitea web -p 4000
 Restart=always
 Environment=USER=gitea HOME=/home/gitea
+
 [Install]
 WantedBy=multi-user.target
 EOF'
@@ -148,10 +152,10 @@ EOF'
 # Prevent remote access to MariaDB
 clear
 echo "In a few seconds we are going to secure your MariaDB configuration. You'll be asked for your MariaDB root passphrase (which hasn't been set), you'll set the MariaDB root passphrase and then be asked to confirm some security configurations."
+mysql_secure_installation
 sudo sh -c 'echo [mysqld] > /etc/my.cnf.d/bind-address.cnf'
 sudo sh -c 'echo bind-address=127.0.0.1 >> /etc/my.cnf.d/bind-address.cnf'
 sudo systemctl restart mariadb.service
-mysql_secure_installation
 
 # Allow the services through the firewall
 sudo firewall-cmd --add-service=http --permanent
