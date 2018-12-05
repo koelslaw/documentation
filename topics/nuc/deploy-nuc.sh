@@ -28,9 +28,9 @@ IP="$(hostname -I | sed -e 's/[[:space:]]*$//')"
 sudo mkdir -p /var/www/html/repo/capes
 sudo mkdir -p /var/www/html/repo/grassmarlin
 sudo mkdir -p /var/www/html/repo/nmap
+sudo curl -o /var/www/html/repo/capes/gitea https://dl.gitea.io/gitea/master/gitea-master-linux-amd64
 sudo curl -L https://github.com/nsacyber/GRASSMARLIN/releases/download/v3.2.1/grassmarlin-3.2.1-1.el6.x86_64.rpm -o /var/www/html/repo/grassmarlin/grassmarlin-3.2.1-1.el6.x86_64.rpm
 sudo curl -L https://github.com/mumble-voip/mumble/releases/download/1.2.19/murmur-static_x86-1.2.19.tar.bz2 -o /var/www/html/repo/capes/mattermost.tar.gz
-sudo curl -L http://opensource.wandisco.com/centos/7/git/x86_64/wandisco-git-release-7-2.noarch.rpm -o /var/www/html/repo/capes/wandisco-git-release-7-2.noarch.rpm
 sudo rpm --import https://artifacts.elastic.co/GPG-KEY-elasticsearch
 # sudo rpm --import https://dl.bintray.com/cert-bdf/rpm/repodata/repomd.xml.key
 sudo curl -L https://dl.bintray.com/thehive-project/rpm-stable/thehive-project-release-1.1.0-1.noarch.rpm -o /var/www/html/repo/capes/thehive-project-release-1.1.0-1.noarch.rpm
@@ -41,10 +41,11 @@ sudo curl -L https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-5.6.
 sudo curl -L https://artifacts.elastic.co/downloads/beats/metricbeat/metricbeat-5.6.5-x86_64.rpm -o /var/www/html/repo/capes/metricbeat-5.6.5-x86_64.rpm
 sudo curl -L https://artifacts.elastic.co/downloads/kibana/kibana-5.6.5-x86_64.rpm -o /var/www/html/repo/capes/kibana-5.6.5-x86_64.rpm
 
+sudo yum install http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm -y
+sudo yum install yum-utils createrepo httpd -y
+sudo yum update git -y
 sudo rpm --import /etc/pki/rpm-gpg/*
-sudo yum install http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-yum install yum-utils createrepo httpd
-sudo reposync -n --gpgcheck -l --repoid=epel --repoid=rhel-7-server-rpms --repoid=rhel-7-server-optional-rpms --repoid=rhel-7-server-extras-rpms --download_path=/var/www/html --downloadcomps --download-metadata
+sudo reposync -n --gpgcheck -l --repoid=epel --repoid=rhel-7-server-rpms --repoid=WANdisco-git --repoid=rhel-7-server-optional-rpms --repoid=rhel-7-server-extras-rpms --download_path=/var/www/html --downloadcomps --download-metadata
 cd /var/www/html/epel
 sudo createrepo -v  /var/www/html/epel -g comps.xml
 cd /var/www/html/rhel-7-server-rpms
@@ -93,12 +94,12 @@ sudo useradd -s /usr/sbin/nologin gitea
 
 # Grab Gitea and make it a home
 sudo mkdir -p /opt/gitea
-sudo cp /var/www/html/repo/capes/gitea-master-linux-amd64 /opt/gitea/gitea
+sudo cp /var/www/html/repo/capes/gitea /opt/gitea/gitea
 sudo chown -R gitea:gitea /opt/gitea
 sudo chmod 744 /opt/gitea/gitea
 
 # Create gitea bind ip script
-cat > /etc/systemd/system/gitea.service <<EOF
+sudo tee /opt/gitea/bind_ip.sh <<EOF
 #!/bin/bash
 
 # Interface that obtains routable IP addresses
