@@ -55,6 +55,12 @@ sudo curl -L https://artifacts.elastic.co/downloads/beats/metricbeat/metricbeat-
 sudo curl -L https://artifacts.elastic.co/downloads/kibana/kibana-5.6.5-x86_64.rpm -o /var/www/html/repo/capes/kibana-5.6.5-x86_64.rpm
 # sudo yum install --downloadonly --downloaddir=/var/www/html/repo/capes mariadb-server firewalld bzip2 npm gcc-c++ git java-1.8.0-openjdk.x86_64 python36u python36u-pip python36u-devel thehive cortex https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.6.0.rpm https://centos7.iuscommunity.org/ius-release.rpm libffi-devel python-devel python-pip ssdeep-devel ssdeep-libs perl-Image-ExifTool file-devel nginx httpd-tools
 
+# Update Apache config
+sudo sed -i "s/ServerAdmin root@localhost/ServerAdmin root@$IP/" /etc/httpd/conf/httpd.conf
+
+# Adjust the SELinux context for Apache
+chcon -R -t httpd_sys_content_t /var/www/html/*
+
 ################################
 ########## Gitea ###############
 ################################
@@ -95,6 +101,26 @@ sudo cp /var/www/html/repo/capes/gitea-master-linux-amd64 /opt/gitea/gitea
 sudo chown -R gitea:gitea /opt/gitea
 sudo chmod 744 /opt/gitea/gitea
 
+# Create gitea bind ip script
+cat > /etc/systemd/system/gitea.service <<EOF
+#!/bin/bash
+
+# Interface that obtains routable IP addresses
+INTERFACE=eno1
+
+# Updates the /opt/gitea/custom/conf/app.ini with your current IP
+BIND_IP=$(/sbin/ip -o -4 addr list $INTERFACE | awk '{print $4}' | cut -d/ -f1)
+GITEA_ROOT_URL="ROOT_URL = http://$BIND_IP:4000/"
+GITEA_SSH_DOMAIN="SSH_DOMAIN = $BIND_IP"
+GITEA_DOMAIN="DOMAIN = $BIND_IP"
+/bin/sed -i "s|ROOT_URL.*|$GITEA_ROOT_URL|" /opt/gitea/custom/conf/app.ini
+/bin/sed -i "s|^SSH_DOMAIN.*|$GITEA_SSH_DOMAIN|" /opt/gitea/custom/conf/app.ini
+/bin/sed -i "s|^DOMAIN.*|$GITEA_DOMAIN|" /opt/gitea/custom/conf/app.ini
+
+# Executes the Gitea biary
+/opt/gitea/gitea web -p 4000
+EOF
+
 # Create the Gitea service
 sudo bash -c 'cat > /etc/systemd/system/gitea.service <<EOF
 [Unit]
@@ -130,37 +156,6 @@ sudo sh -c 'echo bind-address=127.0.0.1 >> /etc/my.cnf.d/bind-address.cnf'
 sudo systemctl restart mariadb.service
 mysql_secure_installation
 
-<<<<<<< HEAD
-=======
-# Prepare the service environment
-sudo systemctl daemon-reload
-
-
-# Create gitea bind ip script
-cat > /etc/systemd/system/gitea.service <<EOF
-#!/bin/bash
-
-# Interface that obtains routable IP addresses
-INTERFACE=eno1
-
-### Don't touch below
-BIND_IP=$(/sbin/ip -o -4 addr list $INTERFACE | awk '{print $4}' | cut -d/ -f1)
-GITEA_ROOT_URL="ROOT_URL = http://$BIND_IP:4000/"
-GITEA_SSH_DOMAIN="SSH_DOMAIN = $BIND_IP"
-GITEA_DOMAIN="DOMAIN = $BIND_IP"
-/bin/sed -i "s|ROOT_URL.*|$GITEA_ROOT_URL|" /opt/gitea/custom/conf/app.ini
-/bin/sed -i "s|^SSH_DOMAIN.*|$GITEA_SSH_DOMAIN|" /opt/gitea/custom/conf/app.ini
-/bin/sed -i "s|^DOMAIN.*|$GITEA_DOMAIN|" /opt/gitea/custom/conf/app.ini
-
-
-/opt/gitea/gitea web -p 4000
-EOF
-
-
-# Start Gitea
-sudo systemctl start gitea.service
-
->>>>>>> de7cdbebe5b668f1f28cb9be25fc3dae97a55c42
 # Allow the services through the firewall
 sudo firewall-cmd --add-service=http --add-port=4000/tcp --permanent
 sudo firewall-cmd --reload
@@ -174,8 +169,8 @@ sudo systemctl daemon-reload
 
 # Set Gitea and Apache to start at boot
 sudo systemctl enable gitea.service
-sudo systemctl enable httpd
-sudo systemctl enable mariadb
+sudo systemctl enable httpd.service
+sudo systemctl enable mariadb.service
 
 # Start services
 sudo systemctl start gitea.service
