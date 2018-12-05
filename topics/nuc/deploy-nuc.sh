@@ -19,9 +19,6 @@ sudo sed -i 's/localpkg_gpgcheck=1/localpkg_gpgcheck=0/' /etc/yum.conf
 echo "Create your Gitea passphrase for the MySQL database and press [Enter]. You will create your Gitea administration credentials after the installation."
 read -s giteapassphrase
 
-# Set your IP address as a variable. This is for instructions below.
-IP="$(hostname -I | sed -e 's/[[:space:]]*$//')"
-
 ################################
 ### Create Local Repository ####
 ################################
@@ -96,7 +93,7 @@ sudo mkdir -p /opt/gitea
 sudo cp /var/www/html/repo/capes/gitea-master-linux-amd64 /opt/gitea/gitea
 sudo chmod 744 /opt/gitea/gitea
 
-# Create gitea bind ip script
+# Create Gitea bind ip script
 sudo tee /opt/gitea/bind_ip.sh <<'EOF'
 #!/bin/bash
 
@@ -104,7 +101,7 @@ sudo tee /opt/gitea/bind_ip.sh <<'EOF'
 INTERFACE=eno1
 
 # Updates the /opt/gitea/custom/conf/app.ini with your current IP
-BIND_IP=$(/sbin/ip -o -4 addr list $INTERFACE | awk '\''{print $4}'\'' | cut -d/ -f1)
+BIND_IP=$(/sbin/ip -o -4 addr list $INTERFACE | awk '{print $4}' | cut -d/ -f1)
 GITEA_ROOT_URL="ROOT_URL = http://$BIND_IP:4000/"
 GITEA_SSH_DOMAIN="SSH_DOMAIN = $BIND_IP"
 GITEA_DOMAIN="DOMAIN = $BIND_IP"
