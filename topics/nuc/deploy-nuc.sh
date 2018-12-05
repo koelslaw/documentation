@@ -97,25 +97,25 @@ sudo cp /var/www/html/repo/capes/gitea-master-linux-amd64 /opt/gitea/gitea
 sudo chmod 744 /opt/gitea/gitea
 
 # Create gitea bind ip script
-#sudo tee /opt/gitea/bind_ip.sh <<EOF
-##!/bin/bash
-#
-## Interface that obtains routable IP addresses
-#INTERFACE=eno1
-#
-## Updates the /opt/gitea/custom/conf/app.ini with your current IP
-#BIND_IP=$(/sbin/ip -o -4 addr list $INTERFACE | awk '{print $4}' | cut -d/ -f1)
-#GITEA_ROOT_URL="ROOT_URL = http://$BIND_IP:4000/"
-#GITEA_SSH_DOMAIN="SSH_DOMAIN = $BIND_IP"
-#GITEA_DOMAIN="DOMAIN = $BIND_IP"
-#/bin/sed -i "s|ROOT_URL.*|$GITEA_ROOT_URL|" /opt/gitea/custom/conf/app.ini
-#/bin/sed -i "s|^SSH_DOMAIN.*|$GITEA_SSH_DOMAIN|" /opt/gitea/custom/conf/app.ini
-#/bin/sed -i "s|^DOMAIN.*|$GITEA_DOMAIN|" /opt/gitea/custom/conf/app.ini
-#
-## Executes the Gitea biary
-#/opt/gitea/gitea web -p 4000
-#EOF
-#sudo chmod +x /opt/gitea/bind_ip.sh
+sudo tee /opt/gitea/bind_ip.sh <<'EOF'
+#!/bin/bash
+
+# Interface that obtains routable IP addresses
+INTERFACE=eno1
+
+# Updates the /opt/gitea/custom/conf/app.ini with your current IP
+BIND_IP=$(/sbin/ip -o -4 addr list $INTERFACE | awk '\''{print $4}'\'' | cut -d/ -f1)
+GITEA_ROOT_URL="ROOT_URL = http://$BIND_IP:4000/"
+GITEA_SSH_DOMAIN="SSH_DOMAIN = $BIND_IP"
+GITEA_DOMAIN="DOMAIN = $BIND_IP"
+/bin/sed -i "s|ROOT_URL.*|$GITEA_ROOT_URL|" /opt/gitea/custom/conf/app.ini
+/bin/sed -i "s|^SSH_DOMAIN.*|$GITEA_SSH_DOMAIN|" /opt/gitea/custom/conf/app.ini
+/bin/sed -i "s|^DOMAIN.*|$GITEA_DOMAIN|" /opt/gitea/custom/conf/app.ini
+
+# Executes the Gitea biary
+/opt/gitea/gitea web -p 4000
+EOF
+sudo chmod +x /opt/gitea/bind_ip.sh
 sudo chown -R gitea:gitea /opt/gitea
 
 # Create the Gitea service
@@ -139,9 +139,9 @@ User=gitea
 Group=gitea
 WorkingDirectory=/opt/gitea
 # We are going to load a custom script that makes sure our dhcp obtained IP address is bound to gitea
-# ExecStart=/opt/gitea/bind_ip.sh
+ExecStart=/opt/gitea/bind_ip.sh
 # When the "bind_ip.sh" process works, the below "ExecStart" line will be replaced with the one above
-ExecStart=/opt/gitea/gitea web -p 4000
+# ExecStart=/opt/gitea/gitea web -p 4000
 Restart=always
 Environment=USER=gitea HOME=/home/gitea
 
