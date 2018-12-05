@@ -55,6 +55,12 @@ sudo curl -L https://artifacts.elastic.co/downloads/beats/metricbeat/metricbeat-
 sudo curl -L https://artifacts.elastic.co/downloads/kibana/kibana-5.6.5-x86_64.rpm -o /var/www/html/repo/capes/kibana-5.6.5-x86_64.rpm
 # sudo yum install --downloadonly --downloaddir=/var/www/html/repo/capes mariadb-server firewalld bzip2 npm gcc-c++ git java-1.8.0-openjdk.x86_64 python36u python36u-pip python36u-devel thehive cortex https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.6.0.rpm https://centos7.iuscommunity.org/ius-release.rpm libffi-devel python-devel python-pip ssdeep-devel ssdeep-libs perl-Image-ExifTool file-devel nginx httpd-tools
 
+# Update Apache config
+sudo sed -i "s/ServerAdmin root@localhost/ServerAdmin root@$IP/" /etc/httpd/conf/httpd.conf
+
+# Adjust the SELinux context for Apache
+chcon -R -t httpd_sys_content_t /var/www/html/*
+
 ################################
 ########## Gitea ###############
 ################################

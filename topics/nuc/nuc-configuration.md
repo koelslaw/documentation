@@ -38,6 +38,8 @@ Windows:  there are several great tools to apply a bootable image in MS land, bu
 ## Install RHEL
 This is meant to help those who need a step-by-step build of RHEL, securing SSh, and getting ready to deploy the kit services provided by the Nuc. If you don't need this guide.  
 1. Plug the USB media into the Nuc and power on  
+1. Press `F10` to enter the boot menu  
+1. Select the USB drive or UEFI  
 1. Boot into Anaconda (the Linux install wizard)  
 1. Select your language  
 1. Start at the bottom-left, `Network & Host Name`  
@@ -57,12 +59,19 @@ This is meant to help those who need a step-by-step build of RHEL, securing SSh,
     - Click `Done`  
 1. Next click `Installation Destination`  
     - Select the hard disk you want to install RHEL to, likely it is already selected unless you have more than 1 drive  
+      - Click `Automatic Partitioning` and then click the checkbox that says `I would like to make additional space.`
+      - Click `Done`  
+      - There will be a popup window, in the bottom right, click `Delete All` and then `Reclaim Space`  
+      - There will be a new popup window, click `Accept`  
+      - Click on `Installation Destination`  
       - In the `Other Storage Options`, select `I will configure partitioning`.  
       - Click `Done`  
       - Click `Click here to create automatically.`  
       - Click on the `Red Hat Enterprise Linux Installation` carrot to dropdown your current partitions  
       - Click on `/home` and change the size to `50 G` and click `Update Settings`  
       - Click on `/` and change the size to `50 G` and click `Update Settings`  
+      - Click on the `+` and set the mount point to `/var/log/audit` and set the `Desired Capacity` to `10 G`  
+      - Click on the `+` and set the mount point to `/tmp` and set the `Desired Capacity` to `10 G`  
       - Click on the `+` and set the mount point to `/var` and leave the `Desired Capacity` blank  
       - You should have 7 partitions  
         - `/home` with `50 GiB`  
@@ -70,7 +79,7 @@ This is meant to help those who need a step-by-step build of RHEL, securing SSh,
         - `/tmp` with `10 GiB`
         - `/boot` with 1% of your total drive space  
         - `/` with `50 GiB`  
-        - `/swap` with about 1/2 of your total RAM  
+        - `swap` with about 1/2 of your total RAM  
         - `/var` with everything else  
     - Click `Done`  
     - Click `Accept Changes`  
@@ -89,6 +98,7 @@ This is meant to help those who need a step-by-step build of RHEL, securing SSh,
 1. We're not going to set a Root passphrase because you will not need it. Not setting a passphrase locks the Root account, which is what we want.  
 1. Create a user, but ensure that you toggle the `Make this user administrator` checkbox. Use the [Platform Management](../platform-management.md) page for the user designation.  
 1. Once the installation is done, click the `Reboot` button in the bottom right to...well...reboot  
+1. Remove the USB device  
 1. Login using the account you created during the Anaconda setup  
 
 # Deploy Initial Configuration
