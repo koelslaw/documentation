@@ -25,41 +25,37 @@ IP="$(hostname -I | sed -e 's/[[:space:]]*$//')"
 ################################
 ### Create Local Repository ####
 ################################
-sudo yum install http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-yum install yum-utils createrepo httpd
-sudo reposync -n --gpgcheck -l --repoid=epel --repoid=rhel-7-server-rpms --repoid=rhel-7-server-optional-rpms --repoid=rhel-7-server-extras-rpms --download_path=/var/www/html --downloadcomps --download-metadata
-sudo su -
-cd /var/www/html/epel
-createrepo -v  /var/www/html/epel -g comps.xml
-cd /var/www/html/rhel-7-server-rpms
-createrepo -v  /var/www/html/rhel-7-server-rpms -g comps.xml
-cd /var/www/html/rhel-7-server-optional-rpms
-createrepo -v  /var/www/html/rhel-7-server-optional-rpms -g comps.xml
-cd /var/www/html/rhel-7-server-extras-rpms
-createrepo -v  /var/www/html/rhel-7-server-extras-rpms -g comps.xml
-
 sudo mkdir -p /var/www/html/repo/capes
 sudo mkdir -p /var/www/html/repo/grassmarlin
 sudo mkdir -p /var/www/html/repo/nmap
 sudo curl -L https://github.com/nsacyber/GRASSMARLIN/releases/download/v3.2.1/grassmarlin-3.2.1-1.el6.x86_64.rpm -o /var/www/html/repo/grassmarlin/grassmarlin-3.2.1-1.el6.x86_64.rpm
 sudo curl -L https://github.com/mumble-voip/mumble/releases/download/1.2.19/murmur-static_x86-1.2.19.tar.bz2 -o /var/www/html/repo/capes/mattermost.tar.gz
 sudo curl -L http://opensource.wandisco.com/centos/7/git/x86_64/wandisco-git-release-7-2.noarch.rpm -o /var/www/html/repo/capes/wandisco-git-release-7-2.noarch.rpm
-# sudo yum groupinstall "Development Tools" --downloadonly --downloaddir=/var/www/html/repo/capes
 sudo rpm --import https://artifacts.elastic.co/GPG-KEY-elasticsearch
 # sudo rpm --import https://dl.bintray.com/cert-bdf/rpm/repodata/repomd.xml.key
 sudo curl -L https://dl.bintray.com/thehive-project/rpm-stable/thehive-project-release-1.1.0-1.noarch.rpm -o /var/www/html/repo/capes/thehive-project-release-1.1.0-1.noarch.rpm
 sudo curl -L https://dl.gitea.io/gitea/master/gitea-master-linux-amd64 -o /var/www/html/repo/capes/gitea-master-linux-amd64
+sudo curl -L https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.6.5-x86_64.rpm -o /var/www/html/repo/capes/elasticsearch-5.6.5-x86_64.rpm
 sudo curl -L https://artifacts.elastic.co/downloads/beats/heartbeat/heartbeat-5.6.5-x86_64.rpm -o /var/www/html/repo/capes/heartbeat-5.6.5-x86_64.rpm
 sudo curl -L https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-5.6.5-x86_64.rpm -o /var/www/html/repo/capes/filebeat-5.6.5-x86_64.rpm
 sudo curl -L https://artifacts.elastic.co/downloads/beats/metricbeat/metricbeat-5.6.5-x86_64.rpm -o /var/www/html/repo/capes/metricbeat-5.6.5-x86_64.rpm
 sudo curl -L https://artifacts.elastic.co/downloads/kibana/kibana-5.6.5-x86_64.rpm -o /var/www/html/repo/capes/kibana-5.6.5-x86_64.rpm
-# sudo yum install --downloadonly --downloaddir=/var/www/html/repo/capes mariadb-server firewalld bzip2 npm gcc-c++ git java-1.8.0-openjdk.x86_64 python36u python36u-pip python36u-devel thehive cortex https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.6.0.rpm https://centos7.iuscommunity.org/ius-release.rpm libffi-devel python-devel python-pip ssdeep-devel ssdeep-libs perl-Image-ExifTool file-devel nginx httpd-tools
 
-# Update Apache config
-sudo sed -i "s/ServerAdmin root@localhost/ServerAdmin root@$IP/" /etc/httpd/conf/httpd.conf
+sudo rpm --import /etc/pki/rpm-gpg/*
+sudo yum install http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+yum install yum-utils createrepo httpd
+sudo reposync -n --gpgcheck -l --repoid=epel --repoid=rhel-7-server-rpms --repoid=rhel-7-server-optional-rpms --repoid=rhel-7-server-extras-rpms --download_path=/var/www/html --downloadcomps --download-metadata
+cd /var/www/html/epel
+sudo createrepo -v  /var/www/html/epel -g comps.xml
+cd /var/www/html/rhel-7-server-rpms
+sudo createrepo -v  /var/www/html/rhel-7-server-rpms -g comps.xml
+cd /var/www/html/rhel-7-server-optional-rpms
+sudo createrepo -v  /var/www/html/rhel-7-server-optional-rpms -g comps.xml
+cd /var/www/html/rhel-7-server-extras-rpms
+sudo createrepo -v  /var/www/html/rhel-7-server-extras-rpms -g comps.xml
 
 # Adjust the SELinux context for Apache
-chcon -R -t httpd_sys_content_t /var/www/html/*
+sudo chcon -R -t httpd_sys_content_t /var/www/html/*
 
 ################################
 ########## Gitea ###############
@@ -69,7 +65,7 @@ chcon -R -t httpd_sys_content_t /var/www/html/*
 
 # Install dependencies
 sudo yum install epel-release -y
-sudo yum install mariadb-server http://opensource.wandisco.com/centos/7/git/x86_64/wandisco-git-release-7-2.noarch.rpm firewalld -y
+sudo yum install mariadb-server http://opensource.wandisco.com/centos/7/git/x86_64/wandisco-git-release-7-2.noarch.rpm -y
 sudo yum update git -y
 sudo systemctl start mariadb.service
 
@@ -157,7 +153,8 @@ sudo systemctl restart mariadb.service
 mysql_secure_installation
 
 # Allow the services through the firewall
-sudo firewall-cmd --add-service=http --add-port=4000/tcp --permanent
+sudo firewall-cmd --add-service=http --permanent
+sudo firewall-cmd --add-port=4000/tcp --permanent
 sudo firewall-cmd --reload
 
 ################################
