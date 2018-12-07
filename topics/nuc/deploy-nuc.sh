@@ -91,10 +91,14 @@ sudo useradd -s /usr/sbin/nologin gitea
 # Grab Gitea and make it a home
 sudo mkdir -p /opt/gitea
 sudo cp /var/www/html/repo/capes/gitea-master-linux-amd64 /opt/gitea/gitea
-sudo chmod 744 /opt/gitea/gitea
+sudo chmod 700 /opt/gitea/gitea
+sudo chmod 600 /opt/gitea/custom/conf/app.ini
+### Old settings
+# sudo chmod 744 /opt/gitea/gitea
+# sudo chmod 644 /opt/gitea/custom/conf/app.ini
 
 # Create Gitea bind ip script
-sudo tee /opt/gitea/bind_ip.sh <<'EOF'
+sudo tee /opt/gitea/gitea-config.sh <<'EOF'
 #!/bin/bash
 
 # Interface that obtains routable IP addresses
@@ -108,6 +112,9 @@ GITEA_DOMAIN="DOMAIN = $BIND_IP"
 /bin/sed -i "s|ROOT_URL.*|$GITEA_ROOT_URL|" /opt/gitea/custom/conf/app.ini
 /bin/sed -i "s|^SSH_DOMAIN.*|$GITEA_SSH_DOMAIN|" /opt/gitea/custom/conf/app.ini
 /bin/sed -i "s|^DOMAIN.*|$GITEA_DOMAIN|" /opt/gitea/custom/conf/app.ini
+
+# Removes the ability to register new accounts
+/bin/sed -i "s|DISABLE_REGISTRATION.*|DISABLE_REGISTRATION = true|" /opt/gitea/custom/conf/app.ini
 
 # Executes the Gitea biary
 /opt/gitea/gitea web -p 4000
@@ -135,10 +142,10 @@ Type=simple
 User=gitea
 Group=gitea
 WorkingDirectory=/opt/gitea
+
 # We are going to load a custom script that makes sure our dhcp obtained IP address is bound to gitea
-ExecStart=/opt/gitea/bind_ip.sh
-# When the "bind_ip.sh" process works, the below "ExecStart" line will be replaced with the one above
-# ExecStart=/opt/gitea/gitea web -p 4000
+ExecStart=/opt/gitea/gitea-config.sh
+
 Restart=always
 Environment=USER=gitea HOME=/home/gitea
 
@@ -188,4 +195,4 @@ sudo yum -y remove gcc-c++
 cat /dev/null > ~/.bash_history && history -c
 
 # Success page
-echo "Your NUC has sucessfully be configured now it's time to deploy the servers."
+echo "Your Nuc has sucessfully be configured now it's time to deploy the servers."
