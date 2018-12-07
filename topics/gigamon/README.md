@@ -106,4 +106,4 @@ Packets arrive at the Gigamon Visibility Platform at network ports and are direc
 
 **Note:**	Tool ports only allow data output to a connected tool. Any data arriving at the tool port from an external source will be discarded. In addition, a tool port’s Link Status must be up for packets to be sent out of the port.
 
-Move onto [Network Configuration](../network/network-configuration.md)
+Move onto [Network Configuration](../network/README.md)

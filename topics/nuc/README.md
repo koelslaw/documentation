@@ -109,4 +109,4 @@ sudo subscription-manager register --username [see Platform Management] --passwo
 sudo sh deploy-nuc.sh
 ```
 
-Move onto [Gigamon Configuration](../gigamon/gigamon-configuration.md)
+Move onto [Gigamon Configuration](../gigamon/README.md)

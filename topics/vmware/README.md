@@ -153,4 +153,4 @@ If this is done on a Mac, you could get a popup once the operation is complete a
 1. Review your settings  
 1. Click Finish  
 
-Move onto [Software Deployment](../software-deployment.md)
+Move onto [CAPES](../capes/README.md)
