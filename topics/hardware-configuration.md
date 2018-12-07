@@ -5,5 +5,6 @@
 1. [Gigamon Configuration](gigamon/gigamon-configuration.md)
 1. [Network Configuration](network/network-configuration.md)
 1. [Dell Chassis Management Console (CMC) Configuration](network/cmc-configuration.md)
+1. [VMWare ESXi Configuration](vmware/vmware-configuration.md)
 
 Move onto [Intel Nuc Configuration](nuc/nuc-configuration.md)

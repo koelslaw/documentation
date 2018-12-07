@@ -152,3 +152,5 @@ If this is done on a Mac, you could get a popup once the operation is complete a
   - Video Card:  Leave default  
 1. Review your settings  
 1. Click Finish  
+
+Move onto [Software Deployment](../software-deployment.md)
