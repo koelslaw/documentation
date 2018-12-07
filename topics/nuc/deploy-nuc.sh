@@ -25,7 +25,7 @@ read -s giteapassphrase
 sudo mkdir -p /var/www/html/repo/capes
 sudo mkdir -p /var/www/html/repo/grassmarlin
 sudo mkdir -p /var/www/html/repo/nmap
-sudo curl -o /var/www/html/repo/capes/ https://dl.gitea.io/gitea/master/gitea-master-linux-amd64
+sudo curl -o /var/www/html/repo/capes/gitea-master-linux-amd64 https://dl.gitea.io/gitea/master/gitea-master-linux-amd64
 sudo curl -L https://github.com/nsacyber/GRASSMARLIN/releases/download/v3.2.1/grassmarlin-3.2.1-1.el6.x86_64.rpm -o /var/www/html/repo/grassmarlin/grassmarlin-3.2.1-1.el6.x86_64.rpm
 sudo curl -L https://github.com/mumble-voip/mumble/releases/download/1.2.19/murmur-static_x86-1.2.19.tar.bz2 -o /var/www/html/repo/capes/mattermost.tar.gz
 sudo rpm --import https://artifacts.elastic.co/GPG-KEY-elasticsearch
@@ -149,9 +149,9 @@ EOF'
 # Prevent remote access to MariaDB
 clear
 echo "In a few seconds we are going to secure your MariaDB configuration. You'll be asked for your MariaDB root passphrase (which hasn't been set), you'll set the MariaDB root passphrase and then be asked to confirm some security configurations."
-mysql_secure_installation
 sudo sh -c 'echo [mysqld] > /etc/my.cnf.d/bind-address.cnf'
 sudo sh -c 'echo bind-address=127.0.0.1 >> /etc/my.cnf.d/bind-address.cnf'
+mysql_secure_installation
 sudo systemctl restart mariadb.service
 
 # Allow the services through the firewall
