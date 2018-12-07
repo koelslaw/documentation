@@ -1,0 +1,617 @@
+Switch running config:
+
+
+Current configuration : 14106 bytes
+!
+! Last configuration change at 16:54:36 UTC Fri Dec 7 2018 by admin
+!
+version 16.3
+no service pad
+service timestamps debug datetime msec
+service timestamps log datetime msec
+service password-encryption
+no platform punt-keepalive disable-kernel-core
+!
+hostname switch.[state].cmat.lan
+!
+!
+vrf definition Mgmt-vrf
+ !
+ address-family ipv4
+ exit-address-family
+ !
+ address-family ipv6
+ exit-address-family
+!
+enable secret 5 $1$eHRj$9OtbYbKVfWt96HluiBK.m/
+!
+no aaa new-model
+switch 1 provision ws-c3850-48t
+!
+!
+!
+!
+ip routing
+!
+!
+!
+!
+ip nbar http-services
+!
+no ip domain lookup
+ip dhcp excluded-address 10.[octet].50.1 10.[octet].50.10
+ip dhcp excluded-address 10.[octet].60.1 10.[octet].60.20
+!
+ip dhcp pool AP_CONFIG
+ network 10.[octet].50.0 255.255.255.0
+ default-router 10.[octet].50.1
+ option 150 ip 10.[octet].50.1
+
+switch.[state].cmat.lan#show running-config
+Building configuration...
+
+Current configuration : 14106 bytes
+!
+! Last configuration change at 16:54:36 UTC Fri Dec 7 2018 by admin
+!
+version 16.3
+no service pad
+service timestamps debug datetime msec
+service timestamps log datetime msec
+service password-encryption
+no platform punt-keepalive disable-kernel-core
+!
+hostname switch.[state].cmat.lan
+!
+!
+vrf definition Mgmt-vrf
+ !
+ address-family ipv4
+ exit-address-family
+ !
+ address-family ipv6
+ exit-address-family
+!
+enable secret 5 $1$eHRj$9OtbYbKVfWt96HluiBK.m/
+!
+no aaa new-model
+switch 1 provision ws-c3850-48t
+!
+!
+!
+!
+ip routing
+!
+!
+!
+!
+ip nbar http-services
+!
+no ip domain lookup
+ip dhcp excluded-address 10.[octet].50.1 10.[octet].50.10
+ip dhcp excluded-address 10.[octet].60.1 10.[octet].60.20
+!
+ip dhcp pool AP_CONFIG
+ network 10.[octet].50.0 255.255.255.0
+ default-router 10.[octet].50.1
+ option 150 ip 10.[octet].50.1
+!
+ip dhcp pool AP_CLIENTS
+ network 10.[octet].60.0 255.255.255.0
+ default-router 10.[octet].60.1
+ dns-server 10.[octet].10.1 208.67.222.222
+ domain-name [state].cmat.lan
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+flow monitor wireless-avc-basic
+ record wireless avc basic
+!
+!
+crypto pki trustpoint TP-self-signed-3490599378
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-3490599378
+ revocation-check none
+ rsakeypair TP-self-signed-3490599378
+!
+!
+crypto pki certificate chain TP-self-signed-3490599378
+ certificate self-signed 01
+  30820330 30820218 A0030201 02020101 300D0609 2A864886 F70D0101 05050030
+  31312F30 2D060355 04031326 494F532D 53656C66 2D536967 6E65642D 43657274
+  69666963 6174652D 33343930 35393933 3738301E 170D3138 31323035 31373030
+  34335A17 0D323030 31303130 30303030 305A3031 312F302D 06035504 03132649
+  4F532D53 656C662D 5369676E 65642D43 65727469 66696361 74652D33 34393035
+  39393337 38308201 22300D06 092A8648 86F70D01 01010500 0382010F 00308201
+  0A028201 0100B748 E1D16988 36022C45 9C35C66C 93DEC167 97C481F8 399E21C0
+  038EE290 EB2EC06F 530D0C1F 61ADDB2C DDEC8107 3219E50F FB431FF6 3CE546A4
+  E3B2A75E A14FC5D5 B7477C61 365AE012 6190EC43 6339759B 93EF3833 05181782
+  E467D493 FC1978FA E9F225BE 6FBC78DB 8FBF2B2F E896C93C BD7C68B5 C3DB48F4
+  935ECA0A 750B78EE 2076B25A 4EEF6161 3475A8EA D24317D9 D6F4D994 B4F3AAA5
+  C106B5C9 1087D587 91D00923 5B13E909 6363A502 B31B8892 70BBCD4F 8823805D
+  CE65F5A8 16F91D8B 92628901 2C793B13 542ADAFC 6DF40990 AC1FB317 66CCCC8B
+  5C88872A 29039615 778CCBF8 00B133FC 05B0B990 06AE9C8B C0E3AC6C D632B1F7
+  67826642 0A0F0203 010001A3 53305130 0F060355 1D130101 FF040530 030101FF
+  301F0603 551D2304 18301680 14FF2C0D 12C2615C 9FA11D15 4F9B8D68 151A7AF9
+  58301D06 03551D0E 04160414 FF2C0D12 C2615C9F A11D154F 9B8D6815 1A7AF958
+  300D0609 2A864886 F70D0101 05050003 82010100 0C24365C E4248208 961DDADF
+  254CB1A8 3AE757CB 920A9FBB 45E6B398 C4BD097C 634BE582 D78BE6EC 2B092927
+  E8101EB4 24CA7BF7 4286D43F E68439A8 FCD5A724 19E5AEAB 0DA67B9D 72EBAB96
+  02A3A330 A80D8A2B F47AB03A 50FA5860 EBFAD04A 6B5AC9A5 42ADBE85 1E8F553D
+  46D1D5F7 E2973B5A 2B8981FF 35039C16 E8A49889 3AAB4F52 565E2498 0816A9A0
+  829B82A0 F88FBB16 2B24A214 E30B6110 48A8CC42 B463EC2B 972BE7B2 D15999DA
+  6F3DDB7F 19C29665 55644653 F3433635 F0796462 0F9F701A 4A7554CC EEC0C2E7
+  B71FF650 7E59FB7F 759F165E B7C3C49C AF54E26A 8A5185FC FB34AD72 C9A87E2E
+  A22B3D22 08B1EAC3 7CEADD04 43B31FD7 FFC53698
+  	quit
+!
+license boot level ipservicesk9
+diagnostic bootup level minimal
+spanning-tree mode rapid-pvst
+spanning-tree extend system-id
+!
+!
+username admin privilege 15 secret 5 $1$CXAs$nBLkBHzK0vr0nQhr8.z2s1
+!
+redundancy
+ mode sso
+service-routing mdns-sd
+ designated-gateway enable
+!
+!
+!
+class-map match-any system-cpp-police-topology-control
+  description Topology control
+class-map match-any system-cpp-police-sw-forward
+  description Sw forwarding, SGT Cache Full, LOGGING
+class-map match-any system-cpp-default
+  description DHCP snooping, show forward and rest of traffic
+class-map match-any system-cpp-police-sys-data
+  description Learning cache ovfl, Crypto Control, Exception, EGR Exception, NFL SAMPLED DATA, Gold Pkt, RPF Failed
+class-map match-any system-cpp-police-punt-webauth
+  description Punt Webauth
+class-map match-any system-cpp-police-forus
+  description Forus Address resolution and Forus traffic
+class-map match-any system-cpp-police-multicast-end-station
+  description MCAST END STATION
+class-map match-any system-cpp-police-multicast
+  description Transit Traffic and MCAST Data
+class-map match-any system-cpp-police-l2-control
+  description L2 control
+class-map match-any system-cpp-police-dot1x-auth
+  description DOT1X Auth
+class-map match-any system-cpp-police-data
+  description ICMP_GEN and BROADCAST
+class-map match-any system-cpp-police-control-low-priority
+  description ICMP redirect and general punt
+class-map match-any system-cpp-police-wireless-priority1
+  description Wireless priority 1
+class-map match-any system-cpp-police-wireless-priority2
+  description Wireless priority 2
+class-map match-any system-cpp-police-wireless-priority3-4-5
+  description Wireless priority 3,4 and 5
+class-map match-any non-client-nrt-class
+class-map match-any system-cpp-police-routing-control
+  description Routing control
+class-map match-any system-cpp-police-protocol-snooping
+  description Protocol snooping
+!
+policy-map port_child_policy
+ class non-client-nrt-class
+  bandwidth remaining ratio 10
+policy-map system-cpp-policy
+ class system-cpp-police-data
+  police rate 200 pps
+ class system-cpp-police-sys-data
+  police rate 100 pps
+ class system-cpp-police-sw-forward
+  police rate 1000 pps
+ class system-cpp-police-multicast
+  police rate 500 pps
+ class system-cpp-police-multicast-end-station
+  police rate 2000 pps
+ class system-cpp-police-punt-webauth
+ class system-cpp-police-l2-control
+ class system-cpp-police-routing-control
+  police rate 1800 pps
+ class system-cpp-police-control-low-priority
+ class system-cpp-police-wireless-priority1
+ class system-cpp-police-wireless-priority2
+ class system-cpp-police-wireless-priority3-4-5
+ class system-cpp-police-topology-control
+ class system-cpp-police-dot1x-auth
+ class system-cpp-police-protocol-snooping
+ class system-cpp-police-forus
+ class system-cpp-default
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface GigabitEthernet0/0
+ vrf forwarding Mgmt-vrf
+ no ip address
+ negotiation auto
+!
+interface GigabitEthernet1/0/1
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/2
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/3
+ switchport access vlan 10
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/4
+ switchport access vlan 10
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/5
+ switchport access vlan 10
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/6
+ switchport access vlan 10
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/7
+ switchport access vlan 10
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/8
+ switchport access vlan 10
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/9
+ switchport access vlan 10
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/10
+ switchport access vlan 10
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/11
+ switchport access vlan 10
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/12
+ switchport access vlan 10
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/13
+ switchport access vlan 10
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/14
+ switchport access vlan 10
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/15
+ switchport access vlan 10
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/16
+ switchport access vlan 10
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/17
+ switchport access vlan 10
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/18
+ switchport access vlan 10
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/19
+ switchport access vlan 10
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/20
+ switchport access vlan 10
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/21
+ switchport access vlan 10
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/22
+ switchport access vlan 10
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/23
+ switchport access vlan 10
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/24
+ switchport access vlan 10
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/25
+ switchport access vlan 10
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/26
+ switchport access vlan 10
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/27
+ switchport access vlan 10
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/28
+ switchport access vlan 10
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/29
+ switchport access vlan 10
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/30
+ switchport access vlan 10
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/31
+ switchport access vlan 10
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/32
+ switchport access vlan 10
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/33
+ switchport access vlan 10
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/34
+ switchport access vlan 10
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/35
+ switchport access vlan 10
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/36
+ switchport access vlan 10
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/37
+ switchport access vlan 20
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/38
+ switchport access vlan 20
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/39
+ switchport access vlan 20
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/40
+ switchport access vlan 20
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/41
+ switchport access vlan 20
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/42
+ switchport access vlan 20
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/43
+ switchport access vlan 20
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/44
+ switchport access vlan 20
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/45
+ switchport access vlan 20
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/46
+ switchport access vlan 20
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/47
+ switchport access vlan 20
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/48
+ switchport access vlan 20
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet1/1/1
+!
+interface GigabitEthernet1/1/2
+!
+interface GigabitEthernet1/1/3
+!
+interface GigabitEthernet1/1/4
+!
+interface TenGigabitEthernet1/1/1
+!
+interface TenGigabitEthernet1/1/2
+!
+interface TenGigabitEthernet1/1/3
+!
+interface TenGigabitEthernet1/1/4
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+interface Vlan2
+ description routing_xc
+ ip address 10.[octet].2.2 255.255.255.0
+!
+interface Vlan10
+ ip address 10.[octet].10.1 255.255.255.0
+!
+interface Vlan50
+ ip address 10.[octet].50.1 255.255.255.0
+!
+interface Vlan60
+ ip address 10.[octet].60.1 255.255.255.0
+!
+!
+router eigrp 100
+ network 10.[octet].2.0 0.0.0.255
+ network 10.[octet].50.0 0.0.0.255
+ network 10.[octet].60.0 0.0.0.255
+!
+ip forward-protocol nd
+ip http server
+ip http authentication local
+ip http secure-server
+!
+!
+ip access-list extended AutoQos-4.0-wlan-Acl-Bulk-Data
+ permit tcp any any eq 22
+ permit tcp any any eq 465
+ permit tcp any any eq 143
+ permit tcp any any eq 993
+ permit tcp any any eq 995
+ permit tcp any any eq 1914
+ permit tcp any any eq ftp
+ permit tcp any any eq ftp-data
+ permit tcp any any eq smtp
+ permit tcp any any eq pop3
+ip access-list extended AutoQos-4.0-wlan-Acl-MultiEnhanced-Conf
+ permit udp any any range 16384 32767
+ permit tcp any any range 50000 59999
+ip access-list extended AutoQos-4.0-wlan-Acl-Scavanger
+ permit tcp any any range 2300 2400
+ permit udp any any range 2300 2400
+ permit tcp any any range 6881 6999
+ permit tcp any any range 28800 29100
+ permit tcp any any eq 1214
+ permit udp any any eq 1214
+ permit tcp any any eq 3689
+ permit udp any any eq 3689
+ permit tcp any any eq 11999
+ip access-list extended AutoQos-4.0-wlan-Acl-Signaling
+ permit tcp any any range 2000 2002
+ permit tcp any any range 5060 5061
+ permit udp any any range 5060 5061
+ip access-list extended AutoQos-4.0-wlan-Acl-Transactional-Data
+ permit tcp any any eq 443
+ permit tcp any any eq 1521
+ permit udp any any eq 1521
+ permit tcp any any eq 1526
+ permit udp any any eq 1526
+ permit tcp any any eq 1575
+ permit udp any any eq 1575
+ permit tcp any any eq 1630
+ permit udp any any eq 1630
+ permit tcp any any eq 1527
+ permit tcp any any eq 6200
+ permit tcp any any eq 3389
+ permit tcp any any eq 5985
+ permit tcp any any eq 8080
+!
+!
+!
+!
+control-plane
+ service-policy input system-cpp-policy
+!
+!
+line con 0
+ login local
+ stopbits 1
+line aux 0
+ stopbits 1
+line vty 0 4
+ login local
+line vty 5 15
+ login local
+!
+ntp server 10.[octet].10.2 source Vlan10
+!
+wsma agent exec
+!
+wsma agent config
+!
+wsma agent filesys
+!
+wsma agent notify
+!
+!
+ap dot11 airtime-fairness policy-name Default 0
+ap group default-group
+ap hyperlocation ble-beacon 0
+ap hyperlocation ble-beacon 1
+ap hyperlocation ble-beacon 2
+ap hyperlocation ble-beacon 3
+ap hyperlocation ble-beacon 4
+end
