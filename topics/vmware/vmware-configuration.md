@@ -62,6 +62,7 @@ If this is done on a Mac, you could get a popup once the operation is complete a
 1. Press `esc` to log out  
 
 # Upload Media to Datastore
+**Note:** this could be a bit different, specifically around the Storage considerations. I recommend you update the documentation with your specific environment.  
 
 1. Point your browser to `https://esxi-managment-ip` from the [Platform Management](../platform-management.md) page  
 1. Log in with your user credential pair from the [Platform Management](../platform-management.md) page  
@@ -94,15 +95,55 @@ If this is done on a Mac, you could get a popup once the operation is complete a
 # Create the CAPES Virtual Machine
 1. Right-Click on `Virtual Machines` and select `Create/Register VM`  
 ![](../../images/esxi-create-vm.png)  
-  - Name: `capes`
+  - Name: `capes`  
   - Compatibility: Leave default  
   - Guest OS Family: `Linux`  
   - Guest OS Version: `Red Hat Enterprise Linux 7 (64-bit)`  
-1. Select your storage, likely `datastore1`  
+1. Select your storage  
 1. Customize the VM  
   - CPU: `2`  
-  - Memory: `16 GB`  
-  - Hard disk 1: `50 GB`
+  - Memory: `12 GB`  
+  - Hard disk 1: `50 GB`  
+  - SCSI Controller 0: Leave default  
+  - SATA Controller 0: Leave default  
+  - USB controller 1:  Leave default  
+  - Network Adapter: `Passive`, ensure that `Connect` is enabled  
+  - CD/DVD Drive 1: `Datastore ISO file`, select the RHEL ISO you uploaded above, ensure that `Connect` is enabled  
+  - Video Card:  Leave default  
+1. Review your settings  
+1. Click Finish  
+
+# Create the Sensor Data Tier Virtual Machine
+1. Select `Create/Register VM`  
+  - Name: `data-tier`  
+  - Compatibility: Leave default  
+  - Guest OS Family: `Linux`  
+  - Guest OS Version: `Red Hat Enterprise Linux 7 (64-bit)`  
+1. Select your storage  
+1. Customize the VM  
+  - CPU: `x`  
+  - Memory: `xx GB`  
+  - Hard disk 1: `xx GB`  
+  - SCSI Controller 0: Leave default  
+  - SATA Controller 0: Leave default  
+  - USB controller 1:  Leave default  
+  - Network Adapter: `Passive`, ensure that `Connect` is enabled  
+  - CD/DVD Drive 1: `Datastore ISO file`, select the RHEL ISO you uploaded above, ensure that `Connect` is enabled  
+  - Video Card:  Leave default  
+1. Review your settings  
+1. Click Finish  
+
+# Create the Active Virtual Machine
+1. Select `Create/Register VM`  
+  - Name: `active`  
+  - Compatibility: Leave default  
+  - Guest OS Family: `Linux`  
+  - Guest OS Version: `Red Hat Enterprise Linux 7 (64-bit)`  
+1. Select your storage  
+1. Customize the VM  
+  - CPU: `x`  
+  - Memory: `xx GB`  
+  - Hard disk 1: `xx GB`  
   - SCSI Controller 0: Leave default  
   - SATA Controller 0: Leave default  
   - USB controller 1:  Leave default  
