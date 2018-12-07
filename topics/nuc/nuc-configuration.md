@@ -24,7 +24,7 @@ If you live in the terminal, use `dd` to apply the image.  These instructions ar
 `diskutil unmountDisk /dev/disk#`  
 
 3. write the image to drive:  
-`sudo dd bs=8m if=path/to/rockiso of=/dev/disk#`  
+`sudo dd bs=8m if=path/to/rhel.iso of=/dev/disk#`  
 
 If this is done on a Mac, you could get a popup once the operation is complete asking you to `Initialize, Ignore, Eject` the disk. You want to `Ignore` or `Eject`. `Initialize` will add a partition to it that will allow Mac to read the disk, and make it unbootable.  
 ![](../../images/mac-initialize-ignore-eject.png)  
