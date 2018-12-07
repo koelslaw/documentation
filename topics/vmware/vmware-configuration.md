@@ -61,8 +61,53 @@ If this is done on a Mac, you could get a popup once the operation is complete a
 1. Go down and select `Test Management Network` and ping your gateway IP from the [Platform Management](../platform-management.md) page to validate the settings  
 1. Press `esc` to log out  
 
-# Browser Configuration
+# Upload Media to Datastore
 
 1. Point your browser to `https://esxi-managment-ip` from the [Platform Management](../platform-management.md) page  
 1. Log in with your user credential pair from the [Platform Management](../platform-management.md) page  
-1. 
+1. Right-click on `Storage` and select `Browse datastores`  
+![](../../images/esxi-browse-datastore.png)  
+1. Click on `Create directory` and make a new directory called `iso`  
+1. Click on the new `iso` folder and click `Upload`  
+1. Upload your RHEL and RockNSM ISO's, when that's done, click `Close`  
+
+# Create Networking Ports
+
+1. Right-Click on `Networking` and select `Add port group`  
+![](../../images/esxi-network-port-group.png)  
+1. Enter the following:
+  - Name: `Passive`  
+  - VLAN ID: `10`  
+  - Virtual switch: `vSwitch0`  
+  - Security: `Inherit from vSwitch`  
+1. Enter the following:
+  - Name: `Management`  
+  - VLAN ID: `10`  
+  - Virtual switch: `vSwitch0`  
+  - Security: `Inherit from vSwitch`  
+1. Enter the following:
+  - Name: `Active`  
+  - VLAN ID: `20`  
+  - Virtual switch: `vSwitch0`  
+  - Security: `Inherit from vSwitch`  
+
+# Create the CAPES Virtual Machine
+1. Right-Click on `Virtual Machines` and select `Create/Register VM`  
+![](../../images/esxi-create-vm.png)  
+  - Name: `capes`
+  - Compatibility: Leave default  
+  - Guest OS Family: `Linux`  
+  - Guest OS Version: `Red Hat Enterprise Linux 7 (64-bit)`  
+1. Select your storage, likely `datastore1`  
+1. Customize the VM  
+  - CPU: `2`  
+  - Memory: `16 GB`  
+  - Hard disk 1: `50 GB`
+  - SCSI Controller 0: Leave default  
+  - SATA Controller 0: Leave default  
+  - USB controller 1:  Leave default  
+  - Network Adapter: `Passive`, ensure that `Connect` is enabled  
+  - CD/DVD Drive 1: `Datastore ISO file`, select the RHEL ISO you uploaded above, ensure that `Connect` is enabled  
+  - Video Card:  Leave default  
+1. Review your settings  
+1. Click Finish  
