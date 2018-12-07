@@ -25,3 +25,5 @@ https://localhost - Kibana web interface - After deploy, the created creds are i
 https://localhost:8443 - Docket - web interface for pulling PCAP from the sensor (must be enabled in config)
 
 > localhost = IP of the management interface of the box  
+
+Move onto [VMWare ESXi](../vmware/README.md)

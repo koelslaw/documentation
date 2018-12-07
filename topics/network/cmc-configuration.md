@@ -66,4 +66,4 @@ The end result summary should look like the following.
 
 ![](../../images/cmc-final-vlan-membership.png)
 
-Move onto [VMWare Configuration](../vmware/vmware-configuration.md)  
+Move onto [Software Deployment](../software-deployment.md)  

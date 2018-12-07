@@ -8,6 +8,7 @@ These are the software components of the CMAT kit.
 | GRASSMARLIN             | Passive ICS / SCADA Enumeration  | NA      |
 | Nmap                    | Active Network Enumeration       | NA      |
 | BlueScope               | Active Endpoint Interrogation    | NA      |
+| OpenVAS                 | Active Vulnerability Scanning    | NA      |
 | Google Stenographer     | Full Packet Capture & Indexing   | RockNSM |
 | Suricata                | Signature Based Alerting         | RockNSM |
 | Bro                     | Protocol Analysis & Metadata     | RockNSM |

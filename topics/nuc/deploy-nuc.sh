@@ -22,6 +22,91 @@ read -s giteapassphrase
 ################################
 ### Create Local Repository ####
 ################################
+# Create the Atomic (OpenVAS) Repos
+sudo bash -c 'cat > /etc/yum.repos.d/atomic.repo <<EOF
+# Name: Atomic Rocket Turtle RPM Repository for CentOS / Red Hat Enterprise Linux 7 -
+# URL: http://www.atomicrocketturtle.com/
+[atomic]
+name = CentOS / Red Hat Enterprise Linux $releasever - atomic
+mirrorlist = http://updates.atomicorp.com/channels/mirrorlist/atomic/centos-$releasever-$basearch
+enabled = 1
+protect = 0
+gpgkey = file:///etc/pki/rpm-gpg/RPM-GPG-KEY.art.txt
+    file:///etc/pki/rpm-gpg/RPM-GPG-KEY.atomicorp.txt
+gpgcheck = 1
+
+# Almost Stable, release candidates for [atomic]
+[atomic-testing]
+name = CentOS / Red Hat Enterprise Linux $releasever - atomic - (Testing)
+mirrorlist = http://updates.atomicorp.com/channels/mirrorlist/atomic-testing/centos-$releasever-$basearch
+enabled = 0
+protect = 0
+gpgkey = file:///etc/pki/rpm-gpg/RPM-GPG-KEY.art.txt
+    file:///etc/pki/rpm-gpg/RPM-GPG-KEY.atomicorp.txt
+gpgcheck = 1
+EOF'
+
+# Create the Atomic (OpenVAS) keys
+sudo bash -c 'cat > /etc/pki/rpm-gpg/RPM-GPG-KEY.art.txt <<EOF
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+Version: GnuPG v1.2.1 (GNU/Linux)
+
+mQGiBEGP+skRBACyZz7muj2OgWc9FxK+Hj7tWPnrfxEN+0PE+n8MtqH+dxwQpMTd
+gDpOXxJa45GM5pEwB6CFSFK7Fb/faniF9fDbm1Ga7MpBupIBYLactkoOTZMuTlGB
+T0O5ha4h26YLqFfQOtlEi7d0+BDDdfHRQw3o67ycgRnLgYSA79DISc3MywCgk2TR
+yd5sRfZAG23b4EDl+D0+oaMEAK73J7zuxf6F6V5EaxLd/w4JVB2xW0Glcn0fACOe
+8FV9lzcZuo2xPpdGuyj02f/xlqvEav3XqTfFU2no61mA2pamaRNhlo+CEfGc7qde
+/1twfSgOYqzeCx7+aybyPo8Th41b80FT19mfkjBf6+5NbUHffRabFFh1FmcPVNBn
+F3FoA/95nRIzqDMItdTRitaZn02dIGNjdwllBD75bSVEvaR9O5hjBo0VMc25DB7f
+DM2qEO52wCQbAKw9zFC284ekZVDaK4aHYt7iobHaqJEpKHgsDut5WWuMiSLR+SsF
+aBHIZ9HvrKWLSUQKHU6A1Hva0P0r3GnoCMc/VCVfrLl721SjPbQzQXRvbWljIFJv
+Y2tldCBUdXJ0bGUgPGFkbWluQGF0b21pY3JvY2tldHR1cnRsZS5jb20+iFkEExEC
+ABkFAkGP+skECwcDAgMVAgMDFgIBAh4BAheAAAoJEDKpURRevSdEzcQAn1hSHqTO
+jwv/z/picpOnR+mgycwHAKCBex2ciyXo5xeaQ9w7OMf7Jsmon7kBDQRBj/rMEAQA
+6JvRndqE4koK0e49fUkICm1X0ZEzsVg9VmUW+Zft5guCRxmGlYTmtlC7oJCToRP/
+m/xH5uIevGiJycRKB0Ix+Csl6f9QuTkQ7tSTHcaIKbI3tL1x6CCBoWeTGYaOJlvk
+ubrmajiMFaBfopLH2firoSToDGoUvv4e7bImIHEgNr8AAwUEAND0YR9DOEZvc+Lq
+Ta/PQyxkdZ75o+Ty/O64E3OmO1Tuw2ciSQXCcwrbrMSE6EHHetxtGCnOdkjjjtmH
+AnxsxdONv/EJuQmLcoNcsigZZ4tfRdmtXgcbnOmXBgmy1ea1KvWcsmecNSAMJHwR
+7vDDKzbj4mSmudzjapHeeOewFF10iEYEGBECAAYFAkGP+swACgkQMqlRFF69J0Sq
+nQCfa/q9Y/oY4dOTGj6MsdmRIQkKZhYAoIscjinFwTru4FVi2MIEzUUMToDK
+=NOIx
+-----END PGP PUBLIC KEY BLOCK-----
+EOF'
+sudo bash -c 'cat > /etc/pki/rpm-gpg/RPM-GPG-KEY.atomicorp.txt <<EOF
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+Version: GnuPG v1.4.5 (GNU/Linux)
+
+mQINBFCrkUwBEADpjFL/PJmBGz36ZZVCGE9nxxrwYdIDYjvrjS9Xoq0qExcJE2qD
+VitCDI9KLX7/qu61985vF13C5oqpuhl7nqTjwC59VJM+bitblj7o4DtKflyVtUK8
+ee0PwDnOk0NDHZZVB2KcaLs+cblbZL6LOjtQgWqjE7VH5AreeaqaJldP8kRBl/2R
+Ug8o8NyUlvhGVKK/s7scIU9GhV4diFnNipnpdSZtRO1wgkGJ/uMhkSVRVrS1Ci0p
+iADA+gmbmHpyk+H8JrtuiHm5K0OE31MoIM5jLwEpTzX5yQXOCEkQ8Dmfxy5T1qSV
+1d6WdmoBmcXltfXifbNLkOYdZCTiW1z9uxi+PZ0GAyv04qICElDgCSGJ/5UxOjYG
+GhDNRs7BmEHSfQHD9kE7VJ98JnQPqcwOO6IBgRuEt4z9Qw/ksPBBeZ11ktitWPDl
+xP4PBy/JNb1/B2BmvjYvmYk88w9OUbwMXL8pkiQ/xMf3IltXKig6dOnjNOfQhmMf
+uYztVbPtHct4eCxx12ThfvixygG/TIeq4VHbg0GW+wt39LtSgV+3BUz9QiQKY/wo
+SIJbK5oaK0ZNdah8DCqco6xyNH67qbahZoXS2K+y0Um2+0ZBFH7wLrswW4eRTVsk
+RFr79V/a8vh09GqoKN4tzNwpId4n5ivuwoYbca5j1AoW0GR4ne8MdSbAtwARAQAB
+tEJBdG9taWNvcnAgKEF0b21pY29ycCBPZmZpY2lhbCBTaWduaW5nIEtleSkgPHN1
+cHBvcnRAYXRvbWljb3JwLmNvbT6JAjYEEwECACAFAlCrkUwCGwMGCwkIBwMCBBUC
+CAMEFgIDAQIeAQIXgAAKCRD/vV0KRSCvqax4D/9G93N+b8CHcGQRzdpRnjLQ3lRp
+vSFZlc2dBW7d9PuoO8yw0nJ5QkEfROZvg6fgNesYzDUdYcqSiTb91sDv2XENS3h7
+D9gx4kutGbb/KZNH8LJfinq429zvA00xdct5zL9c7PKM/qRxE1zdZlyJ03/ewLI5
+qyvcaHgZ8PQze1+vye0txuC40FVdCkZCXWlgX3Tw+JaCPtKHsC91+fcvKGRUEb5/
++3owf3bnuKem3dcqlZlpniJtUIqfgwSTIZUwNfbE4jYsF/0mtM0wruJN0CWf5zCg
+ICLG3TrcwrDEgSDkci+igcxz9heQ9DXuFuaUDE+DndyoeY7UmHjpGwmHwsJ0HttB
+V574FB5oFndS4+AAz8ut6UT5ydEaPsMnQYAeSJxU0C5EFyA3UjIOsSe1esVm3sDq
+VezPn4Q74Ex6YMX5w9OGCVlpl/TLM7b0UD0158RT6rxkW8owXaJwb1JO8wUNSIzN
+2E2tm6FRVpOdxhR2CdkKMNilOG6glpi+3ZRgrXEr83bAYN6rwyUWHW3ihdfzVX6t
+ZzIJVvnnEzxQaUISI/ZMzVlmzgyxOYseXHeapFJG92gNwxu2IqFlQ4xWUBkJiQll
+ZkDBI7nqmV87cSJZsQPQPEzZej6rKA/pvOaUR9+p9jCildt2m9ulozk2pXgJgNVb
+kt1o05etg6iRaeSaNQ==
+=DrwN
+-----END PGP PUBLIC KEY BLOCK-----
+EOF'
+
+# Collect files
 sudo mkdir -p /var/www/html/repo/capes
 sudo mkdir -p /var/www/html/repo/grassmarlin
 sudo mkdir -p /var/www/html/repo/nmap
@@ -41,7 +126,7 @@ sudo curl -L https://artifacts.elastic.co/downloads/kibana/kibana-5.6.5-x86_64.r
 sudo yum install http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm -y
 sudo yum install yum-utils createrepo httpd -y
 sudo rpm --import /etc/pki/rpm-gpg/*
-sudo reposync -n --gpgcheck -l --repoid=epel --repoid=rhel-7-server-rpms --repoid=WANdisco-git --repoid=rhel-7-server-optional-rpms --repoid=rhel-7-server-extras-rpms --download_path=/var/www/html --downloadcomps --download-metadata
+sudo reposync -n --gpgcheck -l --repoid=epel --repoid=atomic --repoid=atomic-testing --repoid=rhel-7-server-rpms --repoid=WANdisco-git --repoid=rhel-7-server-optional-rpms --repoid=rhel-7-server-extras-rpms --download_path=/var/www/html --downloadcomps --download-metadata
 cd /var/www/html/epel
 sudo createrepo -v  /var/www/html/epel -g comps.xml
 cd /var/www/html/rhel-7-server-rpms
@@ -50,6 +135,10 @@ cd /var/www/html/rhel-7-server-optional-rpms
 sudo createrepo -v  /var/www/html/rhel-7-server-optional-rpms -g comps.xml
 cd /var/www/html/rhel-7-server-extras-rpms
 sudo createrepo -v  /var/www/html/rhel-7-server-extras-rpms -g comps.xml
+cd /var/www/html/atomic
+sudo createrepo -v  /var/www/html/atomic -g comps.xml
+cd /var/www/html/atomic-testing
+sudo createrepo -v  /var/www/html/atomic-testing -g comps.xml
 
 # Adjust the SELinux context for Apache
 sudo chcon -R -t httpd_sys_content_t /var/www/html/*
