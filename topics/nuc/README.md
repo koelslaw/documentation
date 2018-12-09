@@ -101,12 +101,17 @@ This is meant to help those who need a step-by-step build of RHEL, securing SSh,
 1. Remove the USB device  
 1. Login using the account you created during the Anaconda setup  
 
-# Deploy Initial Configuration
-Now we are going to deploy the initial configuration for the Nuc. This will serve as a repository to build the reset of the kit, as well as to store documentation.  
+## Deploy Initial Configuration
+Now we are going to deploy the initial configuration for the Nuc. This will serve as a repository to build the rest of the kit, as well as to store documentation.  
+
 
 ```
 sudo subscription-manager register --username [see Platform Management] --password [see Platform Management] --auto-attach
+```
+:warning: The next action will result in large downloads. I would not recommend completing the following action unless you have a decent internet connection and/or some time. :warning:
+```
 sudo sh deploy-nuc.sh
 ```
+## Download the follwoing iso images
 
 Move onto [Gigamon Configuration](../gigamon/README.md)
