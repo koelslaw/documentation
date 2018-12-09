@@ -43,6 +43,8 @@ A Rack Unit (abbreviated U or RU) is a unit of measure defined as 1.75 in. It is
 ┌────────────────────────────────────┐
 │              CASE 1                │
 │ ┌────────────────────────────────┐ │
+│ │     MIDDLE ATLANTIC POWER      │ │
+│ ├────────────────────────────────┤ │
 │ │       CISCO ROUTER 4321        │ │
 │ ├────────────────────────────────┤ │
 │ │       CISCO SWITCH C3850       │ │
