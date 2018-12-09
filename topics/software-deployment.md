@@ -3,11 +3,15 @@ The CMAT kit contains [several software tool suites](software-components.md).
 
 Here we will begin the deployment of that software onto the stack.
 
-# Software Deployment Order
-1. [RockNSM](rocknsm/README.md)
-1. [VMWare ESXi](vmware/README.md)
-1. [CAPES](capes/README.md)
+## Passive Software Deployment Order
+1. [RockNSM Bare Metal](rocknsm/README.md)
+2. [VMWare ESXi](vmware/README.md)
+3. [RHEL DNS Server](dns/README.md)
+4. [RockNSM Inside of ESXi](rocknsm/README.md)
+5. [CAPES](capes/README.md)
+6. [GRASSMARLIN](grassmarlin/README.md)
+
+## Active Software Deployment Order
 1. [OpenVAS](openvas/README.md)
-1. [Nmap](nmap/README.md)
-1. [GRASSMARLIN](grassmarlin/README.md)
-1. [BlueScope](bluescope/README.md)
+2. [Nmap](nmap/README.md)
+3. [BlueScope](bluescope/README.md)
