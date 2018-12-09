@@ -22,6 +22,25 @@ read -s giteapassphrase
 ################################
 ### Create Local Repository ####
 ################################
+#create rock repos
+
+sudo yum-config-manager --add-repo https://copr.fedorainfracloud.org/coprs/g/rocknsm/rocknsm-2.1/repo/epel-7/group_rocknsm-rocknsm-2.1-epel-7.repo
+
+
+#Create Elastic Repo
+sudo rpm --import https://artifacts.elastic.co/GPG-KEY-elasticsearch
+
+sudo bash -c 'cat > /etc/yum.repos.d/elastic.repo <<EOF
+[elasticsearch-6.x]
+name=Elasticsearch repository for 6.x packages
+baseurl=https://artifacts.elastic.co/packages/6.x/yum
+gpgcheck=1
+gpgkey=https://artifacts.elastic.co/GPG-KEY-elasticsearch
+enabled=1
+autorefresh=1
+type=rpm-md
+EOF'
+
 # Create the Atomic (OpenVAS) Repos
 sudo bash -c 'cat > /etc/yum.repos.d/atomic.repo <<EOF
 # Name: Atomic Rocket Turtle RPM Repository for CentOS / Red Hat Enterprise Linux 7 -
@@ -126,7 +145,8 @@ sudo curl -L https://artifacts.elastic.co/downloads/kibana/kibana-5.6.5-x86_64.r
 sudo yum install http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm -y
 sudo yum install yum-utils createrepo httpd -y
 sudo rpm --import /etc/pki/rpm-gpg/*
-sudo reposync -n --gpgcheck -l --repoid=epel --repoid=atomic --repoid=atomic-testing --repoid=rhel-7-server-rpms --repoid=WANdisco-git --repoid=rhel-7-server-optional-rpms --repoid=rhel-7-server-extras-rpms --download_path=/var/www/html --downloadcomps --download-metadata
+sudo reposync -n --gpgcheck -l --repoid=epel --repoid=atomic --repoid=atomic-testing --repoid=rhel-7-server-rpms --repoid=WANdisco-git --repoid=rhel-7-server-optional-rpms --repoid=rhel-7-server-extras-rpms --repoid=Elasticsearch-6.x --download_path=/var/www/html --downloadcomps --download-metadata
+
 cd /var/www/html/epel
 sudo createrepo -v  /var/www/html/epel -g comps.xml
 cd /var/www/html/rhel-7-server-rpms
