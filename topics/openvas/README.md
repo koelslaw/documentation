@@ -21,13 +21,7 @@ vi /bin/openvas-setup
 56 fi
 ...
 ```
-1. Add the `unixsocket` for Redis, and make sure we add it where SELinux will be happy with it  
-```
-vi /etc/redis.conf
-...
-unixsocket /run/redis/redis.sock
-unixsocketperm 700
-```
+
 1. Run the OpenVAS setup script `sudo openvas-setup`  
 1. Edit OpenVAS config to point to the correct Redis `unixsocket` add line 97 to the file  
 ```
@@ -59,20 +53,18 @@ shift+g
 firewall-cmd --add-port=9392/tcp --permanent  
 firewall-cmd --reload
 ```
-1. Rebuild the NVT database `openvasmd --rebuild`  
-1. Reload the services
-**NOTE:** they take a while to start up  
+
+1. Add the `unixsocket` for Redis, and make sure we add it where SELinux will be happy with it  
 ```
-systemctl restart redis openvas-manager openvas-scanner
+vi /etc/redis.conf
+...
+unixsocket /run/redis/redis.sock
+unixsocketperm 700
 ```
 
-## Pretty sure this was not needed, the biggest issue is that openvas wants to put the socket in the /tmp dir when it should be under /run/redis
-#This is the selinux policy I put into place before moving the socket to the correct directory  
-#
-#Selinux Policy that was added
-##============= redis_t ==============
-#allow redis_t tmp_t:dir add_name;
-#
-##!!!! This avc is allowed in the current policy
-# allow redis_t tmp_t:dir write;
-#
+1. Rebuild the NVT database  
+```
+sudo systemclt start redis.service
+openvasmd --rebuild
+systemctl restart redis openvas-manager.service openvas-scanner.service
+```
