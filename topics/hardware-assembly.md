@@ -47,9 +47,9 @@ A Rack Unit (abbreviated U or RU) is a unit of measure defined as 1.75 in. It is
 │ ├────────────────────────────────┤ │
 │ │       CISCO ROUTER 4321        │ │
 │ ├────────────────────────────────┤ │
-│ │       CISCO SWITCH C3850       │ │
+│ │        Dell R840               │ │
 │ ├────────────────────────────────┤ │
-│ │        DELL R840 SERVER        │ │
+│ │       CISCO SWITCH C3850       │ │
 │ └────────────────────────────────┘ │
 └────────────────────────────────────┘
 ```
@@ -95,9 +95,9 @@ A Rack Unit (abbreviated U or RU) is a unit of measure defined as 1.75 in. It is
 │ ┌────────────────────────────────┐ │
 │ │     MIDDLE ATLANTIC POWER      │ │
 │ ├────────────────────────────────┤ │
-│ │      GIGAMON GIGAVUE HC1       │ │
+│ │      DELL R840                 │ │
 │ ├────────────────────────────────┤ │
-│ │        DELL R840 SERVER        │ │
+│ │      GIGAMON GIGAVUE HC1       │ │
 │ └────────────────────────────────┘ │
 └────────────────────────────────────┘
 ```

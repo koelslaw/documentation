@@ -26,7 +26,6 @@ read -s giteapassphrase
 
 sudo yum-config-manager --add-repo https://copr.fedorainfracloud.org/coprs/g/rocknsm/rocknsm-2.1/repo/epel-7/group_rocknsm-rocknsm-2.1-epel-7.repo
 
-
 #Create Elastic Repo
 sudo rpm --import https://artifacts.elastic.co/GPG-KEY-elasticsearch
 
@@ -143,9 +142,10 @@ sudo curl -L https://artifacts.elastic.co/downloads/beats/metricbeat/metricbeat-
 sudo curl -L https://artifacts.elastic.co/downloads/kibana/kibana-5.6.5-x86_64.rpm -o /var/www/html/repo/capes/kibana-5.6.5-x86_64.rpm
 
 sudo yum install http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm -y
+
 sudo yum install yum-utils createrepo httpd -y
 sudo rpm --import /etc/pki/rpm-gpg/*
-sudo reposync -n --gpgcheck -l --repoid=epel --repoid=atomic --repoid=atomic-testing --repoid=rhel-7-server-rpms --repoid=WANdisco-git --repoid=rhel-7-server-optional-rpms --repoid=rhel-7-server-extras-rpms --repoid=Elasticsearch-6.x --download_path=/var/www/html --downloadcomps --download-metadata
+sudo reposync -n --gpgcheck -l --repoid=epel --repoid=atomic --repoid=atomic-testing --repoid=rhel-7-server-rpms --repoid=WANdisco-git --repoid=rhel-7-server-optional-rpms --repoid=rhel-7-server-extras-rpms --repoid=Elasticsearch-6.x --repoid=group_rocknsm-rocknsm-2.1 --download_path=/var/www/html --downloadcomps --download-metadata
 
 cd /var/www/html/epel
 sudo createrepo -v  /var/www/html/epel -g comps.xml
@@ -159,7 +159,10 @@ cd /var/www/html/atomic
 sudo createrepo -v  /var/www/html/atomic -g comps.xml
 cd /var/www/html/atomic-testing
 sudo createrepo -v  /var/www/html/atomic-testing -g comps.xml
-
+cd /var/www/html/epel
+sudo createrepo -v  /var/www/html/epel -g comps.xml
+cd /var/www/html/group_rocknsm-rocknsm-2.1
+sudo createrepo -v  /var/www/html/group_rocknsm-rocknsm-2.1 -g comps.xml
 # Adjust the SELinux context for Apache
 sudo chcon -R -t httpd_sys_content_t /var/www/html/*
 
