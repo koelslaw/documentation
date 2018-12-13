@@ -59,3 +59,54 @@ U spaces.
 
 14. Insert and tighten the two screws using the Phillips #2
 screwdriver to secure the rails to the rack.
+
+### Hardware Reconfiguration
+
+1. Remove 1 of 1.6 TB SSD to the Server that will be designated as you Sensor/Baremetal/RHEL Machine
+
+
+### Configure iDRAC
+
+TODO
+
+
+### OS installation
+
+1. During initial setup you will be present with the lifecycle controller.
+
+2. Navigate to -> System Setup -> Advanced Hardware Configuration
+
+
+![](../../images/lifecyclecontroller.png)
+
+3. Navigate to -> Device Seetings -> RAID Controller - PERC
+
+
+
+![](../../images/configure for raid.png)
+
+4. Configure the SSD RAID as Follow for each Server
+
+![](../../images/Device list for ssd raid.png)
+
+  - Sensor Tier
+    - RAID 0 240 GB SSD x 1 (NAME: OS)
+    - RAID 0 1.6TB SSD x 5 (NAME: FAST)
+
+  - Data Tier (ESXI)
+    - RAID 0 240 GB SSD X 1 (NAME: OS_ISO)
+    - RAID 0 1.6TB SSD x 3 (NAME: FAST)
+
+
+![](../../images/device list for nvme.png)
+
+5. Navigate to -> Device Seetings -> RAID Controller - NVME
+  - Sensor Tier
+    - RAID 0 1.6 NVME
+
+  - Data Tier (ESXI)
+    - RAID 0 1.6 NVME
+
+6. When Configuration is finished exit Lifecycle Controller and Install OS via the iDRAC or Installation Media
+
+![](../../images/lifecyclecontroller.png)
