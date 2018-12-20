@@ -17,7 +17,7 @@ A Rack Unit (abbreviated U or RU) is a unit of measure defined as 1.75 in. It is
  - Unhinge doors
 
 ## Step 2 - Install Server - U1 & U2
-1.
+[Dell Server Installation](dell/README.md)
 
 ## Step 3 - Installation of Cisco Switch - U3
 1. Attach front brackets (included) to both sides using 4 mounting holes (front and rear) and 4 short-set screws per side

@@ -112,6 +112,12 @@ sudo subscription-manager register --username [see Platform Management] --passwo
 ```
 sudo sh deploy-nuc.sh
 ```
+
+Add the nuc git repo
+ - rock-scripts
+ - rock-dashboards
+ - CAPES
+ - rock
 ## Download the follwoing iso images
 
 Move onto [Gigamon Configuration](../gigamon/README.md)

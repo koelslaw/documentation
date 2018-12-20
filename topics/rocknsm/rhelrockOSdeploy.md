@@ -1,21 +1,20 @@
-# Installation Guide
+# Installation Guide for Rock
 ![](../../images/install_banner.png)
 
-## Overview
 
-If there’s one thing that should be carried away from the installation section, it's this:  
 
-> RockNSM has been designed to be used as a distro. It's not a package or a suite of tools. It’s built from the ground up purposefully.  THE ONLY SUPPORTED INSTALL IS THE OFFICIAL ISO.
+## prereqs:
+ - Installation media
+  - RHEL
+  - ESXi
 
-Yes, one can clone the project and run the Ansible on some bespoke CentOS build and may have great success. But you've voided the warranty.  Providing a clean product that makes supporting submitted issues is important to us.  The ISO addresses most use cases.
+## Preparing Media
 
-## Getting Media
-
-The latest ROCK build is available here: [ROCK 2.2](http://download.rocknsm.io/)  
+If not already done move one of the SSD to the server that will be your sensor. This ensures you have enough room for your PCAP for stenographer
 
 ## Apply the Image
 
-Now it's time to create a bootable USB drive with that fresh ROCK build.  Let's look at few options.   
+Now it's time to create a bootable USB drive with RHEL/ESXi.  Let's look at few options.   
 
 ### CLI
 
@@ -45,13 +44,6 @@ Windows:  there are several great tools to apply a bootable image in MS land, bu
 
 ROCK works with both legacy BIOS and UEFI booting.  Once booted from the USB, you are presented with 2 primary paths:  
 
-### Automated vs. Custom install
-
-The automated build strives to make some of the harder decisions for users by skipping over many options to get you up and running.  
-
-The Custom option uses the same settings as Automated, but pauses at the anaconda screen that will allow advanced users to customize how to configure local storage.  This is especially helpful when you're working with multiple disks.  
-
-For this guide select the **Automated** install and `ENTER`.  
 
 ### DATE & TIME
 
@@ -61,16 +53,59 @@ Bro includes a utility for parsing these on the command line called `bro-cut`. I
 
 ### Network Setup
 
+
+#### - Sensor Setup
+
 Before beginning the install process it's best to connect the interface you've selected to be the **management interface**.  Here's the order of events:  
 
 1. ROCK will initially look for an interface with a default gateway and treat that interface as MGMT
-1. All remaining interfaces will be treated as MONITOR
+2. All remaining interfaces will be treated as MONITOR
+
 
 Ensure that the interface you intend to use for MGMT has been turned on and has an IP:  
 
+
+
+#### - Data Tier (ESXi) Setup
+
+There will not be any monitor interface only the management interface. no futher config is needed. ensure connection to the switch via the fiber sfp is good
+
+
+### Security profiles
+ Apply the DISA STiG
+
+
+
+### Partitioning
+
+#### - Sensor Setup
+
+  Set up the partitions as follows:
+    - /data  = everything else from steno
+    - /data/stenographer/ = 7TB ssd
+    - /data/kafka = 1.6 TB nvme only
+    - / = 50 GB ssd
+    - /home = everything else ssd
+    - /var = 30 GB ssd
+    - /var/log/audit = 25 GB ssd
+    - /tmp  = 10 GB ssd
+    - /boot = default ssd
+
+#### - Data Tier (Any Elasticsearch Node)
+
+  Set up the partitions as follows:
+    - /data  = everthing else ssd <--- Elastic lives here
+    - / = 50 GB ssd
+    - /home = 50 GB ssd
+    - /var = 10 GB ssd
+    - /var/log/audit = 10 GB ssd
+    - /tmp  = 10 GB ssd
+    - /boot = default ssd
+
+
 ### User Creation
 
-ROCK is configured with the root user disabled.  We recommend that you leave it that way.  Once you've kicked off the install, click **User Creation** at the next screen (shown above) and complete the required fields to set up a non-root admin user.  
+Leave the root user disabled.  We recommend that you leave it that way.  Once you've kicked off the install, click **User Creation** at the next screen (shown above) and complete the required fields to set up a non-root admin user.  
 
 ![](../../images/admin-user.jpg)
 
@@ -79,8 +114,12 @@ ROCK is configured with the root user disabled.  We recommend that you leave it 
 - click **Finish Installation** and wait for reboot
 - accept license agreement: `c` + `ENTER`
 
+
+
 #### Update Repository
-We want to set the Nuc as the upstream repository, you can copy / paste this following code block into the Terminal.
+once the server that wilol now refer to as the sensor reboots we need to start the deployment rock. since rock is by default buil;t on CENTOS vs RHEL and we are accomplishing this in offline vs online, we want to set the Nuc as the upstream RHEL repository You can copy / paste this following code block into the Terminal.
+
+
 ```
 sudo bash -c 'cat > /etc/yum.repos.d/local-repos.repo <<EOF
 [atomic]
@@ -138,6 +177,11 @@ gpgcheck=0
 enabled=1
 
 EOF'
+
+```
+
+Ensure that the local repo has been added
+```
 yum repolist all
 
 
@@ -145,7 +189,7 @@ yum repolist all
 
 The last step before configuring sensor settings is to update the base OS to current: `sudo yum update -y && reboot`  
 
-## Configure
+## Configuration for sensor
 
 The primary configuration file for ROCK is `/etc/rocknsm/config.yml`.  This file contains key variables like network interface setup, cpu cores utilized, and more.  Here's the default config file after initial install:  
 
@@ -249,6 +293,7 @@ enable_kafka: True
 enable_nginx: True
 enable_lighttpd: True
 enable_fsf: False
+
 ```
 
 All these tunable options are commented to describe the function of each section, but here are some key points to note starting out:  
@@ -314,7 +359,19 @@ deploy_rock.sh
 
 This script will regenerate a fresh default `config.yml` for you and get you out of jail.  If you need to reset things you can execute this script by running:  
 
+
 `sudo ./deploy_rock.sh`
+
+disable fips
+
+```
+sudo vim /etc/default/grub
+```
+and issue Restart
+
+```
+sudo reboot
+```
 
 ## Deploy
 
