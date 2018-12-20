@@ -32,7 +32,7 @@ If this is done on a Mac, you could get a popup once the operation is complete a
 
 ### Via GUI
 
-**acOS:**  if using the terminal is currently a barrier to getting things rolling, [etcher.io](http://etcher.io) is an excellent GUI burning utility.  
+**MacOS:**  if using the terminal is currently a barrier to getting things rolling, [etcher.io](http://etcher.io) is an excellent GUI burning utility.  
 **Windows:**  there are several great tools to apply a bootable image in MS land, but we recommend [rufus](https://rufus.akeo.ie/).  
 
 ## Installation Instructions
