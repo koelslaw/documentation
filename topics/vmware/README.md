@@ -121,9 +121,9 @@ If this is done on a Mac, you could get a popup once the operation is complete a
   - Guest OS Version: `Red Hat Enterprise Linux 7 (64-bit)`  
 1. Select your storage  
 1. Customize the VM  
-  - CPU: `x`  
-  - Memory: `xx GB`  
-  - Hard disk 1: `xx GB`  
+  - CPU: `12`  
+  - Memory: `16 GB`  
+  - Hard disk 1: `1 TB`  
   - SCSI Controller 0: Leave default  
   - SATA Controller 0: Leave default  
   - USB controller 1:  Leave default  
