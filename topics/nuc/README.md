@@ -1,7 +1,9 @@
 # Intel Nuc Configuration
 
+The intel nuc an important part of the setup. It is used as you RPM repo, You doucmentation Source, and you ability to quickly rebuild os the kit for various reasons. It is also meant to be removable so it can update the rest of kit components and ROCK.
+
 # Install RedHat Enterprise Linux (RHEL)
-**Note:** if necessary, these steps can be replicated to work with [CentOS Minimal](http://mirror.mobap.edu/centos/7.5.1804/isos/x86_64/CentOS-7-x86_64-Minimal-1804.iso).
+> Note: if necessary, these steps can be replicated to work with [CentOS Minimal](http://mirror.mobap.edu/centos/7.5.1804/isos/x86_64/CentOS-7-x86_64-Minimal-1804.iso).
 
 ## Create Installation Media
 

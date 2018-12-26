@@ -4,7 +4,7 @@
 
 These functions are accomplished with `rockctl  {start|stop|status}`.
 
-> NOTE: these may need to be prefaced with /usr/local/bin/ depending on your _$PATH_.
+> Note:: these may need to be prefaced with /usr/local/bin/ depending on your _$PATH_.
 
 - `rockctl status`
 
