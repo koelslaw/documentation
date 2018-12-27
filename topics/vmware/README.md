@@ -54,7 +54,7 @@ If this is done on a Mac, you could get a popup once the operation is complete a
 1. Go down to `Configure Management Network`  
 1. Go down to `IPv4 Configuration`  
 1. Ensure that `Set static IPv4 address and network configuration` is set (you can toggle it by selecting it and pressing the `Space` bar)  
-1. Enter the `IPv4 Address`, `Subnet Mask`, and `Default Gateway`, and press `Enter`  
+1. Enter the `IPv4 Address`, `Subnet Mask`, and `Default Gateway`, and press `Enter`
 1. Go down and select `DNS Configuration`  
 1. Enter your DNS and hostname information from the [Platform Management](../platform-management.md) page and press `Enter`  
 1. Press `esc`, then `Y` to save your changes and restart your management interface  
@@ -133,7 +133,7 @@ If this is done on a Mac, you could get a popup once the operation is complete a
 1. Review your settings  
 1. Click Finish  
 
-# Create the Active Virtual Machine
+# Create the Active Virtual Machine OpenVAS
 1. Select `Create/Register VM`  
   - Name: `active`  
   - Compatibility: Leave default  
