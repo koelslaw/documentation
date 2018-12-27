@@ -15,7 +15,7 @@ If you have not already done so, press the chassis power button to turn it on. T
 # Initial Configuration (WebUI)
 1. Connect a network cable to one of the management ports on the back of the CMC.
 
-**Note:** There are redundant management interfaces. Either one will work. If you only have 1 plugged in, you'll get a warning when you log into the webUI but it isn't a problem. To make the warning go away, plug the CMC into [an appropriate switch port in VLAN10](../hardware-assembly.md).
+> Note: There are redundant management interfaces. Either one will work. If you only have 1 plugged in, you'll get a warning when you log into the webUI but it isn't a problem. To make the warning go away, plug the CMC into [an appropriate switch port in VLAN10](../hardware-assembly.md).
 ![](../../images/cmc-management.png)
 > Management port highlighted purple  
 
@@ -62,7 +62,7 @@ The LAG for the hypervisor blades and external LAG will operate in trunk mode wi
 
 The end result summary should look like the following.
 
-**NOTE**: You can change the VLAN in this view to see the settings per each VLAN. `T` means that VLAN will be tagged on that port. `U` means it will be untagged on that port. Blank means it is an access port in that VLAN. A trunk port should have all VLANs that you wish to pass with a setting of `T`.
+> Note:: You can change the VLAN in this view to see the settings per each VLAN. `T` means that VLAN will be tagged on that port. `U` means it will be untagged on that port. Blank means it is an access port in that VLAN. A trunk port should have all VLANs that you wish to pass with a setting of `T`.
 
 ![](../../images/cmc-final-vlan-membership.png)
 

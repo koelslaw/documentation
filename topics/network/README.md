@@ -92,4 +92,8 @@ The entire running configuration is stored in the [config directory](../../confi
 1. Set your local IP address to be in the same subnet as the management IP you configured above  
 1. Point your browser to the management IP from the [Platform Management page](../platform-management.md) page  
 
+
+Move onto [ESXi](../vmware/README.md)
+or if installed,
+
 Move onto [Dell Chassis Management Console (CMC) Configuration](cmc-configuration.md)

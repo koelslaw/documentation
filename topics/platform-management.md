@@ -15,7 +15,7 @@
 | Red Hat Subscription            | NA   | NA                       | NA                     | NA                             | NA                             | cmtadmin         | 26093Pinz!         | NA               | NA                 | Red Hat Subscription Manager Creds |
 |                                 |      |                          |                        |                                |                                |                  |                    |                  |                    |                                    |
 
-**Note:** The naming standard is `asset-type-#.state.cmat.lan`. The IP scheme is `10.[state octet].[VLAN].[host]`.  
+> Note: The naming standard is `asset-type-#.state.cmat.lan`. The IP scheme is `10.[state octet].[VLAN].[host]`.  
 
 | State      |  State Abbreviation   | State Octet |
 |------------|-----------------------|-------------|

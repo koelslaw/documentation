@@ -5,7 +5,7 @@ This repo serves as the main source of documentation for the Cyber Mission Assur
 ## Build Steps
 To walk through the build steps, [check out the README](./topics/README.md).
 
-**Note:** This documentation was made with best effort on a short timeline. Most of the documentation is correct, but there could be nuances or minor details that still need to be adjusted to your environment.
+> Note: This documentation was made with best effort on a short timeline. Most of the documentation is correct, but there could be nuances or minor details that still need to be adjusted to your environment.
 
 Please contribute fixes back to the project.  
 

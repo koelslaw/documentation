@@ -26,7 +26,7 @@ Flow Control: None
 1. This will ask you to log in with the [default credentials](../credentials.md)
 1. As soon as you log in, you'll be asked to enter the `Initial Configuration`, let's do that.
 
-**Note:** You need to change the hostnames, octets, and insert your passwords from the [Platform Management page](../platform-management.md) before inputting this into the Gigamon.
+> Note: You need to change the hostnames, octets, and insert your passwords from the [Platform Management page](../platform-management.md) before inputting this into the Gigamon.
 
 A good suggestion is to perform a "Find" for `[` and replace the `[comment]` with your specific environment variables.
 
@@ -43,7 +43,7 @@ Do you want to use the wizard for initial configuration? yes
 4. Use zeroconf on eth0 interface: no
 5. Primary IPv4 address and masklen: 10.[state].10.5/24
 6. Default gateway: 10.[state].10.1
-7. Primary DNS server: 10.[state].10.1
+7. Primary DNS server: 10.[state].10.20
 8. Domain name: cmat.lan
 9. Enable IPv6: no
 10. Enable secure cryptography: no
@@ -99,11 +99,11 @@ Packets arrive at the Gigamon Visibility Platform at network ports and are direc
 ### Network (Ingress) Ports
 **Network ports** are where you connect data sources to GigaVUE nodes. For example, you could connect a switch’s SPAN port, connect an external TAP, or simply connect an open port on a hub to an open port on a line card. Regardless, the idea is the same – network ports are where data arrives at the GigaVUE node.
 
-**Note:**	In their standard configuration, network ports only accept data input – no data output is allowed.
+> Note:	In their standard configuration, network ports only accept data input – no data output is allowed.
 
 ### Tool (Egress) Ports
 **Tool ports** are where you connect destinations for the data arriving on network ports on GigaVUE nodes. For example, an IT organization could assign one set of tool ports to its Security Team for an intrusion detection system, a forensic data recorder, and a traditional protocol analyzer while a separate set of tool ports assigned to the Application Performance Management team is used for a flow recorder and a long-term packet capture device. Regardless of the specific tool connected, the idea is the same – tool ports are where users select different portions of the data arriving on network ports.
 
-**Note:**	Tool ports only allow data output to a connected tool. Any data arriving at the tool port from an external source will be discarded. In addition, a tool port’s Link Status must be up for packets to be sent out of the port.
+> Note:	Tool ports only allow data output to a connected tool. Any data arriving at the tool port from an external source will be discarded. In addition, a tool port’s Link Status must be up for packets to be sent out of the port.
 
 Move onto [Network Configuration](../network/README.md)
