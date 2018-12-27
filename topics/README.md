@@ -1,5 +1,5 @@
 # Topics Readme
-**Note:** this documentation has been generated generically for the use of multiple states.
+> Note: this documentation has been generated generically for the use of multiple states.
 
 When tailoring this documentation, you should replace `[state]` and `[state octet]` with your designated state abbreviation and assigned state octet.
 

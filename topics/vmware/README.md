@@ -62,7 +62,7 @@ If this is done on a Mac, you could get a popup once the operation is complete a
 1. Press `esc` to log out  
 
 # Upload Media to Datastore
-**Note:** this could be a bit different, specifically around the Storage considerations. I recommend you update the documentation with your specific environment.  
+> Note: this could be a bit different, specifically around the Storage considerations. I recommend you update the documentation with your specific environment.  
 
 1. Point your browser to `https://esxi-managment-ip` from the [Platform Management](../platform-management.md) page  
 1. Log in with your user credential pair from the [Platform Management](../platform-management.md) page  
