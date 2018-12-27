@@ -43,7 +43,7 @@ Do you want to use the wizard for initial configuration? yes
 4. Use zeroconf on eth0 interface: no
 5. Primary IPv4 address and masklen: 10.[state].10.5/24
 6. Default gateway: 10.[state].10.1
-7. Primary DNS server: 10.[state].10.1
+7. Primary DNS server: 10.[state].10.20
 8. Domain name: cmat.lan
 9. Enable IPv6: no
 10. Enable secure cryptography: no
