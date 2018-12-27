@@ -7,7 +7,7 @@
  - Installation media
   - RHEL
   - ESXi
-
+___
 ## Preparing Media
 
 If not already done move one of the SSD to the server that will be your sensor. This ensures you have enough room for your PCAP for stenographer
@@ -37,15 +37,8 @@ macOS:  if using the terminal is currently a barrier to getting things rolling, 
 
 Windows:  there are several great tools to apply a bootable image in MS land, but we recommend [rufus](https://rufus.akeo.ie/).  
 
-## Install
 
-### First Boot
-![](../../images/rock-initialboot.jpg)
-
-ROCK works with both legacy BIOS and UEFI booting.  Once booted from the USB, you are presented with 2 primary paths:  
-
-
-### DATE & TIME
+### Date & Time
 
 UTC is generally preferred for logging data as the timestamps from anywhere in the world will have a proper order without calculating offsets. That said, Kibana will present the Bro logs according to your timezone (as set in the browser). The bro logs themselves (i.e. in `/data/bro/logs/`) log in epoch time and will be written in UTC regardless of the system timezone.
 
@@ -61,15 +54,16 @@ Before beginning the install process it's best to connect the interface you've s
 1. ROCK will initially look for an interface with a default gateway and treat that interface as MGMT
 2. All remaining interfaces will be treated as MONITOR
 
+> This will be the 2 ethernet cables running from the gigamon to the back of the server in the same case (sensor)
 
-Ensure that the interface you intend to use for MGMT has been turned on and has an IP:  
+
+Ensure that the interface you intend to use for MGMT has been turned on and has a static IP and proper name outlined in [Platform Management page](../platform-management.md)
 
 
 
 #### - Data Tier (ESXi) Setup
 
-There will not be any monitor interface only the management interface. no futher config is needed. ensure connection to the switch via the fiber sfp is good
-
+There will not be any monitor interfaces only the management interfaces. Ensure a management interface is set with a static IP and proper name outlined in [Platform Management page](../platform-management.md)
 
 ### Security profiles
  Apply the DISA STiG
@@ -79,6 +73,8 @@ There will not be any monitor interface only the management interface. no futher
 ### Partitioning
 
 #### - Sensor Setup
+
+There partitioning will differ for each server. The main focus for storage on the sensor is for stenographer to retain pcap. The data tier will need space to retain all the indexed information form the sensor and distribute the load amongst the 3 elastic nodes.
 
   Set up the partitions as follows:
     - /data  = everything else from steno
@@ -102,6 +98,9 @@ There will not be any monitor interface only the management interface. no futher
     - /tmp  = 10 GB ssd
     - /boot = default ssd
 
+  Setup the LVM Cache as follows:
+    - Step 1-7 TODO
+
 
 ### User Creation
 
@@ -115,9 +114,10 @@ Leave the root user disabled.  We recommend that you leave it that way.  Once yo
 - accept license agreement: `c` + `ENTER`
 
 
+## Repo Changes
 
-#### Update Repository
-once the server that wilol now refer to as the sensor reboots we need to start the deployment rock. since rock is by default buil;t on CENTOS vs RHEL and we are accomplishing this in offline vs online, we want to set the Nuc as the upstream RHEL repository You can copy / paste this following code block into the Terminal.
+### Update Repository
+Once the sensor reboots we need to start the deployment rock. since rock is by default buil;t on CENTOS vs RHEL and we are accomplishing this in offline vs online, we want to set the Nuc as the upstream RHEL repository You can copy / paste this following code block into the Terminal.
 
 
 ```
