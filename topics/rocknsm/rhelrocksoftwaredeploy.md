@@ -823,3 +823,25 @@ zookeeper.connection.timeout.ms=6000
 group.initial.rebalance.delay.ms=0
 
 ```
+
+
+### Ports
+Open the following ports on the firewall for the elastic machines
+
+  - 9300 TCP - Node coordination (I am sure elastic has abetter name for this)
+  - 9200 TCP - Elasticsearch
+  - 5601 TCP - Only on the elasticsearch node that has kibana installed, Likely es1.[STATE].cmat.lan
+  - 22 TCP - SSH Access
+
+
+```
+sudo firewall-cmd --add-port=9300/tcp --permanent
+```
+Reload the firewall config
+
+```
+sudo firewall-cmd --reload
+```
+
+### Function check
+Move onto [Usage](usage.md)
