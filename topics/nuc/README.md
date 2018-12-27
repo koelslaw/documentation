@@ -51,12 +51,12 @@ This is meant to help those who need a step-by-step build of RHEL, securing SSh,
       - Go to `IPv4 Settings` and change the Method from `Automatic` to `Manual`. Click `Add` and set  
         - the IP address from the [Platform Management](../platform-management.md) page  
         - `Netmask 255.255.255.0`  
-        - and `Gateway 10.[state octet].10.1`  
+        - and `Gateway 10.[state octet].10.19`  
       - Go to `IPv6 Settings` and change from `Automatic` to `Ignore`  
       - Click `Save`  
     - Click `Done` in the top left  
 1. Next the `Security Profile` in the lower right  
-    - Select `United States Government Configuration Baseline (USGCB/STIG) - DRAFT`  
+    - Select `DISA STIG`  
     - Click `Select Profile`  
     - Click `Done`  
 1. Next click `Installation Destination`  
@@ -110,16 +110,88 @@ Now we are going to deploy the initial configuration for the Nuc. This will serv
 ```
 sudo subscription-manager register --username [see Platform Management] --password [see Platform Management] --auto-attach
 ```
+
+Congrats! You have access to the RHEL RPM Repos. By extension so does the rest fo the stack.
+
+
+The next script is meant to take some of the work on setting up the nuc. Using the script also ensures the rest of the kit has what it needs to function.
+
+
 :warning: The next action will result in large downloads. I would not recommend completing the following action unless you have a decent internet connection and/or some time. :warning:
+
+
 ```
 sudo sh deploy-nuc.sh
 ```
+Once the script has completed then it we need to clone a few git repos to ensure we have what we need to build ROCK. Navigate to `10.[state].10.19:4000` or `nuc.[STATE].cmat.lan:4000` if you already have dns setup in accordance with the documentation.
 
-Add the nuc git repo
- - rock-scripts
- - rock-dashboards
- - CAPES
- - rock
-## Download the follwoing iso images
+
+#### Post-Install Configuration
+When you browse to Gitea for the first time, you'll enter a post-installation configuration pipeline.
+
+* The database user will be `gitea` and the passphrase will be what you set at the beginning of the install process  
+* Use the explicit IP of the Gitea server instead of `localhost` for the `Domain` and `Application URL` fields  
+* Under `Server and other Services Settings` check the `Disable Avatar Service` box  
+
+![gitea install](img/install.png)
+
+##### Configure SSH Usage
+
+Gitea provides the ability to perform git functions via http or ssh.  In order to enable `ssh` complete the following steps:  
+
+* edit gitea's app.ini file  
+`sudo vi /opt/gitea/custom/conf/app.ini`  
+
+make the following changes & additions to the `[server]` section:  
+
+`START_SSH_SERVER = true`     # ensure this is set to true  
+`DISABLE_SSH      = false`    # ensure this is set to false  
+`SSH_PORT         = 4001`     # set this to any available port that is **NOT 22**   
+`SSH_LISTEN_PORT  = 4001`     # set this to any available port that is **NOT 22**  
+
+here's an example (showing only the `[server]` section):  
+```
+...
+
+[server]
+LOCAL_ROOT_URL   = http://localhost:4000/
+SSH_DOMAIN       = <ip>
+START_SSH_SERVER = true
+DOMAIN           = <ip>
+HTTP_PORT        = 4000
+ROOT_URL         = http://<ip>:4000/
+DISABLE_SSH      = false
+SSH_PORT         = 4001
+SSH_LISTEN_PORT  = 4001
+LFS_START_SERVER = true
+LFS_CONTENT_PATH = /opt/gitea/data/lfs
+LFS_JWT_SECRET   = xxxxxxxxxxxxxxxxxxx
+OFFLINE_MODE     = false
+
+...:
+```
+##### Wrapping it up
+```
+sudo firewall-cmd --add-port=4001/tcp --permanent
+sudo firewall-cmd --reload
+sudo systemctl restart gitea
+sudo systemctl restart sshd
+```
+
+
+Mirror the following Repositories in gitea
+
+ - rock-scripts https://github.com/rocknsm/rock-scripts.git
+ - rock-dashboards https://github.com/rocknsm/rock-dashboards.git
+ - CAPES https://github.com/capesstack/capes.git
+ - Rock https://github.com/rocknsm/rock.git
+
+## Download Iso images
+
+Coordinate with the CMAT technical lead to coordinate reciept of the following iso images:
+ - RHEL - DVD iso (Should have this one already downloaded from nuc installation)
+ - ESXi iso
+
+
 
 Move onto [Gigamon Configuration](../gigamon/README.md)

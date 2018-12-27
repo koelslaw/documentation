@@ -162,6 +162,8 @@ sudo createrepo -v  /var/www/html/atomic-testing -g comps.xml
 cd /var/www/html/epel
 sudo createrepo -v  /var/www/html/epel -g comps.xml
 cd /var/www/html/group_rocknsm-rocknsm-2.1
+sudo createrepo -v  /var/www/html/elastic6-x -g comps.xml
+cd /var/www/html/elastic-6.x
 sudo createrepo -v  /var/www/html/copr-rocknsm-2.1 -g comps.xml
 # Adjust the SELinux context for Apache
 sudo chcon -R -t httpd_sys_content_t /var/www/html/*
