@@ -1,5 +1,5 @@
 # Hardware Kit Components
-These are the components of the CMAT kit.
+These are the major components of the CMAT kit.
 
 | Component   | Make            | Model          | Case Number |
 |-------------|-----------------|----------------|-------------|
@@ -8,7 +8,7 @@ These are the components of the CMAT kit.
 | Switch      | Cisco           | Catalyst 3850  | 1           |
 | Server 2    | Dell            | PowerEdge R840 | 2           |
 | Gigamon     | Gigavue         | HC1            | 2           |
-| Power Strip | Middle Atlantic |                | 2           |
+| Power Strip | Middle Atlantic |                | 1 & 2       |
 
 ```
 ┌────────────────────────────────────┐
@@ -24,6 +24,7 @@ These are the components of the CMAT kit.
 │ └────────────────────────────────┘ │
 └────────────────────────────────────┘
 ```  
+
 ```
 ┌────────────────────────────────────┐
 │              CASE 2                │

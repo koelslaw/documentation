@@ -7,10 +7,11 @@ The CMAT kit contains [several hardware assets](hardware-components.md).
 - case on floor
 
 # A Note about Rack Units (U's)
-A Rack Unit (abbreviated U or RU) is a unit of measure defined as 1.75 in. It is most frequently used as a measurement of the overall height of 19-inch and 23-inch rack frames, as well as the height of equipment that mounts in these frames, whereby the height of the frame or equipment is expressed as multiples of rack units. For example, a typical full-size rack cage is 42U high, while equipment is typically 1U, 2U, 3U, or 4U high.
+A Rack Unit (abbreviated U or RU) is a unit of measure defined as 1.75 in. It is most frequently used as a measurement of the overall height of 19-inch and 23-inch rack frames, as well as the height of equipment that mounts in these frames, whereby the height of the frame or equipment is expressed as multiples of rack units. For exam
+ple, a typical full-size rack cage is 42U high, while equipment is typically 1U, 2U, 3U, or 4U high.
 
 **The counting of U's starts at the bottom of the rack.**
-
+___
 # Case 1
 
 ## Step 1 - Disassemble Case
@@ -110,7 +111,7 @@ screwdriver to secure the back of the rails to the rack.
 │ └────────────────────────────────┘ │
 └────────────────────────────────────┘
 ```
-
+___
 # Case 2
 
 ## Step 1 - Dissemble Case
@@ -201,6 +202,7 @@ screwdriver to secure the back of the rails to the rack.
 │ └────────────────────────────────┘ │
 └────────────────────────────────────┘
 ```
+___
 
 # Hardware Wiring
 
