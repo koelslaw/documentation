@@ -11,39 +11,43 @@ Download the latest versions of need isos. See Tech SME for iso images with supp
  ```
  After that is done do not forget to reposync so the rpm databases will know the older versions are gone.
 
-EPEL
+### EPEL
  ```
  cd /var/www/html/epel
  sudo createrepo -v  /var/www/html/epel -g comps.xml
  ```
- Server
+### Server
  ```
  cd /var/www/html/rhel-7-server-rpms
  sudo createrepo -v  /var/www/html/rhel-7-server-rpms -g comps.xml
  ```
-Optional
+### Optional
  ```
  cd /var/www/html/rhel-7-server-optional-rpms
  sudo createrepo -v  /var/www/html/rhel-7-server-optional-rpms -g comps.xml
  ```
- Extras
+### Extras
  ```
  cd /var/www/html/rhel-7-server-extras-rpms
  sudo createrepo -v  /var/www/html/rhel-7-server-extras-rpms -g comps.xml
  ```
-Atomic (OpenVAS)
- ```
+### Atomic (OpenVAS)
+Standard
+```
  cd /var/www/html/atomic
  sudo createrepo -v  /var/www/html/atomic -g comps.xml
-
+```
+Testing
+```
  cd /var/www/html/atomic-testing
  sudo createrepo -v  /var/www/html/atomic-testing -g comps.xml
 ```
-Elasticsearch
+### Elasticsearch
 ```
  cd /var/www/html/Elasticsearch-6.x
  sudo createrepo -v  /var/www/html/Elasticsearch-6.x -g comps.xml
 ```
 
 ## Hardware Maintx
-TODO
+1. Cleaning of fan assemblies
+2. Tightening of all screws

@@ -1,5 +1,5 @@
 # CMAT Hardware Assembly
-The CMAT kit contains [several hardware assets](hardware-components.md).
+The CMAT kit contains [several hardware assets](04-hardware-components.md).
 
 
 ## Prereqs
@@ -311,4 +311,4 @@ Physical Port Assignments to VLANs
 
 ```
 
-Move onto [Hardware Configuration](hardware-configuration.md)
+Move onto [Hardware Configuration](06-hardware-configuration.md)
