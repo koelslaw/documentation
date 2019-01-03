@@ -7,7 +7,7 @@ Here we will begin the deployment of that software onto the stack.
 1. [RockNSM Bare Metal](rocknsm/README.md)
 2. [VMWare ESXi](vmware/README.md)
 3. [RHEL DNS Server](dns/README.md)
-4. [RockNSM Inside of ESXi](rocknsm/README.md)
+4. [RockNSM Elastic Cluster Inside of ESXi](rocknsm/README.md)
 5. [CAPES](capes/README.md)
 6. [GRASSMARLIN](grassmarlin/README.md)
 
@@ -15,3 +15,8 @@ Here we will begin the deployment of that software onto the stack.
 1. [OpenVAS](openvas/README.md)
 2. [Nmap](nmap/README.md)
 3. [BlueScope](bluescope/README.md)
+
+
+
+
+Move onto [Post Install](09-post-install.md)

@@ -1,9 +1,6 @@
-Switch running config:
-
-
-Current configuration : 14106 bytes
+Current configuration : 17283 bytes
 !
-! Last configuration change at 16:54:36 UTC Fri Dec 7 2018 by admin
+! Last configuration change at 18:20:49 UTC Wed Jan 2 2019
 !
 version 16.3
 no service pad
@@ -12,7 +9,7 @@ service timestamps log datetime msec
 service password-encryption
 no platform punt-keepalive disable-kernel-core
 !
-hostname switch.[state].cmat.lan
+hostname switch.mo.cmat.lan
 !
 !
 vrf definition Mgmt-vrf
@@ -23,9 +20,18 @@ vrf definition Mgmt-vrf
  address-family ipv6
  exit-address-family
 !
-enable secret 5 $1$eHRj$9OtbYbKVfWt96HluiBK.m/
+enable secret 5 $1$Z5Uw$H51uEa1iHlOfNR4Y2n48M1
 !
-no aaa new-model
+aaa new-model
+!
+!
+!
+!
+!
+!
+!
+!
+aaa session-id common
 switch 1 provision ws-c3850-48t
 !
 !
@@ -39,68 +45,20 @@ ip routing
 ip nbar http-services
 !
 no ip domain lookup
-ip dhcp excluded-address 10.[octet].50.1 10.[octet].50.10
-ip dhcp excluded-address 10.[octet].60.1 10.[octet].60.20
+ip domain name cmat.lan
+ip dhcp excluded-address 10.1.50.1 10.1.50.10
+ip dhcp excluded-address 10.1.60.1 10.1.60.20
 !
 ip dhcp pool AP_CONFIG
- network 10.[octet].50.0 255.255.255.0
- default-router 10.[octet].50.1
- option 150 ip 10.[octet].50.1
-
-switch.[state].cmat.lan#show running-config
-Building configuration...
-
-Current configuration : 14106 bytes
-!
-! Last configuration change at 16:54:36 UTC Fri Dec 7 2018 by admin
-!
-version 16.3
-no service pad
-service timestamps debug datetime msec
-service timestamps log datetime msec
-service password-encryption
-no platform punt-keepalive disable-kernel-core
-!
-hostname switch.[state].cmat.lan
-!
-!
-vrf definition Mgmt-vrf
- !
- address-family ipv4
- exit-address-family
- !
- address-family ipv6
- exit-address-family
-!
-enable secret 5 $1$eHRj$9OtbYbKVfWt96HluiBK.m/
-!
-no aaa new-model
-switch 1 provision ws-c3850-48t
-!
-!
-!
-!
-ip routing
-!
-!
-!
-!
-ip nbar http-services
-!
-no ip domain lookup
-ip dhcp excluded-address 10.[octet].50.1 10.[octet].50.10
-ip dhcp excluded-address 10.[octet].60.1 10.[octet].60.20
-!
-ip dhcp pool AP_CONFIG
- network 10.[octet].50.0 255.255.255.0
- default-router 10.[octet].50.1
- option 150 ip 10.[octet].50.1
+ network 10.1.50.0 255.255.255.0
+ default-router 10.1.50.1
+ option 150 ip 10.1.50.1
 !
 ip dhcp pool AP_CLIENTS
- network 10.[octet].60.0 255.255.255.0
- default-router 10.[octet].60.1
- dns-server 10.[octet].10.1 208.67.222.222
- domain-name [state].cmat.lan
+ network 10.1.60.0 255.255.255.0
+ default-router 10.1.60.1
+ dns-server 10.1.10.1 208.67.222.222
+ domain-name mo.cmat.lan
 !
 !
 !
@@ -115,51 +73,53 @@ ip dhcp pool AP_CLIENTS
 flow monitor wireless-avc-basic
  record wireless avc basic
 !
+central-management-version 720912395232346114
 !
-crypto pki trustpoint TP-self-signed-3490599378
+crypto pki trustpoint TP-self-signed-3592452553
  enrollment selfsigned
- subject-name cn=IOS-Self-Signed-Certificate-3490599378
+ subject-name cn=IOS-Self-Signed-Certificate-3592452553
  revocation-check none
- rsakeypair TP-self-signed-3490599378
+ rsakeypair TP-self-signed-3592452553
 !
 !
-crypto pki certificate chain TP-self-signed-3490599378
+crypto pki certificate chain TP-self-signed-3592452553
  certificate self-signed 01
   30820330 30820218 A0030201 02020101 300D0609 2A864886 F70D0101 05050030
   31312F30 2D060355 04031326 494F532D 53656C66 2D536967 6E65642D 43657274
-  69666963 6174652D 33343930 35393933 3738301E 170D3138 31323035 31373030
-  34335A17 0D323030 31303130 30303030 305A3031 312F302D 06035504 03132649
-  4F532D53 656C662D 5369676E 65642D43 65727469 66696361 74652D33 34393035
-  39393337 38308201 22300D06 092A8648 86F70D01 01010500 0382010F 00308201
-  0A028201 0100B748 E1D16988 36022C45 9C35C66C 93DEC167 97C481F8 399E21C0
-  038EE290 EB2EC06F 530D0C1F 61ADDB2C DDEC8107 3219E50F FB431FF6 3CE546A4
-  E3B2A75E A14FC5D5 B7477C61 365AE012 6190EC43 6339759B 93EF3833 05181782
-  E467D493 FC1978FA E9F225BE 6FBC78DB 8FBF2B2F E896C93C BD7C68B5 C3DB48F4
-  935ECA0A 750B78EE 2076B25A 4EEF6161 3475A8EA D24317D9 D6F4D994 B4F3AAA5
-  C106B5C9 1087D587 91D00923 5B13E909 6363A502 B31B8892 70BBCD4F 8823805D
-  CE65F5A8 16F91D8B 92628901 2C793B13 542ADAFC 6DF40990 AC1FB317 66CCCC8B
-  5C88872A 29039615 778CCBF8 00B133FC 05B0B990 06AE9C8B C0E3AC6C D632B1F7
-  67826642 0A0F0203 010001A3 53305130 0F060355 1D130101 FF040530 030101FF
-  301F0603 551D2304 18301680 14FF2C0D 12C2615C 9FA11D15 4F9B8D68 151A7AF9
-  58301D06 03551D0E 04160414 FF2C0D12 C2615C9F A11D154F 9B8D6815 1A7AF958
-  300D0609 2A864886 F70D0101 05050003 82010100 0C24365C E4248208 961DDADF
-  254CB1A8 3AE757CB 920A9FBB 45E6B398 C4BD097C 634BE582 D78BE6EC 2B092927
-  E8101EB4 24CA7BF7 4286D43F E68439A8 FCD5A724 19E5AEAB 0DA67B9D 72EBAB96
-  02A3A330 A80D8A2B F47AB03A 50FA5860 EBFAD04A 6B5AC9A5 42ADBE85 1E8F553D
-  46D1D5F7 E2973B5A 2B8981FF 35039C16 E8A49889 3AAB4F52 565E2498 0816A9A0
-  829B82A0 F88FBB16 2B24A214 E30B6110 48A8CC42 B463EC2B 972BE7B2 D15999DA
-  6F3DDB7F 19C29665 55644653 F3433635 F0796462 0F9F701A 4A7554CC EEC0C2E7
-  B71FF650 7E59FB7F 759F165E B7C3C49C AF54E26A 8A5185FC FB34AD72 C9A87E2E
-  A22B3D22 08B1EAC3 7CEADD04 43B31FD7 FFC53698
+  69666963 6174652D 33353932 34353235 3533301E 170D3138 31313238 32323034
+  32315A17 0D323030 31303130 30303030 305A3031 312F302D 06035504 03132649
+  4F532D53 656C662D 5369676E 65642D43 65727469 66696361 74652D33 35393234
+  35323535 33308201 22300D06 092A8648 86F70D01 01010500 0382010F 00308201
+  0A028201 01009CD6 485A317E ED00308E BCC164A7 717C3EEA 8271869A 3DE1B675
+  1E5FE44D 39F8AA6D 43F6C684 57DC0CB4 0560B905 154FB02D D24B354E 9690CCA5
+  0BB725FD DCC4F962 3080BE46 649CD574 42CF1825 A15AAB57 C77533C4 601A8034
+  4C7649B8 08415D49 C369CC79 329CC46F 61C7AC5B 6569FBE3 4A6F6822 0AB852E8
+  444484EF 7DCCE2EB 8E831E3C 0D51FE25 EACFEE48 4FB31C65 D01BA73E 2B86CC7F
+  6C17F6C7 92D4DA13 CA99C62C EEA0894B C86E40AD 2F20F63A 599F9F25 2DC21BF6
+  01FEF9C3 CFD3C072 354A9BA4 D2E115A8 81A42BA8 7E15E41A 43A90492 F7E280BD
+  34CF1B3A 3471249C ACD97B39 17258BE2 F3C10166 8EBEFB80 CB50ABB5 D0EBE135
+  B5B293ED E6370203 010001A3 53305130 0F060355 1D130101 FF040530 030101FF
+  301F0603 551D2304 18301680 14268BF3 B753BDDF 07F4C814 553515CF 9D8D5564
+  4A301D06 03551D0E 04160414 268BF3B7 53BDDF07 F4C81455 3515CF9D 8D55644A
+  300D0609 2A864886 F70D0101 05050003 82010100 216E150C 171C9125 2E1746B3
+  B9D9841C B873E8D0 75F27160 C36BD5E6 4E0B1D39 E2DDD82B 731898CA 1DA3357F
+  7132CD2D 6B41EA20 C11D4570 E0DF9C99 255AC36D 847249A4 BDBDB75E F0B84AA0
+  91608ABB 7AE07D5D 5002AEF4 D424A652 D2CE75A2 F86E18B7 AAD0EC50 1F76717F
+  5B850CCF 985B4094 CF7643FC 083ED2AC 81ACF85D EE5FE2AF 2EADE9CB 5BBB7DE3
+  4E70C7C2 FACAE132 6328A056 A278DAF3 81525E66 C2BEE9CF D5A18353 6E8667AC
+  49927AEA E9480048 97429C11 5B2AA905 A3EC2020 E1750F31 4F1F4F1F 84600C53
+  542CE4BD 3774F428 26228DD2 4B8469CA 874DB460 7DF05629 A7157030 155353F0
+  AD1F05C3 4CE7D7FB B3AEBED9 B44F5CFA 0FD22A3D
   	quit
 !
+device classifier
 license boot level ipservicesk9
 diagnostic bootup level minimal
 spanning-tree mode rapid-pvst
 spanning-tree extend system-id
 !
 !
-username admin privilege 15 secret 5 $1$CXAs$nBLkBHzK0vr0nQhr8.z2s1
+username admine privilege 15 secret 5 $1$s73p$0vGEA/jfrePC1wcGEe0m6.
 !
 redundancy
  mode sso
@@ -206,7 +166,9 @@ class-map match-any system-cpp-police-protocol-snooping
 !
 policy-map port_child_policy
  class non-client-nrt-class
-  bandwidth remaining ratio 10
+  bandwidth remaining ratio 7
+ class class-default
+  bandwidth remaining ratio 63
 policy-map system-cpp-policy
  class system-cpp-police-data
   police rate 200 pps
@@ -245,247 +207,297 @@ policy-map system-cpp-policy
 !
 !
 !
+interface Port-channel1
+ switchport mode trunk
+ lacp max-bundle 2
+!
 interface GigabitEthernet0/0
  vrf forwarding Mgmt-vrf
  no ip address
+ shutdown
  negotiation auto
 !
 interface GigabitEthernet1/0/1
+ switchport mode trunk
+!
+interface GigabitEthernet1/0/2
  switchport access vlan 50
  switchport mode access
  spanning-tree portfast
-!
-interface GigabitEthernet1/0/2
- switchport access vlan 60
- switchport mode access
- spanning-tree portfast
+ ip nbar protocol-discovery
 !
 interface GigabitEthernet1/0/3
+ description ACCESS_PORTS_INTERNAL
  switchport access vlan 10
  switchport mode access
  spanning-tree portfast
 !
 interface GigabitEthernet1/0/4
+ description ACCESS_PORTS_INTERNAL
  switchport access vlan 10
  switchport mode access
  spanning-tree portfast
 !
 interface GigabitEthernet1/0/5
+ description ACCESS_PORTS_INTERNAL
  switchport access vlan 10
  switchport mode access
  spanning-tree portfast
 !
 interface GigabitEthernet1/0/6
+ description ACCESS_PORTS_INTERNAL
  switchport access vlan 10
  switchport mode access
  spanning-tree portfast
 !
 interface GigabitEthernet1/0/7
+ description ACCESS_PORTS_INTERNAL
  switchport access vlan 10
  switchport mode access
  spanning-tree portfast
 !
 interface GigabitEthernet1/0/8
+ description ACCESS_PORTS_INTERNAL
  switchport access vlan 10
  switchport mode access
  spanning-tree portfast
 !
 interface GigabitEthernet1/0/9
+ description ACCESS_PORTS_INTERNAL
  switchport access vlan 10
  switchport mode access
  spanning-tree portfast
 !
 interface GigabitEthernet1/0/10
+ description ACCESS_PORTS_INTERNAL
  switchport access vlan 10
  switchport mode access
  spanning-tree portfast
 !
 interface GigabitEthernet1/0/11
+ description ACCESS_PORTS_INTERNAL
  switchport access vlan 10
  switchport mode access
  spanning-tree portfast
 !
 interface GigabitEthernet1/0/12
+ description ACCESS_PORTS_INTERNAL
  switchport access vlan 10
  switchport mode access
  spanning-tree portfast
 !
 interface GigabitEthernet1/0/13
+ description ACCESS_PORTS_INTERNAL
  switchport access vlan 10
  switchport mode access
  spanning-tree portfast
 !
 interface GigabitEthernet1/0/14
+ description ACCESS_PORTS_INTERNAL
  switchport access vlan 10
  switchport mode access
  spanning-tree portfast
 !
 interface GigabitEthernet1/0/15
+ description ACCESS_PORTS_INTERNAL
  switchport access vlan 10
  switchport mode access
  spanning-tree portfast
 !
 interface GigabitEthernet1/0/16
+ description ACCESS_PORTS_INTERNAL
  switchport access vlan 10
  switchport mode access
  spanning-tree portfast
 !
 interface GigabitEthernet1/0/17
+ description ACCESS_PORTS_INTERNAL
  switchport access vlan 10
  switchport mode access
  spanning-tree portfast
 !
 interface GigabitEthernet1/0/18
+ description ACCESS_PORTS_INTERNAL
  switchport access vlan 10
  switchport mode access
  spanning-tree portfast
 !
 interface GigabitEthernet1/0/19
+ description ACCESS_PORTS_INTERNAL
  switchport access vlan 10
  switchport mode access
  spanning-tree portfast
 !
 interface GigabitEthernet1/0/20
+ description ACCESS_PORTS_INTERNAL
  switchport access vlan 10
  switchport mode access
  spanning-tree portfast
 !
 interface GigabitEthernet1/0/21
+ description ACCESS_PORTS_INTERNAL
  switchport access vlan 10
  switchport mode access
  spanning-tree portfast
 !
 interface GigabitEthernet1/0/22
+ description ACCESS_PORTS_INTERNAL
  switchport access vlan 10
  switchport mode access
  spanning-tree portfast
 !
 interface GigabitEthernet1/0/23
+ description ACCESS_PORTS_INTERNAL
  switchport access vlan 10
  switchport mode access
  spanning-tree portfast
 !
 interface GigabitEthernet1/0/24
+ description ACCESS_PORTS_INTERNAL
  switchport access vlan 10
  switchport mode access
  spanning-tree portfast
 !
 interface GigabitEthernet1/0/25
+ description ACCESS_PORTS_INTERNAL
  switchport access vlan 10
  switchport mode access
  spanning-tree portfast
 !
 interface GigabitEthernet1/0/26
+ description ACCESS_PORTS_INTERNAL
  switchport access vlan 10
  switchport mode access
  spanning-tree portfast
 !
 interface GigabitEthernet1/0/27
+ description ACCESS_PORTS_INTERNAL
  switchport access vlan 10
  switchport mode access
  spanning-tree portfast
 !
 interface GigabitEthernet1/0/28
+ description ACCESS_PORTS_INTERNAL
  switchport access vlan 10
  switchport mode access
  spanning-tree portfast
 !
 interface GigabitEthernet1/0/29
+ description ACCESS_PORTS_INTERNAL
  switchport access vlan 10
  switchport mode access
  spanning-tree portfast
 !
 interface GigabitEthernet1/0/30
+ description ACCESS_PORTS_INTERNAL
  switchport access vlan 10
  switchport mode access
  spanning-tree portfast
 !
 interface GigabitEthernet1/0/31
+ description ACCESS_PORTS_INTERNAL
  switchport access vlan 10
  switchport mode access
  spanning-tree portfast
 !
 interface GigabitEthernet1/0/32
+ description ACCESS_PORTS_INTERNAL
  switchport access vlan 10
  switchport mode access
  spanning-tree portfast
 !
 interface GigabitEthernet1/0/33
+ description ACCESS_PORTS_INTERNAL
  switchport access vlan 10
  switchport mode access
  spanning-tree portfast
 !
 interface GigabitEthernet1/0/34
+ description ACCESS_PORTS_INTERNAL
  switchport access vlan 10
  switchport mode access
  spanning-tree portfast
 !
 interface GigabitEthernet1/0/35
+ description ACCESS_PORTS_INTERNAL
  switchport access vlan 10
  switchport mode access
  spanning-tree portfast
 !
 interface GigabitEthernet1/0/36
+ description ACCESS_PORTS_INTERNAL
  switchport access vlan 10
  switchport mode access
  spanning-tree portfast
 !
 interface GigabitEthernet1/0/37
- switchport access vlan 20
+ description ACCESS_PORTS_INTERNAL
+ switchport access vlan 10
  switchport mode access
  spanning-tree portfast
 !
 interface GigabitEthernet1/0/38
- switchport access vlan 20
+ description ACCESS_PORTS_INTERNAL
+ switchport access vlan 10
  switchport mode access
  spanning-tree portfast
 !
 interface GigabitEthernet1/0/39
- switchport access vlan 20
+ description ACCESS_PORTS_INTERNAL
+ switchport access vlan 10
  switchport mode access
  spanning-tree portfast
 !
 interface GigabitEthernet1/0/40
+ description ACCESS_PORT_ACTIVE
  switchport access vlan 20
  switchport mode access
  spanning-tree portfast
 !
 interface GigabitEthernet1/0/41
+ description ACCESS_PORT_ACTIVE
  switchport access vlan 20
  switchport mode access
  spanning-tree portfast
 !
 interface GigabitEthernet1/0/42
+ description ACCESS_PORT_ACTIVE
  switchport access vlan 20
  switchport mode access
  spanning-tree portfast
 !
 interface GigabitEthernet1/0/43
+ description ACCESS_PORT_ACTIVE
  switchport access vlan 20
  switchport mode access
  spanning-tree portfast
 !
 interface GigabitEthernet1/0/44
+ description ACCESS_PORT_ACTIVE
  switchport access vlan 20
  switchport mode access
  spanning-tree portfast
 !
 interface GigabitEthernet1/0/45
+ description ACCESS_PORT_ACTIVE
  switchport access vlan 20
  switchport mode access
  spanning-tree portfast
 !
 interface GigabitEthernet1/0/46
+ description ACCESS_PORT_ACTIVE
  switchport access vlan 20
  switchport mode access
  spanning-tree portfast
 !
 interface GigabitEthernet1/0/47
+ description ACCESS_PORT_ACTIVE
  switchport access vlan 20
  switchport mode access
  spanning-tree portfast
 !
 interface GigabitEthernet1/0/48
+ description ACCESS_PORT_ACTIVE
  switchport access vlan 20
  switchport mode access
  spanning-tree portfast
@@ -499,12 +511,20 @@ interface GigabitEthernet1/1/3
 interface GigabitEthernet1/1/4
 !
 interface TenGigabitEthernet1/1/1
+ description *** CONNECTED TO ESXI ***
+ switchport access vlan 10
+ switchport mode trunk
 !
 interface TenGigabitEthernet1/1/2
+ description *** CONNECTED TO SENSOR ***
+ switchport access vlan 10
+ switchport mode access
 !
 interface TenGigabitEthernet1/1/3
+ shutdown
 !
 interface TenGigabitEthernet1/1/4
+ shutdown
 !
 interface Vlan1
  no ip address
@@ -512,29 +532,36 @@ interface Vlan1
 !
 interface Vlan2
  description routing_xc
- ip address 10.[octet].2.2 255.255.255.0
+ ip address 10.1.2.2 255.255.255.0
 !
 interface Vlan10
- ip address 10.[octet].10.1 255.255.255.0
+ ip address 10.1.10.1 255.255.255.0
+!
+interface Vlan20
+ ip address 10.1.20.1 255.255.255.0
+!
+interface Vlan40
+ ip address 10.1.40.2 255.255.255.0
 !
 interface Vlan50
- ip address 10.[octet].50.1 255.255.255.0
+ ip address 10.1.50.1 255.255.255.0
 !
 interface Vlan60
- ip address 10.[octet].60.1 255.255.255.0
-!
-!
-router eigrp 100
- network 10.[octet].2.0 0.0.0.255
- network 10.[octet].50.0 0.0.0.255
- network 10.[octet].60.0 0.0.0.255
+ ip address 10.1.60.1 255.255.255.0
 !
 ip forward-protocol nd
-ip http server
+no ip http server
 ip http authentication local
-ip http secure-server
+no ip http secure-server
+ip route 0.0.0.0 0.0.0.0 10.1.40.1
 !
 !
+ip access-list extended ACTIVE_OUTBOUND
+ deny   ip any 10.1.10.0 0.0.0.255
+ deny   ip any 10.1.40.0 0.0.0.255
+ deny   ip any 10.1.50.0 0.0.0.255
+ deny   ip any 10.1.60.0 0.0.0.255
+ permit ip any any
 ip access-list extended AutoQos-4.0-wlan-Acl-Bulk-Data
  permit tcp any any eq 22
  permit tcp any any eq 465
@@ -582,21 +609,26 @@ ip access-list extended AutoQos-4.0-wlan-Acl-Transactional-Data
 !
 !
 !
+!
+!
 control-plane
  service-policy input system-cpp-policy
 !
 !
 line con 0
- login local
+ length 0
  stopbits 1
 line aux 0
  stopbits 1
 line vty 0 4
- login local
+ length 0
+ transport input none
+ transport output none
 line vty 5 15
- login local
+ transport input none
+ transport output none
 !
-ntp server 10.[octet].10.2 source Vlan10
+ntp server 10.1.10.1 source Vlan10
 !
 wsma agent exec
 !
@@ -606,8 +638,44 @@ wsma agent filesys
 !
 wsma agent notify
 !
+event manager environment UNSUPPORTED_AP_VLAN 50
 !
+wireless mobility controller
+wireless management interface Vlan50
+wireless multicast
+wireless mgmt-via-wireless
+wlan CMAT.MO 1 CMAT.MO
+ auto qos enterprise
+ client vlan 0060
+ ip flow monitor wireless-avc-basic input
+ ip flow monitor wireless-avc-basic output
+ radio dot11bg
+ no security wpa akm dot1x
+ security wpa akm psk set-key ascii 0 cyberteam
+ no shutdown
+ap fra
+ap ntp ip 10.1.10.19
+ap dot11 24ghz rf-profile a
+ dot11n-only
+ no shutdown
 ap dot11 airtime-fairness policy-name Default 0
+ap group cmat
+ remote-lan CMAT.MO
+ airtime-fairness dot11 24GHz mode enforce-policy
+ airtime-fairness dot11 24GHz optimization
+ airtime-fairness dot11 5GHz mode enforce-policy
+ airtime-fairness dot11 5GHz optimization
+ hyperlocation
+ wlan CMAT.MO
+  vlan VLAN0060
+ port 1
+  poe
+  no shutdown
+ port 2
+  no shutdown
+ port 3
+  no shutdown
+ rf-profile dot11 24ghz a
 ap group default-group
 ap hyperlocation ble-beacon 0
 ap hyperlocation ble-beacon 1

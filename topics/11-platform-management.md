@@ -1,3 +1,6 @@
+>THIS IS MEANT AS A TEMPLATE FOR YOUR DOCUMENTATION PLEASE DO NOT REUSE THESE AS THE USER/PASSWORDS
+
+
 | Device                          | Case | Hostname                 | Management IP          | Management UI                  | Out of Band Management (iDRAC) | Default Username | Default Passphrase | Current Username | Current Passphrase | Note                               |
 |---------------------------------|------|--------------------------|------------------------|--------------------------------|--------------------------------|------------------|--------------------|------------------|--------------------|------------------------------------|
 | Gigamon                         | 2    | tap.[state].cmat.lan     | 10.[state octet].10.5  | https://10.[state octet].10.5  | NA                             | admin            | admin123A!         | admin            | CYBERadmin1234!@#$ |                                    |
