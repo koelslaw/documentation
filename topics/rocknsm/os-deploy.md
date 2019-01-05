@@ -176,4 +176,4 @@ The last step before configuring sensor settings is to update the base OS to
 current: `sudo yum update -y && reboot`  
 
 
-Move onto [Rock NSM Deploy](rhelrocksoftwaredeploy.md).
+Move onto [Rock NSM Deploy](os-deploy.md).
