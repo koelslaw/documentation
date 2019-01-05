@@ -88,29 +88,29 @@ need space to retain all the indexed information from the sensor and distribute
 the load amongst the 3 Elastic nodes.
 
 Set up the partitions as follows:
-  - /data/stenographer/ = 7 TB SSD
-  - /data/kafka = 1.6 TB NVMe only
-  - / = 50 GB SSD
-  - /home = 50 GB SSD
-  - /var = 30 GB SSD
-  - /var/log/audit = 5 GB SSD
-  - /tmp  = 10 GB SSD
-  - /boot = default SSD
-  - /data  = All remaining SSD
+  * /data/stenographer/ = 7 TB SSD
+  * /data/kafka = 1.6 TB NVMe only
+  * / = 50 GB SSD
+  * /home = 50 GB SSD
+  * /var = 30 GB SSD
+  * /var/log/audit = 5 GB SSD
+  * /tmp  = 10 GB SSD
+  * /boot = default SSD
+  * /data  = All remaining SSD
 
 #### - Data Tier (Any Elasticsearch Node)
 
 Set up the partitions as follows:
-  - / = 50 GB SSD
-  - /home = 50 GB SSD
-  - /var = 10 GB SSD
-  - /var/log/audit = 10 GB SSD
-  - /tmp  = 10 GB SSD
-  - /boot = default SSD
-  - /data  = All remaining SSD <--- Elastic lives here
+  * / = 50 GB SSD
+  * /home = 50 GB SSD
+  * /var = 10 GB SSD
+  * /var/log/audit = 10 GB SSD
+  * /tmp  = 10 GB SSD
+  * /boot = default SSD
+  * /data  = All remaining SSD <--- Elastic lives here
 
 Setup the LVM Cache as follows:
-  - Step 1-7 TODO
+  * Step 1-7 TODO
 
 
 ### User Creation
