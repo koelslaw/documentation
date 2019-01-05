@@ -80,7 +80,7 @@ There will not be any monitor interfaces only the management interfaces. Ensure 
 
 ### Partitioning
 
-#### - Sensor Setup
+#### Sensor Tier
 
 There partitioning will differ for each server. The main focus for storage on
 the sensor is for Stenographer to retain network traffic. The data tier will
@@ -99,7 +99,7 @@ Set up the partitions as follows:
 * /boot = default SSD
 * /data  = All remaining SSD
 
-#### - Data Tier (Any Elasticsearch Node)
+#### Data Tier (Any Elasticsearch Node)
 
 Set up the partitions as follows:
 
