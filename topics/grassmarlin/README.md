@@ -8,6 +8,8 @@ GrassMarlin v3.2 User Guide:
 
 ## Install Instructions
 
+Install RHEL with GUI
+
 
 ### Update Repository
 We want to set the Nuc as the upstream repository, you can copy / paste this following code block into the Terminal.
@@ -68,6 +70,15 @@ gpgcheck=0
 enabled=1
 
 ```
+
+1. Install GrassMarlin from the Nuc
+
+
+```
+sudo yum install grassmarlin X.xX.x.rpm
+```
+
+
 
 ## Notes
  For other versions visit: https://github.com/nsacyber/GRASSMARLIN/releases

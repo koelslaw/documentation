@@ -13,8 +13,8 @@ When tailoring this documentation, you should replace `[state]` and `[state octe
 1. [Intel Nuc Configuration](nuc/README.md)
 2. [Gigamon Configuration](gigamon/README.md)
 3. [Network Configuration](network/README.md)
-4. [VMWare ESXi Configuration](vmware/README.md)
-5. [Dell R840 Configuration](dell software/README.md)
+4. [Dell R840 Configuration](dell/README.md)
+5. [VMWare ESXi Configuration](vmware/README.md)
 
 
 Other:
