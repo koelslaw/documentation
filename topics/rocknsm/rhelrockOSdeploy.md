@@ -102,16 +102,18 @@ Set up the partitions as follows:
 #### - Data Tier (Any Elasticsearch Node)
 
 Set up the partitions as follows:
-  * / = 50 GB SSD
-  * /home = 50 GB SSD
-  * /var = 10 GB SSD
-  * /var/log/audit = 10 GB SSD
-  * /tmp  = 10 GB SSD
-  * /boot = default SSD
-  * /data  = All remaining SSD <--- Elastic lives here
+
+* / = 50 GB SSD
+* /home = 50 GB SSD
+* /var = 10 GB SSD
+* /var/log/audit = 10 GB SSD
+* /tmp  = 10 GB SSD
+* /boot = default SSD
+* /data  = All remaining SSD <--- Elastic lives here
 
 Setup the LVM Cache as follows:
-  * Step 1-7 TODO
+
+* Step 1-7 TODO
 
 
 ### User Creation
