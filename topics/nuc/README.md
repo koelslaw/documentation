@@ -1,6 +1,9 @@
 # Intel Nuc Configuration
 
-The intel nuc an important part of the setup. It is used as you RPM repo, You doucmentation Source, and you ability to quickly rebuild os the kit for various reasons. It is also meant to be removable so it can update the rest of kit components and ROCK.
+The intel nuc is an important part of the kits initial setup. It is used as your:
+- RPM repo
+- Documentation Repo
+- Generally to build/rebuild and maintain the kit
 
 # Install RedHat Enterprise Linux (RHEL)
 > Note: if necessary, these steps can be replicated to work with [CentOS Minimal](http://mirror.mobap.edu/centos/7.5.1804/isos/x86_64/CentOS-7-x86_64-Minimal-1804.iso).
@@ -38,7 +41,8 @@ macOS:  if using the terminal is currently a barrier to getting things rolling, 
 Windows:  there are several great tools to apply a bootable image in MS land, but we recommend [rufus](https://rufus.akeo.ie/).  
 
 ## Install RHEL
-This is meant to help those who need a step-by-step build of RHEL, securing SSh, and getting ready to deploy the kit services provided by the Nuc. If you don't need this guide.  
+This is meant to help those who need a step-by-step build of RHEL, securing SSh, and getting ready to deploy the kit services provided by the Nuc.
+
 1. Plug the USB media into the Nuc and power on  
 1. Press `F10` to enter the boot menu  
 1. Select the USB drive or UEFI  
@@ -104,8 +108,9 @@ This is meant to help those who need a step-by-step build of RHEL, securing SSh,
 1. Login using the account you created during the Anaconda setup  
 
 ## Deploy Initial Configuration
-Now we are going to deploy the initial configuration for the Nuc. This will serve as a repository to build the rest of the kit, as well as to store documentation.  
+Now we are going to deploy the initial configuration for the Nuc. This will configure the nuc as a repository to build the rest of the kit, as well as to store documentation.  
 
+Before that we need some upstream packages for installation. to get those we need to grab the our RHEL subscription.
 
 ```
 sudo subscription-manager register --username [see Platform Management] --password [see Platform Management] --auto-attach
@@ -123,7 +128,6 @@ The next script is meant to take some of the work on setting up the nuc. Using t
 ```
 sudo sh deploy-nuc.sh
 ```
-Once the script has completed then it we need to clone a few git repos to ensure we have what we need to build ROCK. Navigate to `10.[state].10.19:4000` or `nuc.[STATE].cmat.lan:4000` if you already have dns setup in accordance with the documentation.
 
 
 #### Post-Install Configuration
@@ -178,6 +182,8 @@ sudo systemctl restart gitea
 sudo systemctl restart sshd
 ```
 
+Once the post installation steps have been completed then we need to clone a few git repos to ensure we have what we need to build ROCK. Navigate to `10.[state].10.19:4000` or `nuc.[STATE].cmat.lan:4000` if you already have dns setup in accordance with the documentation.
+
 
 Mirror the following Repositories in gitea
 
@@ -185,10 +191,10 @@ Mirror the following Repositories in gitea
  - rock-dashboards https://github.com/rocknsm/rock-dashboards.git
  - CAPES https://github.com/capesstack/capes.git
  - Rock https://github.com/rocknsm/rock.git
-
+ - Any Repos you have for quick references
 ## Download Iso images
 
-Coordinate with the CMAT technical lead to coordinate reciept of the following iso images:
+Coordinate with the CMAT technical lead to coordinate receipt of the following iso images:
  - RHEL - DVD iso (Should have this one already downloaded from nuc installation)
  - ESXi iso
 

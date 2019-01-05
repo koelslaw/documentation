@@ -8,4 +8,4 @@ The analysis of live network data is a resource intensive task. The bottom line 
 | Storage  | 256GB, with 200+ of that dedicated to /data, SSD preferred      |
 | Network  | 2 gigabit interfaces, one for management and one for collection |
 
-Move onto [Deployment](deploy.md).
+Move onto [Deployment](rhelrockOSdeploy.md).
