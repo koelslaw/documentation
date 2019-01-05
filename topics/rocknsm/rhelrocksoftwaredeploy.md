@@ -1,7 +1,11 @@
 # Rock Software Deployment
 
 
-Here is where stuff gets interesting. the rock deploy script is used to configure a standalone sensor on 1 box for testing/eval. our kit is broken into 2 pieces so the deploy script does a lot of the configuration for us but it needs soem tweaking to make it happen. This is where i plan on making significant improvement in the future.
+Here is where stuff gets interesting. the ROCK deploy script is used to
+configure a standalone sensor on 1 box for testing/eval. our kit is broken
+into 2 pieces so the deploy script does a lot of the configuration for us but
+it needs some tweaking to make it happen. This is where I plan on making
+significant improvement in the future.
 
 
 ## Prereqs
