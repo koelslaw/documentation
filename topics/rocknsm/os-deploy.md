@@ -1,12 +1,9 @@
-# Installation Guide for Rock
-
-![](../../images/install_banner.png)
+# Installation Guide for RHEL/7
 
 
 ## Prerequisites:
 
- - Installation media
-  - RHEL/7
+- RHEL/7 install media
 
 ---
 
@@ -176,4 +173,4 @@ The last step before configuring sensor settings is to update the base OS to
 current: `sudo yum update -y && reboot`  
 
 
-Move onto [Rock NSM Deploy](os-deploy.md).
+Move onto [Rock NSM Deploy](rock-deploy.md).
