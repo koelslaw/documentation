@@ -19,8 +19,9 @@ options:
 
 ### CLI
 
-The go-to utility for writing disk images from the CLI is `dd`.  These
-instructions are specific to macOS.  If you're in a different environment,
+The go-to utility for writing disk images from the CLI is `dd`.  
+
+These instructions are specific to macOS.  If you're in a different environment,
 `lsblk` and `dmesg` are helpful utilities for locating the correct storage
 device to write to.
 
