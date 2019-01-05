@@ -1,29 +1,43 @@
 # Installation Guide for Rock
+
 ![](../../images/install_banner.png)
 
 
+## Prerequisites:
 
-## prereqs:
  - Installation media
-  - RHEL
-  - ESXi
-___
+  - RHEL/7
+
+---
+
 ## Preparing Media
 
-If not already done, move one of the SSDs to the server that will be your sensor. This ensures you have enough room for stenographer data.
+If not already done, move one of the SSDs to the server that will be your
+sensor. This ensures you have enough room for stenographer data.
 
 ## Apply the Image
 
 Now it's time to create a bootable USB drive with RHEL/ESXi.  Let's look at few
 options:
 
-### CLI
+### Graphical Tools
+
+macOS:  if using the terminal is currently a barrier to getting things rolling,
+[etcher.io](http://etcher.io) is an excellent GUI burning utility.  
+
+Windows:  there are several great tools to apply a bootable image in MS land,
+but we recommend one of the following:  
+- [rufus](https://rufus.akeo.ie/)
+- [unetbootin](https://unetbootin.github.io/)
+
+
+### Via CLI
 
 The go-to utility for writing disk images from the CLI is `dd`.  
 
 These instructions are specific to macOS.  If you're in a different environment,
 `lsblk` and `dmesg` are helpful utilities for locating the correct storage
-device to write to.
+device to write to.  
 
 :warning: Take CAUTION when using these commands by ENSURING you're writing to the correct disk / partition! :warning:
 
@@ -35,15 +49,7 @@ path:
 `diskutil unmountDisk /dev/disk#`  
 
 3. Write the image to drive:  
-`sudo dd bs=8M if=path/to/rockiso of=/dev/rdisk#`  
-
-### Via GUI
-
-macOS:  if using the terminal is currently a barrier to getting things rolling,
-[etcher.io](http://etcher.io) is an excellent GUI burning utility.  
-
-Windows:  there are several great tools to apply a bootable image in MS land,
-but we recommend [rufus](https://rufus.akeo.ie/).  
+`sudo dd bs=8M if=path/to/rhel-iso of=/dev/disk#`  
 
 
 ### Date & Time
@@ -52,10 +58,10 @@ UTC is generally preferred for logging data as the timestamps from anywhere in t
 
 Bro includes a utility for parsing these on the command line called `bro-cut`. It can be used to print human-readable timestamps in either the local sensor timezone or UTC. You can also give it a custom format string to specify what you'd like displayed.
 
-### Network Setup
 
+### Network
 
-#### - Sensor Setup
+#### - Management Interface
 
 Before beginning the install process it's best to connect the interface you've selected to be the **management interface**.  Here's the order of events:  
 
@@ -64,9 +70,14 @@ Before beginning the install process it's best to connect the interface you've s
 
 > This will be the 2 ethernet cables running from the gigamon to the back of the server in the same case (sensor)
 
+#### Interfaces
+
+- em1
+- em2 - **connect for mgmgt interface**
+- em3
+- em4
 
 Ensure that the interface you intend to use for MGMT has been turned on and has a static IP and proper name outlined in [Platform Management page](../platform-management.md)
-
 
 
 #### - Data Tier (ESXi) Setup
@@ -74,47 +85,73 @@ Ensure that the interface you intend to use for MGMT has been turned on and has 
 There will not be any monitor interfaces only the management interfaces. Ensure a management interface is set with a static IP and proper name outlined in [Platform Management page](../platform-management.md)
 
 ### Security profiles
- Apply the DISA STiG
 
+Apply the DISA STiG
 
 
 ### Partitioning
 
+There are two separate node types: **sensor** and **data** tiers. The partitioning
+will differ for each server.
+
+### VGs
+
+ensure drive designation
+
+rhel   sda        223GiB
+fast   sdb        7.4 TB
+faster nvme0n1    1.4 TB
+
 #### Sensor Tier
 
-There partitioning will differ for each server. The main focus for storage on
-the sensor is for Stenographer to retain network traffic. The data tier will
-need space to retain all the indexed information from the sensor and distribute
-the load amongst the 3 Elastic nodes.
+The main focus for storage on the **sensor** is for Stenographer to retain
+network traffic.
 
 Set up the partitions as follows:
 
-* /data/stenographer/ = 7 TB SSD
-* /data/kafka = 1.6 TB NVMe only
-* / = 50 GB SSD
-* /home = 50 GB SSD
-* /var = 30 GB SSD
-* /var/log/audit = 5 GB SSD
-* /tmp  = 10 GB SSD
-* /boot = default SSD
-* /data  = All remaining SSD
+##### Volume Group - "fast"
 
-#### Data Tier (Any Elasticsearch Node)
+fast VG  
+- /data/stenographer/ = blank to use all available space ( ~ 7TiB )
+
+##### Volume Group - "faster"
+
+faster VG =
+- /data/kafka = blank to use all available space ( ~ 1.5TiB )
+
+##### Volume Group - "rhel"
+
+
+- `swap` = no change
+- `/boot` = no change
+- `/boot/efi` = no change
+- `/` = 50 GB small
+- `/var` = 30 GB
+- `/var/log/audit` = 10 GB
+- `/tmp`  = 10 GB
+- `/home` = 50 GB
+- `/data`  = blank (to use all remaining)
+
+
+#### Data Tier
+
+The data tier (a.k.a _any_ Elasticsearch node) will need space to retain all
+the indexed information from the sensor and distribute the load amongst the
+3 Elastic nodes.
 
 Set up the partitions as follows:
 
-* / = 50 GB SSD
-* /home = 50 GB SSD
-* /var = 10 GB SSD
-* /var/log/audit = 10 GB SSD
-* /tmp  = 10 GB SSD
-* /boot = default SSD
-* /data  = All remaining SSD <--- Elastic lives here
+- / = 50 GB SSD
+- /home = 50 GB SSD
+- /var = 10 GB SSD
+- /var/log/audit = 10 GB SSD
+- /tmp  = 10 GB SSD
+- /boot = default SSD
+- /data  = All remaining SSD <--- Elastic lives here
 
 Setup the LVM Cache as follows:
 
-* Step 1-7 TODO
-
+<!-- Step 1-7 TODO NVME @brad -->
 
 ### User Creation
 
