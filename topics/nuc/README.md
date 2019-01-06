@@ -1,6 +1,6 @@
 # Intel Nuc Configuration
 
-The intel nuc is an important part of the kits initial setup. It is used as your:
+The intel Nuc is an important part of the kits initial setup. It is used as your:
 - RPM repo
 - Documentation Repo
 - Generally to build/rebuild and maintain the kit
@@ -29,7 +29,7 @@ If you live in the terminal, use `dd` to apply the image.  These instructions ar
 `diskutil unmountDisk /dev/disk#`  
 
 3. write the image to drive:  
-`sudo dd bs=8m if=path/to/rhel.iso of=/dev/disk#`  
+`sudo dd bs=8M if=path/to/rhel.iso of=/dev/disk#`  
 
 If this is done on a Mac, you could get a popup once the operation is complete asking you to `Initialize, Ignore, Eject` the disk. You want to `Ignore` or `Eject`. `Initialize` will add a partition to it that will allow Mac to read the disk, and make it unbootable.  
 ![](../../images/mac-initialize-ignore-eject.png)  
@@ -118,17 +118,13 @@ sudo subscription-manager register --username [see Platform Management] --passwo
 
 Congrats! You have access to the RHEL RPM Repos. By extension so does the rest fo the stack.
 
-
 The next script is meant to take some of the work on setting up the nuc. Using the script also ensures the rest of the kit has what it needs to function.
 
-
 :warning: The next action will result in large downloads. I would not recommend completing the following action unless you have a decent internet connection and/or some time. :warning:
-
 
 ```
 sudo sh deploy-nuc.sh
 ```
-
 
 #### Post-Install Configuration
 When you browse to Gitea for the first time, you'll enter a post-installation configuration pipeline.
@@ -184,7 +180,6 @@ sudo systemctl restart sshd
 
 Once the post installation steps have been completed then we need to clone a few git repos to ensure we have what we need to build ROCK. Navigate to `10.[state].10.19:4000` or `nuc.[STATE].cmat.lan:4000` if you already have dns setup in accordance with the documentation.
 
-
 Mirror the following Repositories in gitea
 
  - rock-scripts https://github.com/rocknsm/rock-scripts.git
@@ -195,9 +190,7 @@ Mirror the following Repositories in gitea
 ## Download Iso images
 
 Coordinate with the CMAT technical lead to coordinate receipt of the following iso images:
- - RHEL - DVD iso (Should have this one already downloaded from nuc installation)
- - ESXi iso
-
-
+ - RHEL - DVD iso (Should have this one already downloaded from Nuc installation)
+ - ESXi ISO
 
 Move onto [Gigamon Configuration](../gigamon/README.md)

@@ -14,25 +14,25 @@ Now it's time to create a bootable USB drive with that fresh ESXi build.  Let's 
 
 ### CLI
 
-If you live in the terminal, use `dd` to apply the image.  These instructions are for using a terminal in macOS.  If you're in a different environment, google is your friend.  
+If you live in the terminal, use `dd` to apply the image.  These instructions are for using a terminal in macOS.  If you're in a different environment, Google is your friend.  
 
 :warning: Take CAUTION when using these commands by ENSURING you're writing to the correct disk / partition! :warning:
 
-1. once you've inserted a USB get the drive ID:  
+1. once you've inserted a USB, get the drive ID:  
 `diskutil list`  
 
 2. unmount the target drive so you can write to it:  
 `diskutil unmountDisk /dev/disk#`  
 
 3. write the image to drive:  
-`sudo dd bs=8m if=path/to/esxi.iso of=/dev/disk#`  
+`sudo dd bs=8M if=path/to/esxi.iso of=/dev/disk#`  
 
 If this is done on a Mac, you could get a popup once the operation is complete asking you to `Initialize, Ignore, Eject` the disk. You want to `Ignore` or `Eject`. `Initialize` will add a partition to it that will allow Mac to read the disk, and make it unbootable.  
 ![](../../images/mac-initialize-ignore-eject.png)  
 
 ### Via GUI
 
-**MacOS:**  if using the terminal is currently a barrier to getting things rolling, [etcher.io](http://etcher.io) is an excellent GUI burning utility.  
+**MacOS:**  if using the terminal is currently a barrier to getting things rolling, [etcher.io](https://www.balena.io/etcher/) is an excellent GUI burning utility.  
 **Windows:**  there are several great tools to apply a bootable image in MS land, but we recommend [rufus](https://rufus.akeo.ie/).  
 
 ## Installation Instructions
@@ -95,7 +95,7 @@ If this is done on a Mac, you could get a popup once the operation is complete a
 # Create the CAPES Virtual Machine
 1. Right-Click on `Virtual Machines` and select `Create/Register VM`  
 ![](../../images/esxi-create-vm.png)  
-  - Name: `capes`  
+  - Name: `CAPES`  
   - Compatibility: Leave default  
   - Guest OS Family: `Linux`  
   - Guest OS Version: `Red Hat Enterprise Linux 7 (64-bit)`  
@@ -134,9 +134,11 @@ If this is done on a Mac, you could get a popup once the operation is complete a
 1. Review your settings  
 1. Click Finish  
 
-# Create the Sensor Data Tier Virtual Machine (X3)
+# Create the Sensor Data Tier Virtual Machine
+> Note: You're going to create three of these named "data-tier-[1, 2, and 3]"
+
 1. Select `Create/Register VM`  
-  - Name: `data-tier`  
+  - Name: `data-tier-[#]`  
   - Compatibility: Leave default  
   - Guest OS Family: `Linux`  
   - Guest OS Version: `Red Hat Enterprise Linux 7 (64-bit)`  
@@ -154,24 +156,44 @@ If this is done on a Mac, you could get a popup once the operation is complete a
 1. Review your settings  
 1. Click Finish  
 
-# Create the Active Virtual Machine OpenVAS
+# Create the Active Virtual Machine for OpenVAS
 1. Select `Create/Register VM`  
-  - Name: `active`  
+  - Name: `OpenVAS`  
   - Compatibility: Leave default  
   - Guest OS Family: `Linux`  
   - Guest OS Version: `Red Hat Enterprise Linux 7 (64-bit)`  
 1. Select your storage  
 1. Customize the VM  
-  - CPU: `x`  
-  - Memory: `xx GB`  
-  - Hard disk 1: `xx GB`  
+  - CPU: `4`  
+  - Memory: `8 GB`  
+  - Hard disk 1: `50 GB`  
   - SCSI Controller 0: Leave default  
   - SATA Controller 0: Leave default  
   - USB controller 1:  Leave default  
-  - Network Adapter: `Passive`, ensure that `Connect` is enabled  
+  - Network Adapter: `Active`, ensure that `Connect` is enabled  
   - CD/DVD Drive 1: `Datastore ISO file`, select the RHEL ISO you uploaded above, ensure that `Connect` is enabled  
   - Video Card:  Leave default  
 1. Review your settings  
 1. Click Finish  
 
-Move onto [CAPES](../capes/README.md)
+# Create the Active Virtual Machine for GRASSMARLIN
+1. Select `Create/Register VM`  
+  - Name: `GRASSMARLIN`  
+  - Compatibility: Leave default  
+  - Guest OS Family: `Linux`  
+  - Guest OS Version: `Red Hat Enterprise Linux 7 (64-bit)`  
+1. Select your storage  
+1. Customize the VM  
+  - CPU: `4`  
+  - Memory: `8 GB`  
+  - Hard disk 1: `50 GB`  
+  - SCSI Controller 0: Leave default  
+  - SATA Controller 0: Leave default  
+  - USB controller 1:  Leave default  
+  - Network Adapter: `Active`, ensure that `Connect` is enabled  
+  - CD/DVD Drive 1: `Datastore ISO file`, select the RHEL ISO you uploaded above, ensure that `Connect` is enabled  
+  - Video Card:  Leave default  
+1. Review your settings  
+1. Click Finish  
+
+Move onto [DNS](../dns/README.md)

@@ -8,7 +8,7 @@ service timestamps log datetime msec
 platform qfp utilization monitor load 80
 no platform punt-keepalive disable-kernel-core
 !
-hostname gateway.mo.cmat.lan
+hostname gateway.[state].cmat.lan
 !
 boot-start-marker
 boot-end-marker
@@ -44,7 +44,7 @@ clock calendar-valid
 !
 !
 !
-ip host switch.mo.cmat.lan 10.1.10.3
+ip host switch.[state].cmat.lan 10.1.10.3
 !
 !
 !

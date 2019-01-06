@@ -9,7 +9,7 @@ service timestamps log datetime msec
 service password-encryption
 no platform punt-keepalive disable-kernel-core
 !
-hostname switch.mo.cmat.lan
+hostname switch.[state].cmat.lan
 !
 !
 vrf definition Mgmt-vrf

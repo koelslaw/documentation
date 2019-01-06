@@ -8,12 +8,9 @@ Once power has been connected to the servers setup they should automatically boo
 
 2. Navigate to -> System Setup -> Advanced Hardware Configuration
 
-
 ![](../../images/lifecyclecontroller.png)
 
 3. Navigate to -> Device Settings -> RAID Controller - PERC
-
-
 
 ![](../../images/configure for raid.png)
 
@@ -29,7 +26,6 @@ Once power has been connected to the servers setup they should automatically boo
     - RAID 0 240 GB SSD X 1 (NAME: OS_ISO)
     - RAID 0 1.6TB SSD x 3 (NAME: FAST)
 
-
 ![](../../images/device list for nvme.png)
 
 5. Navigate to -> Device Settings -> RAID Controller - NVME
@@ -43,5 +39,4 @@ Once power has been connected to the servers setup they should automatically boo
 
 ![](../../images/lifecyclecontroller.png)
 
-
-Proceed to [Rock OS Deployment](rocknsm/README.md)
+Proceed to [Software Deployment](../software-deployment.md)

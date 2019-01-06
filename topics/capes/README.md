@@ -1,13 +1,7 @@
 # Documentation
 
-
-
-
-
-
-
 Please see below for Build, Operate, Maintain specifics on the different web applications
-* [Post Installation](https://nuc.mo.cmat.lan:4000/capes/capes/tree/master/docs#post-installation)
+* [Post Installation](https://nuc.[state].cmat.lan:4000/capes/capes/tree/master/docs#post-installation)
 * [CAPES Landing Page](../landing_page/build_operate_maintain.md)  
 * [CyberChef](../cyberchef/build_operate_maintain.md)
 * [Gitea](../gitea/build_operate_maintain.md)  
@@ -56,26 +50,22 @@ Generally, the CAPES ecosystem is meant to run as a whole, so the preferred usag
 
 That said, there is a deploy script for each of the services that you should be able to run individually if your use case requires that.
 
-### Build your OS (CentOS 7.4)
-This is meant to help those who need a step-by-step build of CentOS, securing SSh, and getting ready to grab CAPES. If you don't need this guide, skip on down to [Get CAPES](#get-capes).
-1. Download the latest version of [CentOS Minimal](http://isoredirect.centos.org/centos/7/isos/x86_64/CentOS-7-x86_64-Minimal-1611.iso)
-1. Build a VM or a physical system with 4 cores, 8 GB of RAM, and a 20 GB HDD at a minimum
-    - Don't use any of the "easy install" options when setting up a VM, we're going to make some config changes in the build process
-    - I recommend removing all the things that get attached that you're not going to use (speakers, BlueTooth, USB, printer support, floppy, web camera, etc.)
-1. Fire up the VM and boot into Anaconda (the Linux install wizard)
+### Build your OS
+1. Fire up the CAPES VM you built on ESXi and boot into Anaconda (the Linux install wizard)
 1. Select your language
 1. Start at the bottom-left, `Network & Host Name`
-    - There is the `Host Name` box at the bottom of the window, you can enter a hostname here or we can do that later...in either case, `localhost` is a poor choice
-    - Switch the toggle to enable your NIC
-      - Click `Configure`
+    - There is the `Host Name` box at the bottom of the window, enter the CAPES hostname from the [../platform-management.md](Platform Management) page
+    - Switch the toggle to enable NIC
+      - Click `Configure` for your first NIC
+      - Go to `IPv4 Settings`
+        - Change the `Method` to `Manual`
+        - Click `Add`
+          - Update your IP address, network, and gateway from the [../platform-management.md](Platform Management) page
       - Go to `IPv6 Settings` and change from `Automatic` to `Ignore`
       - Click `Save`
     - Click `Done` in the top left
 1. Next the `Security Profile` in the lower right
-    - Select `DISA Stig`
-
-    *TODO* which stig does this need to be?
-
+    - Select `DISA STIG`
     - Click `Select Profile`
     - Click `Done`
 1. Next click `Installation Destination`
@@ -91,106 +81,67 @@ This is meant to help those who need a step-by-step build of CentOS, securing SS
     - `Network Time` should be toggled on
     - Click `Done`
     - Note - the beginning of these install scripts configures Network Time Protocol (NTP). You just did that, but it's included just to be safe because time, and DNS, matter.
-1. Click `Begin Installation`
-1. We're not going to set a Root passphrase because CAPES will never, ever need it. Ever. Not setting a passphrase locks the Root account.
-1. Create a user, but ensure that you toggle the `Make this user administrator` checkbox
-1. Once the installation is done, click the `Reboot` button in the bottom right to...well...reboot
-1. Login using the account you created during the Anaconda setup
-  - Run the following commands
-    ```
-    sudo yum update -y && sudo yum install git -y
-    sudo firewall-cmd --add-service=ssh --permanent
-    sudo firewall-cmd --reload
-    ```
-1. Secure ssh by removing username and password as an authentication option and don't allow the root account to log in at all
-  - On your management system, create an ssh key pair
-    ```
-    ssh-keygen -t rsa #accept the defaults, but enter a passphrase for your keys
-    ssh-copy-id your_capes_user@<ip of CAPES>
-    ssh your_capes_user@<ip of CAPES>
-    # You are now logged into the shell of CAPES
-    sudo sed -i 's/\#PermitRootLogin yes/PermitRootLogin no/' /etc/ssh/sshd_config #enter password for the CAPES user you created
-    sudo sed -i 's/PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh/sshd_config
-    sudo systemctl restart sshd.service
-    ```
-17. Create the local repo file in `/etc/yum.repos.d/local-repo.repo`
+    1. Click `Begin Installation`
+    1. We're not going to set a Root passphrase because you will never, ever need it. Ever. Not setting a passphrase locks the Root account.
+    1. Create a user from the [../platform-management.md](Platform Management) page, but ensure that you toggle the `Make this user administrator` checkbox
+    ![](../../images/admin-user.jpg)
+    1. Once the installation is done, click the `Reboot` button in the bottom right to...well...reboot
+    1. Login using the account you created during the Anaconda setup
+
+## Repo Changes
+
+### Update Repository
+Once CAPES reboots we need to set the Nuc as the upstream RHEL repository You can copy / paste this following code block into the Terminal (once you update the `.[state octet].` with your [octet](../README.md)).
 
 ```
-[atomic]
-name: Atomic for OpenVAS
-baseurl=http://10.1.10.19/atomic/
-gpgcheck=0
-enabled=1
-
-
+sudo bash -c 'cat > /etc/yum.repos.d/local-repos.repo <<EOF
 [capes]
 name: Capes Local
-baseurl=http://10.1.10.19/capes/
+baseurl=http://10.[state octet].10.19/capes/
 gpgcheck=0
 enabled=1
-
-
-[copr-rocknsm-2.1]
-name: copr rocknms repo
-baseurl=http://10.1.10.19/copr-rocknsm-2.1/
-gpgcheck=0
-enabled=1
-
 
 [local-epel]
 name: Extra packages For Enterprise Linux Local Repo
-baseurl=http://10.1.10.19/epel/
+baseurl=http://10.[state octet].10.19/epel/
 gpgcheck=0
 enabled=1
-
-
 
 [local-rhel-7-server-extras-rpmsx86_64]
 name: local rhel 7 server extras
-baseurl=http://10.1.10.19/rhel-7-server-extras-rpms/
+baseurl=http://10.[state octet].10.19/rhel-7-server-extras-rpms/
 gpgcheck=0
 enabled=1
 
-
 [local-rhel-7-server-optional-rpmsx86_64]
 name: local rhel 7 server optional
-baseurl=http://10.1.10.19/rhel-7-server-optional-rpms/
+baseurl=http://10.[state octet].10.19/rhel-7-server-optional-rpms/
 gpgcheck=0
 enabled=1
 
 [local-rhel-7-server-rpmsx86_64]
 name: local rhel 7 server rpms
-baseurl=http://10.1.10.19/rhel-7-server-rpms/
+baseurl=http://10.[state octet].10.19/rhel-7-server-rpms/
 gpgcheck=0
 enabled=1
 
-
 [local-wandiscox86_64]
 name: wandisco
-baseurl=http://10.1.10.19/WANdisco-git/
+baseurl=http://10.[state octet].10.19/WANdisco-git/
 gpgcheck=0
+enabled=1
 
+EOF'
 ```
-
-
 ## Get CAPES
 Finally, here we go.
 
 ### CentOS 7.4
 ```
-$ sudo yum -y install git
-$ git clone https://nuc.mo.cmat.lan:4000/capes/capes.git
-$ cd capes
-$ sudo sh deploy_capes.sh
-```
-
-### Pre-CentOS 7.4
-```
-$ sudo yum install -y https://kojipkgs.fedoraproject.org/packages/http-parser/2.7.1/3.el7/x86_64/http-parser-2.7.1-3.el7.x86_64.rpm
-$ sudo yum -y install git
-$ git clone https://nuc.mo.cmat.lan:4000/capes/capes.git
-$ cd capes
-$ sudo sh deploy_capes.sh
+sudo yum install git -y
+git clone https://nuc.[state].cmat.lan:4000/capes/capes.git
+cd capes
+sudo sh deploy_capes.sh
 ```
 
 ### Build Process
@@ -298,5 +249,3 @@ cortex {
 
 ## Get Started
 After the CAPES installation, you should be able to browse to `http://capes_system` (or `http://capes_IP` if you don't have DNS set up) to get to the CAPES landing page and start setting up services.
-
-I **strongly** recommend that you look at the `Build, Operate, Maintain` guides for these services before you get going. A few of the services launch a configuration pipeline that is hard to restart if you don't complete it the first time (I'm looking at you TheHive, Cortex, and Gitea).
