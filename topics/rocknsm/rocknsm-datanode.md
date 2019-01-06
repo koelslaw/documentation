@@ -6,13 +6,13 @@ This will cover the deployment of the RockNSM data node elements.
 1. Fire up the VM and boot into Anaconda (the Linux install wizard)
 1. Select your language
 1. Start at the bottom-left, `Network & Host Name`
-    - There is the `Host Name` box at the bottom of the window, enter the `datanode-[1,2,3]` hostname from the [../platform-management.md](Platform Management) page
+    - There is the `Host Name` box at the bottom of the window, enter the `datanode-[1,2,3]` hostname from the [Platform Management](../platform-management.md) page
     - Switch the toggle to enable your NIC
       - Click `Configure`
       - Go to `IPv4 Settings`
         - Change the `Method` to `Manual`
         - Click `Add`
-          - Update your IP address, network, and gateway from the [../platform-management.md](Platform Management) page
+          - Update your IP address, network, and gateway from the [Platform Management](../platform-management.md) page
       - Go to `IPv6 Settings` and change from `Automatic` to `Ignore`
       - Click `Save`
     - Click `Done` in the top left
