@@ -57,7 +57,7 @@ This will cover the deployment of the RockNSM data node elements.
     - Click `Done`
 1. Click `Begin Installation`
 1. We're not going to set a Root passphrase because you will never, ever need it. Ever. Not setting a passphrase locks the Root account.
-1. Create a user from the [../platform-management.md](Platform Management) page, but ensure that you toggle the `Make this user administrator` checkbox
+1. Create a user from the [Platform Management](../platform-management.md) page, but ensure that you toggle the `Make this user administrator` checkbox
 ![](../../images/admin-user.jpg)
 1. Once the installation is done, click the `Reboot` button in the bottom right to...well...reboot
 1. Login using the account you created during the Anaconda setup
@@ -118,18 +118,13 @@ sudo yum update -y
 ```
 
 ## Install Data Node Elements
-Next we'll install Elasticsearch, Kibana, and configure them to receive data from the sensor.
+Next we'll install Elasticsearch, Logstash, and Kibana.
 
-### Installation of Elasticsearch
-Elasticsearch is a distributed, RESTful search and analytics engine. It indexes and stores the Network Security Monitoring (NSM) data for the CMAT kit.
-```
-sudo yum install elasticsearch
-```
+Logstash is an open source, server-side data processing pipeline that ingests data from a multitude of sources simultaneously, transforms it, and then sends it to Elasticsearch. Elasticsearch is a distributed, RESTful search and analytics engine. It indexes and stores the Network Security Monitoring (NSM) data for the CMAT kit. Kibana lets you visualize your Elasticsearch data and navigate the Elastic Stack.
 
-### Installation of Kibana
-Kibana lets you visualize your Elasticsearch data and navigate the Elastic Stack. It visualizes the NSM data for the CMAT kit.
+We'll configure them afte we've installed the RockNSM sensor node.
 ```
-sudo yum install kibana
+sudo yum install elasticsearch logstash kibana -y
 ```
 
 Move onto [RockNSM Sensor](rocknsm-sensor.md)

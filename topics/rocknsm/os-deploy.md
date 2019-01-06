@@ -93,6 +93,15 @@ will differ for each server.
 
 ### VGs
 
+```
+@sean can you please put this into `rocknsm-datanode.md`?
+
+You can delete this afterwards.
+
+-- andy
+```
+
+
 ensure drive designation
 
 rhel   sda        223GiB
@@ -145,6 +154,8 @@ Set up the partitions as follows:
 - /tmp  = 10 GB SSD
 - /boot = default SSD
 - /data  = All remaining SSD <--- Elastic lives here
+
+\\
 
 Setup the LVM Cache as follows:
 

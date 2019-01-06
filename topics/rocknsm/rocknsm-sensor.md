@@ -158,4 +158,4 @@ EOF'
 ## Sensor Installation
 Now that we have build the OS, it is time to install the RockNSM sensor.\
 
-Move onto [RockNSM Usage](rocknsm-usage.md)
+Move onto [Connecting the Sensor to the Data Node](rocknsm-configuration.md)
