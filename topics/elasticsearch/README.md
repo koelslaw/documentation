@@ -3,8 +3,8 @@
 ## Install RHEL 7 Server
 
 > ## Prerequisites
-> Configure router to serve NTP
-> Configure DNS server for internal resolution
+> - Configure router to serve NTP
+> - Configure DNS server for internal resolution
 
 ### Pre-Install
 When you boot the installer, called Anaconda. Before it boots, press <TAB> and append the following, which disables physical NIC naming and sets the screen resolution that is better for VMware.
