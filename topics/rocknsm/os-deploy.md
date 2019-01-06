@@ -70,9 +70,9 @@ Before beginning the install process it's best to connect the interface you've s
 #### Interfaces
 
 - em1
-- em2 - **connect for mgmgt interface**
-- em3
-- em4
+- em2
+- em3                                 ( will be connected to gigamon tap )
+- em4 **connect for mgmgt interface** ( will be connected to gigamon tap )
 
 Ensure that the interface you intend to use for MGMT has been turned on and has a static IP and proper name outlined in [Platform Management page](../platform-management.md)
 
