@@ -231,6 +231,12 @@ You should have plain text bro logs showing up in /data/bro/logsM/current/:
 - `ls -ltr /data/bro/logs/current/`
 
 ___
+
+
+
+
+
+
 ## Preperation for Deployment
 
 

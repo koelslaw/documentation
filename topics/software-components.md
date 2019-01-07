@@ -52,4 +52,4 @@ RockNSM is a collections platform, in the spirit of passive Network Security Mon
 - [BlueScope]()
 - [RockNSM](http://rocknsm.io)
 
-Move onto [Software Deployment](software-deployment.md)
+Move onto [Software Deployment](hardware-components.md)
