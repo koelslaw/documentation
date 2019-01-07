@@ -93,7 +93,7 @@ The entire running configuration is stored in the [config directory](../../confi
 1. Point your browser to the management IP from the [Platform Management page](../platform-management.md) page  
 
 
-Move onto [ESXi](../vmware/README.md)
+Move onto [Dell Server R840 Configuration](../dell/README.md)
 or if installed,
 
 Move onto [Dell Chassis Management Console (CMC) Configuration](cmc-configuration.md)
