@@ -41,7 +41,7 @@ If this is done on a Mac, you could get a popup once the operation is complete a
 2. Set the BIOS to boot from the media  
 3. Select the ESXi installer in the boot menu and press Enter  
 4. To accept the EULA, press `F11`  
-5. Select the `FAST` drive on which to install ESXi and press Enter  
+5. Select the `OS` drive on which to install ESXi and press Enter  
 6. To select the default keyboard layout for the host, press Enter  
 7. To set the host password in accordance with the [Platform Management](../platform-management.md) page  
 8. To begin installation, press `F11`  
