@@ -216,8 +216,8 @@ ___
 |Switch| Gi1/0/6  |NUC  |Port 1|Ethernet|
 |Switch| Te1/0/1 (SR SFP)  |Server 1  | 0/0/1(SR SFP) | Fiber|
 |Switch| Te1/0/2 (SR SFP)  |Server 2  | 0/0/1(SR SFP) | Fiber|
-|Gigamon| Tool Port 1 |Server 1  | Ethernet port 1 | Ethernet|
-|Gigamon| Tool Port 2 |Server 1  | Ethernet port 2 | Ethernet|
+|Gigamon| Tool Port 1 |Server 1  | Ethernet port 1 | Fiber|
+|Gigamon| Tool Port 2 |Server 1  | Ethernet port 2 | Fiber|
 
 Physical Port Assignments to VLANs
 
@@ -225,6 +225,8 @@ Physical Port Assignments to VLANs
 |--|--|--|
 |10|1-36  |Internal|
 |20|37-48  |Active|
+|50|Internal to switch  |Management interface for wireless AP|
+|60|Internal to switch  |DHCP Pool for Clients|
 
 ```
                                                       ┌──────────────────────────────┐  ┌───────────────────────────────┐
