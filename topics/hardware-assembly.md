@@ -1,5 +1,5 @@
 # CMAT Hardware Assembly
-The CMAT kit contains [several hardware assets](04-hardware-components.md).
+The CMAT kit contains [several hardware assets](hardware-components.md).
 
 
 ## Prereqs
