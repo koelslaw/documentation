@@ -1,31 +1,30 @@
 # DNS Server for Kit
-At this point we have used static assignments for all the services for the kit. to make it easier to find stuff and allow some forms of automation we will be setting up a dns server first. after that we will deploy rock and capes
+At this point we have used static assignments for all the services for the kit. to make it easier to find stuff and allow some forms of automation we will be setting up a dns server first.
 
 ## Prereqs
- - RHEL installed with static ip set during installation
+ - RHEL installed with static ip set during installation according to [RHEL Documentation](../rhel/README.md)
+  - If you forgot to set a static of need to change use `sudo nmtui`
+- Logged in via `ssh` or via the ESXi Console
 
-### Set static IP
-If you forgot to set astatic of need to change use
+### Dnsmasq
 
-```
-sudo nmtui
-```
-
-### Install dnsmasq
+1. Install dnsmasq
 ```
 sudo yum install dnsmasq
 ```
-All we need to do is configure it so it can answer dns queries
+1. Configure the dnsmasq config files so dnsmaq will answer dns queries.
 ```
 sudo vim /etc/dnsmasq.conf
 ```
-Add the following lines to the config file. This binds it to the localhost and also its own static ip. It also disables DHCP as the router is already handling any DHCP we need.
+1. Add the following lines to the end of the config file. This binds it to the localhost and also its own static ip. It also disables DHCP as the switch is already handling any DHCP we need.
 ```
 listen-address=127.0.0.1
-listen-address=10.[state].40.20
+listen-address=10.[state].10.20
 no-dhcp-interface=
 ```
-Add the following addresses to the end of the /etc/hosts files
+Add the following addresses to the end of the /etc/hosts files using `sudo vi /etc/hosts`
+
+ > NOTE: Any other dns entries you wish to have go here  
 
 ```
 127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
@@ -44,10 +43,31 @@ Add the following addresses to the end of the /etc/hosts files
 10.[state octet].10.28  capes.[state].cmat.lan
 10.[state octet].10.20  grassmarlin.[state].cmat.lan
 ```
-Restart dnsmasq
+1. Allow DNS traffic Through the firewall using:
+
+```
+sudo firewall-cmd --add-port=53/udp --permanent
+```
+1. Reload the firewall config using:
+
+```
+sudo firewall-cmd --reload
+```
+
+  You should receive a `success` message if the firewall commands have been run correctly.
+
+1. Restart dnsmasq
 
 ```
 sudo systemctl restart dnsmasq
 
 ```
+
+1. Ensure dnsmasq is running
+
+```
+sudo systemctl status dnsmasq
+
+```
+
 Move on to [RockNSM Data Node](../rocknsm/README.md)
