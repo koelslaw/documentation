@@ -38,16 +38,21 @@ Windows:  there are several great tools to apply a bootable image in MS land, bu
 ### Partition Schemes for Each RHEL Device
 Use the Platform Management doc and the table below to confiure the RHEL OSs. If they need to be in a specific volume group then they will be denoted inside `()` otherwise assume it is part of the default `rhel` volume group
 
-| Device     |  /   | /tmp | /var/log/audit | /boot| /home| /swap| /var/| /data | /data/stenographer | somedir/kafka|
-|-------------------|----------------------|--------------|--|--|--|--|--|--|--|--|
-| Nuc               | 50 GB                | 10 GB         |10 GB|Default|50 GB|Default|Remaing Space|NA|NA|NA|
-| DNS               | /                    | tmp           |var/logaudit|boot|/home|swap|var|data|data steno|kafka|
-| Sensor (Server 1) | 50GB                    | 10GB           |10GB|Default|50 GB|Default|10GB|Remaining Space|NA|NA|
-| ES Nodes          | 50GB                    | 25GB           |10GB|default|50GB|swap|25GB|data|NA|NA|
-| GrassMarlin       | /                    | tmp           |var/logaudit|boot|/home|swap|var|data|data steno|kafka|
-| OpenVAS           | /                    | tmp           |var/logaudit|boot|/home|swap|var|data|data steno|kafka|
+| Device            |  /     | /tmp     | /var/log/audit | /boot  | /home| /swap | /var        | /data               | /data/stenographer | /data/kafka|
+|--|--|--|--|--|--|--|--|--|--|--|
+| Nuc               | 50 GB  | 10 GB    |10 GB           |Default |50 GB |Default|Remaing Space|NA                   |NA                  |NA|
+| DNS               | /      | tmp      |var/logaudit    |boot    |/home |swap   |var          |data                 |data steno          |kafka|
+| Sensor (Server 1) | 50GB   | 10GB     |10GB            |Default |50 GB |Default|10GB         |Remaining Space(fast)|6.8 TB (fast)       |~1.5 TB (nvme0n1p1)|
+| ES Nodes          | 50GB   | 25GB     |10GB            |default |50GB  |8GB    |25GB         |Remaining Space      |NA                  |NA|
+| GrassMarlin       | /      | tmp      |var/logaudit    |boot    |/home |swap   |var          |data                 |data steno          |kafka|
+| OpenVAS           | /      | tmp      |var/logaudit    |boot    |/home |swap   |var          |data                 |data steno          |kafka|
 
-
+### Volume Group Table
+|Volume Group | Media|
+|--|--|
+|FAST| RAID 0 SSD |
+|FASTER| NVME |
+|OS| Stand Alone 240 GB SSD |
 
 This is meant to help those who need a step-by-step build of RHEL.
 
@@ -77,19 +82,21 @@ This is meant to help those who need a step-by-step build of RHEL.
       - In the `Other Storage Options`, select `I will configure partitioning`.  
       - Click `Done`  
       - Click `Click here to create automatically.`
-      - If required, Create any additional volume groups
-          - Create new volume group
-          - give it a name
-          - assign it a disk
+      - Under `Device type` select `lvm`.
+      - **If** required, Create any additional volume groups
+          - under the `Volume Group` select `Create New Volume Group`
+          - Give it the required name (OS,FAST,FASTER, or NVME)
+          - Assign the appropriate disks according to
+          - Hit `Save`
       - Click on the `Red Hat Enterprise Linux Installation` carrot to dropdown your current partitions  
       - Click on `/home` and change the size to desired size and click `Update Settings`  
       - Click on `/` and change the size to desired size and click `Update Settings`  
       - Click on the `+` and set the mount point to `/var/log/audit` and set the `Desired Capacity` to desired size  
       - Click on the `+` and set the mount point to `/tmp` and set the `Desired Capacity` to desired size  
       - Click on the `+` and set the mount point to `/var` and leave the `Desired Capacity` blank
-      - If required, Click on the `+` and set the mount point to `/data` and set to desired size
-      - If required, Click on the `+` and set the mount point to `/data/stenographer` and and set to desired size
-      - If required, Click on the `+` and set the mount point to `/data/kafka` and and set to desired size
+      - **If** required, Click on the `+` and set the mount point to `/data` and set to desired size
+      - **If** required, Click on the `+` and set the mount point to `/data/stenographer` and and set to desired size
+      - **If** required, Click on the `+` and set the mount point to `/data/kafka` and and set to desired size
       - Check partitions against above table  
         - Click `Done`  
     - Click `Accept Changes`  
