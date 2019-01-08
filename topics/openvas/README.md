@@ -4,7 +4,7 @@ OpenVAS is a framework of several services and tools offering a comprehensive an
 
 # Installation
 1. Build a [virtual machine on the Active virtual network](../vmware/README.md#Create-the-Active-Virtual-Machine)  
-1. Ensure that you have created the repo files on your VM so that you can do the install from your Nuc
+1. Install OS in accordance with [Rhel Documentation](../rhel/README.md)
 1. Install OpenVAS `sudo yum install openvas`
 1. Remove, or comment out, the check for SELinux being turned off on line 49 - 56, because only animals turn off SELinux  
 ```
