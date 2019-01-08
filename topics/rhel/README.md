@@ -35,18 +35,24 @@ Windows:  there are several great tools to apply a bootable image in MS land, bu
 
 ## Install RHEL
 
-### Partion Schemes for Each RHEL Device
-Use the Platform Management doc and the table below to confiure the RHEL OSs
+### Partition Schemes for Each RHEL Device
+Use the Platform Management doc and the table below to confiure the RHEL OSs. If they need to be in a specific volume group then they will be denoted inside `()` otherwise assume it is part of the default `rhel` volume group
 
-| Device     |  /   | /tmp | /var/log/audit | /boot| /home| /swap| /var/| /data | /data/stenographer | somedir/kafka|
-|-------------------|----------------------|--------------|--|--|--|--|--|--|--|--|
-| Nuc               | 50 GB                | 10 GB         |10 GB|Default|50 GB|Default|Remaing Space|NA|NA|NA|
-| DNS               | /                    | tmp           |var/logaudit|boot|/home|swap|var|data|data steno|kafka|
-| Sensor (Server 1) | 50                    | 10           |10|Default|50 GB|Default|10|Remaining Space|NA|NA|
-| ES Nodes          | 50                    | 25           |10|default|50|swap|25|data|NA|NA|
-| Nuc               | /                    | tmp           |var/logaudit|boot|/home|swap|var|data|data steno|kafka|
+| Device            |  /     | /tmp     | /var/log/audit | /boot  | /home| /swap | /var        | /data               | /data/stenographer | /data/kafka|
+|--|--|--|--|--|--|--|--|--|--|--|
+| Nuc               | 50 GB  | 10 GB    |10 GB           |Default |50 GB |Default|Remaing Space|NA                   |NA                  |NA|
+| DNS               | /      | tmp      |var/logaudit    |boot    |/home |swap   |var          |data                 |data steno          |kafka|
+| Sensor (Server 1) | 50GB   | 10GB     |10GB            |Default |50 GB |Default|10GB         |Remaining Space(fast)|6.8 TB (fast)       |~1.5 TB (nvme0n1p1)|
+| ES Nodes          | 50GB   | 25GB     |10GB            |default |50GB  |8GB    |25GB         |Remaining Space      |NA                  |NA|
+| GrassMarlin       | /      | tmp      |var/logaudit    |boot    |/home |swap   |var          |data                 |data steno          |kafka|
+| OpenVAS           | /      | tmp      |var/logaudit    |boot    |/home |swap   |var          |data                 |data steno          |kafka|
 
-
+### Volume Group Table
+|Volume Group | Media|
+|--|--|
+|FAST| RAID 0 SSD |
+|FASTER| NVME |
+|OS| Stand Alone 240 GB SSD |
 
 This is meant to help those who need a step-by-step build of RHEL.
 
@@ -75,16 +81,22 @@ This is meant to help those who need a step-by-step build of RHEL.
       - Click on `Installation Destination`  
       - In the `Other Storage Options`, select `I will configure partitioning`.  
       - Click `Done`  
-      - Click `Click here to create automatically.`  
+      - Click `Click here to create automatically.`
+      - Under `Device type` select `lvm`.
+      - **If** required, Create any additional volume groups
+          - under the `Volume Group` select `Create New Volume Group`
+          - Give it the required name (OS,FAST,FASTER, or NVME)
+          - Assign the appropriate disks according to
+          - Hit `Save`
       - Click on the `Red Hat Enterprise Linux Installation` carrot to dropdown your current partitions  
       - Click on `/home` and change the size to desired size and click `Update Settings`  
       - Click on `/` and change the size to desired size and click `Update Settings`  
       - Click on the `+` and set the mount point to `/var/log/audit` and set the `Desired Capacity` to desired size  
       - Click on the `+` and set the mount point to `/tmp` and set the `Desired Capacity` to desired size  
       - Click on the `+` and set the mount point to `/var` and leave the `Desired Capacity` blank
-      - If required, Click on the `+` and set the mount point to `/data` and set to desired size
-      - If required, Click on the `+` and set the mount point to `/data/stenographer` and and set to desired size
-      - If required, Click on the `+` and set the mount point to `/data/kafka` and and set to desired size
+      - **If** required, Click on the `+` and set the mount point to `/data` and set to desired size
+      - **If** required, Click on the `+` and set the mount point to `/data/stenographer` and and set to desired size
+      - **If** required, Click on the `+` and set the mount point to `/data/kafka` and and set to desired size
       - Check partitions against above table  
         - Click `Done`  
     - Click `Accept Changes`  
@@ -97,8 +109,7 @@ This is meant to help those who need a step-by-step build of RHEL.
     - `Region` should be changed to `Etc`  
     - `City` should be changed to `Coordinated Universal Time`  
     - `Network Time` should be toggled on  
-    - Click `Done`  
-    > Note - the beginning of these install scripts configures Network Time Protocol (NTP). You just did that, but it's included just to be safe because time, and DNS, matter.  
+    - Click `Done`
 
 1. Click `Begin Installation`  
 1. We're not going to set a Root passphrase because you will not need it. Not setting a passphrase locks the Root account, which is what we want.  
@@ -108,7 +119,7 @@ This is meant to help those who need a step-by-step build of RHEL.
 1. Login using the account you created during the Anaconda setup  
 
 
-> For every machine except the NUC itself the following rpm repo file needs to be created
+> For every machine except the NUC and capes (which uses elastic 5 instead of 6) need the following rpm repo file needs to be created.
 
 1. Add local repos to RHEL.
 
@@ -151,7 +162,6 @@ This is meant to help those who need a step-by-step build of RHEL.
   enabled=1
 
   EOF'
-
   ```
 
 1. Continue installation...
