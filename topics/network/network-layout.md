@@ -5,17 +5,16 @@
 
 The CMAT kits will use the following network standard: `10.[KIT].[VLAN].[HOST]`
 
-## VLANs
+## VLANs to Physical Ports
 | VLAN  |  Port     | Description |
 |-------|-----------|-------------|
-| 10    | 1 - 39    | Internal    |
-| 20    | 40 - 48   | Active      |
+| 10    | 1 - 35    | Internal    |
+| 20    | 36 - 48   | Active      |
 
-## Router Gateways
+## Gateways
 | IP       | Router Gateway                              |
 |:---------|:--------------------------------------------|
-|10.1.10.1 | [VLAN 10 Gateway (Passive)](#passive-table) |
-|10.1.20.1 | [VLAN 20 Gateway (Active)](#active-table)   |
-|10.1.30.1 | VLAN 30 Gateway (Remote)                    |
-
-## Subnets
+|10.[state].10.1 | [VLAN 10 Gateway (Passive)](#passive-table) |
+|10.[state].20.1 | [VLAN 20 Gateway (Active)](#active-table)   |
+|10.[state].50.1 | VLAN 50 Gateway (Remote)                    |
+|10.[state].60.1 | VLAN 60 Gateway (Remote)                    |

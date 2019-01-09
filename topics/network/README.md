@@ -41,6 +41,8 @@ You can copy and paste the provided configuration into the router console. You n
 
 A good suggestion is to perform a "Find"  in the configuration for `[` and replace the `[comment]` with your specific environment variables.
 
+For Specific Configuration examples see the [Router](../router/README.md) Configuration
+
 The entire running configuration is stored in the [config directory](../../config/router-config.txt).
 
 # Initial Switch Configuration
@@ -84,6 +86,8 @@ You can copy and paste the provided configuration into the switch console. You n
 
 The entire running configuration is stored in the [config directory](../../config/switch-config.txt).
 
+For Specific Configuration examples see the [Switch](../switch/README.md) Configuration
+
 ## Initial Switch Configuration (WebUI)
 1. Connect a network cable to the management port on the front of the switch
 ![](../../images/switch-management.png)
@@ -94,6 +98,6 @@ The entire running configuration is stored in the [config directory](../../confi
 
 
 Move onto [Dell Server R840 Configuration](../dell/README.md)
-or if installed,
+or **if** installed,
 
 Move onto [Dell Chassis Management Console (CMC) Configuration](cmc-configuration.md)
