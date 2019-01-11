@@ -19,11 +19,14 @@ To walk through the build steps, [check out the README](./topics/README.md).
 - [Hardware Components](./topics/hardware-components.md)
 - [Hardware Assembly](./topics/hardware-assembly.md)
 - [Hardware Configuration](./topics/hardware-configuration.md)
+
   - [Intel Nuc Configuration](nuc/README.md)
   - [Gigamon Configuration](gigamon/README.md)
   - [Network Configuration](network/README.md)
   - [Dell R840 Configuration](dell/README.md)
+
 - [Software Deployment](./topics/software-deployment.md)
+  
   -  Infrastructure
     - [ESXi](vmware/README.md)
   - Passive Software Deployment
@@ -40,6 +43,7 @@ To walk through the build steps, [check out the README](./topics/README.md).
     - [OpenVAS](./openvas/README.md)
     - [Nmap](./nmap/README.md)
     - [BlueScope](./bluescope/README.md)
+
 - [Network Layout](./topics/network/network-layout.md)
 - [Post-Installation](./topics/post-install.md)
 - [Platform Management (IPs, hostnames, creds, etc.)](./topics/platform-management.md)
