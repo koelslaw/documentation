@@ -206,27 +206,27 @@ ___
 
 # Hardware Wiring
 
-|Source | Port | Destination |Port|Media
+|Source | Port                 | Destination |Port             |Media
 |--|--|--|--|--|
-|Switch| Gi1/0/1  |Router  |0/0/0 |Ethernet|
-|Switch| Gi1/0/2  |AP  |POE/CONSOLE |Ethernet|
-|Switch| Gi1/0/3  |GIGAMON  |MGMT PORT |Ethernet|
-|Switch| Gi1/0/4  |Server 1  | iDRAC|Ethernet|
-|Switch| Gi1/0/5  |Server 2  |iDRAC |Ethernet|
-|Switch| Gi1/0/6  |NUC  |Port 1|Ethernet|
-|Switch| Te1/0/1 (SR SFP)  |Server 1  | 0/0/1(SR SFP) | Fiber|
-|Switch| Te1/0/2 (SR SFP)  |Server 2  | 0/0/1(SR SFP) | Fiber|
-|Gigamon| Tool Port 1 |Server 1  | Ethernet port 1 | Fiber|
-|Gigamon| Tool Port 2 |Server 1  | Ethernet port 2 | Fiber|
+|Switch | Gi1/0/1              |Router       |0/0/0            |Ethernet|
+|Switch | Gi1/0/2              |AP           |POE/CONSOLE      |Ethernet|
+|Switch | Gi1/0/3              |GIGAMON      |MGMT PORT        |Ethernet|
+|Switch | Gi1/0/4              |Server 1     | iDRAC           |Ethernet|
+|Switch | Gi1/0/5              |Server 2     |iDRAC            |Ethernet|
+|Switch | Gi1/0/6              |NUC          |Port 1           |Ethernet|
+|Switch | Te1/0/1 (SR SFP)     |Server 1     | 0/0/1(SR SFP)   | Fiber|
+|Switch | Te1/0/2 (SR SFP)     |Server 2     | 0/0/1(SR SFP)   | Fiber|
+|Gigamon| Tool Port 1 (2/1/x1) |Server 1     | SFP Port 1      | Fiber|
 
 Physical Port Assignments to VLANs
 
-|VLAN|Port  |Description|
+|VLAN|Port              |Description|
 |--|--|--|
-|10|1-36  |Internal|
-|20|37-48  |Active|
-|50|Internal to switch  |Management interface for wireless AP|
-|60|Internal to switch  |DHCP Pool for Clients|
+|10  |1-36                |Internal or Passive|
+|20  |37-48               |Active|
+|30  |Internal to Switch  |VPN Tunnel|
+|50  |Internal to switch  |Management interface for wireless AP|
+|60  |Internal to switch  |DHCP Pool for Clients|
 
 ```
                                                       ┌──────────────────────────────┐  ┌───────────────────────────────┐
@@ -235,8 +235,8 @@ Physical Port Assignments to VLANs
   ┌───────────────────────────────┐                   │       ┌───┐                  │  │                               │
   │       CISCO ROUTER 4321       │                   │  ┌───┐│USB│┌───┐┌───┐┌────┐  │  │  ┌───┐┌───┐┌───┐┌───┐         │
   ├───────────────────────────────┤                 ┏━╋━━│1GB│├───┤│DSP││PWR││HDMI│  │  │  │SFP││SFP││1GB││1GB│         │
-  │    ━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━┓   ┃ │  └───┘│USB│└───┘└───┘└────┘  │  │  └───┘└───┘└───┘└───┘         │
-  │  ┌───┐   ┌───┐  ┌───┐         │             ┃   ┃ │       └───┘                  │  │    ┃  ┌─────┐                 │
+  │    ┏━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━┓   ┃ │  └───┘│USB│└───┘└───┘└────┘  │  │  └───┘└───┘└───┘└───┘         │
+  │  ┌─┻─┐   ┌───┐  ┌───┐         │             ┃   ┃ │       └───┘                  │  │    ┃  ┌─────┐                 │
   │  │MGT│   │AUX│  │1GB│         │             ┃   ┃ └──────────────────────────────┘  │    ┃  │iDRAC│                 │
   │  ├───┼───┼───┤  ├───┤  ┌───┐  │             ┃   ┃                                   │    ┃  └─────┘                 │
   │  │USB│CON│AUX│  │1GB│  │SFP│  │             ┃   ┃                                   └────╋─────┳────────────────────┘
@@ -245,14 +245,14 @@ Physical Port Assignments to VLANs
   └───────────────────────────────┘             ┃   ┃    ┃                                         ┃
                                             ┏━━━╋━━━╋━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
   ┌─────────────────────────────────────────┻───┻───┻────┻────────────────┐
-  │                          CISCO SWITCH C3850                           │
+  │               CISCO SWITCH C3850 (Not All 48 ports Shown)             │
   ├─────────────────────────────────────────┳───┳───┳────┳────────────────┤
   │                                         ┃   ┃   ┃    ┃                │
-  │  ┌───┬───┬───┬───┬───┬───┐┌───┬───┬───┬───┬───┬───┐┌───┬───┬───┬───┐  │
-  │  │ 1 │ - │ - │ - │ - │30 ││37 │38 │39 │40 │41 │42 ││SFP│SFP│SFP│SFP│  │
+  │  ┌───┬───┬───┬───┬───┬───┐┌───┬───┬───┬─┻─┬─┻─┬─┻─┐┌─┻─┬───┬───┬───┐  │
+  │  │ - │ - │ - │ - │ - │ - ││ - │ - │ - │ 5 │ 1 │ 3 ││SFP│SFP│SFP│SFP│  │
   │  ├───┼───┼───┼───┼───┼───┤├───┼───┼───┼───┼───┼───┤└───┴───┴───┴───┘  │
-  │  │ 7 │ - │ - │ - │ - │36 ││43 │44 │45 │46 │47 │48 │      ┃            │
-  │  └───┴───┴───┴───┴───┴───┘└───┴───┴───┴───┴───┴───┘      ┃            │    ┌───────────────────────────────┐
+  │  │ - │ - │ - │ - │ - │ - ││ - │ - │ - │ 6 │ 2 │ 4 │      ┃            │
+  │  └───┴───┴───┴───┴───┴───┘└───┴───┴───┴─┳─┴─┳─┴─┳─┘      ┃            │    ┌───────────────────────────────┐
   │                                         ┃   ┃   ┃        ┗━━━━━━━━━━━━╋━━━━┫  DELL R840 SERVER 2 (Sensor)  │
   └─────────────────────────────────────────╋───╋───╋─────────────────────┘    ├─────────┳─────────────────────┤
                                             ┃   ┃   ┃                          │         ┃                     │

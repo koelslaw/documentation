@@ -94,13 +94,6 @@ That said, there is a deploy script for each of the services that you should be 
 Once CAPES reboots we need to set the Nuc as the upstream RHEL repository You can copy / paste this following code block into the Terminal (once you update the `.[state octet].` with your [octet](../README.md)).
 
 ```
-sudo bash -c 'cat > /etc/yum.repos.d/local-repos.repo <<EOF
-[capes]
-name: Capes Local
-baseurl=http://10.[state octet].10.19/capes/
-gpgcheck=0
-enabled=1
-
 [local-epel]
 name: Extra packages For Enterprise Linux Local Repo
 baseurl=http://10.[state octet].10.19/epel/
@@ -125,13 +118,14 @@ baseurl=http://10.[state octet].10.19/rhel-7-server-rpms/
 gpgcheck=0
 enabled=1
 
-[local-wandiscox86_64]
-name: wandisco
-baseurl=http://10.[state octet].10.19/WANdisco-git/
+[local-capes]
+name: elastic
+baseurl=http://10.[state octet].10.19/capes/
 gpgcheck=0
 enabled=1
 
 EOF'
+
 ```
 ## Get CAPES
 Finally, here we go.

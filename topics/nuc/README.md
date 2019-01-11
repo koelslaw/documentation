@@ -9,26 +9,36 @@ The intel Nuc is an important part of the kits initial setup and maintx. It is u
 
 - [RHEL](../rhel/README.md) Installed
 > Note: if necessary, these steps can be replicated to work with [CentOS Minimal](http://mirror.mobap.edu/centos/7.5.1804/isos/x86_64/CentOS-7-x86_64-Minimal-1804.iso).
+
 - Network connection to Internet
 
 ## Deploy Initial Configuration
 We are going to deploy the initial configuration for the Nuc. This will configure the nuc as a repository to build the rest of the kit, as well as to store documentation.  
 
-Before that we need some upstream packages for installation. To get those we need to grab the our RHEL subscription.
+1. Before that we need some upstream packages for installation. To get those we need to grab the our RHEL subscription.
 
-```
-sudo subscription-manager register --username [see Platform Management] --password [see Platform Management] --auto-attach
-```
+  ```
+  sudo subscription-manager register --username [see Platform Management] --password [see Platform Management] --auto-attach
+  ```
 
-Congrats! You have access to the RHEL RPM Repos. By extension so does the rest of the stack.
+  Congrats! You have access to the RHEL RPM Repos. By extension so does the rest of the stack.
 
-The next script is meant to take some of the work on setting up the nuc. Using the script also ensures the rest of the kit has what it needs to function.
+1. The next script is meant to take some of the work on setting up the nuc. Using the script also ensures the rest of the kit has what it needs to function.
+
+1. Clone the mozarkite github repo.
+
+  ```
+  sudo git clone http://some.git.repo.somewhere
+  ```
+
+
 
 :warning: The next action will result in large downloads. I would not recommend completing the following action unless you have a decent internet connection and/or some time. :warning:
 
-```
-sudo sh deploy-nuc.sh
-```
+1. Run the deploy Nuc Script
+  ```
+  sudo sh deploy-nuc.sh
+  ```
 
 #### Post-Install Configuration
 When you browse to Gitea for the first time, you'll enter a post-installation configuration pipeline.

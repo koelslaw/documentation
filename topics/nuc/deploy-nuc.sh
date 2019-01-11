@@ -128,6 +128,13 @@ EOF'
 sudo mkdir -p /var/www/html/repo/capes
 sudo mkdir -p /var/www/html/repo/grassmarlin
 sudo mkdir -p /var/www/html/repo/nmap
+sudo mkdir -p /var/www/html/rock2
+
+sudo curl -o https://download.rocknsm.io/rocknsm-2.2.0.iso ~/
+sudo sudo mkdir -p /mnt/cd
+sudo mount -o loop ~/rocknsm-2.2.0.iso /mnt/cd
+sudo sudo cp -R /mnt/cd/* /var/www/html/rock2/.
+sudo createrepo -v /var/www/html/rock2
 sudo curl -o /var/www/html/repo/capes/gitea-master-linux-amd64 https://dl.gitea.io/gitea/master/gitea-master-linux-amd64
 sudo curl -L https://github.com/nsacyber/GRASSMARLIN/releases/download/v3.2.1/grassmarlin-3.2.1-1.el6.x86_64.rpm -o /var/www/html/repo/grassmarlin/grassmarlin-3.2.1-1.el6.x86_64.rpm
 sudo curl -L https://github.com/mumble-voip/mumble/releases/download/1.2.19/murmur-static_x86-1.2.19.tar.bz2 -o /var/www/html/repo/capes/mattermost.tar.gz

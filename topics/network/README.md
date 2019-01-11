@@ -70,7 +70,9 @@ Flow Control: None
 
 As soon as you connect, you'll be given some basic instructions on how to change the default username and passphrase. So let's do that.
 
-Remember, the credential pairs are stored in the [platform-management page](../platform-management.md). Replace `[username]` and `[passphrase]` with the proper pair from the [platform-management page](../platform-management.md).
+Remember, the credential pairs are stored in the [platform-management page](../platform-management.md).
+
+Replace `[username]` and `[passphrase]` with the proper pair from the [platform-management page](../platform-management.md).
 
 ```
 User Access Verification

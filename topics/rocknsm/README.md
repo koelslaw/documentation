@@ -1,5 +1,5 @@
 # RockNSM Readme
-RockNSM has 2 components, the data node (top half) and the sensor (bottom half).
+RockNSM has 2 components, the data node (top half or Server 2) and the sensor (bottom half or Server 1).
 
 ## Data Node
 The data node has the indexing/storage and visualization elements:

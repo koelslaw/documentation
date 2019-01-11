@@ -1,6 +1,9 @@
+Building configuration...
+
+
 Current configuration : 5059 bytes
 !
-! Last configuration change at 12:24:27 CST Wed Jan 2 2019
+! Last configuration change at 09:01:55 CST Wed Jan 9 2019
 !
 version 16.6
 service timestamps debug datetime msec
@@ -8,7 +11,7 @@ service timestamps log datetime msec
 platform qfp utilization monitor load 80
 no platform punt-keepalive disable-kernel-core
 !
-hostname gateway.[state].cmat.lan
+hostname gateway.[State].cmat.lan
 !
 boot-start-marker
 boot-end-marker
@@ -44,7 +47,7 @@ clock calendar-valid
 !
 !
 !
-ip host switch.[state].cmat.lan 10.1.10.3
+ip host switch.[State].cmat.lan 10.1.10.3
 !
 !
 !
@@ -109,7 +112,7 @@ crypto pki certificate chain TP-self-signed-1123779263
   D95EEA5B E710D891 2326A978 AD74A449 43F04DA3 06C67A07 0966B797 903703FA
   41A8CB04 E5EF61F8 7CA83425 828244F1 3891EAB3 F1BD3FE3 5A8E71D0 9E9ACFA6
   CDFA7A96 8DD11044 ED73F6FE 680DE01F 276B88E4
-        quit
+  	quit
 crypto pki certificate chain TP-self-signed-1349810103
 !
 !
@@ -212,7 +215,7 @@ route-map track-primary-if permit 1
 !
 !
 control-plane
-!         
+!
 !
 line con 0
  transport input none
