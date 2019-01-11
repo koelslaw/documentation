@@ -5,9 +5,9 @@ This repo serves as the main source of documentation for the Cyber Mission Assur
 ## Build Steps
 To walk through the build steps, [check out the README](./topics/README.md).
 
-> Note: This documentation was made with best effort on a short timeline. Most of the documentation is correct, but there could be nuances or minor details that still need to be adjusted to your environment.
+  **Famous Quote: When you wait till the last minute then it only takes a minute. -Jeff Geiger**
 
-Please contribute fixes back to the project.  
+> NOTE: This documentation was made with best effort on a short timeline. Most of the documentation is correct, but there could be nuances or minor details that still need to be adjusted to your environment. Please contribute fixes back to the project.  
 
 ## Table of Contents
 
@@ -19,9 +19,27 @@ Please contribute fixes back to the project.
 - [Hardware Components](./topics/hardware-components.md)
 - [Hardware Assembly](./topics/hardware-assembly.md)
 - [Hardware Configuration](./topics/hardware-configuration.md)
+  - [Intel Nuc Configuration](nuc/README.md)
+  - [Gigamon Configuration](gigamon/README.md)
+  - [Network Configuration](network/README.md)
+  - [Dell R840 Configuration](dell/README.md)
 - [Software Deployment](./topics/software-deployment.md)
+  -  Infrastructure
+    - [ESXi](vmware/README.md)
+  - Passive Software Deployment
+    - [RHEL DNS Server](./dns/README.md)
+    - [RockNSM](./rocknsm/README.md)
+      - [Hardware Requirements](rocknsm-requirements.md)
+      - [RockNSM Data Node](rocknsm-datanode.md)
+      - [RockNSM Sensor](rocknsm-sensor.md)
+      - [Connecting the Sensor to the Data Node](rocknsm-configuration.md)
+      - [Usage](rocknsm-usage.md)
+    - [CAPES](./capes/README.md)
+    - [GRASSMARLIN](./grassmarlin/README.md)
+  - Active Software Deployment
+    - [OpenVAS](./openvas/README.md)
+    - [Nmap](./nmap/README.md)
+    - [BlueScope](./bluescope/README.md)
 - [Network Layout](./topics/network/network-layout.md)
 - [Post-Installation](./topics/post-install.md)
 - [Platform Management (IPs, hostnames, creds, etc.)](./topics/platform-management.md)
-- [Server Configuration Files](./conf/server_config.md)
-- [Client Configuration Files](./conf/client_config.md)
