@@ -37,7 +37,7 @@ Once power has been connected to the servers setup they should automatically boo
 
 ### Raid Configuration for Installation
 
-#### Data Tier SSD (ESXI (Server 2))
+#### Data Tier SSDs (ESXI (Server 2))
 1. Navigate to -> `System Setup`
 
 1. Click `Advanced Hardware Configuration`
@@ -110,7 +110,7 @@ Once power has been connected to the servers setup they should automatically boo
   - Select `Create Vitual Disk` at the bottom of the page. Check `Confirm` and `Yes` then `Ok`
 
 
-#### Sensor SSD (Server 1)
+#### Sensor SSDs (Server 1)
 1. Navigate to -> `System Setup`
 
 1. Click `Advanced Hardware Configuration`
