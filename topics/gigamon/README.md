@@ -79,12 +79,12 @@ tap.[state].cmat.lan (config) # username admin|monitor|operator password
 ## Enabling Interfaces
 It should be noted, these next steps...are silly. Don't blame us.
 
-1. Once you're logged in, click on the `Chasis` from the toolbar on the left
-1. You will notice that the interfaces aren't' configured and it is not inherently obvious how to enable them.
+1. Once you're logged in, click on the `Chassis` from the toolbar on the left
+1. You will notice that the interfaces are not configured and it is not inherently obvious how to enable them.
 ![](../../images/gigamon-unconfigured.png)  
 > Unconfigured Gigamon interfaces
 
-1. You can either right-click on the image and select `Configure` or switch from "Chasis View" to "List View" and then select your interfaces and `Configure` them.
+1. You can either right-click on the image and select `Configure` or switch from "Chassis View" to "List View" and then select your interfaces and `Configure` them.
 ![](../../images/gigamon-rightclick-configure.png)  
 ![](../../images/gigamon-menu-configure.png)  
 > Configuration options for the interfaces
@@ -105,5 +105,35 @@ Packets arrive at the Gigamon Visibility Platform at network ports and are direc
 **Tool ports** are where you connect destinations for the data arriving on network ports on GigaVUE nodes. For example, an IT organization could assign one set of tool ports to its Security Team for an intrusion detection system, a forensic data recorder, and a traditional protocol analyzer while a separate set of tool ports assigned to the Application Performance Management team is used for a flow recorder and a long-term packet capture device. Regardless of the specific tool connected, the idea is the same – tool ports are where users select different portions of the data arriving on network ports.
 
 > Note:	Tool ports only allow data output to a connected tool. Any data arriving at the tool port from an external source will be discarded. In addition, a tool port’s Link Status must be up for packets to be sent out of the port.
+
+### Sample Tap Configuration
+> NOTE: This is an example configuration and should not be considered the only way to tap a network. This is here to get you started.
+
+1. Right Click the Modules on the tap under the `Chassis` tab and select `Config`.
+1. The ports you wish to be your tapping interface. for example 2/2/g1. Mouse over `Admin` and select `Enable`, do the same for 2/2/g2.
+> NOTE: This is where the network traffic will pass through
+
+1. Do the same for the interfaces that connect your gigamon to your sensor.
+1. At this point everything should be network port. We need to change that to an inline network port. So right click on `2/2/g1` mouse over `Type` and select `Inline Network`, do the same for 2/2/g2.
+
+1. Setup the ports that are going to your server as tool ports in our case `2/1/g1`
+
+1. On the left hand pane click `Maps` so we can start sending our traffic to the tool interfaces from the inline network interfaces, click `New`, give it the following parameters:
+  - Map Alias: Tap
+  - Type: Regular
+  - Subtype: Pass All
+  - Source : 2/2/g1
+  - Destination: 2/1/g1
+
+1. Click `Ok`
+1. Find `Inline Bypass`, click `New` and give it the following parameters:
+  - Alias: Capture
+  - Port A: 2/2/g1
+  - Port B: 2/2/g2
+  - Traffic Path: Bypass with Monitoring
+  - Link Failure Propagation: Checked
+1. At this point if you ssh into your sensor.[state].cmat.lan machine will start recieving traffic.
+
+
 
 Move onto [Network Configuration](../network/README.md)
