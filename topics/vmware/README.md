@@ -192,7 +192,7 @@ If this is done on a Mac, you could get a popup once the operation is complete a
   - USB controller 1:  Leave default  
   - Network Adapter: `Active`, ensure that `Connect` is enabled  
   - CD/DVD Drive 1: `Datastore ISO file`, select the RHEL ISO you uploaded above, ensure that `Connect` is enabled  
-  - Video Card:  Leave default  
+  - Video Card: Leave default  
 1. Review your settings  
 1. Click Finish  
 

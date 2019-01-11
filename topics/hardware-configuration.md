@@ -18,5 +18,7 @@ Consult the [Platform Management](platform-management.md) page to to get all the
 3. [Network Configuration](network/README.md)
 4. [Dell R840 Configuration](dell/README.md)
 
-If installed:
+Move to [Software Deployment](platform-management.md)
+
+**If** installed:
  - [Dell Chassis Management Console (CMC) Configuration](network/cmc-configuration.md)

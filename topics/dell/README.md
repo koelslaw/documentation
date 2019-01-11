@@ -191,4 +191,4 @@ At this point you have finished. the NVME drives will be standalone and not in a
 
   ![](../../images/lifecyclecontroller.png)
 
-Proceed to [ESXI](../vmaware/README.md) OR  [Deploy Bare Metal Rock](rocknsm/README.md)
+Proceed to [Software Deployment](../topics/software-deployment.md)
