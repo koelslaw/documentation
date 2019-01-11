@@ -1,6 +1,8 @@
-Current configuration : 17283 bytes
+Building configuration...
+
+Current configuration : 17266 bytes
 !
-! Last configuration change at 18:20:49 UTC Wed Jan 2 2019
+! Last configuration change at 19:53:56 UTC Wed Jan 9 2019
 !
 version 16.3
 no service pad
@@ -9,7 +11,7 @@ service timestamps log datetime msec
 service password-encryption
 no platform punt-keepalive disable-kernel-core
 !
-hostname switch.[state].cmat.lan
+hostname switch.[State].cmat.lan
 !
 !
 vrf definition Mgmt-vrf
@@ -57,8 +59,8 @@ ip dhcp pool AP_CONFIG
 ip dhcp pool AP_CLIENTS
  network 10.1.60.0 255.255.255.0
  default-router 10.1.60.1
- dns-server 10.1.10.1 208.67.222.222
- domain-name mo.cmat.lan
+ dns-server 10.1.10.20
+ domain-name cmat.lan
 !
 !
 !
@@ -431,20 +433,20 @@ interface GigabitEthernet1/0/36
  spanning-tree portfast
 !
 interface GigabitEthernet1/0/37
- description ACCESS_PORTS_INTERNAL
- switchport access vlan 10
+ description ACCESS_PORT_ACTIVE
+ switchport access vlan 20
  switchport mode access
  spanning-tree portfast
 !
 interface GigabitEthernet1/0/38
- description ACCESS_PORTS_INTERNAL
- switchport access vlan 10
+ description ACCESS_PORT_ACTIVE
+ switchport access vlan 20
  switchport mode access
  spanning-tree portfast
 !
 interface GigabitEthernet1/0/39
- description ACCESS_PORTS_INTERNAL
- switchport access vlan 10
+ description ACCESS_PORT_ACTIVE
+ switchport access vlan 20
  switchport mode access
  spanning-tree portfast
 !
@@ -644,7 +646,7 @@ wireless mobility controller
 wireless management interface Vlan50
 wireless multicast
 wireless mgmt-via-wireless
-wlan CMAT.MO 1 CMAT.MO
+wlan CMAT.[State] 1 CMAT.[State]
  auto qos enterprise
  client vlan 0060
  ip flow monitor wireless-avc-basic input
@@ -660,13 +662,13 @@ ap dot11 24ghz rf-profile a
  no shutdown
 ap dot11 airtime-fairness policy-name Default 0
 ap group cmat
- remote-lan CMAT.MO
+ remote-lan CMAT.[State]
  airtime-fairness dot11 24GHz mode enforce-policy
  airtime-fairness dot11 24GHz optimization
  airtime-fairness dot11 5GHz mode enforce-policy
  airtime-fairness dot11 5GHz optimization
  hyperlocation
- wlan CMAT.MO
+ wlan CMAT.[State]
   vlan VLAN0060
  port 1
   poe
