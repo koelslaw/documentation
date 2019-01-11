@@ -38,14 +38,13 @@ Windows:  there are several great tools to apply a bootable image in MS land, bu
 ### Partition Schemes for Each RHEL Device
 Use the Platform Management doc and the table below to confiure the RHEL OSs. If they need to be in a specific volume group then they will be denoted inside `()` otherwise assume it is part of the default `rhel` volume group
 
-| Device            |  /     | /tmp     | /var/log/audit | /boot  | /home| /swap | /var        | /data               | /data/stenographer | /data/kafka|
+| Device            |  /     | /tmp     | /var/log/audit | /boot  | /home          | /swap | /var        | /data               | /data/stenographer | /data/kafka|
 |--|--|--|--|--|--|--|--|--|--|--|
-| Nuc               | 50 GB  | 10 GB    |10 GB           |Default |50 GB |Default|Remaing Space|NA                   |NA                  |NA|
-| DNS               | /      | tmp      |var/logaudit    |boot    |/home |swap   |var          |data                 |data steno          |kafka|
-| Sensor (Server 1) | 50GB   | 10GB     |10GB            |Default |50 GB |Default|10GB         |Remaining Space(fast)|6.8 TB (fast)       |~1.5 TB (nvme0n1p1)|
-| ES Nodes          | 50GB   | 25GB     |10GB            |default |50GB  |8GB    |25GB         |Remaining Space      |NA                  |NA|
-| GrassMarlin       | /      | tmp      |var/logaudit    |boot    |/home |swap   |var          |data                 |data steno          |kafka|
-| OpenVAS           | /      | tmp      |var/logaudit    |boot    |/home |swap   |var          |data                 |data steno          |kafka|
+| Nuc               | 5GB    | 1 GB     |2GB             |Default |Remaining Space |Default|var          |NA                   |NA                  |NA|
+| Sensor (Server 1) | 50GB   | 10GB     |10GB            |Default |50 GB           |Default|10GB         |Remaining Space(fast)|6.8 TB (fast)       |~1.5 TB (faster)|
+| ES Nodes          | 50GB   | 25GB     |10GB            |default |50GB            |8GB    |25GB         |Remaining Space      |NA                  |NA|
+| GrassMarlin       | 5GB    | 1GB      |1GB             |Default |Remaining Space |Default|var          |NA                   |NA                  |NA|
+| OpenVAS           | 5GB    | 1GB      |2 GB            |Default |Remaining Space |Default|15GB         |NA                   |NA                  |NA|
 
 ### Volume Group Table
 |Volume Group | Media|
@@ -55,6 +54,8 @@ Use the Platform Management doc and the table below to confiure the RHEL OSs. If
 |OS| Stand Alone 240 GB SSD |
 
 This is meant to help those who need a step-by-step build of RHEL.
+
+>NOTE: Capes has its own installation criteria, please refer to [Capes Installation](capes/README.md).
 
 1. Attach or insert the media and power on  
 1. Press `F10` to enter the boot menu  
@@ -84,9 +85,9 @@ This is meant to help those who need a step-by-step build of RHEL.
       - Click `Click here to create automatically.`
       - Under `Device type` select `lvm`.
       - **If** required, Create any additional volume groups
-          - under the `Volume Group` select `Create New Volume Group`
-          - Give it the required name (OS,FAST,FASTER, or NVME)
-          - Assign the appropriate disks according to
+          - Under the `Volume Group` select `Create New Volume Group`
+          - Give it the required name (OS,FAST,FASTER)
+          - Assign the appropriate disks according to above Volume Group Table
           - Hit `Save`
       - Click on the `Red Hat Enterprise Linux Installation` carrot to dropdown your current partitions  
       - Click on `/home` and change the size to desired size and click `Update Settings`  
@@ -158,6 +159,12 @@ This is meant to help those who need a step-by-step build of RHEL.
   [local-elastic-6.x]
   name: elastic
   baseurl=http://10.[state octet].10.19/elastic-6.x/
+  gpgcheck=0
+  enabled=1
+
+  [local-rock2]
+  name: elastic
+  baseurl=http://10.[state octet].10.19/rock2/
   gpgcheck=0
   enabled=1
 
