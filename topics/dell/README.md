@@ -5,7 +5,7 @@
 - Keyboard
 - Mouse
 
-### Configure iDRAC
+### Configure iDRAC for Both Servers
 
 Once power has been connected to the servers setup they should automatically boot the lifecycle controllers. If not, hit `F10`.
 
@@ -34,6 +34,9 @@ Once power has been connected to the servers setup they should automatically boo
 1. Click `Finish`, Again.
 1. Click `Yes` to save the IDRAC configuration, and `ok`
 1. This should return you to the System Setup page
+1. **Repeat for other server**
+
+___
 
 ### Raid Configuration for Installation
 
@@ -57,6 +60,8 @@ Once power has been connected to the servers setup they should automatically boo
 
   ![](../../images/configure for raid.png)
 
+>NOTE: **If** the disks have had previously installed OS on them do a cryptographic wipe prior to creating the raid arrays.
+
 1. Select Create Virtual disk
 
   ![](../../images/IMG_20190105_093919.jpg)
@@ -81,7 +86,7 @@ Once power has been connected to the servers setup they should automatically boo
       - Select **ONLY** the ~240 GB hardrive
     - Select `Apply Changes` and `Ok`
   - Enter Virtual Disk Name: OS
-  - Select `Create Vitual Disk` at the bottom of the page. Check `Confirm` and `Yes` then `Ok`
+  - Select `Create Virtual Drive` at the bottom of the page. Check `Confirm` and `Yes` then `Ok`
 
 1. Select Create Virtual disk
 
@@ -104,11 +109,13 @@ Once power has been connected to the servers setup they should automatically boo
       - Media Type: SSD
       - Interface Type: SATA
       - Sector Size: 512 B
-      - Select the remaining 3 Harddrives
+      - Select the remaining 1.7 TB SSD Harddrives
     - Select `Apply Changes` and `Ok`
   - Enter Virtual Disk Name: FAST
-  - Select `Create Vitual Disk` at the bottom of the page. Check `Confirm` and `Yes` then `Ok`
+  - Select `Create Virtual Drive` at the bottom of the page. Check `Confirm` and `Yes` then `Ok`
 
+**Move to Server 1**
+___
 
 #### Sensor SSDs (Server 1)
 1. Navigate to -> `System Setup`
@@ -130,6 +137,8 @@ Once power has been connected to the servers setup they should automatically boo
 
   ![](../../images/configure for raid.png)
 
+> NOTE: **If** the disks have had previously installed OS on them do a cryptographic wipe prior to creating the raid arrays.
+
 1. Select Create Virtual disk
 
   ![](../../images/IMG_20190105_093919.jpg)
@@ -152,7 +161,7 @@ Once power has been connected to the servers setup they should automatically boo
       - Select **ONLY** the ~240 GB hardrive
     - Select `Apply Changes` and `Ok`
   - Enter Virtual Disk Name: OS
-  - Select `Create Vitual Disk` at the bottom of the page. Check `Confirm` and `Yes` then `Ok`
+  - Select `Create Virtual Drive` at the bottom of the page. Check `Confirm` and `Yes` then `Ok`
 
 1. Select Create Virtual disk
 
@@ -174,10 +183,10 @@ Once power has been connected to the servers setup they should automatically boo
       - Media Type: SSD
       - Interface Type: SATA
       - Sector Size: 512 B
-      - Select the remaining 3 Harddrives
+      - Select the remaining 1.7 TB SSD Harddrives
     - Select `Apply Changes` and `Ok`
   - Enter Virtual Disk Name: FAST
-  - Select `Create Vitual Disk` at the bottom of the page. Check `Confirm` and `Yes` then `Ok`
+  - Select `Create Virtual Drive` at the bottom of the page. Check `Confirm` and `Yes` then `Ok`
 
 
 1. If done correctly, you should be greeted with a screen saying that you cannot configure any more drives, Click `Back`

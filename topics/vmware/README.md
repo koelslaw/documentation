@@ -70,7 +70,7 @@ If this is done on a Mac, you could get a popup once the operation is complete a
 ![](../../images/esxi-browse-datastore.png)  
 4. Click on `Create directory` and make a new directory called `iso`  
 1. Click on the new `iso` folder and click `Upload`  
-1. Upload your RHEL and RockNSM ISO's, when that's done, click `Close`  
+1. Upload your RHEL, when that's done, click `Close`  
 
 # Create Networking Ports
 
@@ -99,6 +99,7 @@ If this is done on a Mac, you could get a popup once the operation is complete a
   - Compatibility: Leave default  
   - Guest OS Family: `Linux`  
   - Guest OS Version: `Red Hat Enterprise Linux 7 (64-bit)`  
+1. Click `Next` to create new virtual machine
 1. Select your storage  
 1. Customize the VM  
   - CPU: `2`  
