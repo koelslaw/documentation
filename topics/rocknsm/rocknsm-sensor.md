@@ -5,7 +5,7 @@ This will cover the deployment of the RockNSM sensor elements.
 1. Perform system update and enable daily updates
 ```
 sudo yum update -y
-sudo yum install -y yum-cron
+sudo yum install -y yum-cron wget
 sudo systemctl enable yum-cron
 sudo systemctl start yum-cron
 ```
@@ -13,10 +13,13 @@ sudo systemctl start yum-cron
 ### Preparation for Rock Deployment
 
 1. `wget` the following files from the nuc to aid in the deployment of ROCK
-
+  1. cd to the user's /home directory
+    ```
+    cd    
+    ```
   1. Grab the rock scripts
     ```
-    sudo wget http://10.1.10.19:4000/administrator/rock-scripts/archive/master.tar.gz
+    sudo wget http://10.[state].10.19:4000/administrator/rock-scripts/archive/master.tar.gz
     ```
   1. Rename the file.
     ```
@@ -25,11 +28,11 @@ sudo systemctl start yum-cron
   1. Grab the rock dashboards
 
     ```
-    sudo wget http://10.1.10.19:4000/administrator/rock-dashboards/archive/master.tar.gz
+    sudo wget http://10.[state].10.19:4000/administrator/rock-dashboards/archive/master.tar.gz
     ```
   1. Rename the file
     ```
-    sudo mv master.tar.gz rock-scripts_master.tar.gz
+    sudo mv master.tar.gz rock-dashboards_master.tar.gz
     ```
 
 
@@ -52,7 +55,7 @@ sudo systemctl start yum-cron
   ```
   1. Run Grubby
   ```
-  grubby --update-kernel=ALL --remove-args=fips=1
+  sudo grubby --update-kernel=ALL --remove-args=fips=1
   ```
   1. **Carefully** up date the grub config file setting `fips=0`
   ```
@@ -78,12 +81,12 @@ sudo systemctl start yum-cron
   ```
 1. Make a place for ROCK to live
   ```
-  mkdir /opt/var/rocknsm/
+  mkdir /opt/rocknsm
   ```
 
 1. Navigate there so we can clone the Rock NSM repo there
   ```
-  cd /opt/var/rocknsm/  
+  cd /opt/rocknsm  
   ```
 
 1. Clone the Rock NSM repo from the NUC
@@ -96,18 +99,18 @@ sudo systemctl start yum-cron
   ```
 1. Navigate to the rock playbook directory
   ```
-  cd /rocknsm/bin
+  cd /opt/rocknsm/bin
   ```
 1. Generate defaults for rock to deploy with
   ```
   sudo sh generate_defaults.sh
   ```
 
-1. Edit the `etc/rocknsm/config.yml`
+1. Edit the `/etc/rocknsm/config.yml`
   ```
-  sudo vi /etc/rocknsm.config.yml
+  sudo vi /etc/rocknsm/config.yml
   ```
-> NOTE: The config file and deploy playbook at thier current state is mean tto autmate the build of everything on a single machine and generic hardware. some "wrench turning" in the background will have to be done so that the cmat kit will deploy correctly. At this point the playbooks will handle most of the rock specific config and we will have to tke care of the elastic parts
+> NOTE: The config file and deploy playbook at their current state is mean to automate the build of everything on a single machine and generic hardware. some "wrench turning" in the background will have to be done so that the cmat kit will deploy correctly. At this point the playbooks will handle most of the rock specific config and we will have to take care of the elastic parts
 
 1. Change the config to the following:
 
@@ -220,14 +223,14 @@ sudo systemctl start yum-cron
   sudo cp ~/rock-dashboards_master.tar.gz /srv/rocknsm/support/rock-dashboards_master.tar.gz
   ```
   ```
-  sudo cp ~/rock-scripts_master.tar.gz /srv/rocknsm/support/rock-dashboards_master.tar.gz
+  sudo cp ~/rock-scripts_master.tar.gz /srv/rocknsm/support/scripts_master.tar.gz
   ```
 
-1. Comment the entire `setup yum repos` section out of the `~/rock/playbooks/roles/sensor-common/tasks` playbook in order to deploy rock correctly. We have our own.
+1. Comment the entire `setup yum repos` section out of the `~/rock/playbooks/roles/sensor-common/tasks/configure.yml` playbook in order to deploy rock correctly. We have our own.
 
 1. With the current setup, the Ansible script doesn't play nicely with the with the shell script wrapper. So we will deploy the ansible script directly.
 
-1. Navigate to the ~/rock/playbooks
+1. Navigate to the ~/rock/playbooks`
 
   ```
   cd ~/rock/playbooks
@@ -245,7 +248,7 @@ sudo systemctl start yum-cron
   /etc/kafka/server.properties
 
 
-  ```
+  ```yml
   # Licensed to the Apache Software Foundation (ASF) under one or more
   # contributor license agreements.  See the NOTICE file distributed with
   # this work for additional information regarding copyright ownership.
@@ -384,8 +387,9 @@ sudo systemctl start yum-cron
   group.initial.rebalance.delay.ms=0
 
   ```
+
 /usr/share/bro/site/scripts/rock/plugins/kafka.bro
-  ```
+  ```yml
 
   #Copyright (C) 2016-2018 RockNSM
   #
@@ -403,7 +407,7 @@ sudo systemctl start yum-cron
   module Kafka;
 
   redef Kafka::kafka_conf = table(
-     ["metadata.broker.list"] = "10.1.10.21:9092",
+     ["metadata.broker.list"] = "10.[state].10.21:9092",
      ["client.id"] = "bro"
   );
 
@@ -432,8 +436,6 @@ sudo systemctl start yum-cron
   ```
 
 
-
-
 1. Open the following ports on the firewall for the sensor
 
   - 9092 TCP - Kafka
@@ -446,4 +448,4 @@ sudo systemctl start yum-cron
   ```
   sudo firewall-cmd --reload
   ```
-Move onto [Connecting the Sensor to the Data Node](rocknsm-configuration.md)
+Move onto [Rock NSM Data Node](rocknsm-datanode.md)

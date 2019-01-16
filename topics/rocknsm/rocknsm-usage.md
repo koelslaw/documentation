@@ -20,7 +20,8 @@ These CLI functions are accomplished with `rockctl  {start|stop|status}`.
 
 ## Key web interfaces
 
-https://localhost - Kibana web interface - After deploy, the created creds are in the home directory of the user created upon install as `KIBANA_CREDS.README`
+https://localhost - Kibana web interface
+
 https://localhost:8443 - Docket - web interface for pulling PCAP from the sensor (must be enabled in config)
 > localhost is the data node management IP address from the [../platform-management.md](Platform Management) page
 

@@ -68,9 +68,30 @@ That said, there is a deploy script for each of the services that you should be 
     - Select `DISA STIG`
     - Click `Select Profile`
     - Click `Done`
-1. Next click `Installation Destination`
-    - Select the hard disk you want to install CentOS to, likely it is already selected unless you have more than 1 drive
-    - Click `Done`
+
+1. Select the hard disk you want to install RHEL to, likely it is already selected unless you have more than 1 drive  
+      - Click `Automatic Partitioning` and then click the checkbox that says `I would like to make additional space.`
+      - Click `Done`  
+      - There will be a popup window, in the bottom right, click `Delete All` and then `Reclaim Space`  
+      - There will be a new popup window, click `Accept`  
+      - Click on `Installation Destination`  
+      - In the `Other Storage Options`, select `I will configure partitioning`.  
+      - Click `Done`  
+      - Click `Click here to create automatically.`
+      - Under `Device type` select `lvm`.
+      - **If** required, Create any additional volume groups
+          - Under the `Volume Group` select `Create New Volume Group`
+          - Give it the required name (OS,FAST,FASTER)
+          - Assign the appropriate disks according to above Volume Group Table
+          - Hit `Save`
+      - Click on the `Red Hat Enterprise Linux Installation` carrot to dropdown your current partitions  
+      - Click on `/home` and change the size to ? and click `Update Settings`  
+      - Click on `/` and change the size to ? and click `Update Settings`  
+      - Click on the `+` and set the mount point to `/var/log/audit` and set the `Desired Capacity` to ?  
+      - Click on the `+` and set the mount point to `/tmp` and set the `Desired Capacity` to ?  
+      - Click on the `+` and set the mount point to `/var` and leave the `Desired Capacity` blank
+        - Click `Done`  
+    - Click `Accept Changes`
 1. Click `kdump`
     - Uncheck `Enable kdump`
     - Click `Done`

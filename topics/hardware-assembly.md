@@ -209,14 +209,14 @@ ___
 |Source | Port                 | Destination |Port             |Media
 |--|--|--|--|--|
 |Switch | Gi1/0/1              |Router       |0/0/0            |Ethernet|
-|Switch | Gi1/0/2              |AP           |POE/CONSOLE      |Ethernet|
+|Switch | Gi1/0/2              |AP           |POE/mGig         |Ethernet|
 |Switch | Gi1/0/3              |GIGAMON      |MGMT PORT        |Ethernet|
 |Switch | Gi1/0/4              |Server 1     | iDRAC           |Ethernet|
 |Switch | Gi1/0/5              |Server 2     |iDRAC            |Ethernet|
 |Switch | Gi1/0/6              |NUC          |Port 1           |Ethernet|
-|Switch | Te1/0/1 (SR SFP)     |Server 1     | 0/0/1(SR SFP)   | Fiber|
-|Switch | Te1/0/2 (SR SFP)     |Server 2     | 0/0/1(SR SFP)   | Fiber|
-|Gigamon| Tool Port 1 (2/1/x1) |Server 1     | SFP Port 1      | Fiber|
+|Switch | Te1/0/1 (SR SFP)     |Server 1     | 0/0/2(SR SFP)   |Multimode Fiber|
+|Switch | Te1/0/2 (SR SFP)     |Server 2     | 0/0/1(SR SFP)   |Multimode Fiber|
+|Gigamon| Tool Port 1 (1/0/x11)|Server 1     | SFP Port 1      |Multimode Fiber|
 
 Physical Port Assignments to VLANs
 
@@ -279,4 +279,4 @@ Physical Port Assignments to VLANs
   └─────────────────────────────────────────────────────────────────────┘
 ```
 
-Move onto [Hardware Configuration](06-hardware-configuration.md)
+Move onto [Hardware Configuration](hardware-configuration.md)

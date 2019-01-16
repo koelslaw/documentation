@@ -18,8 +18,8 @@ The sensor has the network security monitoring and data shipping elements:
 
 ## Build Steps
 1. [Hardware Requirements](rocknsm-requirements.md)
-1. [RockNSM Data Node](rocknsm-datanode.md)
 1. [RockNSM Sensor](rocknsm-sensor.md)
+1. [RockNSM Data Node](rocknsm-datanode.md)
 1. [Connecting the Sensor to the Data Node](rocknsm-configuration.md)
 1. [Usage](rocknsm-usage.md)
 
