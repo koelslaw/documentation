@@ -248,7 +248,7 @@ sudo systemctl start yum-cron
   /etc/kafka/server.properties
 
 
-  ```
+  ```yml
   # Licensed to the Apache Software Foundation (ASF) under one or more
   # contributor license agreements.  See the NOTICE file distributed with
   # this work for additional information regarding copyright ownership.
@@ -387,8 +387,9 @@ sudo systemctl start yum-cron
   group.initial.rebalance.delay.ms=0
 
   ```
+
 /usr/share/bro/site/scripts/rock/plugins/kafka.bro
-  ```
+  ```yml
 
   #Copyright (C) 2016-2018 RockNSM
   #
@@ -435,8 +436,6 @@ sudo systemctl start yum-cron
   ```
 
 
-
-
 1. Open the following ports on the firewall for the sensor
 
   - 9092 TCP - Kafka
@@ -449,4 +448,4 @@ sudo systemctl start yum-cron
   ```
   sudo firewall-cmd --reload
   ```
-Move onto [Connecting the Sensor to the Data Node](rocknsm-configuration.md)
+Move onto [Rock NSM Data Node](rocknsm-datanode.md)

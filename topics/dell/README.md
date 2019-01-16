@@ -69,7 +69,7 @@ ___
 
   - Answer check `confirm` and `yes` to the question `Are you sure you want to clear this configuration?`
 
-  - Select `Create Virtual Disk`
+  - Select `Create Virtual Drive`
 
   - Select `RAID0`
 

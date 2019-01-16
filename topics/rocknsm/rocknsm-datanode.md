@@ -1201,6 +1201,4 @@ sudo systemctl start yum-cron
   sudo firewall-cmd --reload
   ```
 
-
-
-Move onto [RockNSM Sensor](rocknsm-sensor.md)
+Move onto [USAGE](rocknsm-usage.md)

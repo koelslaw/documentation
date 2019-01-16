@@ -11,7 +11,7 @@ service timestamps log datetime msec
 service password-encryption
 no platform punt-keepalive disable-kernel-core
 !
-hostname switch.[State].cmat.lan
+hostname switch..[state]..cmat.lan
 !
 !
 vrf definition Mgmt-vrf
@@ -48,18 +48,18 @@ ip nbar http-services
 !
 no ip domain lookup
 ip domain name cmat.lan
-ip dhcp excluded-address 10.1.50.1 10.1.50.10
-ip dhcp excluded-address 10.1.60.1 10.1.60.20
+ip dhcp excluded-address 10.[state].50.1 10.[state].50.10
+ip dhcp excluded-address 10.[state].60.1 10.[state].60.20
 !
 ip dhcp pool AP_CONFIG
- network 10.1.50.0 255.255.255.0
- default-router 10.1.50.1
- option 150 ip 10.1.50.1
+ network 10.[state].50.0 255.255.255.0
+ default-router 10.[state].50.1
+ option 150 ip 10.[state].50.1
 !
 ip dhcp pool AP_CLIENTS
- network 10.1.60.0 255.255.255.0
- default-router 10.1.60.1
- dns-server 10.1.10.20
+ network 10.[state].60.0 255.255.255.0
+ default-router 10.[state].60.1
+ dns-server 10.[state].10.20
  domain-name cmat.lan
 !
 !
@@ -534,35 +534,35 @@ interface Vlan1
 !
 interface Vlan2
  description routing_xc
- ip address 10.1.2.2 255.255.255.0
+ ip address 10.[state].2.2 255.255.255.0
 !
 interface Vlan10
- ip address 10.1.10.1 255.255.255.0
+ ip address 10.[state].10.1 255.255.255.0
 !
 interface Vlan20
- ip address 10.1.20.1 255.255.255.0
+ ip address 10.[state].20.1 255.255.255.0
 !
 interface Vlan40
- ip address 10.1.40.2 255.255.255.0
+ ip address 10.[state].40.1 255.255.255.0
 !
 interface Vlan50
- ip address 10.1.50.1 255.255.255.0
+ ip address 10.[state].50.1 255.255.255.0
 !
 interface Vlan60
- ip address 10.1.60.1 255.255.255.0
+ ip address 10.[state].60.1 255.255.255.0
 !
 ip forward-protocol nd
 no ip http server
 ip http authentication local
 no ip http secure-server
-ip route 0.0.0.0 0.0.0.0 10.1.40.1
+ip route 0.0.0.0 0.0.0.0 10.[state].40.1
 !
 !
 ip access-list extended ACTIVE_OUTBOUND
- deny   ip any 10.1.10.0 0.0.0.255
- deny   ip any 10.1.40.0 0.0.0.255
- deny   ip any 10.1.50.0 0.0.0.255
- deny   ip any 10.1.60.0 0.0.0.255
+ deny   ip any 10.[state].10.0 0.0.0.255
+ deny   ip any 10.[state].40.0 0.0.0.255
+ deny   ip any 10.[state].50.0 0.0.0.255
+ deny   ip any 10.[state].60.0 0.0.0.255
  permit ip any any
 ip access-list extended AutoQos-4.0-wlan-Acl-Bulk-Data
  permit tcp any any eq 22
@@ -630,7 +630,7 @@ line vty 5 15
  transport input none
  transport output none
 !
-ntp server 10.1.10.1 source Vlan10
+ntp server 10.[state].10.1 source Vlan10
 !
 wsma agent exec
 !
@@ -646,7 +646,7 @@ wireless mobility controller
 wireless management interface Vlan50
 wireless multicast
 wireless mgmt-via-wireless
-wlan CMAT.[State] 1 CMAT.[State]
+wlan CMAT.[state] 1 CMAT.[state]
  auto qos enterprise
  client vlan 0060
  ip flow monitor wireless-avc-basic input
@@ -656,19 +656,19 @@ wlan CMAT.[State] 1 CMAT.[State]
  security wpa akm psk set-key ascii 0 cyberteam
  no shutdown
 ap fra
-ap ntp ip 10.1.10.19
+ap ntp ip 10.[state].10.19
 ap dot11 24ghz rf-profile a
  dot11n-only
  no shutdown
 ap dot11 airtime-fairness policy-name Default 0
 ap group cmat
- remote-lan CMAT.[State]
+ remote-lan CMAT.[state]
  airtime-fairness dot11 24GHz mode enforce-policy
  airtime-fairness dot11 24GHz optimization
  airtime-fairness dot11 5GHz mode enforce-policy
  airtime-fairness dot11 5GHz optimization
  hyperlocation
- wlan CMAT.[State]
+ wlan CMAT.[state]
   vlan VLAN0060
  port 1
   poe
