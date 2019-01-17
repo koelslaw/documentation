@@ -103,7 +103,7 @@ If this is done on a Mac, you could get a popup once the operation is complete a
 1. Select your storage  
 1. Customize the VM  
   - CPU: `2`  
-  - Memory: `12 GB`  
+  - Memory: `3 GB`,  Reserved
   - Hard disk 1: `50 GB`  
   - SCSI Controller 0: Leave default  
   - SATA Controller 0: Leave default  
@@ -124,7 +124,7 @@ If this is done on a Mac, you could get a popup once the operation is complete a
 1. Select your storage  
 1. Customize the VM  
   - CPU: `1`  
-  - Memory: `2 GB`  
+  - Memory: `2 GB` , Reserved
   - Hard disk 1: `16 GB`  
   - SCSI Controller 0: Leave default  
   - SATA Controller 0: Leave default  
@@ -146,7 +146,7 @@ If this is done on a Mac, you could get a popup once the operation is complete a
 1. Select your storage  
 1. Customize the VM  
   - CPU: `12`  
-  - Memory: `16 GB`  
+  - Memory: `12 GB` , Reserved   
   - Hard disk 1: `1 TB`  
   - SCSI Controller 0: Leave default  
   - SATA Controller 0: Leave default  
@@ -166,7 +166,7 @@ If this is done on a Mac, you could get a popup once the operation is complete a
 1. Select your storage  
 1. Customize the VM  
   - CPU: `4`  
-  - Memory: `8 GB`  
+  - Memory: `8 GB` , Reserved
   - Hard disk 1: `50 GB`  
   - SCSI Controller 0: Leave default  
   - SATA Controller 0: Leave default  
@@ -186,7 +186,7 @@ If this is done on a Mac, you could get a popup once the operation is complete a
 1. Select your storage  
 1. Customize the VM  
   - CPU: `4`  
-  - Memory: `8 GB`  
+  - Memory: `8 GB`, Reserved
   - Hard disk 1: `50 GB`  
   - SCSI Controller 0: Leave default  
   - SATA Controller 0: Leave default  
