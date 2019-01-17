@@ -1,6 +1,9 @@
 # RockNSM Sensor
 This will cover the deployment of the RockNSM sensor elements.
 
+## Prereqs
+ -DNS setup
+ 
 ## Sensor Installation
 1. Perform system update and enable daily updates
 ```
@@ -224,7 +227,7 @@ cd
   sudo cp ~/rock-dashboards_master.tar.gz /srv/rocknsm/support/rock-dashboards_master.tar.gz
   ```
   ```
-  sudo cp ~/rock-scripts_master.tar.gz /srv/rocknsm/support/scripts_master.tar.gz
+  sudo cp ~/rock-scripts_master.tar.gz /srv/rocknsm/support/rock-scripts_master.tar.gz
   ```
 
 1. Comment the entire `setup yum repos` section out of the `/opt/rocknsm/rock/playbooks/roles/sensor-common/tasks/configure.yml` playbook in order to deploy rock correctly. We have our own. to block comment out use the following method

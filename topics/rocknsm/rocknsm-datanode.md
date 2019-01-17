@@ -3,7 +3,7 @@ This will cover the deployment of the RockNSM data node elements.
 ## Prereqs
 - ESXi installed
 - logged in `ssh` or vm console in ESXi
-
+- DNS Setup
 ## Install OS
 
 ### Preinstall
@@ -244,7 +244,7 @@ cd
 sudo cp ~/rock-dashboards_master.tar.gz /srv/rocknsm/support/rock-dashboards_master.tar.gz
   ```
   ```
-sudo cp ~/rock-scripts_master.tar.gz /srv/rocknsm/support/rock-dashboards_master.tar.gz
+sudo cp ~/rock-scripts_master.tar.gz /srv/rocknsm/support/rock-scripts_master.tar.gz
   ```
 1. Comment the entire `setup yum repos` section out of the `/opt/rocknsm/rock/playbooks/roles/sensor-common/tasks/configure.yml` playbook in order to deploy rock correctly. We have our own. to block comment out use the following method
   1. Crtl-v
@@ -840,7 +840,7 @@ cd
 sudo cp ~/rock-dashboards_master.tar.gz /srv/rocknsm/support/rock-dashboards_master.tar.gz
   ```
   ```
-sudo cp ~/rock-scripts_master.tar.gz /srv/rocknsm/support/rock-dashboards_master.tar.gz
+sudo cp ~/rock-scripts_master.tar.gz /srv/rocknsm/support/rock-scripts_master.tar.gz
   ```
 
 1. Comment the entire `setup yum repos` section out of the `/opt/rocknsm/rock/playbooks/roles/sensor-common/tasks/configure.yml` playbook in order to deploy rock correctly. We have our own. to block comment out use the following method
