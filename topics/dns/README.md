@@ -14,7 +14,7 @@ At this point we have used static assignments for all the components of the kit.
   ```
 1. Configure the dnsmasq config files so dnsmaq will answer dns queries.
   ```
-  sudo vim /etc/dnsmasq.conf
+  sudo vi /etc/dnsmasq.conf
   ```
 1. Add the following lines to the end of the config file. This binds it to the localhost and also its own static ip. It also disables DHCP as the switch is already handling any DHCP we need.
   ```
@@ -27,21 +27,21 @@ At this point we have used static assignments for all the components of the kit.
    > NOTE: Any other dns entries you wish to have go here  
 
   ```
-  127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
-  ::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
-  10.[state octet].10.19  nuc.[state].cmat.lan
-  10.[state octet].10.20  dns.[state].cmat.lan
-  10.[state octet].10.7   idrac1.[state].cmat.lan
-  10.[state octet].10.9   idrac2.[state].cmat.lan
-  10.[state octet].10.15  esxi1.[state].cmat.lan
-  10.[state octet].10.21  sensor.[state].cmat.lan
-  10.[state octet].10.5   gigamon.[state].cmat.lan
-  10.[state octet].10.25  kibana.[state].cmat.lan
-  10.[state octet].10.25  es1.[state].cmat.lan
-  10.[state octet].10.26  es2.[state].cmat.lan
-  10.[state octet].10.27  es3.[state].cmat.lan
-  10.[state octet].10.28  capes.[state].cmat.lan
-  10.[state octet].10.20  grassmarlin.[state].cmat.lan
+127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
+::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
+10.[state octet].10.19  nuc.[state].cmat.lan
+10.[state octet].10.20  dns.[state].cmat.lan
+10.[state octet].10.7   idrac1.[state].cmat.lan
+10.[state octet].10.9   idrac2.[state].cmat.lan
+10.[state octet].10.15  esxi1.[state].cmat.lan
+10.[state octet].10.21  sensor.[state].cmat.lan
+10.[state octet].10.5   gigamon.[state].cmat.lan
+10.[state octet].10.25  kibana.[state].cmat.lan
+10.[state octet].10.25  es1.[state].cmat.lan
+10.[state octet].10.26  es2.[state].cmat.lan
+10.[state octet].10.27  es3.[state].cmat.lan
+10.[state octet].10.28  capes.[state].cmat.lan
+10.[state octet].10.20  grassmarlin.[state].cmat.lan
   ```
 1. Allow DNS traffic through the firewall using:
   ```

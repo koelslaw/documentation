@@ -8,33 +8,10 @@ sudo yum update -y
 sudo yum install -y yum-cron wget
 sudo systemctl enable yum-cron
 sudo systemctl start yum-cron
+sudo yum install wget
 ```
 
 ### Preparation for Rock Deployment
-
-1. `wget` the following files from the nuc to aid in the deployment of ROCK
-  1. cd to the user's /home directory
-    ```
-    cd    
-    ```
-  1. Grab the rock scripts
-    ```
-    sudo wget http://10.[state].10.19:4000/administrator/rock-scripts/archive/master.tar.gz
-    ```
-  1. Rename the file.
-    ```
-    sudo mv master.tar.gz rock-scripts_master.tar.gz
-    ```
-  1. Grab the rock dashboards
-
-    ```
-    sudo wget http://10.[state].10.19:4000/administrator/rock-dashboards/archive/master.tar.gz
-    ```
-  1. Rename the file
-    ```
-    sudo mv master.tar.gz rock-dashboards_master.tar.gz
-    ```
-
 
 1. Disable FIPS
   1. Install dracut
@@ -97,9 +74,9 @@ sudo systemctl start yum-cron
   ```
   sudo git clone http://nuc.[state].cmat.lan:4000/administrator/rock.git
   ```
-1. Navigate to the rock playbook directory
+1. Navigate to the rock bin directory
   ```
-  cd /opt/rocknsm/bin
+  cd /opt/rocknsm/rock/bin
   ```
 1. Generate defaults for rock to deploy with
   ```
@@ -210,14 +187,38 @@ sudo systemctl start yum-cron
   enable_lighttpd: False
   enable_fsf: True
   ```
+1.  Create the following directory
+```
+sudo mkdir -p /srv/rocknsm/support
+```
+1. `wget` the following files from the nuc to aid in the deployment of ROCK
+  1. cd to the user's /home directory
+    ```
+    cd    
+    ```
+  1. Grab the rock scripts
+    ```
+    sudo wget http://10.[state].10.19:4000/administrator/rock-scripts/archive/master.tar.gz
+    ```
+  1. Rename the file.
+    ```
+    sudo mv master.tar.gz rock-scripts_master.tar.gz
+    ```
+  1. Grab the rock dashboards
 
-1. The epel gets loaded into /etc/yum.repos.d/ during the generate defaults script and it gets in the way of installation. We already have that as part of our nuc so we need to  do some housekeeping to clean that up.
-
-  ```
-  sudo rm /etc/yum.repos.d/epel.repo
-  ```
+    ```
+    sudo wget http://10.[state].10.19:4000/administrator/rock-dashboards/archive/master.tar.gz
+    ```
+  1. Rename the file
+    ```
+    sudo mv master.tar.gz rock-dashboards_master.tar.gz
+    ```
 
 1. Copy them to the need directory
+
+  ```
+cd
+  ```
 
   ```
   sudo cp ~/rock-dashboards_master.tar.gz /srv/rocknsm/support/rock-dashboards_master.tar.gz
@@ -233,7 +234,7 @@ sudo systemctl start yum-cron
 1. Navigate to the ~/rock/playbooks`
 
   ```
-  cd ~/rock/playbooks
+  cd /opt/rocknsm/rock/playbooks
   ```
 
 1. And then deploy
