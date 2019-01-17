@@ -134,7 +134,6 @@ sudo curl -o https://download.rocknsm.io/rocknsm-2.2.0.iso ~/
 sudo sudo mkdir -p /mnt/cd
 sudo mount -o loop ~/rocknsm-2.2.0.iso /mnt/cd
 sudo sudo cp -R /mnt/cd/* /var/www/html/rock2/.
-sudo createrepo -v /var/www/html/rock2
 sudo curl -o /var/www/html/repo/capes/gitea-master-linux-amd64 https://dl.gitea.io/gitea/master/gitea-master-linux-amd64
 sudo curl -L https://github.com/nsacyber/GRASSMARLIN/releases/download/v3.2.1/grassmarlin-3.2.1-1.el6.x86_64.rpm -o /var/www/html/repo/grassmarlin/grassmarlin-3.2.1-1.el6.x86_64.rpm
 sudo curl -L https://github.com/mumble-voip/mumble/releases/download/1.2.19/murmur-static_x86-1.2.19.tar.bz2 -o /var/www/html/repo/capes/mattermost.tar.gz
@@ -163,15 +162,17 @@ sudo createrepo -v  /var/www/html/rhel-7-server-optional-rpms -g comps.xml
 cd /var/www/html/rhel-7-server-extras-rpms
 sudo createrepo -v  /var/www/html/rhel-7-server-extras-rpms -g comps.xml
 cd /var/www/html/atomic
-sudo createrepo -v  /var/www/html/atomic -g comps.xml
+sudo createrepo -v  /var/www/html/atomic
 cd /var/www/html/atomic-testing
-sudo createrepo -v  /var/www/html/atomic-testing -g comps.xml
+sudo createrepo -v  /var/www/html/atomic-testing
 cd /var/www/html/epel
 sudo createrepo -v  /var/www/html/epel -g comps.xml
 cd /var/www/html/group_rocknsm-rocknsm-2.1
 sudo createrepo -v  /var/www/html/elastic6-x -g comps.xml
 cd /var/www/html/elastic-6.x
 sudo createrepo -v  /var/www/html/copr-rocknsm-2.1 -g comps.xml
+sudo createrepo -v /var/www/html/rock2
+sudo createrepo -v /var/www/html/capes
 # Adjust the SELinux context for Apache
 sudo chcon -R -t httpd_sys_content_t /var/www/html/*
 
