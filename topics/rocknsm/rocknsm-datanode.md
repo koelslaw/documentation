@@ -135,7 +135,7 @@ sudo vi /etc/rocknsm.config.yml
   # name of node in elasticsearch cluster
   es_node_name: es[#] [NAME OF THIS ELASTICSEARCH NODE]
   # how much memory to use for elasticsearch
-  es_mem: 8
+  es_mem: 6
 
   ########## Offline/Enterprise Network Options ##############
 
@@ -730,7 +730,7 @@ sudo vi /etc/rocknsm.config.yml
   # name of node in elasticsearch cluster
   es_node_name: es[#] [NAME OF THIS ELASTICSEARCH NODE]
   # how much memory to use for elasticsearch
-  es_mem: 8
+  es_mem: 6
 
   ########## Offline/Enterprise Network Options ##############
 
