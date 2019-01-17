@@ -73,7 +73,12 @@ If this is done on a Mac, you could get a popup once the operation is complete a
 1. Upload your RHEL, when that's done, click `Close`  
 
 # Create Networking Ports
-
+1. On the Configure tab, expand Networking and select Virtual switches.
+Click Add host networking.
+1. Select a connection type for which you want to use the new standard switch and click Next.
+1. Add physical network adapter `vmnic0`.
+Virtual Machine Port Group for a Standard Switch
+1. Click OK.
 1. Right-Click on `Networking` and select `Add port group`  
 ![](../../images/esxi-network-port-group.png)  
 1. Enter the following:
@@ -191,7 +196,7 @@ If this is done on a Mac, you could get a popup once the operation is complete a
   - SCSI Controller 0: Leave default  
   - SATA Controller 0: Leave default  
   - USB controller 1:  Leave default  
-  - Network Adapter: `Active`, ensure that `Connect` is enabled  
+  - Network Adapter: `Passive`, ensure that `Connect` is enabled  
   - CD/DVD Drive 1: `Datastore ISO file`, select the RHEL ISO you uploaded above, ensure that `Connect` is enabled  
   - Video Card: Leave default  
 1. Review your settings  
