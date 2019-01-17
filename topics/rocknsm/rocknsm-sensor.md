@@ -227,11 +227,14 @@ cd
   sudo cp ~/rock-scripts_master.tar.gz /srv/rocknsm/support/scripts_master.tar.gz
   ```
 
-1. Comment the entire `setup yum repos` section out of the `~/rock/playbooks/roles/sensor-common/tasks/configure.yml` playbook in order to deploy rock correctly. We have our own.
+1. Comment the entire `setup yum repos` section out of the `/opt/rocknsm/rock/playbooks/roles/sensor-common/tasks/configure.yml` playbook in order to deploy rock correctly. We have our own. to block comment out use the following method
+  1. Crtl-v
+  1. Make your Selection
+  1. Type `:s/^/#/`
 
-1. With the current setup, the Ansible script doesn't play nicely with the with the shell script wrapper. So we will deploy the ansible script directly.
+1. With the current setup, the Ansible script doesn't play nicely with the shell script wrapper. So we will deploy the ansible script directly.
 
-1. Navigate to the ~/rock/playbooks`
+1. Navigate to the /opt/rocknsm/rock/playbooks`
 
   ```
   cd /opt/rocknsm/rock/playbooks
