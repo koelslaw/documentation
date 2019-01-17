@@ -115,6 +115,7 @@ That said, there is a deploy script for each of the services that you should be 
 Once CAPES reboots we need to set the Nuc as the upstream RHEL repository You can copy / paste this following code block into the Terminal (once you update the `.[state octet].` with your [octet](../README.md)).
 
 ```
+sudo bash -c 'cat > /etc/yum.repos.d/local-repos.repo <<EOF
 [local-epel]
 name: Extra packages For Enterprise Linux Local Repo
 baseurl=http://10.[state octet].10.19/epel/
@@ -154,10 +155,70 @@ Finally, here we go.
 ### CentOS 7.4
 ```
 sudo yum install git -y
-git clone https://nuc.[state].cmat.lan:4000/capes/capes.git
-cd capes
+git clone https://nuc.[state].cmat.lan:4000/administrator/CAPES.git
+cd CAPES
 sudo sh deploy_capes.sh
 ```
+
+
+### Securing the Maria DB Installation
+The setup automatically starts the `mysql_secure_installation`
+
+NOTE: RUNNING ALL PARTS OF THIS SCRIPT IS RECOMMENDED FOR ALL MariaDB
+      SERVERS IN PRODUCTION USE!  PLEASE READ EACH STEP CAREFULLY!
+
+In order to log into MariaDB to secure it, we'll need the current
+password for the root user.  If you've just installed MariaDB, and
+you haven't set the root password yet, the password will be blank,
+so you should just press enter here.
+
+Enter current password for root (enter for none):
+OK, successfully used password, moving on...
+
+Setting the root password ensures that nobody can log into the MariaDB
+root user without the proper authorisation.
+
+You already have a root password set, so you can safely answer 'n'.
+
+Change the root password? [Y/n] Y
+
+By default, a MariaDB installation has an anonymous user, allowing anyone
+to log into MariaDB without having to have a user account created for
+them.  This is intended only for testing, and to make the installation
+go a bit smoother.  You should remove them before moving into a
+production environment.
+
+Remove anonymous users? [Y/n] Y
+ ... Success!
+
+Normally, root should only be allowed to connect from 'localhost'.  This
+ensures that someone cannot guess at the root password from the network.
+
+Disallow root login remotely? [Y/n] Y
+ ... Success!
+
+By default, MariaDB comes with a database named 'test' that anyone can
+access.  This is also intended only for testing, and should be removed
+before moving into a production environment.
+
+Remove test database and access to it? [Y/n] Y
+ - Dropping test database...
+ ... Success!
+ - Removing privileges on test database...
+ ... Success!
+
+Reloading the privilege tables will ensure that all changes made so far
+will take effect immediately.
+
+Reload privilege tables now? [Y/n] Y
+ ... Success!
+
+Cleaning up...
+
+All done!  If you've completed all of the above steps, your MariaDB
+installation should now be secure.
+
+Thanks for using MariaDB!
 
 ### Build Process
 The build is automated minus asking you to set the Gitea, CAPES, and Mumble administrative passphrases, set the MariaDB root passphrase, and confirm some security settings for MariaDB.
