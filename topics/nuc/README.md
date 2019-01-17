@@ -100,6 +100,8 @@ Mirror the following Repositories in gitea
  - rock-dashboards https://github.com/rocknsm/rock-dashboards.git (Rock Data Tier Installation)
  - CAPES https://github.com/capesstack/capes.git (Capes Installation)
  - Rock https://github.com/rocknsm/rock.git (Data and Sensor Installation)
+ - hackmd  https://github.com/hackmdio/hackmd.git
+ - Cortex https://github.com/TheHive-Project/Cortex-Analyzers.git
  - Any Repos you have for quick references like the handy once that was included in the book you received during software training
 
 

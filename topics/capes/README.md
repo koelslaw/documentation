@@ -155,7 +155,7 @@ Finally, here we go.
 ### CentOS 7.4
 ```
 sudo yum install git -y
-git clone https://nuc.[state].cmat.lan:4000/administrator/CAPES.git
+git clone http://nuc.[state].cmat.lan:4000/administrator/CAPES.git
 cd CAPES
 sudo sh deploy_capes.sh
 ```
