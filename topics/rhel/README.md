@@ -43,7 +43,7 @@ Use the Platform Management doc and the table below to confiure the RHEL OSs. If
 | Nuc               | 5GB    | 1 GB     |2GB             |Default |50GB            |Default|Remaining Space |NA                   |NA                  |NA|
 | Sensor (Server 1) | 50GB   | 10GB     |10GB            |Default |50 GB           |Default|10GB            |Remaining Space(fast)|6.8 TB (fast)       |~1.5 TB (faster)|
 | ES Nodes          | 50GB   | 25GB     |10GB            |default |50GB            |8GB    |25GB            |Remaining Space      |NA                  |NA|
-| GrassMarlin       | 5GB    | 1GB      |1GB             |Default |Remaining Space |Default|var             |NA                   |NA                  |NA|
+| GrassMarlin       | 5GB    | 1GB      |1GB             |Default |Remaining Space |Default|15GB            |NA                   |NA                  |NA|
 | OpenVAS           | 5GB    | 1GB      |2 GB            |Default |Remaining Space |Default|15GB            |NA                   |NA                  |NA|
 | DNS               | 5GB    | 2GB      |2 GB            |Default |Remaining Space |Default|2GB             |NA                   |NA                  |NA|
 
