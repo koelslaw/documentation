@@ -46,18 +46,8 @@ sudo bash -c 'cat > /etc/yum.repos.d/atomic.repo <<EOF
 # URL: http://www.atomicrocketturtle.com/
 [atomic]
 name = CentOS / Red Hat Enterprise Linux $releasever - atomic
-mirrorlist = http://updates.atomicorp.com/channels/mirrorlist/atomic/centos-$releasever-$basearch
+mirrorlist = http://updates.atomicorp.com/channels/mirrorlist/atomic/centos-7-x86_64
 enabled = 1
-protect = 0
-gpgkey = file:///etc/pki/rpm-gpg/RPM-GPG-KEY.art.txt
-    file:///etc/pki/rpm-gpg/RPM-GPG-KEY.atomicorp.txt
-gpgcheck = 1
-
-# Almost Stable, release candidates for [atomic]
-[atomic-testing]
-name = CentOS / Red Hat Enterprise Linux $releasever - atomic - (Testing)
-mirrorlist = http://updates.atomicorp.com/channels/mirrorlist/atomic-testing/centos-$releasever-$basearch
-enabled = 0
 protect = 0
 gpgkey = file:///etc/pki/rpm-gpg/RPM-GPG-KEY.art.txt
     file:///etc/pki/rpm-gpg/RPM-GPG-KEY.atomicorp.txt
@@ -150,10 +140,10 @@ sudo curl -L https://github.com/mumble-voip/mumble/releases/download/1.2.19/murm
 sudo curl -L https://releases.mattermost.com/4.9.2/mattermost-4.9.2-linux-amd64.tar.gz -o /var/www/html/repo/capes/mattermost.tar.gz
 sudo curl -L https://gchq.github.io/CyberChef/cyberchef.htm -o /var/www/html/repo/capes/cyberchef.htm
 sudo yum install http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm -y
-sudo curl -l http://opensource.wandisco.com/centos/7/git/x86_64/wandisco-git-release-7-2.noarch.rpm -o /var/www/html/repo/capes
+sudo curl -l http://opensource.wandisco.com/centos/7/git/x86_64/wandisco-git-release-7-2.noarch.rpm -o /var/www/html/repo/capes/wandisco-git-release-7-2.noarch.rpm
 sudo yum install yum-utils createrepo httpd -y
 sudo rpm --import /etc/pki/rpm-gpg/*
-sudo reposync -n --gpgcheck -l --repoid=epel --repoid=atomic --repoid=atomic-testing --repoid=rhel-7-server-rpms --repoid=WANdisco-git --repoid=rhel-7-server-optional-rpms --repoid=rhel-7-server-extras-rpms --repoid=Elasticsearch-6.x --repoid=group_rocknsm-rocknsm-2.1 --download_path=/var/www/html --downloadcomps --download-metadata
+sudo reposync -n -l --repoid=epel --repoid=atomic --repoid=rhel-7-server-rpms --repoid=rhel-7-server-optional-rpms --repoid=rhel-7-server-extras-rpms --repoid=elastic-6.x --repoid=group_rocknsm-rocknsm-2.1 --download_path=/var/www/html --downloadcomps --download-metadata
 
 cd /var/www/html/epel
 sudo createrepo -v  /var/www/html/epel -g comps.xml
@@ -170,9 +160,9 @@ sudo createrepo -v  /var/www/html/atomic-testing
 cd /var/www/html/epel
 sudo createrepo -v  /var/www/html/epel -g comps.xml
 cd /var/www/html/group_rocknsm-rocknsm-2.1
-sudo createrepo -v  /var/www/html/elastic6-x -g comps.xml
+sudo createrepo -v  /var/www/html/elastic-6.x -g comps.xml
 cd /var/www/html/elastic-6.x
-sudo createrepo -v  /var/www/html/copr-rocknsm-2.1 -g comps.xml
+sudo createrepo -v  /var/www/html/copr-rocknsm-2.1
 sudo createrepo -v /var/www/html/rock2
 sudo createrepo -v /var/www/html/capes
 # Adjust the SELinux context for Apache
