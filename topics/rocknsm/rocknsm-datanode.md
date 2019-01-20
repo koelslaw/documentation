@@ -293,20 +293,20 @@ ___
 
     /etc/logstash/conf.d/logstash-100-input-kafka-bro.conf
 
-    ```
-    input {
-     kafka {
-       topics => ["bro-raw"]
-       add_field => { "[@metadata][stage]" => "broraw_kafka" }
-       # Set this to one per kafka partition to scale up
-       #consumer_threads => 4
-       group_id => "bro_logstash"
-       bootstrap_servers => "sensor.[STATE].cmat.lan:9092"
-       codec => json
-       auto_offset_reset => "earliest"
-     }
-    }
-    ```
+```
+input {
+ kafka {
+   topics => ["bro-raw"]
+   add_field => { "[@metadata][stage]" => "broraw_kafka" }
+   # Set this to one per kafka partition to scale up
+   #consumer_threads => 4
+   group_id => "bro_logstash"
+   bootstrap_servers => "sensor.[STATE].cmat.lan:9092"
+   codec => json
+   auto_offset_reset => "earliest"
+ }
+}
+```
     /etc/logstash/conf.d/logstash-100-input-kafka-fsf.conf
 
     ```
