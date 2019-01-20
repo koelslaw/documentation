@@ -291,122 +291,118 @@ ___
 
 1. The following files need to be edited in `vi` they can be copy and pasted. Just make sure you replace [state] with your state. Also replace `[#]` with the appropriate number for the elastic cluster `1,2, or 3`
 
-  /etc/logstash/conf.d/logstash-100-input-kafka-bro.conf
-
-  ```
-
-  input {
-   kafka {
-     topics => ["bro-raw"]
-     add_field => { "[@metadata][stage]" => "broraw_kafka" }
-     # Set this to one per kafka partition to scale up
-     #consumer_threads => 4
-     group_id => "bro_logstash"
-     bootstrap_servers => "sensor.[STATE].cmat.lan:9092"
-     codec => json
-     auto_offset_reset => "earliest"
-   }
-  }
-
-  ```
-
+##### /etc/logstash/conf.d/logstash-100-input-kafka-bro.conf
+```
+input {
+ kafka {
+   topics => ["bro-raw"]
+   add_field => { "[@metadata][stage]" => "broraw_kafka" }
+   # Set this to one per kafka partition to scale up
+   #consumer_threads => 4
+   group_id => "bro_logstash"
+   bootstrap_servers => "sensor.[STATE].cmat.lan:9092"
+   codec => json
+   auto_offset_reset => "earliest"
+ }
+}
+```
 
 ##### /etc/logstash/conf.d/logstash-100-input-kafka-fsf.conf
 
-    ```
-    input {
-     kafka {
-       topics => ["fsf-raw"]
-       add_field => { "[@metadata][stage]" => "fsfraw_kafka" }
-       # Set this to one per kafka partition to scale up
-       #consumer_threads => 4
-       group_id => "fsf_logstash"
-       bootstrap_servers => "sensor.[STATE].cmat.lan:9092"
-       codec => json
-       auto_offset_reset => "earliest"
-     }
-    }
-    ```
+```
+input {
+ kafka {
+   topics => ["fsf-raw"]
+   add_field => { "[@metadata][stage]" => "fsfraw_kafka" }
+   # Set this to one per kafka partition to scale up
+   #consumer_threads => 4
+   group_id => "fsf_logstash"
+   bootstrap_servers => "sensor.[STATE].cmat.lan:9092"
+   codec => json
+   auto_offset_reset => "earliest"
+ }
+}
+```
 
 ##### /etc/logstash/conf.d/logstash-100-input-kafka-suricata.conf
 
-    ```
-    input {
-     kafka {
-       topics => ["suricata-raw"]
-       add_field => { "[@metadata][stage]" => "suricataraw_kafka" }
-       # Set this to one per kafka partition to scale up
-       #consumer_threads => 4
-       group_id => "suricata_logstash"
-       bootstrap_servers => "sensor.[STATE].cmat.lan:9092"
-       codec => json
-       auto_offset_reset => "earliest"
-     }
-    }
-    ```
+```
+input {
+ kafka {
+   topics => ["suricata-raw"]
+   add_field => { "[@metadata][stage]" => "suricataraw_kafka" }
+   # Set this to one per kafka partition to scale up
+   #consumer_threads => 4
+   group_id => "suricata_logstash"
+   bootstrap_servers => "sensor.[STATE].cmat.lan:9092"
+   codec => json
+   auto_offset_reset => "earliest"
+ }
+}
+```
 
 ##### /etc/logstash/conf.d/logstash-999-output-es-bro.conf
 
-    ```
-    output {
-       if [@metadata][stage] == "broraw_kafka" {
-    #        kafka {
-    #          codec => json
-    #          topic_id => "bro-%{[@meta][event_type]}"
-    #          bootstrap_servers => "127.0.0.1:9092"
-    #        }
+```
+output {
+   if [@metadata][stage] == "broraw_kafka" {
+#        kafka {
+#          codec => json
+#          topic_id => "bro-%{[@meta][event_type]}"
+#          bootstrap_servers => "127.0.0.1:9092"
+#        }
 
-           elasticsearch {
-               hosts => ["es[#].[STATE].cmat.lan","es[#].[STATE].cmat.lan","es[#].[STATE].cmat.lan"]
-               index => "bro-%{[@meta][event_type]}-%{+YYYY.MM.dd}"
-               template => "/opt/rocknsm/rock/playbooks/files/es-bro-mappings.json"
-               document_type => "_doc"
-           }
+       elasticsearch {
+           hosts => ["es[#].[STATE].cmat.lan","es[#].[STATE].cmat.lan","es[#].[STATE].cmat.lan"]
+           index => "bro-%{[@meta][event_type]}-%{+YYYY.MM.dd}"
+           template => "/opt/rocknsm/rock/playbooks/files/es-bro-mappings.json"
+           document_type => "_doc"
        }
-    }
-    ```
+   }
+}
+```
 
 ##### /etc/logstash/conf.d/logstash-999-output-es-fsf.conf
 
-    ```
-    output {
-     if [@metadata][stage] == "fsfraw_kafka" {
-    #    kafka {
-    #     codec => json
-    #     topic_id => "fsf-clean"
-    #     bootstrap_servers => "127.0.0.1:9092"
-    #    }
+```
+output {
+ if [@metadata][stage] == "fsfraw_kafka" {
+#    kafka {
+#     codec => json
+#     topic_id => "fsf-clean"
+#     bootstrap_servers => "127.0.0.1:9092"
+#    }
 
-       elasticsearch {
-         hosts => ["es[#].[STATE].cmat.lan","es[#].[STATE].cmat.lan","es[#].[STATE].cmat.lan"]
-         index => "fsf-%{+YYYY.MM.dd}"
-         manage_template => false
-         document_type => "_doc"
-       }
-     }
-    }
-    ```
+   elasticsearch {
+     hosts => ["es[#].[STATE].cmat.lan","es[#].[STATE].cmat.lan","es[#].[STATE].cmat.lan"]
+     index => "fsf-%{+YYYY.MM.dd}"
+     manage_template => false
+     document_type => "_doc"
+   }
+ }
+}
+```
 
 ##### /etc/logstash/conf.d/logstash-999-output-es-suricata.conf
 
-    ```
-    output {
-     if [@metadata][stage] == "suricataraw_kafka" {
-    #    kafka {
-    #     codec => json
-    #     topic_id => "suricata-clean"
-    #     bootstrap_servers => "127.0.0.1:9092"
-    #    }
+```
+output {
+ if [@metadata][stage] == "suricataraw_kafka" {
+#    kafka {
+#     codec => json
+#     topic_id => "suricata-clean"
+#     bootstrap_servers => "127.0.0.1:9092"
+#    }
 
-       elasticsearch {
-         hosts => ["es[#].[STATE].cmat.lan","es[#].[STATE].cmat.lan","es[#].[STATE].cmat.lan"]
-         index => "suricata-%{+YYYY.MM.dd}"
-         manage_template => false
-         document_type => "_doc"
-       }
-     }
-    }
-    ```
+   elasticsearch {
+     hosts => ["es[#].[STATE].cmat.lan","es[#].[STATE].cmat.lan","es[#].[STATE].cmat.lan"]
+     index => "suricata-%{+YYYY.MM.dd}"
+     manage_template => false
+     document_type => "_doc"
+   }
+ }
+}
+```
 
 ##### /etc/elasticsearch/elasticsearch.yml
 
