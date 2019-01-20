@@ -293,7 +293,7 @@ ___
 
 ---
 
-/etc/logstash/conf.d/logstash-100-input-kafka-bro.conf
+##### /etc/logstash/conf.d/logstash-100-input-kafka-bro.conf
 ```
 input {
  kafka {
@@ -308,7 +308,9 @@ input {
  }
 }
 ```
+
 ---
+
 ##### /etc/logstash/conf.d/logstash-100-input-kafka-fsf.conf
 
 ```
@@ -326,6 +328,8 @@ input {
 }
 ```
 
+___
+
 ##### /etc/logstash/conf.d/logstash-100-input-kafka-suricata.conf
 
 ```
@@ -342,6 +346,8 @@ input {
  }
 }
 ```
+
+___
 
 ##### /etc/logstash/conf.d/logstash-999-output-es-bro.conf
 
@@ -364,6 +370,8 @@ output {
 }
 ```
 
+___
+
 ##### /etc/logstash/conf.d/logstash-999-output-es-fsf.conf
 
 ```
@@ -384,6 +392,8 @@ output {
  }
 }
 ```
+
+___
 
 ##### /etc/logstash/conf.d/logstash-999-output-es-suricata.conf
 
@@ -406,219 +416,224 @@ output {
 }
 ```
 
+___
+
 ##### /etc/elasticsearch/elasticsearch.yml
 
-  ```yml
+```yml
 
-  # ======================== Elasticsearch Configuration =========================
-  #
-  # NOTE: Elasticsearch comes with reasonable defaults for most settings.
-  #       Before you set out to tweak and tune the configuration, make sure you
-  #       understand what are you trying to accomplish and the consequences.
-  #
-  # The primary way of configuring a node is via this file. This template lists
-  # the most important settings you may want to configure for a production cluster.
-  #
-  # Please consult the documentation for further information on configuration options:
-  # https://www.elastic.co/guide/en/elasticsearch/reference/index.html
-  #
-  # ---------------------------------- Cluster -----------------------------------
-  #
-  # Use a descriptive name for your cluster:
-  #
-  cluster.name: es[#]
-  #
-  # ------------------------------------ Node ------------------------------------
-  #
-  # Use a descriptive name for the node:
-  #
-  node.name: es[#]
-  #
-  # Add custom attributes to the node:
-  #
-  #node.attr.rack: r1
-  #
-  # ----------------------------------- Paths ------------------------------------
-  #
-  # Path to directory where to store the data (separate multiple locations by comma):
-  #
-  path.data: /data/elasticsearch
-  #
-  # Path to log files:
-  #
-  path.logs: /var/log/elasticsearch
-  #
-  # ----------------------------------- Memory -----------------------------------
-  #
-  # Lock the memory on startup:
-  #
-  bootstrap.memory_lock: true
-  #
-  # Make sure that the heap size is set to about half the memory available
-  # on the system and that the owner of the process is allowed to use this
-  # limit.
-  #
-  # Elasticsearch performs poorly when the system is swapping the memory.
-  #
-  # ---------------------------------- Network -----------------------------------
-  #
-  # Set the bind address to a specific IP (IPv4 or IPv6):
-  #
-  network.host: 0.0.0.0
-  #
-  # Set a custom port for HTTP:
-  #
-  #http.port: 9200
-  #
-  # For more information, consult the network module documentation.
-  #
-  # --------------------------------- Discovery ----------------------------------
-  #
-  # Pass an initial list of hosts to perform discovery when new node is started:
-  # The default list of hosts is ["127.0.0.1", "[::1]"]
-  #
-  discovery.zen.ping.unicast.hosts: ["es[#].[STATE].cmat.lan","es[#].[STATE].cmat.lan", "es[#].[STATE].cmat.lan"]
-  #
-  # Prevent the "split brain" by configuring the majority of nodes (total number of master-eligible nodes / 2 + 1):
-  #
-  #discovery.zen.minimum_master_nodes:
-  #
-  # For more information, consult the zen discovery module documentation.
-  #
-  # ---------------------------------- Gateway -----------------------------------
-  #
-  # Block initial recovery after a full cluster restart until N nodes are started:
-  #
-  #gateway.recover_after_nodes: 3
-  #
-  # For more information, consult the gateway module documentation.
-  #
-  # ---------------------------------- Various -----------------------------------
-  #
-  # Require explicit names when deleting indices:
-  #
-  #action.destructive_requires_name: true
-    ```
+# ======================== Elasticsearch Configuration =========================
+#
+# NOTE: Elasticsearch comes with reasonable defaults for most settings.
+#       Before you set out to tweak and tune the configuration, make sure you
+#       understand what are you trying to accomplish and the consequences.
+#
+# The primary way of configuring a node is via this file. This template lists
+# the most important settings you may want to configure for a production cluster.
+#
+# Please consult the documentation for further information on configuration options:
+# https://www.elastic.co/guide/en/elasticsearch/reference/index.html
+#
+# ---------------------------------- Cluster -----------------------------------
+#
+# Use a descriptive name for your cluster:
+#
+cluster.name: es[#]
+#
+# ------------------------------------ Node ------------------------------------
+#
+# Use a descriptive name for the node:
+#
+node.name: es[#]
+#
+# Add custom attributes to the node:
+#
+#node.attr.rack: r1
+#
+# ----------------------------------- Paths ------------------------------------
+#
+# Path to directory where to store the data (separate multiple locations by comma):
+#
+path.data: /data/elasticsearch
+#
+# Path to log files:
+#
+path.logs: /var/log/elasticsearch
+#
+# ----------------------------------- Memory -----------------------------------
+#
+# Lock the memory on startup:
+#
+bootstrap.memory_lock: true
+#
+# Make sure that the heap size is set to about half the memory available
+# on the system and that the owner of the process is allowed to use this
+# limit.
+#
+# Elasticsearch performs poorly when the system is swapping the memory.
+#
+# ---------------------------------- Network -----------------------------------
+#
+# Set the bind address to a specific IP (IPv4 or IPv6):
+#
+network.host: 0.0.0.0
+#
+# Set a custom port for HTTP:
+#
+#http.port: 9200
+#
+# For more information, consult the network module documentation.
+#
+# --------------------------------- Discovery ----------------------------------
+#
+# Pass an initial list of hosts to perform discovery when new node is started:
+# The default list of hosts is ["127.0.0.1", "[::1]"]
+#
+discovery.zen.ping.unicast.hosts: ["es[#].[STATE].cmat.lan","es[#].[STATE].cmat.lan", "es[#].[STATE].cmat.lan"]
+#
+# Prevent the "split brain" by configuring the majority of nodes (total number of master-eligible nodes / 2 + 1):
+#
+#discovery.zen.minimum_master_nodes:
+#
+# For more information, consult the zen discovery module documentation.
+#
+# ---------------------------------- Gateway -----------------------------------
+#
+# Block initial recovery after a full cluster restart until N nodes are started:
+#
+#gateway.recover_after_nodes: 3
+#
+# For more information, consult the gateway module documentation.
+#
+# ---------------------------------- Various -----------------------------------
+#
+# Require explicit names when deleting indices:
+#
+#action.destructive_requires_name: true
+```
+
+___
 
 ##### /etc/kibana/kibana.yml
 
-    ```yml
+```yml
 
-  # Kibana is served by a back end server. This setting specifies the port to use.
-  #server.port: 5601
+# Kibana is served by a back end server. This setting specifies the port to use.
+#server.port: 5601
 
-  # Specifies the address to which the Kibana server will bind. IP addresses and host names are both valid values.
-  # The default is 'localhost', which usually means remote machines will not be able to connect.
-  # To allow connections from remote users, set this parameter to a non-loopback address.
-  server.host: "0.0.0.0"
+# Specifies the address to which the Kibana server will bind. IP addresses and host names are both valid values.
+# The default is 'localhost', which usually means remote machines will not be able to connect.
+# To allow connections from remote users, set this parameter to a non-loopback address.
+server.host: "0.0.0.0"
 
-  # Enables you to specify a path to mount Kibana at if you are running behind a proxy.
-  # Use the `server.rewriteBasePath` setting to tell Kibana if it should remove the basePath
-  # from requests it receives, and to prevent a deprecation warning at startup.
-  # This setting cannot end in a slash.
-  #server.basePath: ""
+# Enables you to specify a path to mount Kibana at if you are running behind a proxy.
+# Use the `server.rewriteBasePath` setting to tell Kibana if it should remove the basePath
+# from requests it receives, and to prevent a deprecation warning at startup.
+# This setting cannot end in a slash.
+#server.basePath: ""
 
-  # Specifies whether Kibana should rewrite requests that are prefixed with
-  # `server.basePath` or require that they are rewritten by your reverse proxy.
-  # This setting was effectively always `false` before Kibana 6.3 and will
-  # default to `true` starting in Kibana 7.0.
-  #server.rewriteBasePath: false
+# Specifies whether Kibana should rewrite requests that are prefixed with
+# `server.basePath` or require that they are rewritten by your reverse proxy.
+# This setting was effectively always `false` before Kibana 6.3 and will
+# default to `true` starting in Kibana 7.0.
+#server.rewriteBasePath: false
 
-  # The maximum payload size in bytes for incoming server requests.
-  #server.maxPayloadBytes: 1048576
+# The maximum payload size in bytes for incoming server requests.
+#server.maxPayloadBytes: 1048576
 
-  # The Kibana server's name.  This is used for display purposes.
-  #server.name: "10.1.10.27"
+# The Kibana server's name.  This is used for display purposes.
+#server.name: "10.1.10.27"
 
-  # The URL of the Elasticsearch instance to use for all your queries.
-  elasticsearch.url: "http://0.0.0.0:9200"
+# The URL of the Elasticsearch instance to use for all your queries.
+elasticsearch.url: "http://0.0.0.0:9200"
 
-  # When this setting's value is true Kibana uses the hostname specified in the server.host
-  # setting. When the value of this setting is false, Kibana uses the hostname of the host
-  # that connects to this Kibana instance.
-  #elasticsearch.preserveHost: true
+# When this setting's value is true Kibana uses the hostname specified in the server.host
+# setting. When the value of this setting is false, Kibana uses the hostname of the host
+# that connects to this Kibana instance.
+#elasticsearch.preserveHost: true
 
-  # Kibana uses an index in Elasticsearch to store saved searches, visualizations and
-  # dashboards. Kibana creates a new index if the index doesn't already exist.
-  #kibana.index: ".kibana"
+# Kibana uses an index in Elasticsearch to store saved searches, visualizations and
+# dashboards. Kibana creates a new index if the index doesn't already exist.
+#kibana.index: ".kibana"
 
-  # The default application to load.
-  #kibana.defaultAppId: "home"
+# The default application to load.
+#kibana.defaultAppId: "home"
 
-  # If your Elasticsearch is protected with basic authentication, these settings provide
-  # the username and password that the Kibana server uses to perform maintenance on the Kibana
-  # index at startup. Your Kibana users still need to authenticate with Elasticsearch, which
-  # is proxied through the Kibana server.
-  #elasticsearch.username: "user"
-  #elasticsearch.password: "pass"
+# If your Elasticsearch is protected with basic authentication, these settings provide
+# the username and password that the Kibana server uses to perform maintenance on the Kibana
+# index at startup. Your Kibana users still need to authenticate with Elasticsearch, which
+# is proxied through the Kibana server.
+#elasticsearch.username: "user"
+#elasticsearch.password: "pass"
 
-  # Enables SSL and paths to the PEM-format SSL certificate and SSL key files, respectively.
-  # These settings enable SSL for outgoing requests from the Kibana server to the browser.
-  #server.ssl.enabled: false
-  #server.ssl.certificate: /path/to/your/server.crt
-  #server.ssl.key: /path/to/your/server.key
+# Enables SSL and paths to the PEM-format SSL certificate and SSL key files, respectively.
+# These settings enable SSL for outgoing requests from the Kibana server to the browser.
+#server.ssl.enabled: false
+#server.ssl.certificate: /path/to/your/server.crt
+#server.ssl.key: /path/to/your/server.key
 
-  # Optional settings that provide the paths to the PEM-format SSL certificate and key files.
-  # These files validate that your Elasticsearch backend uses the same key files.
-  #elasticsearch.ssl.certificate: /path/to/your/client.crt
-  #elasticsearch.ssl.key: /path/to/your/client.key
+# Optional settings that provide the paths to the PEM-format SSL certificate and key files.
+# These files validate that your Elasticsearch backend uses the same key files.
+#elasticsearch.ssl.certificate: /path/to/your/client.crt
+#elasticsearch.ssl.key: /path/to/your/client.key
 
-  # Optional setting that enables you to specify a path to the PEM file for the certificate
-  # authority for your Elasticsearch instance.
-  #elasticsearch.ssl.certificateAuthorities: [ "/path/to/your/CA.pem" ]
+# Optional setting that enables you to specify a path to the PEM file for the certificate
+# authority for your Elasticsearch instance.
+#elasticsearch.ssl.certificateAuthorities: [ "/path/to/your/CA.pem" ]
 
-  # To disregard the validity of SSL certificates, change this setting's value to 'none'.
-  #elasticsearch.ssl.verificationMode: full
+# To disregard the validity of SSL certificates, change this setting's value to 'none'.
+#elasticsearch.ssl.verificationMode: full
 
-  # Time in milliseconds to wait for Elasticsearch to respond to pings. Defaults to the value of
-  # the elasticsearch.requestTimeout setting.
-  #elasticsearch.pingTimeout: 1500
+# Time in milliseconds to wait for Elasticsearch to respond to pings. Defaults to the value of
+# the elasticsearch.requestTimeout setting.
+#elasticsearch.pingTimeout: 1500
 
-  # Time in milliseconds to wait for responses from the back end or Elasticsearch. This value
-  # must be a positive integer.
-  #elasticsearch.requestTimeout: 30000
+# Time in milliseconds to wait for responses from the back end or Elasticsearch. This value
+# must be a positive integer.
+#elasticsearch.requestTimeout: 30000
 
-  # List of Kibana client-side headers to send to Elasticsearch. To send *no* client-side
-  # headers, set this value to [] (an empty list).
-  #elasticsearch.requestHeadersWhitelist: [ authorization ]
+# List of Kibana client-side headers to send to Elasticsearch. To send *no* client-side
+# headers, set this value to [] (an empty list).
+#elasticsearch.requestHeadersWhitelist: [ authorization ]
 
-  # Header names and values that are sent to Elasticsearch. Any custom headers cannot be overwritten
-  # by client-side headers, regardless of the elasticsearch.requestHeadersWhitelist configuration.
-  #elasticsearch.customHeaders: {}
+# Header names and values that are sent to Elasticsearch. Any custom headers cannot be overwritten
+# by client-side headers, regardless of the elasticsearch.requestHeadersWhitelist configuration.
+#elasticsearch.customHeaders: {}
 
-  # Time in milliseconds for Elasticsearch to wait for responses from shards. Set to 0 to disable.
-  #elasticsearch.shardTimeout: 30000
+# Time in milliseconds for Elasticsearch to wait for responses from shards. Set to 0 to disable.
+#elasticsearch.shardTimeout: 30000
 
-  # Time in milliseconds to wait for Elasticsearch at Kibana startup before retrying.
-  #elasticsearch.startupTimeout: 5000
+# Time in milliseconds to wait for Elasticsearch at Kibana startup before retrying.
+#elasticsearch.startupTimeout: 5000
 
-  # Logs queries sent to Elasticsearch. Requires logging.verbose set to true.
-  #elasticsearch.logQueries: false
+# Logs queries sent to Elasticsearch. Requires logging.verbose set to true.
+#elasticsearch.logQueries: false
 
-  # Specifies the path where Kibana creates the process ID file.
-  #pid.file: /var/run/kibana.pid
+# Specifies the path where Kibana creates the process ID file.
+#pid.file: /var/run/kibana.pid
 
-  # Enables you specify a file where Kibana stores log output.
-  #logging.dest: stdout
+# Enables you specify a file where Kibana stores log output.
+#logging.dest: stdout
 
-  # Set the value of this setting to true to suppress all logging output.
-  #logging.silent: false
+# Set the value of this setting to true to suppress all logging output.
+#logging.silent: false
 
-  # Set the value of this setting to true to suppress all logging output other than error messages.
-  #logging.quiet: false
+# Set the value of this setting to true to suppress all logging output other than error messages.
+#logging.quiet: false
 
-  # Set the value of this setting to true to log all events, including system usage information
-  # and all requests.
-  #logging.verbose: false
+# Set the value of this setting to true to log all events, including system usage information
+# and all requests.
+#logging.verbose: false
 
-  # Set the interval in milliseconds to sample system and process performance
-  # metrics. Minimum is 100ms. Defaults to 5000.
-  #ops.interval: 5000
+# Set the interval in milliseconds to sample system and process performance
+# metrics. Minimum is 100ms. Defaults to 5000.
+#ops.interval: 5000
 
-  # Specifies locale to be used for all localizable strings, dates and number formats.
-  #i18n.locale: "en"
-  ```
+# Specifies locale to be used for all localizable strings, dates and number formats.
+#i18n.locale: "en"
+```
 
+___
 
 1. Open the following ports on the firewall for the elastic machines
 
@@ -637,8 +652,10 @@ output {
   ```
   sudo firewall-cmd --reload
   ```
-1. Deploy more nodes as needed.
 
+1. Restart services with `rock_stop` and the `rock_start`
+
+1. Deploy more nodes as needed.
 
 ____________________________________________________________
 ____________________________________________________________
@@ -743,103 +760,106 @@ sudo yum sintall wget
 1. Change the config to the following:
   Replace the `[#]` with the number of the cluster. In this case of the ELK cluster it will be `1`.
 
-  ```yml
-  ---
-  # These are all the current variables that could affect
-  # the configuration of ROCKNSM. Take care when modifying
-  # these. The defaults should be used unless you really
-  # know what you are doing!
+___
 
-  # interfaces that should be configured for sensor applications
-  rock_monifs:
+```yml
+---
+# These are all the current variables that could affect
+# the configuration of ROCKNSM. Take care when modifying
+# these. The defaults should be used unless you really
+# know what you are doing!
 
-  # Secifies the hostname of the sensor
-  rock_hostname: es[#]
-  # the FQDN
-  rock_fqdn: [NAME OF THIS ELASTICSEARCH NODE].[STATE].cmat.lan
-  # the number of CPUs that bro will use
-  bro_cpu: 6
-  # name of elasticsearch cluster
-  es_cluster_name: rocknsm [NAME OF ENTIRE CLUSTER]
-  # name of node in elasticsearch cluster
-  es_node_name: es[#] [NAME OF THIS ELASTICSEARCH NODE]
-  # how much memory to use for elasticsearch
-  es_mem: 6
+# interfaces that should be configured for sensor applications
+rock_monifs:
 
-  ########## Offline/Enterprise Network Options ##############
+# Secifies the hostname of the sensor
+rock_hostname: es[#]
+# the FQDN
+rock_fqdn: [NAME OF THIS ELASTICSEARCH NODE].[STATE].cmat.lan
+# the number of CPUs that bro will use
+bro_cpu: 6
+# name of elasticsearch cluster
+es_cluster_name: rocknsm [NAME OF ENTIRE CLUSTER]
+# name of node in elasticsearch cluster
+es_node_name: es[#] [NAME OF THIS ELASTICSEARCH NODE]
+# how much memory to use for elasticsearch
+es_mem: 6
 
-  # configure if this system may reach out to the internet
-  # (configured repos below) during configuration
-  rock_online_install: False
-  # (online) enable RockNSM testing repos
-  rock_enable_testing: False
-  # (online) the URL for the EPEL repo mirror
-  epel_baseurl: http://download.fedoraproject.org/pub/epel/$releasever/$basearch/
-  # (online) the URL for the EPEL GPG key
-  epel_gpgurl: https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-7
-  # (online) the URL for the elastic repo mirror
-  elastic_baseurl: https://artifacts.elastic.co/packages/6.x/yum
-  # (online) the URL for the elastic GPG key
-  elastic_gpgurl: https://artifacts.elastic.co/GPG-KEY-elasticsearch
-  # (online) the URL for the rocknsm repo mirror
-  rocknsm_baseurl: https://packagecloud.io/rocknsm/2_2/el/7/$basearch
-  # (online) the URL for the rocknsm GPG key
-  rocknsm_gpgurl: https://packagecloud.io/rocknsm/2_2/gpgkey
+########## Offline/Enterprise Network Options ##############
 
-  #
-  rock_disable_offline_repo: True
-  # (offline) the filesytem path for a local repo if doing an "offline" install
-  rocknsm_local_baseurl: http://nuc.[STATE].cmat.lan/
-  # (offline) disable the gpgcheck features for local repos, contingent on a kickstart test checking for /srv/rocknsm/repodata/repomd.xml.asc
-  rock_offline_gpgcheck: 0
+# configure if this system may reach out to the internet
+# (configured repos below) during configuration
+rock_online_install: False
+# (online) enable RockNSM testing repos
+rock_enable_testing: False
+# (online) the URL for the EPEL repo mirror
+epel_baseurl: http://download.fedoraproject.org/pub/epel/$releasever/$basearch/
+# (online) the URL for the EPEL GPG key
+epel_gpgurl: https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-7
+# (online) the URL for the elastic repo mirror
+elastic_baseurl: https://artifacts.elastic.co/packages/6.x/yum
+# (online) the URL for the elastic GPG key
+elastic_gpgurl: https://artifacts.elastic.co/GPG-KEY-elasticsearch
+# (online) the URL for the rocknsm repo mirror
+rocknsm_baseurl: https://packagecloud.io/rocknsm/2_2/el/7/$basearch
+# (online) the URL for the rocknsm GPG key
+rocknsm_gpgurl: https://packagecloud.io/rocknsm/2_2/gpgkey
 
-  # the git repo from which to checkout rocknsm customization scripts for bro
-  bro_rockscripts_repo: https://nuc.[STATE].cmat.lan:4000/administrator/rock-scripts.git
+#
+rock_disable_offline_repo: True
+# (offline) the filesytem path for a local repo if doing an "offline" install
+rocknsm_local_baseurl: http://nuc.[STATE].cmat.lan/
+# (offline) disable the gpgcheck features for local repos, contingent on a kickstart test checking for /srv/rocknsm/repodata/repomd.xml.asc
+rock_offline_gpgcheck: 0
 
-  #### Retention Configuration ####
-  elastic_close_interval: 15
-  elastic_delete_interval: 60
-  # Kafka retention is in Hour
-  kafka_retention: 168
-  # Log Retemtion in Days
-  bro_log_retention: 0
-  bro_stats_retention: 0
-  suricata_retention: 3
-  fsf_retention: 3
+# the git repo from which to checkout rocknsm customization scripts for bro
+bro_rockscripts_repo: https://nuc.[STATE].cmat.lan:4000/administrator/rock-scripts.git
 
-  ### Advanced Feature Selection ######
-  # Don't flip these unless you know what you're doing
-  with_stenographer: False
-  with_docket: True
-  with_bro: False
-  with_suricata: False
-  with_snort: False
-  with_suricata_update: False
-  with_logstash: True
-  with_elasticsearch: True
-  with_kibana: False
-  with_zookeeper: False
-  with_kafka: False
-  with_lighttpd: True
-  with_fsf: False
+#### Retention Configuration ####
+elastic_close_interval: 15
+elastic_delete_interval: 60
+# Kafka retention is in Hour
+kafka_retention: 168
+# Log Retemtion in Days
+bro_log_retention: 0
+bro_stats_retention: 0
+suricata_retention: 3
+fsf_retention: 3
 
-  # Specify if a service is enabled on startup
-  enable_stenographer: False
-  enable_docket: True
-  enable_bro: False
-  enable_suricata: False
-  enable_snort: False
-  enable_suricata_update: False
-  enable_logstash: True
-  enable_elasticsearch: True
-  enable_kibana: False
-  enable_zookeeper: False
-  enable_kafka: False
-  enable_lighttpd: True
-  enable_fsf: False
+### Advanced Feature Selection ######
+# Don't flip these unless you know what you're doing
+with_stenographer: False
+with_docket: True
+with_bro: False
+with_suricata: False
+with_snort: False
+with_suricata_update: False
+with_logstash: True
+with_elasticsearch: True
+with_kibana: False
+with_zookeeper: False
+with_kafka: False
+with_lighttpd: True
+with_fsf: False
 
-  ```
+# Specify if a service is enabled on startup
+enable_stenographer: False
+enable_docket: True
+enable_bro: False
+enable_suricata: False
+enable_snort: False
+enable_suricata_update: False
+enable_logstash: True
+enable_elasticsearch: True
+enable_kibana: False
+enable_zookeeper: False
+enable_kafka: False
+enable_lighttpd: True
+enable_fsf: False
 
+```
+
+___
 
 1.  Create the following directory
 ```
@@ -904,332 +924,349 @@ sudo mkdir -p /srv/rocknsm/support
 
 1. The following files need to be edited in `vi` they can be copy and pasted. Just make sure you replace [state] with your state.
 
-    /etc/logstash/conf.d/logstash-100-input-kafka-bro.conf
+___
 
-    ```
-    input {
-     kafka {
-       topics => ["bro-raw"]
-       add_field => { "[@metadata][stage]" => "broraw_kafka" }
-       # Set this to one per kafka partition to scale up
-       #consumer_threads => 4
-       group_id => "bro_logstash"
-       bootstrap_servers => "sensor.[STATE].cmat.lan:9092"
-       codec => json
-       auto_offset_reset => "earliest"
-     }
-    }
-    ```
-    /etc/logstash/conf.d/logstash-100-input-kafka-fsf.conf
+##### /etc/logstash/conf.d/logstash-100-input-kafka-bro.conf
 
-    ```
-    input {
-     kafka {
-       topics => ["fsf-raw"]
-       add_field => { "[@metadata][stage]" => "fsfraw_kafka" }
-       # Set this to one per kafka partition to scale up
-       #consumer_threads => 4
-       group_id => "fsf_logstash"
-       bootstrap_servers => "sensor.[STATE].cmat.lan:9092"
-       codec => json
-       auto_offset_reset => "earliest"
-     }
-    }
-    ```
+```
+input {
+ kafka {
+   topics => ["bro-raw"]
+   add_field => { "[@metadata][stage]" => "broraw_kafka" }
+   # Set this to one per kafka partition to scale up
+   #consumer_threads => 4
+   group_id => "bro_logstash"
+   bootstrap_servers => "sensor.[STATE].cmat.lan:9092"
+   codec => json
+   auto_offset_reset => "earliest"
+ }
+}
+```
 
-    /etc/logstash/conf.d/logstash-100-input-kafka-suricata.conf
+___
 
-    ```
-    input {
-     kafka {
-       topics => ["suricata-raw"]
-       add_field => { "[@metadata][stage]" => "suricataraw_kafka" }
-       # Set this to one per kafka partition to scale up
-       #consumer_threads => 4
-       group_id => "suricata_logstash"
-       bootstrap_servers => "sensor.[STATE].cmat.lan:9092"
-       codec => json
-       auto_offset_reset => "earliest"
-     }
-    }
-    ```
+##### /etc/logstash/conf.d/logstash-100-input-kafka-fsf.conf
 
-    /etc/logstash/conf.d/logstash-999-output-es-bro.conf
+```
+input {
+ kafka {
+   topics => ["fsf-raw"]
+   add_field => { "[@metadata][stage]" => "fsfraw_kafka" }
+   # Set this to one per kafka partition to scale up
+   #consumer_threads => 4
+   group_id => "fsf_logstash"
+   bootstrap_servers => "sensor.[STATE].cmat.lan:9092"
+   codec => json
+   auto_offset_reset => "earliest"
+ }
+}
+```
+___
 
-    ```
-    output {
-       if [@metadata][stage] == "broraw_kafka" {
-    #        kafka {
-    #          codec => json
-    #          topic_id => "bro-%{[@meta][event_type]}"
-    #          bootstrap_servers => "127.0.0.1:9092"
-    #        }
+##### /etc/logstash/conf.d/logstash-100-input-kafka-suricata.conf
 
-           elasticsearch {
-               hosts => ["es[#].[STATE].cmat.lan","es[#].[STATE].cmat.lan","es[#].[STATE].cmat.lan"]
-               index => "bro-%{[@meta][event_type]}-%{+YYYY.MM.dd}"
-               template => "/opt/rocknsm/rock/playbooks/files/es-bro-mappings.json"
-               document_type => "_doc"
-           }
-       }
-    }
-    ```
+```
+input {
+ kafka {
+   topics => ["suricata-raw"]
+   add_field => { "[@metadata][stage]" => "suricataraw_kafka" }
+   # Set this to one per kafka partition to scale up
+   #consumer_threads => 4
+   group_id => "suricata_logstash"
+   bootstrap_servers => "sensor.[STATE].cmat.lan:9092"
+   codec => json
+   auto_offset_reset => "earliest"
+ }
+}
+```
 
-    /etc/logstash/conf.d/logstash-999-output-es-fsf.conf
+____
 
-    ```
-    output {
-     if [@metadata][stage] == "fsfraw_kafka" {
-    #    kafka {
-    #     codec => json
-    #     topic_id => "fsf-clean"
-    #     bootstrap_servers => "127.0.0.1:9092"
-    #    }
+##### /etc/logstash/conf.d/logstash-999-output-es-bro.conf
+
+```
+output {
+   if [@metadata][stage] == "broraw_kafka" {
+#        kafka {
+#          codec => json
+#          topic_id => "bro-%{[@meta][event_type]}"
+#          bootstrap_servers => "127.0.0.1:9092"
+#        }
 
        elasticsearch {
-         hosts => ["es[#].[STATE].cmat.lan","es[#].[STATE].cmat.lan","es[#].[STATE].cmat.lan"]
-         index => "fsf-%{+YYYY.MM.dd}"
-         manage_template => false
-         document_type => "_doc"
+           hosts => ["es[#].[STATE].cmat.lan","es[#].[STATE].cmat.lan","es[#].[STATE].cmat.lan"]
+           index => "bro-%{[@meta][event_type]}-%{+YYYY.MM.dd}"
+           template => "/opt/rocknsm/rock/playbooks/files/es-bro-mappings.json"
+           document_type => "_doc"
        }
-     }
-    }
-    ```
+   }
+}
+```
 
-    /etc/logstash/conf.d/logstash-999-output-es-suricata.conf
+___
 
-    ```
-    output {
-     if [@metadata][stage] == "suricataraw_kafka" {
-    #    kafka {
-    #     codec => json
-    #     topic_id => "suricata-clean"
-    #     bootstrap_servers => "127.0.0.1:9092"
-    #    }
+#####/etc/logstash/conf.d/logstash-999-output-es-fsf.conf
 
-       elasticsearch {
-         hosts => ["es[#].[STATE].cmat.lan","es[#].[STATE].cmat.lan","es[#].[STATE].cmat.lan"]
-         index => "suricata-%{+YYYY.MM.dd}"
-         manage_template => false
-         document_type => "_doc"
-       }
-     }
-    }
-    ```
+```
+output {
+ if [@metadata][stage] == "fsfraw_kafka" {
+#    kafka {
+#     codec => json
+#     topic_id => "fsf-clean"
+#     bootstrap_servers => "127.0.0.1:9092"
+#    }
 
-    /etc/elasticsearch/elasticsearch.yml
+   elasticsearch {
+     hosts => ["es[#].[STATE].cmat.lan","es[#].[STATE].cmat.lan","es[#].[STATE].cmat.lan"]
+     index => "fsf-%{+YYYY.MM.dd}"
+     manage_template => false
+     document_type => "_doc"
+   }
+ }
+}
+```
 
-  ```yml
+___
 
-  # ======================== Elasticsearch Configuration =========================
-  #
-  # NOTE: Elasticsearch comes with reasonable defaults for most settings.
-  #       Before you set out to tweak and tune the configuration, make sure you
-  #       understand what are you trying to accomplish and the consequences.
-  #
-  # The primary way of configuring a node is via this file. This template lists
-  # the most important settings you may want to configure for a production cluster.
-  #
-  # Please consult the documentation for further information on configuration options:
-  # https://www.elastic.co/guide/en/elasticsearch/reference/index.html
-  #
-  # ---------------------------------- Cluster -----------------------------------
-  #
-  # Use a descriptive name for your cluster:
-  #
-  cluster.name: es[#]
-  #
-  # ------------------------------------ Node ------------------------------------
-  #
-  # Use a descriptive name for the node:
-  #
-  node.name: es[#]
-  #
-  # Add custom attributes to the node:
-  #
-  #node.attr.rack: r1
-  #
-  # ----------------------------------- Paths ------------------------------------
-  #
-  # Path to directory where to store the data (separate multiple locations by comma):
-  #
-  path.data: /data/elasticsearch
-  #
-  # Path to log files:
-  #
-  path.logs: /var/log/elasticsearch
-  #
-  # ----------------------------------- Memory -----------------------------------
-  #
-  # Lock the memory on startup:
-  #
-  bootstrap.memory_lock: true
-  #
-  # Make sure that the heap size is set to about half the memory available
-  # on the system and that the owner of the process is allowed to use this
-  # limit.
-  #
-  # Elasticsearch performs poorly when the system is swapping the memory.
-  #
-  # ---------------------------------- Network -----------------------------------
-  #
-  # Set the bind address to a specific IP (IPv4 or IPv6):
-  #
-  network.host: 0.0.0.0
-  #
-  # Set a custom port for HTTP:
-  #
-  #http.port: 9200
-  #
-  # For more information, consult the network module documentation.
-  #
-  # --------------------------------- Discovery ----------------------------------
-  #
-  # Pass an initial list of hosts to perform discovery when new node is started:
-  # The default list of hosts is ["127.0.0.1", "[::1]"]
-  #
-  discovery.zen.ping.unicast.hosts: ["es[#].[STATE].cmat.lan","es[#].[STATE].cmat.lan", "es[#].[STATE].cmat.lan"]
-  #
-  # Prevent the "split brain" by configuring the majority of nodes (total number of master-eligible nodes / 2 + 1):
-  #
-  #discovery.zen.minimum_master_nodes:
-  #
-  # For more information, consult the zen discovery module documentation.
-  #
-  # ---------------------------------- Gateway -----------------------------------
-  #
-  # Block initial recovery after a full cluster restart until N nodes are started:
-  #
-  #gateway.recover_after_nodes: 3
-  #
-  # For more information, consult the gateway module documentation.
-  #
-  # ---------------------------------- Various -----------------------------------
-  #
-  # Require explicit names when deleting indices:
-  #
-  #action.destructive_requires_name: true
-    ```
+##### /etc/logstash/conf.d/logstash-999-output-es-suricata.conf
 
-    /etc/kibana/kibana.yml
+```
+output {
+ if [@metadata][stage] == "suricataraw_kafka" {
+#    kafka {
+#     codec => json
+#     topic_id => "suricata-clean"
+#     bootstrap_servers => "127.0.0.1:9092"
+#    }
 
-    ```yml
+   elasticsearch {
+     hosts => ["es[#].[STATE].cmat.lan","es[#].[STATE].cmat.lan","es[#].[STATE].cmat.lan"]
+     index => "suricata-%{+YYYY.MM.dd}"
+     manage_template => false
+     document_type => "_doc"
+   }
+ }
+}
+```
 
-  # Kibana is served by a back end server. This setting specifies the port to use.
-  #server.port: 5601
+___
 
-  # Specifies the address to which the Kibana server will bind. IP addresses and host names are both valid values.
-  # The default is 'localhost', which usually means remote machines will not be able to connect.
-  # To allow connections from remote users, set this parameter to a non-loopback address.
-  server.host: "0.0.0.0"
+##### /etc/elasticsearch/elasticsearch.yml
 
-  # Enables you to specify a path to mount Kibana at if you are running behind a proxy.
-  # Use the `server.rewriteBasePath` setting to tell Kibana if it should remove the basePath
-  # from requests it receives, and to prevent a deprecation warning at startup.
-  # This setting cannot end in a slash.
-  #server.basePath: ""
+```yml
 
-  # Specifies whether Kibana should rewrite requests that are prefixed with
-  # `server.basePath` or require that they are rewritten by your reverse proxy.
-  # This setting was effectively always `false` before Kibana 6.3 and will
-  # default to `true` starting in Kibana 7.0.
-  #server.rewriteBasePath: false
+# ======================== Elasticsearch Configuration =========================
+#
+# NOTE: Elasticsearch comes with reasonable defaults for most settings.
+#       Before you set out to tweak and tune the configuration, make sure you
+#       understand what are you trying to accomplish and the consequences.
+#
+# The primary way of configuring a node is via this file. This template lists
+# the most important settings you may want to configure for a production cluster.
+#
+# Please consult the documentation for further information on configuration options:
+# https://www.elastic.co/guide/en/elasticsearch/reference/index.html
+#
+# ---------------------------------- Cluster -----------------------------------
+#
+# Use a descriptive name for your cluster:
+#
+cluster.name: es[#]
+#
+# ------------------------------------ Node ------------------------------------
+#
+# Use a descriptive name for the node:
+#
+node.name: es[#]
+#
+# Add custom attributes to the node:
+#
+#node.attr.rack: r1
+#
+# ----------------------------------- Paths ------------------------------------
+#
+# Path to directory where to store the data (separate multiple locations by comma):
+#
+path.data: /data/elasticsearch
+#
+# Path to log files:
+#
+path.logs: /var/log/elasticsearch
+#
+# ----------------------------------- Memory -----------------------------------
+#
+# Lock the memory on startup:
+#
+bootstrap.memory_lock: true
+#
+# Make sure that the heap size is set to about half the memory available
+# on the system and that the owner of the process is allowed to use this
+# limit.
+#
+# Elasticsearch performs poorly when the system is swapping the memory.
+#
+# ---------------------------------- Network -----------------------------------
+#
+# Set the bind address to a specific IP (IPv4 or IPv6):
+#
+network.host: 0.0.0.0
+#
+# Set a custom port for HTTP:
+#
+#http.port: 9200
+#
+# For more information, consult the network module documentation.
+#
+# --------------------------------- Discovery ----------------------------------
+#
+# Pass an initial list of hosts to perform discovery when new node is started:
+# The default list of hosts is ["127.0.0.1", "[::1]"]
+#
+discovery.zen.ping.unicast.hosts: ["es[#].[STATE].cmat.lan","es[#].[STATE].cmat.lan", "es[#].[STATE].cmat.lan"]
+#
+# Prevent the "split brain" by configuring the majority of nodes (total number of master-eligible nodes / 2 + 1):
+#
+#discovery.zen.minimum_master_nodes:
+#
+# For more information, consult the zen discovery module documentation.
+#
+# ---------------------------------- Gateway -----------------------------------
+#
+# Block initial recovery after a full cluster restart until N nodes are started:
+#
+#gateway.recover_after_nodes: 3
+#
+# For more information, consult the gateway module documentation.
+#
+# ---------------------------------- Various -----------------------------------
+#
+# Require explicit names when deleting indices:
+#
+#action.destructive_requires_name: true
+```
 
-  # The maximum payload size in bytes for incoming server requests.
-  #server.maxPayloadBytes: 1048576
+___
 
-  # The Kibana server's name.  This is used for display purposes.
-  #server.name: "10.1.10.27"
+##### /etc/kibana/kibana.yml
 
-  # The URL of the Elasticsearch instance to use for all your queries.
-  elasticsearch.url: "http://0.0.0.0:9200"
+```yml
 
-  # When this setting's value is true Kibana uses the hostname specified in the server.host
-  # setting. When the value of this setting is false, Kibana uses the hostname of the host
-  # that connects to this Kibana instance.
-  #elasticsearch.preserveHost: true
+# Kibana is served by a back end server. This setting specifies the port to use.
+#server.port: 5601
 
-  # Kibana uses an index in Elasticsearch to store saved searches, visualizations and
-  # dashboards. Kibana creates a new index if the index doesn't already exist.
-  #kibana.index: ".kibana"
+# Specifies the address to which the Kibana server will bind. IP addresses and host names are both valid values.
+# The default is 'localhost', which usually means remote machines will not be able to connect.
+# To allow connections from remote users, set this parameter to a non-loopback address.
+server.host: "0.0.0.0"
 
-  # The default application to load.
-  #kibana.defaultAppId: "home"
+# Enables you to specify a path to mount Kibana at if you are running behind a proxy.
+# Use the `server.rewriteBasePath` setting to tell Kibana if it should remove the basePath
+# from requests it receives, and to prevent a deprecation warning at startup.
+# This setting cannot end in a slash.
+#server.basePath: ""
 
-  # If your Elasticsearch is protected with basic authentication, these settings provide
-  # the username and password that the Kibana server uses to perform maintenance on the Kibana
-  # index at startup. Your Kibana users still need to authenticate with Elasticsearch, which
-  # is proxied through the Kibana server.
-  #elasticsearch.username: "user"
-  #elasticsearch.password: "pass"
+# Specifies whether Kibana should rewrite requests that are prefixed with
+# `server.basePath` or require that they are rewritten by your reverse proxy.
+# This setting was effectively always `false` before Kibana 6.3 and will
+# default to `true` starting in Kibana 7.0.
+#server.rewriteBasePath: false
 
-  # Enables SSL and paths to the PEM-format SSL certificate and SSL key files, respectively.
-  # These settings enable SSL for outgoing requests from the Kibana server to the browser.
-  #server.ssl.enabled: false
-  #server.ssl.certificate: /path/to/your/server.crt
-  #server.ssl.key: /path/to/your/server.key
+# The maximum payload size in bytes for incoming server requests.
+#server.maxPayloadBytes: 1048576
 
-  # Optional settings that provide the paths to the PEM-format SSL certificate and key files.
-  # These files validate that your Elasticsearch backend uses the same key files.
-  #elasticsearch.ssl.certificate: /path/to/your/client.crt
-  #elasticsearch.ssl.key: /path/to/your/client.key
+# The Kibana server's name.  This is used for display purposes.
+#server.name: "10.1.10.27"
 
-  # Optional setting that enables you to specify a path to the PEM file for the certificate
-  # authority for your Elasticsearch instance.
-  #elasticsearch.ssl.certificateAuthorities: [ "/path/to/your/CA.pem" ]
+# The URL of the Elasticsearch instance to use for all your queries.
+elasticsearch.url: "http://0.0.0.0:9200"
 
-  # To disregard the validity of SSL certificates, change this setting's value to 'none'.
-  #elasticsearch.ssl.verificationMode: full
+# When this setting's value is true Kibana uses the hostname specified in the server.host
+# setting. When the value of this setting is false, Kibana uses the hostname of the host
+# that connects to this Kibana instance.
+#elasticsearch.preserveHost: true
 
-  # Time in milliseconds to wait for Elasticsearch to respond to pings. Defaults to the value of
-  # the elasticsearch.requestTimeout setting.
-  #elasticsearch.pingTimeout: 1500
+# Kibana uses an index in Elasticsearch to store saved searches, visualizations and
+# dashboards. Kibana creates a new index if the index doesn't already exist.
+#kibana.index: ".kibana"
 
-  # Time in milliseconds to wait for responses from the back end or Elasticsearch. This value
-  # must be a positive integer.
-  #elasticsearch.requestTimeout: 30000
+# The default application to load.
+#kibana.defaultAppId: "home"
 
-  # List of Kibana client-side headers to send to Elasticsearch. To send *no* client-side
-  # headers, set this value to [] (an empty list).
-  #elasticsearch.requestHeadersWhitelist: [ authorization ]
+# If your Elasticsearch is protected with basic authentication, these settings provide
+# the username and password that the Kibana server uses to perform maintenance on the Kibana
+# index at startup. Your Kibana users still need to authenticate with Elasticsearch, which
+# is proxied through the Kibana server.
+#elasticsearch.username: "user"
+#elasticsearch.password: "pass"
 
-  # Header names and values that are sent to Elasticsearch. Any custom headers cannot be overwritten
-  # by client-side headers, regardless of the elasticsearch.requestHeadersWhitelist configuration.
-  #elasticsearch.customHeaders: {}
+# Enables SSL and paths to the PEM-format SSL certificate and SSL key files, respectively.
+# These settings enable SSL for outgoing requests from the Kibana server to the browser.
+#server.ssl.enabled: false
+#server.ssl.certificate: /path/to/your/server.crt
+#server.ssl.key: /path/to/your/server.key
 
-  # Time in milliseconds for Elasticsearch to wait for responses from shards. Set to 0 to disable.
-  #elasticsearch.shardTimeout: 30000
+# Optional settings that provide the paths to the PEM-format SSL certificate and key files.
+# These files validate that your Elasticsearch backend uses the same key files.
+#elasticsearch.ssl.certificate: /path/to/your/client.crt
+#elasticsearch.ssl.key: /path/to/your/client.key
 
-  # Time in milliseconds to wait for Elasticsearch at Kibana startup before retrying.
-  #elasticsearch.startupTimeout: 5000
+# Optional setting that enables you to specify a path to the PEM file for the certificate
+# authority for your Elasticsearch instance.
+#elasticsearch.ssl.certificateAuthorities: [ "/path/to/your/CA.pem" ]
 
-  # Logs queries sent to Elasticsearch. Requires logging.verbose set to true.
-  #elasticsearch.logQueries: false
+# To disregard the validity of SSL certificates, change this setting's value to 'none'.
+#elasticsearch.ssl.verificationMode: full
 
-  # Specifies the path where Kibana creates the process ID file.
-  #pid.file: /var/run/kibana.pid
+# Time in milliseconds to wait for Elasticsearch to respond to pings. Defaults to the value of
+# the elasticsearch.requestTimeout setting.
+#elasticsearch.pingTimeout: 1500
 
-  # Enables you specify a file where Kibana stores log output.
-  #logging.dest: stdout
+# Time in milliseconds to wait for responses from the back end or Elasticsearch. This value
+# must be a positive integer.
+#elasticsearch.requestTimeout: 30000
 
-  # Set the value of this setting to true to suppress all logging output.
-  #logging.silent: false
+# List of Kibana client-side headers to send to Elasticsearch. To send *no* client-side
+# headers, set this value to [] (an empty list).
+#elasticsearch.requestHeadersWhitelist: [ authorization ]
 
-  # Set the value of this setting to true to suppress all logging output other than error messages.
-  #logging.quiet: false
+# Header names and values that are sent to Elasticsearch. Any custom headers cannot be overwritten
+# by client-side headers, regardless of the elasticsearch.requestHeadersWhitelist configuration.
+#elasticsearch.customHeaders: {}
 
-  # Set the value of this setting to true to log all events, including system usage information
-  # and all requests.
-  #logging.verbose: false
+# Time in milliseconds for Elasticsearch to wait for responses from shards. Set to 0 to disable.
+#elasticsearch.shardTimeout: 30000
 
-  # Set the interval in milliseconds to sample system and process performance
-  # metrics. Minimum is 100ms. Defaults to 5000.
-  #ops.interval: 5000
+# Time in milliseconds to wait for Elasticsearch at Kibana startup before retrying.
+#elasticsearch.startupTimeout: 5000
 
-  # Specifies locale to be used for all localizable strings, dates and number formats.
-  #i18n.locale: "en"
-  ```
+# Logs queries sent to Elasticsearch. Requires logging.verbose set to true.
+#elasticsearch.logQueries: false
 
+# Specifies the path where Kibana creates the process ID file.
+#pid.file: /var/run/kibana.pid
+
+# Enables you specify a file where Kibana stores log output.
+#logging.dest: stdout
+
+# Set the value of this setting to true to suppress all logging output.
+#logging.silent: false
+
+# Set the value of this setting to true to suppress all logging output other than error messages.
+#logging.quiet: false
+
+# Set the value of this setting to true to log all events, including system usage information
+# and all requests.
+#logging.verbose: false
+
+# Set the interval in milliseconds to sample system and process performance
+# metrics. Minimum is 100ms. Defaults to 5000.
+#ops.interval: 5000
+
+# Specifies locale to be used for all localizable strings, dates and number formats.
+#i18n.locale: "en"
+```
+
+___
 
 1. Open the following ports on the firewall for the elastic machines
 
