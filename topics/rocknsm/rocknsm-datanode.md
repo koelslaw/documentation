@@ -10,7 +10,7 @@ This will cover the deployment of the RockNSM data node elements.
 When you boot the installer, called Anaconda. Before it boots, press <TAB> and append the following, which disables physical NIC naming and sets the screen resolution that is better for VMware.
 
   ```
-net.ifnames=0 vga=791
+  net.ifnames=0 vga=791
   ```
 
 Install OS in accordance with [RHEL](../rhel/README.md)
@@ -25,90 +25,97 @@ ___
 
 #### "ELK" Node
 1. Perform system update and enable daily updates
-```
-sudo yum update -y
-sudo yum install -y yum-cron
-sudo systemctl enable yum-cron
-sudo systemctl start yum-cron
-sudo yum install wget
-```
+  ```
+  sudo yum update -y
+  sudo yum install -y yum-cron
+  sudo systemctl enable yum-cron
+  sudo systemctl start yum-cron
+  sudo yum install wget
+  ```
 
 ##### Preparation for Rock Deployment
 
 1. Disable FIPS
+
   1. Install dracut
-  ```
-sudo yum install dracut
-  ```
+    ```
+    sudo yum install dracut
+    ```
+
   1. Remove the dracut-fips* packages
-  ```
-sudo yum remove dracut-fips\*
-  ```
+    ```
+    sudo yum remove dracut-fips\*
+    ```
+
   1. Backup existing FIPS initramfs
-  ```
-sudo mv -v /boot/initramfs-$(uname -r).img{,.FIPS-bak}
-  ```
+    ```
+    sudo mv -v /boot/initramfs-$(uname -r).img{,.FIPS-bak}
+    ```
+
   1. Run `dracut` to rebuild the initramfs
-  ```
-sudo dracut
-  ```
+    ```
+    sudo dracut
+    ```
+
   1. Run Grubby
-  ```
-sudo grubby --update-kernel=ALL --remove-args=fips=1
-  ```
+    ```
+    sudo grubby --update-kernel=ALL --remove-args=fips=1
+    ```
+
   1. **Carefully** up date the grub config file setting `fips=0`
-  ```
-sudo vi /etc/default/grub
-  ```
+    ```
+    sudo vi /etc/default/grub
+    ```
+
   1. Reboot the VM
-  ```
-sudo reboot
-  ```
+    ```
+    sudo reboot
+    ```
 
 1. Log back in...
 
 1. Confirm that fips is disabled by
-  ```
+```
 sysctl crypto.fips_enabled
-  ```
+```
   if it returns `0` then it has been properly disabled
 
 1. Install the Rock NSM dependencies
 
-  ```
+```
 sudo yum install jq GeoIP geopipupdate tcpreplay tcpdump bats policycoreutils-python htop vim git tmux nmap-ncat logrotate perl-LWP-Protocol-https perl-Sys-Syslog perl-Crypt-SSLeay perl-Archive-Tar java-1.8.0-openjdk-headless filebeat ansible
-  ```
+```
 1. Make a place for ROCK to live
-  ```
+```
 mkdir /opt/rocknsm/
-  ```
+```
 
 1. Navigate there so we can clone the Rock NSM repo there
-  ```
+```
 cd /opt/rocknsm/  
-  ```
+```
 
 1. Clone the Rock NSM repo from the NUC
-  ```
+```
 sudo git clone http://10.[state].10.19:4000/administrator/rock.git
-  ```
+```
   or if you have dns setup then
-  ```
+```
 sudo git clone http://nuc.[state].cmat.lan:4000/administrator/rock.git
-  ```
+```
 1. Navigate to the rock bin directory
-  ```
+```
 cd /opt/rocknsm/rock/bin
-  ```
+```
 1. Generate defaults for rock to deploy with
-  ```
+```
 sudo sh generate_defaults.sh
-  ```
+```
 
 1. Edit the `/etc/rocknsm/config.yml`
-  ```
+```
 sudo vi /etc/rocknsm.config.yml
-  ```
+```
 > NOTE: The config file and deploy playbook at thier current state is mean tto autmate the build of everything on a single machine and generic hardware. some "wrench turning" in the background will have to be done so that the cmat kit will deploy correctly. At this point the playbooks will handle most of the rock specific config and we will have to tke care of the elastic parts
 
 1. Change the config to the following:
