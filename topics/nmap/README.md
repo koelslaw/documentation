@@ -67,7 +67,9 @@ enabled=1
 EOF'
 
 ```
-```s
+Install NMAP
+
+```
 yum repolist all
 sudo yum install nmap -y
 ```

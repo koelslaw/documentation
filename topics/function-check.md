@@ -7,5 +7,3 @@
 1. log into `es1.[state].cmat.lan` and run a `rock_status` ensure that all the installed portions of the elastic cluster return no errors
 1.  Navigate to Kibana `http://kibana.[state].cmat.lan` and ensure it loads and you see traffic from from Bro and Suricata
 1. Go forth and find bad.
-
-Move to [Platform Management](platform-management.md)

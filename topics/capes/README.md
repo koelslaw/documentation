@@ -325,3 +325,6 @@ cortex {
 
 ## Get Started
 After the CAPES installation, you should be able to browse to `http://capes_system` (or `http://capes_IP` if you don't have DNS set up) to get to the CAPES landing page and start setting up services.
+
+
+Move to [Mumble client page](../grassmarlin/README.md)
