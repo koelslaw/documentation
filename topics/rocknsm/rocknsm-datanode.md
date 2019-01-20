@@ -291,7 +291,7 @@ ___
 1. The following files need to be edited in `vi` they can be copy and pasted. Just make sure you replace [state] with your state. Also replace `[#]` with the appropriate number for the elastic cluster `1,2, or 3`
 
 
-    /etc/logstash/conf.d/logstash-100-input-kafka-bro.conf
+###### /etc/logstash/conf.d/logstash-100-input-kafka-bro.conf
 
 ```
 input {
@@ -307,7 +307,8 @@ input {
  }
 }
 ```
-    /etc/logstash/conf.d/logstash-100-input-kafka-fsf.conf
+
+##### /etc/logstash/conf.d/logstash-100-input-kafka-fsf.conf
 
     ```
     input {
@@ -324,7 +325,7 @@ input {
     }
     ```
 
-    /etc/logstash/conf.d/logstash-100-input-kafka-suricata.conf
+##### /etc/logstash/conf.d/logstash-100-input-kafka-suricata.conf
 
     ```
     input {
@@ -341,7 +342,7 @@ input {
     }
     ```
 
-    /etc/logstash/conf.d/logstash-999-output-es-bro.conf
+##### /etc/logstash/conf.d/logstash-999-output-es-bro.conf
 
     ```
     output {
@@ -362,7 +363,7 @@ input {
     }
     ```
 
-    /etc/logstash/conf.d/logstash-999-output-es-fsf.conf
+##### /etc/logstash/conf.d/logstash-999-output-es-fsf.conf
 
     ```
     output {
@@ -383,7 +384,7 @@ input {
     }
     ```
 
-    /etc/logstash/conf.d/logstash-999-output-es-suricata.conf
+##### /etc/logstash/conf.d/logstash-999-output-es-suricata.conf
 
     ```
     output {
@@ -404,7 +405,7 @@ input {
     }
     ```
 
-    /etc/elasticsearch/elasticsearch.yml
+##### /etc/elasticsearch/elasticsearch.yml
 
   ```yml
 
