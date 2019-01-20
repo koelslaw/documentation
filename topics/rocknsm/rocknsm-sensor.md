@@ -3,7 +3,7 @@ This will cover the deployment of the RockNSM sensor elements.
 
 ## Prereqs
  -DNS setup
- 
+
 ## Sensor Installation
 1. Perform system update and enable daily updates
 ```
@@ -92,7 +92,7 @@ sudo yum install wget
   ```
 > NOTE: The config file and deploy playbook at their current state is mean to automate the build of everything on a single machine and generic hardware. some "wrench turning" in the background will have to be done so that the cmat kit will deploy correctly. At this point the playbooks will handle most of the rock specific config and we will have to take care of the elastic parts
 
-1. Change the config to the following:
+1. Change the `/etc/rocknsm/config.yml` config to the following:
 
   ```yml
   ---

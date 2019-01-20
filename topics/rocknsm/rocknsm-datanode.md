@@ -266,7 +266,14 @@ sudo ansible-playbook -K deploy-rock.yml
   ```
   It should complete with **no** errors
 
+1. Copy the following files for logstash
+
+  ```
+sudo -cp /opt/rocknsm/rock/plabooks/files/logstash-500-* /etc/logstash/conf.d/.
+  ```
+
 1. The following files need to be edited in `vi` they can be copy and pasted. Just make sure you replace [state] with your state. Also replace `[#]` with the appropriate number for the elastic cluster `1,2, or 3`
+
 
     /etc/logstash/conf.d/logstash-100-input-kafka-bro.conf
 
@@ -1208,5 +1215,7 @@ sudo firewall-cmd --add-port=9300/tcp --permanent
   ```
 sudo firewall-cmd --reload
   ```
+
+1. Restart the stack using `rock_stop` and `rock_start`
 
 Move onto [USAGE](rocknsm-usage.md)
