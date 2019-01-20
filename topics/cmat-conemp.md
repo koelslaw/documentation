@@ -1,1 +1,1 @@
-Move onto [System Architecture](system-architechture.md)
+Move onto [System Architecture](system-architecture.md)

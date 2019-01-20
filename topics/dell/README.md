@@ -1,4 +1,4 @@
-# Dell R840 Configuration (Data and Sensor)
+# Dell R840 Configuration (Server 1 and 2)
 
 ## Prereq
 - Monitor
@@ -200,4 +200,4 @@ At this point you have finished. the NVME drives will be standalone and not in a
 
   ![](../../images/lifecyclecontroller.png)
 
-Proceed to [Software Deployment](../topics/software-deployment.md)
+Proceed to [Software Deployment](../topic/software-deployment.md)
