@@ -68,3 +68,4 @@ sudo systemclt start redis.service
 openvasmd --rebuild
 systemctl restart redis openvas-manager.service openvas-scanner.service
 ```
+Move to [Nmap](./nmap/README.md)

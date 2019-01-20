@@ -18,4 +18,4 @@ sudo yum install http://10.[state octet].10.19/grassmarlin-3.2.1-1.el6.x86_64.rp
  For other versions visit: https://github.com/nsacyber/GRASSMARLIN/releases
 
 
-Move to [OpenVAS](openvas/README.md)
+Move to [OpenVAS](../openvas/README.md)
