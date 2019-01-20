@@ -225,6 +225,7 @@ ___
   ```
   sudo mkdir -p /srv/rocknsm/support
   ```
+
 1. `wget` the following files from the nuc to aid in the deployment of ROCK
 
   1. Grab the rock scripts
@@ -294,6 +295,7 @@ ___
 ###### /etc/logstash/conf.d/logstash-100-input-kafka-bro.conf
 
 ```
+
 input {
  kafka {
    topics => ["bro-raw"]
@@ -306,7 +308,9 @@ input {
    auto_offset_reset => "earliest"
  }
 }
+
 ```
+
 
 ##### /etc/logstash/conf.d/logstash-100-input-kafka-fsf.conf
 
@@ -499,7 +503,7 @@ input {
   #action.destructive_requires_name: true
     ```
 
-    /etc/kibana/kibana.yml
+##### /etc/kibana/kibana.yml
 
     ```yml
 
