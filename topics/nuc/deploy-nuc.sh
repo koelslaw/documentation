@@ -119,8 +119,9 @@ sudo mkdir -p /var/www/html/repo/capes
 sudo mkdir -p /var/www/html/repo/grassmarlin
 sudo mkdir -p /var/www/html/repo/nmap
 sudo mkdir -p /var/www/html/rock2
-
-sudo curl -o https://download.rocknsm.io/rocknsm-2.2.0.iso ~/
+sudo yum install wget -y
+cd ~/
+sudo wget https://download.rocknsm.io/rocknsm-2.2.0.iso
 sudo sudo mkdir -p /mnt/cd
 sudo mount -o loop ~/rocknsm-2.2.0.iso /mnt/cd
 sudo sudo cp -R /mnt/cd/* /var/www/html/rock2/.
