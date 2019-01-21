@@ -5,7 +5,7 @@ Before you start, ensure that your switch and router are [properly racked](../ha
 # Initial Router Configuration
 ## Console
 With a Mac or Linux system, connect a Console cable to the Console port of the router  
-![](../../images/router-console.png)  
+![](../../images/router-console.png){#id .class width=70%}  
 > Console port highlighted purple
 
 Connect your Console cable and go into your Terminal program (Terminal, iTerm, etc.)
@@ -48,7 +48,7 @@ The entire running configuration is stored in the [config directory](../../confi
 # Initial Switch Configuration
 ## Console
 With a Mac or Linux system, connect a Console cable to the Console port of the switch  
-![](../../images/switch-console.png)  
+![](../../images/switch-console.png){#id .class width=70%}  
 > Console port highlighted purple
 
 Connect your Console cable and go into your Terminal program (Terminal, iTerm, etc.)
@@ -92,11 +92,12 @@ For Specific Configuration examples see the [Switch](../switch/README.md) Config
 
 ## Initial Switch Configuration (WebUI)
 1. Connect a network cable to the management port on the front of the switch
-![](../../images/switch-management.png)
+![](../../images/switch-management.png){#id .class width=70%}
 > Management port highlighted purple  
 
-1. Set your local IP address to be in the same subnet as the management IP you configured above  
-1. Point your browser to the management IP from the [Platform Management page](../platform-management.md) page  
+2. Set your local IP address to be in the same subnet as the management IP you configured above  
+
+3. Point your browser to the management IP from the [Platform Management page](../platform-management.md) page  
 
 
 Move onto [Dell Server R840 Configuration](../dell/README.md)

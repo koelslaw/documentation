@@ -1,5 +1,5 @@
 # Installation Guide
-![](../../images/install_banner.png)
+![](../../images/install_banner.png){#id .class width=70%}
 
 ## Overview
 
@@ -41,7 +41,7 @@ Windows:  there are several great tools to apply a bootable image in MS land, bu
 ## Install
 
 ### First Boot
-![](../../images/rock-initialboot.jpg)
+![](../../images/rock-initialboot.jpg){#id .class width=70%}
 
 ROCK works with both legacy BIOS and UEFI booting.  Once booted from the USB, you are presented with 2 primary paths:  
 
@@ -72,7 +72,7 @@ Ensure that the interface you intend to use for MGMT has been turned on and has 
 
 ROCK is configured with the root user disabled.  We recommend that you leave it that way.  Once you've kicked off the install, click **User Creation** at the next screen (shown above) and complete the required fields to set up a non-root admin user.  
 
-![](../../images/admin-user.jpg)
+![](../../images/admin-user.jpg){#id .class width=70%}
 
 > If this step is not completed now do not fear, you will be prompted to create this account after first login.
 
@@ -324,7 +324,7 @@ Kick off the Ansible deploy script:  `sudo ./deploy_rock.sh`
 
 If everything is well, this should set up all the components you selected and give you a success banner similar to the example below:
 
-![](https://asciinema.org/a/2rS2u1fJzhaNVtkuKWgqd5BQl.png)
+![](https://asciinema.org/a/2rS2u1fJzhaNVtkuKWgqd5BQl.png){#id .class width=70%}
 
 ## Initial Kibana Access
 

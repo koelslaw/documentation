@@ -28,7 +28,7 @@ If you live in the terminal, use `dd` to apply the image.  These instructions ar
 `sudo dd bs=8M if=path/to/esxi.iso of=/dev/disk#`  
 
 If this is done on a Mac, you could get a popup once the operation is complete asking you to `Initialize, Ignore, Eject` the disk. You want to `Ignore` or `Eject`. `Initialize` will add a partition to it that will allow Mac to read the disk, and make it unbootable.  
-![](../../images/mac-initialize-ignore-eject.png)  
+![](../../images/mac-initialize-ignore-eject.png){#id .class width=70%}  
 
 ### Via GUI
 
@@ -67,7 +67,7 @@ If this is done on a Mac, you could get a popup once the operation is complete a
 1. Point your browser to `https://esxi1.[STATE].cmat.lan` from the [Platform Management](../platform-management.md) page  
 2. Log in with your user credential pair from the [Platform Management](../platform-management.md) page  
 3. Right-click on `Storage` and select `Browse datastores`  
-![](../../images/esxi-browse-datastore.png)  
+![](../../images/esxi-browse-datastore.png){#id .class width=70%}  
 4. Click on `Create directory` and make a new directory called `iso`  
 1. Click on the new `iso` folder and click `Upload`  
 1. Upload your RHEL, when that's done, click `Close`  
@@ -80,7 +80,7 @@ Click Add host networking.
 Virtual Machine Port Group for a Standard Switch
 1. Click OK.
 1. Right-Click on `Networking` and select `Add port group`  
-![](../../images/esxi-network-port-group.png)  
+![](../../images/esxi-network-port-group.png){#id .class width=70%}  
 1. Enter the following:
   - Name: `Passive`  
   - VLAN ID: `10`  
@@ -99,7 +99,7 @@ Virtual Machine Port Group for a Standard Switch
 
 # Create the CAPES Virtual Machine
 1. Right-Click on `Virtual Machines` and select `Create/Register VM`  
-![](../../images/esxi-create-vm.png)  
+![](../../images/esxi-create-vm.png){#id .class width=70%}  
   - Name: `CAPES`  
   - Compatibility: Leave default  
   - Guest OS Family: `Linux`  
@@ -121,7 +121,7 @@ Virtual Machine Port Group for a Standard Switch
 
 # Create the RHEL DNS
 1. Right-Click on `Virtual Machines` and select `Create/Register VM`  
-![](../../images/esxi-create-vm.png)  
+![](../../images/esxi-create-vm.png){#id .class width=70%}  
   - Name: `RHEL DNS`  
   - Compatibility: Leave default  
   - Guest OS Family: `Linux`  

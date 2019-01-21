@@ -3,11 +3,14 @@
 Before you start, ensure that your Gigamon is [properly racked](../hardware-assembly.md)
 
 # Initial Configuration (Console)
+
 1. With a Mac or Linux system, connect a Console cable to the Console port of the Gigamon  
-![](../../images/gigamon-console.png)  
+
+![](../../images/gigamon-console.png){#id .class width=70%}  
+
 > Console port highlighted purple
 
-1. Connect your Console cable and go into your Terminal program (Terminal, iTerm, etc.)
+2. Connect your Console cable and go into your Terminal program (Terminal, iTerm, etc.)
 ```
 ls /dev/*usb*
 crw-rw-rw-  1 root  wheel   20, 115 Nov 29 15:06 /dev/cu.usbserial-A105LRRY (this could be slightly different on your system)
@@ -23,8 +26,8 @@ Parity: None
 Stop Bits: 1
 Flow Control: None
 ```
-1. This will ask you to log in with the [default credentials](../credentials.md)
-1. As soon as you log in, you'll be asked to enter the `Initial Configuration`, let's do that.
+3. This will ask you to log in with the [default credentials](../credentials.md)
+4. As soon as you log in, you'll be asked to enter the `Initial Configuration`, let's do that.
 
 > Note: You need to change the hostnames, octets, and insert your passwords from the [Platform Management page](../platform-management.md) before inputting this into the Gigamon.
 
@@ -56,10 +59,11 @@ Do you want to use the wizard for initial configuration? yes
 To change an answer, enter the step number to return to.
 Otherwise hit <enter> to save changes and exit.
 ```
-1. Hit enter to save your configuration
-1. You'll be presented with a summary of your configuration changes. You can go back and make any adjustments as necessary.  
- - If you decided not to change your default passphrase, you can do so in the webUI  
- - If you decided to change your default passphrase, I **strongly** recommend you hop over to the webUI and make sure you can log in  
+5. Hit enter to save your configuration
+6. You'll be presented with a summary of your configuration changes. You can go back and make any adjustments as necessary.  
+7. If you decided not to change your default passphrase, you can do so in the webUI  
+8. If you decided to change your default passphrase, I **strongly** recommend you hop over to the webUI and make sure you can log in  
+
 > In the event that your passphrase isn't working, you should reset here before you logout of the console
 
 ```
@@ -69,28 +73,36 @@ tap.[state].cmat.lan (config) # username admin|monitor|operator password
 ```
 
 # Initial Configuration (WebUI)
-1. Connect a network cable to the management port on the front of the Gigamon
-![](../../images/gigamon-management.png)
+9. Connect a network cable to the management port on the front of the Gigamon
+
+![](../../images/gigamon-management.png){#id .class width=70%}
+
 > Management port highlighted purple  
 
-1. Set your local IP address to be in the same network as the management IP you configured above.
-1. Point your browser to the management IP you set above. See the [platform management](../platform-management.md) page for exact address and credentials.
+10. Set your local IP address to be in the same network as the management IP you configured above.
+11. Point your browser to the management IP you set above. See the [platform management](../platform-management.md) page for exact address and credentials.
 
 ## Enabling Interfaces
 It should be noted, these next steps...are silly. Don't blame us.
 
-1. Once you're logged in, click on the `Chassis` from the toolbar on the left
-1. You will notice that the interfaces are not configured and it is not inherently obvious how to enable them.
-![](../../images/gigamon-unconfigured.png)  
+12. Once you're logged in, click on the `Chassis` from the toolbar on the left
+
+13. You will notice that the interfaces are not configured and it is not inherently obvious how to enable them.
+
+![](../../images/gigamon-unconfigured.png){#id .class width=70%}  
+
 > Unconfigured Gigamon interfaces
 
-1. You can either right-click on the image and select `Configure` or switch from "Chassis View" to "List View" and then select your interfaces and `Configure` them.
-![](../../images/gigamon-rightclick-configure.png)  
-![](../../images/gigamon-menu-configure.png)  
+14. You can either right-click on the image and select `Configure` or switch from "Chassis View" to "List View" and then select your interfaces and `Configure` them.
+
+![](../../images/gigamon-rightclick-configure.png){#id .class width=70%}  
+
+![](../../images/gigamon-menu-configure.png){#id .class width=70%}  
+
 > Configuration options for the interfaces
 
-1. Your interfaces should all have come up as Network Ports
-![](../../images/gigamon-configured.png)
+15. Your interfaces should all have come up as Network Ports
+![](../../images/gigamon-configured.png){#id .class width=70%}
 > Configured Gigamon interfaces
 
 ## Port Types
@@ -110,30 +122,30 @@ Packets arrive at the Gigamon Visibility Platform at network ports and are direc
 > NOTE: This is an example configuration and should not be considered the only way to tap a network. This is here to get you started.
 
 1. Right Click the Modules on the tap under the `Chassis` tab and select `Config`.
-1. The ports you wish to be your tapping interface. for example 1/1/g1. Mouse over `Admin` and select `Enable`, do the same for 1/1/g2.
+2. The ports you wish to be your tapping interface. for example 1/1/g1. Mouse over `Admin` and select `Enable`, do the same for 1/1/g2.
+
 > NOTE: This is where the network traffic will pass through
 
-1. Do the same for the interfaces that connect your gigamon to your sensor.
-1. At this point everything should be network port. We need to change that to an inline network port. So right click on `1/1/g1` mouse over `Type` and select `Inline Network`, do the same for 1/1/g2.
+3. Do the same for the interfaces that connect your gigamon to your sensor.
+4. At this point everything should be network port. We need to change that to an inline network port. So right click on `1/1/g1` mouse over `Type` and select `Inline Network`, do the same for 1/1/g2.
 
-1. Setup the ports that are going to your server as tool ports in our case `1/1/g1`
+5. Setup the ports that are going to your server as tool ports in our case `1/1/g1`
 
-1. On the left hand pane click `Maps` so we can start sending our traffic to the tool interfaces from the inline network interfaces, click `New`, give it the following parameters:
+6. On the left hand pane click `Maps` so we can start sending our traffic to the tool interfaces from the inline network interfaces, click `New`, give it the following parameters:
   - Map Alias: Tap
   - Type: Regular
   - Subtype: Pass All
   - Source : 1/2/g1
   - Destination: 1/1/x11
 
-1. Click `Ok`
-1. Find `Inline Bypass`, click `New` and give it the following parameters:
+7. Click `Ok`
+8. Find `Inline Bypass`, click `New` and give it the following parameters:
   - Alias: Capture
   - Port A: 1/2/g1
   - Port B: 1/2/g2
   - Traffic Path: Bypass with Monitoring
   - Link Failure Propagation: Checked
-1. At this point if you ssh into your sensor.[state].cmat.lan machine will start recieving traffic.
-
+9. At this point if you ssh into your sensor.[state].cmat.lan machine will start recieving traffic.
 
 
 Move onto [Network Configuration](../network/README.md)

@@ -12,29 +12,29 @@ Once power has been connected to the servers setup they should automatically boo
 
 1. Navigate to -> `System Setup`
 
-1. Click `Advanced Hardware Configuration`
+2. Click `Advanced Hardware Configuration`
 
-  ![](../../images/lifecyclecontroller.png)
+  ![](../../images/lifecyclecontroller.png){#id .class width=70%}
 
-1. Select `IDRAC settings`
-  ![](../../images/IMG_20190105_101747.jpg)
+3. Select `IDRAC settings`
+  ![](../../images/IMG_20190105_101747.jpg){#id .class width=70%}
 
-1. Select `Network`
-  ![](../../images/IMG_20190105_101906.jpg)
+4. Select `Network`
+  ![](../../images/IMG_20190105_101906.jpg){#id .class width=70%}
 
-1. Set the following values:
+5. Set the following values:
   - IPV4: Enabled
   - DHCP : Disabled
   - IP, Gateway, & DNS: Consult [platform-management](../platform-management.md)
   - Subnet: 255.255.255.0
   - IPV6: Disable
 
-1. Click `Back`
-1. Click `Finish`
-1. Click `Finish`, Again.
-1. Click `Yes` to save the IDRAC configuration, and `ok`
-1. This should return you to the System Setup page
-1. **Repeat for other server**
+6. Click `Back`
+7. Click `Finish`
+8. Click `Finish`, Again.
+9. Click `Yes` to save the IDRAC configuration, and `ok`
+10. This should return you to the System Setup page
+11. **Repeat for other server**
 
 ___
 
@@ -43,28 +43,28 @@ ___
 #### Data Tier SSDs (ESXI (Server 2))
 1. Navigate to -> `System Setup`
 
-1. Click `Advanced Hardware Configuration`
+2. Click `Advanced Hardware Configuration`
 > if you are already in the system setup page then you can skip this step
 
-  ![](../../images/lifecyclecontroller.png)
+  ![](../../images/lifecyclecontroller.png){#id .class width=70%}
 
-1. Navigate to -> `Device Settings`
+3. Navigate to -> `Device Settings`
 
-  ![](../../images/IMG_20190105_093432.jpg)
+  ![](../../images/IMG_20190105_093432.jpg){#id .class width=70%}
 
-1. Select the RAID Controller that is labeled PERC
+4. Select the RAID Controller that is labeled PERC
 
-  ![](../../images/IMG_20190105_093446.jpg)
+  ![](../../images/IMG_20190105_093446.jpg){#id .class width=70%}
 
-1. Select Configure
+5. Select Configure
 
-  ![](../../images/configure for raid.png)
+  ![](../../images/configure for raid.png){#id .class width=70%}
 
 >NOTE: **If** the disks have had previously installed OS on them do a cryptographic wipe prior to creating the raid arrays.
 
-1. Select Create Virtual disk
+6. Select Create Virtual disk
 
-  ![](../../images/IMG_20190105_093919.jpg)
+  ![](../../images/IMG_20190105_093919.jpg){#id .class width=70%}
 
 
   - Answer check `confirm` and `yes` to the question `Are you sure you want to clear this configuration?`
@@ -77,7 +77,7 @@ ___
 
   - Select `Select Physical Drives`
 
-    ![](../../images/IMG_20190105_094155.jpg)
+    ![](../../images/IMG_20190105_094155.jpg){#id .class width=70%}
 
     - Drive Configuration as follows:
       - Media Type: SSD
@@ -88,9 +88,9 @@ ___
   - Enter Virtual Disk Name: OS
   - Select `Create Virtual Drive` at the bottom of the page. Check `Confirm` and `Yes` then `Ok`
 
-1. Select Create Virtual disk
+7. Select Create Virtual disk
 
-  ![](../../images/IMG_20190105_093919.jpg)
+  ![](../../images/IMG_20190105_093919.jpg){#id .class width=70%}
 
 
   - Answer check `confirm` and `yes` to the question `Are you sure you want to clear this configuration?`
@@ -103,7 +103,7 @@ ___
 
   - Select `Select Physical Drives`
 
-    ![](../../images/IMG_20190105_094155.jpg)
+    ![](../../images/IMG_20190105_094155.jpg){#id .class width=70%}
 
     - Drive Configuration as follows:
       - Media Type: SSD
@@ -120,28 +120,28 @@ ___
 #### Sensor SSDs (Server 1)
 1. Navigate to -> `System Setup`
 
-1. Click `Advanced Hardware Configuration`
+2. Click `Advanced Hardware Configuration`
 > if you are already in the system setup page then you can skip this step
 
-  ![](../../images/lifecyclecontroller.png)
+  ![](../../images/lifecyclecontroller.png){#id .class width=70%}
 
-1. Navigate to -> `Device Settings`
+3. Navigate to -> `Device Settings`
 
-  ![](../../images/IMG_20190105_093432.jpg)
+  ![](../../images/IMG_20190105_093432.jpg){#id .class width=70%}
 
-1. Select the RAID Controller that is labeled PERC
+4. Select the RAID Controller that is labeled PERC
 
-  ![](../../images/IMG_20190105_093446.jpg)
+  ![](../../images/IMG_20190105_093446.jpg){#id .class width=70%}
 
-1. Select Configure
+5. Select Configure
 
-  ![](../../images/configure for raid.png)
+  ![](../../images/configure for raid.png){#id .class width=70%}
 
 > NOTE: **If** the disks have had previously installed OS on them do a cryptographic wipe prior to creating the raid arrays.
 
-1. Select Create Virtual disk
+6. Select Create Virtual disk
 
-  ![](../../images/IMG_20190105_093919.jpg)
+  ![](../../images/IMG_20190105_093919.jpg){#id .class width=70%}
 
   - Answer check `confirm` and `yes` to the question `Are you sure you want to clear this configuration?`
 
@@ -152,7 +152,7 @@ ___
   - Select `Unconfigured Capacity`
 
   - Select `Select Physical Drives`
-    ![](../../images/IMG_20190105_094155.jpg)
+    ![](../../images/IMG_20190105_094155.jpg){#id .class width=70%}
 
     - Drive Configuration as follows:
       - Media Type: SSD
@@ -163,9 +163,9 @@ ___
   - Enter Virtual Disk Name: OS
   - Select `Create Virtual Drive` at the bottom of the page. Check `Confirm` and `Yes` then `Ok`
 
-1. Select Create Virtual disk
+7. Select Create Virtual disk
 
-  ![](../../images/IMG_20190105_093919.jpg)
+  ![](../../images/IMG_20190105_093919.jpg){#id .class width=70%}
 
   - Answer check `confirm` and `yes` to the question `Are you sure you want to clear this configuration?`
 
@@ -177,7 +177,7 @@ ___
 
   - Select `Select Physical Drives`
 
-    ![](../../images/IMG_20190105_094155.jpg)
+    ![](../../images/IMG_20190105_094155.jpg){#id .class width=70%}
 
     - Drive Configuration as follows:
       - Media Type: SSD
@@ -189,15 +189,15 @@ ___
   - Select `Create Virtual Drive` at the bottom of the page. Check `Confirm` and `Yes` then `Ok`
 
 
-1. If done correctly, you should be greeted with a screen saying that you cannot configure any more drives, Click `Back`
+8. If done correctly, you should be greeted with a screen saying that you cannot configure any more drives, Click `Back`
 
-  ![](../../images/IMG_20190105_095721.jpg)
+  ![](../../images/IMG_20190105_095721.jpg){#id .class width=70%}
 
 At this point you have finished. the NVME drives will be standalone and not in a RAID Configuration.
 
 
-1. When Configuration is finished exit Lifecycle Controller and Install OS via the iDRAC or Installation Media
+9. When Configuration is finished exit Lifecycle Controller and Install OS via the iDRAC or Installation Media
 
-  ![](../../images/lifecyclecontroller.png)
+  ![](../../images/lifecyclecontroller.png){#id .class width=70%}
 
 Proceed to [Software Deployment](../topic/software-deployment.md)

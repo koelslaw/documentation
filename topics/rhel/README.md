@@ -25,7 +25,7 @@ If you live in the terminal, use `dd` to apply the image.  These instructions ar
 `sudo dd bs=8M if=path/to/rhel.iso of=/dev/disk#`  
 
 If this is done on a Mac, you could get a popup once the operation is complete asking you to `Initialize, Ignore, Eject` the disk. You want to `Ignore` or `Eject`. `Initialize` will add a partition to it that will allow Mac to read the disk, and make it unbootable.  
-![](../../images/mac-initialize-ignore-eject.png)  
+![](../../images/mac-initialize-ignore-eject.png){#id .class width=70%}  
 
 ### Via GUI
 

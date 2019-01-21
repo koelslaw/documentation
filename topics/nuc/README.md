@@ -23,9 +23,9 @@ We are going to deploy the initial configuration for the Nuc. This will configur
 
   Congrats! You have access to the RHEL RPM Repos. By extension so does the rest of the stack.
 
-1. The next script is meant to take some of the work on setting up the nuc. Using the script also ensures the rest of the kit has what it needs to function.
+2. The next script is meant to take some of the work on setting up the nuc. Using the script also ensures the rest of the kit has what it needs to function.
 
-1. Clone the mozarkite github repo.
+3. Clone the mozarkite github repo.
 
   ```
   sudo git clone http://some.git.repo.somewhere
@@ -35,7 +35,7 @@ We are going to deploy the initial configuration for the Nuc. This will configur
 
 :warning: The next action will result in large downloads. I would not recommend completing the following action unless you have a decent internet connection and/or some time. :warning:
 
-1. Run the deploy Nuc Script
+4. Run the deploy Nuc Script
   ```
   sudo sh deploy-nuc.sh
   ```
@@ -47,7 +47,7 @@ When you browse to Gitea for the first time, you'll enter a post-installation co
 * Use the explicit IP of the Gitea server instead of `localhost` for the `Domain` and `Application URL` fields  
 * Under `Server and other Services Settings` check the `Disable Avatar Service` box  
 
-![gitea install](img/install.png)
+![gitea install](img/install.png){#id .class width=70%}
 
 ##### Configure SSH Usage
 

@@ -34,9 +34,7 @@ ___
   ```
 
 ##### Preparation for Rock Deployment
-
 1. Disable FIPS
-
   1. Install dracut
     ```
     sudo yum install dracut
