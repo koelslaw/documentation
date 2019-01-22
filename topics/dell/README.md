@@ -200,4 +200,4 @@ At this point you have finished. the NVME drives will be standalone and not in a
 
   ![](../../images/lifecyclecontroller.png){#id .class width=70%}
 
-Proceed to [Software Deployment](../topic/software-deployment.md)
+Proceed to [Software Deployment](../topics/software-deployment.md)
