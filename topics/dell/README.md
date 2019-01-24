@@ -38,7 +38,7 @@ Once power has been connected to the servers setup they should automatically boo
 
 ___
 
-### Raid Configuration for Installation
+### RAID Configuration for Installation
 
 #### Data Tier SSDs (ESXI (Server 2))
 1. Navigate to -> `System Setup`
