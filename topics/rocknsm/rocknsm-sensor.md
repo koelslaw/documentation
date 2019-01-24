@@ -454,6 +454,39 @@ event bro_init() &priority=-5
 }
 
 ```
+1. Change the suricata threads per interface so suricata doesnt compete with bro for threads
+```
+%YAML 1.1
+---
+default-rule-path: "/var/lib/suricata/rules"
+rule-files:
+  - suricata.rules
+
+af-packet:
+  - interface: em4
+    threads: 4   <--------
+    cluster-id: 99
+    cluster-type: cluster_flow
+    defrag: yes
+    use-mmap: yes
+    mmap-locked: yes
+    #rollover: yes
+    tpacket-v3: yes
+    use-emergency-flush: yes
+  - interface: em3
+    threads: 4 <---------
+    cluster-id: 98
+    cluster-type: cluster_flow
+    defrag: yes
+    use-mmap: yes
+    mmap-locked: yes
+    #rollover: yes
+    tpacket-v3: yes
+    use-emergency-flush: yes
+default-log-dir: /data/suricata
+
+
+```
 
 1. Open the following ports on the firewall for the sensor
 
