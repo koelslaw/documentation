@@ -19,6 +19,8 @@ sudo sed -i 's/localpkg_gpgcheck=1/localpkg_gpgcheck=0/' /etc/yum.conf
 echo "Create your Gitea passphrase for the MySQL database and press [Enter]. You will create your Gitea administration credentials after the installation."
 read -s giteapassphrase
 
+# ensures we have the latest for our nuc
+sudo yum update
 ################################
 ### Create Local Repository ####
 ################################
