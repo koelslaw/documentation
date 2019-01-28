@@ -127,11 +127,15 @@ sudo wget https://download.rocknsm.io/rocknsm-2.2.0.iso
 sudo sudo mkdir -p /mnt/cd
 sudo mount -o loop ~/rocknsm-2.2.0.iso /mnt/cd
 sudo sudo cp -R /mnt/cd/* /var/www/html/rock2/.
+# Capes dependencies
+sudo yum install https://dl.bintray.com/thehive-project/rpm-stable/thehive-project-release-1.1.0-2.noarch.rpm
+sudo yum install --downloadonly --downloaddir=/var/www/html/repo/capes cortex
+sudo yum install https://dl.bintray.com/thehive-project/rpm-stable/thehive-project-release-1.1.0-2.noarch.rpm
+sudo yum install --downloadonly --downloaddir=/var/www/html/repo/capes thehive
 sudo curl -o /var/www/html/repo/capes/gitea-master-linux-amd64 https://dl.gitea.io/gitea/master/gitea-master-linux-amd64
 sudo curl -L https://github.com/nsacyber/GRASSMARLIN/releases/download/v3.2.1/grassmarlin-3.2.1-1.el6.x86_64.rpm -o /var/www/html/repo/grassmarlin/grassmarlin-3.2.1-1.el6.x86_64.rpm
 sudo curl -L https://github.com/mumble-voip/mumble/releases/download/1.2.19/murmur-static_x86-1.2.19.tar.bz2 -o /var/www/html/repo/capes/mattermost.tar.gz
 sudo rpm --import https://artifacts.elastic.co/GPG-KEY-elasticsearch
-# sudo rpm --import https://dl.bintray.com/cert-bdf/rpm/repodata/repomd.xml.key
 sudo curl -L https://dl.bintray.com/thehive-project/rpm-stable/thehive-project-release-1.1.0-1.noarch.rpm -o /var/www/html/repo/capes/thehive-project-release-1.1.0-1.noarch.rpm
 sudo curl -L https://dl.gitea.io/gitea/master/gitea-master-linux-amd64 -o /var/www/html/repo/capes/gitea-master-linux-amd64
 sudo curl -L https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.6.5-x86_64.rpm -o /var/www/html/repo/capes/elasticsearch-5.6.5-x86_64.rpm
@@ -139,15 +143,14 @@ sudo curl -L https://artifacts.elastic.co/downloads/beats/heartbeat/heartbeat-5.
 sudo curl -L https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-5.6.5-x86_64.rpm -o /var/www/html/repo/capes/filebeat-5.6.5-x86_64.rpm
 sudo curl -L https://artifacts.elastic.co/downloads/beats/metricbeat/metricbeat-5.6.5-x86_64.rpm -o /var/www/html/repo/capes/metricbeat-5.6.5-x86_64.rpm
 sudo curl -L https://artifacts.elastic.co/downloads/kibana/kibana-5.6.5-x86_64.rpm -o /var/www/html/repo/capes/kibana-5.6.5-x86_64.rpm
-sudo curl -L https://github.com/mumble-voip/mumble/releases/download/1.2.19/murmur-static_x86-1.2.19.tar.bz2 -o /var/www/html/repo/capes/murmur-static_x86-1.2.19.tar.bz2
 sudo curl -L https://releases.mattermost.com/4.9.2/mattermost-4.9.2-linux-amd64.tar.gz -o /var/www/html/repo/capes/mattermost.tar.gz
 sudo curl -L https://gchq.github.io/CyberChef/cyberchef.htm -o /var/www/html/repo/capes/cyberchef.htm
 sudo yum install http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm -y
 sudo curl -l http://opensource.wandisco.com/centos/7/git/x86_64/wandisco-git-release-7-2.noarch.rpm -o /var/www/html/repo/capes/wandisco-git-release-7-2.noarch.rpm
+# Creation of repo structure
 sudo yum install yum-utils createrepo httpd -y
 sudo rpm --import /etc/pki/rpm-gpg/*
 sudo reposync -n -l --repoid=epel --repoid=atomic --repoid=rhel-7-server-rpms --repoid=rhel-7-server-optional-rpms --repoid=rhel-7-server-extras-rpms --repoid=elastic-6.x --repoid=group_rocknsm-rocknsm-2.1 --download_path=/var/www/html --downloadcomps --download-metadata
-
 cd /var/www/html/epel
 sudo createrepo -v  /var/www/html/epel -g comps.xml
 cd /var/www/html/rhel-7-server-rpms
