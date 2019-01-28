@@ -25,19 +25,18 @@ We are going to deploy the initial configuration for the Nuc. This will configur
 
 2. The next script is meant to take some of the work on setting up the nuc. Using the script also ensures the rest of the kit has what it needs to function.
 
-3. Clone the mozarkite github repo.
+3. Clone the mozarkite github repo. If you cannot access check with d2ie to ensure you have authorization to be on di2e. Also check with technical SME to ensure you have access to the git repo also. If you don't have git already installed use `sudo yum install git`.
 
   ```
-  sudo git clone http://some.git.repo.somewhere
+  sudo git clone https://di2euserfirstname.lastname@bitbucket.di2e.net/scm/mozarkite/mozarkite-docs.git
   ```
-
 
 
 :warning: The next action will result in large downloads. I would not recommend completing the following action unless you have a decent internet connection and/or some time. :warning:
 
 4. Run the deploy Nuc Script
   ```
-  sudo sh deploy-nuc.sh
+  sudo sh ~/mozarkite-docs/topics/nuc/deploy-nuc.sh
   ```
 
 #### Post-Install Configuration
