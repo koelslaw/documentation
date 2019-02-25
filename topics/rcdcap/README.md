@@ -73,7 +73,7 @@ outside the extracted source folder) and type:
 1. The build for this tool is a little rough around the edgeds. I tries to create a directory that is not required during installation. We are going to `rpmrebuild` the new rpm we just built.  
 
   ```
-  sudo rpmrebuild -pve ~/RCDRCDCap-0.9.0-Source/RCDCap-0.9.0-Linux.rpm 
+  sudo rpmrebuild -pve ~/RCDCap-0.9.0-Source/RCDCap-0.9.0-Linux.rpm 
   ```
 
 1. Find the lines that contain the directories `/man/` and `/man1` and delete those lines.
