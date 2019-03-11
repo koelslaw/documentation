@@ -3,7 +3,7 @@
 This repo serves as the main source of documentation for the Cyber Mission Assurance Team (CMAT) kit. This repository does not cover the concept of operations (CONOPS) for the team but rather how to build the kit and the concepts of employing (CONEMP) the kit.
 
 ## Build Steps
-To walk through the build steps, [check out the README](../topics/README.md).
+To walk through the build steps, [check out the README](./topics/README.md).
 
   **Famous Quote: When you wait till the last minute then it only takes a minute. -Jeff Geiger**
 
@@ -11,40 +11,35 @@ To walk through the build steps, [check out the README](../topics/README.md).
 
 ## Table of Contents
 
-### Primary Components
-
-- [Cyber Mission Assurance Team (CMAT) Overview](../topics/cmat-overview.md)
-- [Domestic Operations (DOMOPS) Overview](../topics/domops-overview.md)
-- [Concept of Employment](../topics/cmat-conemp.md)
-- [System Architecture](../topics/system-architecture.md)
-- [Software Components](../topics/software-components.md)
-- [Hardware Components](../topics/hardware-components.md)
-- [Hardware Assembly](../topics/hardware-assembly.md)
-- [Hardware Configuration](../topics/hardware-configuration.md)
+- [Cyber Mission Assurance Team (CMAT) Overview](./topics/cmat-overview.md)
+- [Domestic Operations (DOMOPS) Overview](./topics/domops-overview.md)
+- [Concept of Employment](./topics/cmat-conemp.md)
+- [System Architecture](./topics/system-architecture.md)
+- [Software Components](./topics/software-components.md)
+- [Hardware Components](./topics/hardware-components.md)
+- [Hardware Assembly](./topics/hardware-assembly.md)
+- [Hardware Configuration](./topics/hardware-configuration.md)
     - [Intel Nuc Configuration](nuc/README.md)
     - [Gigamon Configuration](gigamon/README.md)
     - [Network Configuration](network/README.md)
     - [Dell R840 Configuration](dell/README.md)
-- [Software Deployment](../topics/software-deployment.md)
+- [Software Deployment](./topics/software-deployment.md)
     -  Infrastructure
         - [ESXi](vmware/README.md)
     - Passive Software Deployment
-        - [RHEL DNS Server](../dns/README.md)
-        - [RockNSM](../rocknsm/README.md)
+        - [RHEL DNS Server](./dns/README.md)
+        - [RockNSM](./rocknsm/README.md)
           - [Hardware Requirements](rocknsm-requirements.md)
           - [RockNSM Sensor](rocknsm-sensor.md)
           - [RockNSM Data Node](rocknsm-datanode.md)
           - [Connecting the Sensor to the Data Node](rocknsm-configuration.md)
           - [Usage](rocknsm-usage.md)
-        - [CAPES](../capes/README.md)
-        - [GRASSMARLIN](../grassmarlin/README.md)
+        - [CAPES](./capes/README.md)
+        - [GRASSMARLIN](./grassmarlin/README.md)
     - Active Software Deployment
-        - [OpenVAS](../openvas/README.md)
-        - [Nmap](../nmap/README.md)
-        - [BlueScope](../bluescope/README.md)
-- [APPDX1 Network Layout](../topics/network/network-layout.md)
-- [APPDX2 Function Check](../topics/function-check.md)
-- [APPDX3 Platform Management (IPs, hostnames, creds, etc.)](../topics/platform-management.md)
-
-#### Secondary Componnents:
-1. [RCDCap](../topics/rcdcap/README.md)
+        - [OpenVAS](./openvas/README.md)
+        - [Nmap](./nmap/README.md)
+        - [BlueScope](./bluescope/README.md)
+- [APPDX1 Network Layout](./topics/network/network-layout.md)
+- [APPDX2 Function Check](./topics/function-check.md)
+- [APPDX3 Platform Management (IPs, hostnames, creds, etc.)](./topics/platform-management.md)

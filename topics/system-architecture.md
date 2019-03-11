@@ -6,7 +6,4 @@
 ## CMAT Data Flow
 ![](../images/cmatdataflow.jpg){#id .class width=70%}
 
-## Netflow
-![](../images/NET DIAGRAM-2.jpg){#id .class width=70%}
-
 Move onto [Software Components](software-components.md)
