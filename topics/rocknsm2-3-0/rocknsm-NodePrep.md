@@ -108,60 +108,80 @@ ___
 
 1. Generate a hosts.ini file that so ansible knows where to deploy things `sudo vi /etc/rocknsm/hosts.ini`
 
-1. Insert the following text.
+1. Insert the following text. These will tell the script what to deploy and where
 ---
 ```
 
 [all]
-es1.[state].cmat.lan
-es2.[state].cmat.lan
-es3.[state].cmat.lan
-sensor.[state].cmat.lan
+  es1.[state].cmat.lan
+  es2.[state].cmat.lan
+  es3.[state].cmat.lan
+  sensor.[state].cmat.lan
 
-[sensor:children]
-zookeeper
-kafka
-stenographer
-bro
-suricata
-fsf
+[zookeeper]
+  sensor.[state].cmat.lan
 
-[ui:children]
-docket
-kibana
-elasticsearch
-logstash
+[kafka]
+  sensor.[state].cmat.lan
 
-[data:children]
-elasticsearch
-logstash
+[stenographer]
+  sensor.[state].cmat.lan
 
-[sensor]
-sensor.[state].cmat.lan
+[bro]
+  sensor.[state].cmat.lan
 
-[ui]
-es1.[state].camt.lan
+[Suricata]
+  sensor.[state].cmat.lan
 
-[data]
-es2.[state].camt.lan
-es3.[state].camt.lan
+[fsf]
+  sensor.[state].cmat.lan
+
+[docket]
+  sensor.[state].cmat.lan
+
+[kibana]
+  es1.[state].cmat.lan
+
+[logstash]
+  es1.[state].cmat.lan
+  es2.[state].cmat.lan
+  es3.[state].cmat.lan
+
+[elasticsearch]
+  es1.[state].cmat.lan
+  es2.[state].cmat.lan
+  es3.[state].cmat.lan
+
 ```
 
-
 ---
+
+1. Deploy the Rock iso to all the the machines in the playbook to prepare for the deployment of rock NSM
+
+  ```
+  sudo ansible-playbook rockISOPrep.yml
+  ```
+
 1. Generate defaults for rock to deploy with
   ```
   sudo sh generate_defaults.sh
   ```
+> NOTE: this generates a config file on the end user machine. that config file isnt what actually gets used for the deployment. The config file on the nuc is the one that gets used for the deployment. These generated config files are useful in making sure you have the correct setting for each of you servers.
+
+1. Copy one of the generated config files to use as the base for your deployment. My recommendation is sensor.[state].cmat.lan
+
+  ```
+  sudo scp admin@sensor.[state].cmat.lan:/etc/rocknsm/config.yml /etc/rocknsm/config.yml
+  ```
+> NOTE: change the parameters for each part of the deployment. in this case it will be 3 parts: sensor, data tier w/o kibana, data tier w/ Kibana
 
 1. Edit the `/etc/rocknsm/config.yml`
   ```
   sudo vi /etc/rocknsm.config.yml
   ```
 
+>NOTE: we are going to use the same config file for the entire deployment.
 
-1. Change the config to the following:
-  Replace the `[#]` with the number of the cluster.
 ---
 
   ```yml
