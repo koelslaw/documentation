@@ -124,8 +124,8 @@ sudo mkdir -p /var/www/html/rock2
 sudo yum install wget ansible -y
 cd ~/
 # Change this url for different isos
-sudo wget https://download.rocknsm.io/rocknsm-2.2.0.iso
-sudo cp rocrocknsm-2.2.0.iso /var/www/html/.
+sudo wget https://download.rocknsm.io/rocknsm-2.3.0-1902.iso
+sudo cp rocrocknsm-2.3.0.iso /var/www/html/.
 # Capes dependencies
 sudo yum install https://dl.bintray.com/thehive-project/rpm-stable/thehive-project-release-1.1.0-2.noarch.rpm
 sudo yum install --downloadonly --downloaddir=/var/www/html/repo/capes cortex

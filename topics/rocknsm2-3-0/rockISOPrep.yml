@@ -1,21 +1,12 @@
 ---
+- host: all
+  tasks:
+    # change the url as necessary to allow different isos to be mounted across multiple devices
+    - name: Download file the rock iso to used for deployment
+      get_url:
+        url: http://nuc.[state].cmat.com/rocknsm-2.3.0-1902.iso
+        dest: /home/admin/.
 
-- name: Download file the rock iso to used for deployment
-  get_url:
-    url: http://nuc.[state].cmat.com/rocknsm-2.2.0.iso
-    dest: ~/
-
-- name: Mount rock iso
-  mount:
-    path: /mnt/dvd
-    src: ~/rocknsm-2.3.0.iso
-    fstype: iso9660
-    opts: ro
-    state: present
-
-- name: Copy the contents of the rock iso for the deployment
-  copy:
-    src: /mnt/dvd/
-    dest: /srv/rocknsm/
-    remote_src: yes
-    directory_mode: yes
+    #change the iso ad needed to match the iso that is being downloaded
+    - name: mount the iso in prep for deployment of rock to the servers and vms
+      command: sudo mount -o loop /home/admin/rocknsm-2.3.0.-1902.iso
