@@ -80,81 +80,107 @@ ___
 
 ### Deployment of Rock across RHEL Machines
 
-1. Make a place for ROCK to live
-  ```
-  mkdir /opt/rocknsm/
-  ```
-
-1. Navigate there so we can clone the Rock NSM repo there
-  ```
-  cd /opt/rocknsm/  
-  ```
-
-1. Clone the Rock NSM repo from the NUC
-  ```
-  sudo git clone http://10.[state].10.19:4000/administrator/rock.git
-  ```
-  or if you have dns setup then
-  ```
-  sudo git clone http://nuc.[state].cmat.lan:4000/administrator/rock.git
-  ```
-
-1. Navigate to the rock bin directory
-  ```
-  cd /opt/rocknsm/rock/bin
-  ```
-
-  > NOTE: The new playbooks in 2.3.0 are made to handle multi node deployments. We will be able to deploy all machines at the same time.
+  > NOTE: The new playbooks in 2.3.0 are made to handle multi node deployments. We will be able to deploy several machines at the same time.
 
 1. Generate a hosts.ini file that so ansible knows where to deploy things `sudo vi /etc/rocknsm/hosts.ini`
 
 1. Insert the following text. These will tell the script what to deploy and where
 ---
 ```
-
 [all]
-  es1.[state].cmat.lan
-  es2.[state].cmat.lan
-  es3.[state].cmat.lan
-  sensor.[state].cmat.lan
+sensor.mo.cmat.lan ansible_host=10.1.10.21 ansible_connection=local
+es1.mo.cmat.lan ansible_host=10.1.10.25 ansible_connection=local
+es2.mo.cmat.lan ansible_host=10.1.10.26 ansible_connection=local
+es3.mo.cmat.lan ansible_host=10.1.10.27 ansible_connection=local
+
+[rock]
+sensor.mo.cmat.lan ansible_host=10.1.10.21 ansible_connection=local
+
+[web]
+es1.mo.cmat.lan ansible_host=10.1.10.25 ansible_connection=local
+es2.mo.cmat.lan ansible_host=10.1.10.26 ansible_connection=local
+es3.mo.cmat.lan ansible_host=10.1.10.27 ansible_connection=local
+
+[sensors:children]
+rock
+
+[bro:children]
+sensors
+
+[fsf:children]
+sensors
+
+[kafka:children]
+sensors
+
+[stenographer:children]
+sensors
+
+[suricata:children]
+sensors
 
 [zookeeper]
-  sensor.[state].cmat.lan
+sensor.mo.cmat.lan ansible_host=10.1.10.21 ansible_connection=local
 
-[kafka]
-  sensor.[state].cmat.lan
+[elasticsearch:children]
+es_masters
+es_data
+es_ingest
 
-[stenographer]
-  sensor.[state].cmat.lan
+[es_masters]
+# This group should only ever contain exactly 1 or 3 nodes!
+#simplerockbuild.simplerock.lan ansible_host=127.0.0.1 ansible_connection=local
+# Multi-node example #
+es[1:3].[state].cmat.lan
 
-[bro]
-  sensor.[state].cmat.lan
+[es_data]
+#simplerockbuild.simplerock.lan ansible_host=127.0.0.1 ansible_connection=local
+# Multi-node example #
+es[1:3].[state].cmat.lan
 
-[Suricata]
-  sensor.[state].cmat.lan
+[es_ingest]
+#simplerockbuild.simplerock.lan ansible_host=127.0.0.1 ansible_connection=local
+# Multi-node example #
+#elasticsearch0[1:4].simplerock.lan
 
-[fsf]
-  sensor.[state].cmat.lan
+[elasticsearch:vars]
+# Disable all node roles by default
+node_master=false
+node_data=false
+node_ingest=false
 
-[docket]
-  sensor.[state].cmat.lan
+[es_masters:vars]
+node_master=true
 
-[kibana]
-  es1.[state].cmat.lan
+[es_data:vars]
+node_data=true
 
-[logstash]
-  es1.[state].cmat.lan
-  es2.[state].cmat.lan
-  es3.[state].cmat.lan
+[es_ingest:vars]
+node_ingest=true
 
-[elasticsearch]
-  es1.[state].cmat.lan
-  es2.[state].cmat.lan
-  es3.[state].cmat.lan
+[docket:children]
+web
+
+[kibana:children]
+web
+
+[logstash:children]
+sensors
+
+[all:vars]
+ansible_sudo_user={see platform management}
+ansible_sudo_pass={see platform management}
+ansible_ssh_user={see platform management}
 
 ```
 
 ---
+
+1. Make a place for the rock iso to live.
+
+  ```
+  sudo mkdir -p /srv/rocknsm
+  ```
 
 1. Deploy the Rock iso to all the the machines in the playbook to prepare for the deployment of rock NSM
 
@@ -162,11 +188,24 @@ ___
   sudo ansible-playbook rockISOPrep.yml
   ```
 
+1. Navigate to the rock bin directory
+  ```
+  cd /srv/rocknsm/
+  ```
+
+1. Copy the contents of the mounted iso so that it can be used for the installation
+
+  ```
+  sudo cp -r /mnt/* /srv/rocknsm
+  ```  
+
+1. Look at the directory using `ls` to ensure that it copied the information fromt he mounted iso image.
+
 1. Generate defaults for rock to deploy with
   ```
-  sudo sh generate_defaults.sh
+  sudo ansible-playbook /opt/rocknsm/rock/playbooks/generate-defaults.yml
   ```
-> NOTE: this generates a config file on the end user machine. that config file isnt what actually gets used for the deployment. The config file on the nuc is the one that gets used for the deployment. These generated config files are useful in making sure you have the correct setting for each of you servers.
+> NOTE: this generates a config file on the end user machine. The config file on the remote machine isnt what actually gets used for the deployment. The config file on the nuc is the one that gets used for the deployment. These generated config files are useful in making sure you have the correct setting for each of you servers.
 
 1. Copy one of the generated config files to use as the base for your deployment. My recommendation is sensor.[state].cmat.lan
 
@@ -261,15 +300,15 @@ ___
   # following (OFFLINE) installation options:
 
   # (OFFLINE) Disable the creation of a local repo file:
-  rock_disable_offline_repo: True
+  rock_disable_offline_repo: False
   # (OFFLINE) Set the path for local repo if doing an OFFLINE installation:
-  rocknsm_local_baseurl: http://nuc.[STATE].cmat.lan/
+  rocknsm_local_baseurl: file:///srv/rocknsm/
   # (OFFLINE) Set to enable or disable GPG checking for local repos:
   # 1 = enabled
   # 0 = disabled
   rock_offline_gpgcheck: 0
   # (OFFLINE) the git repo used to checkout customized ROCK scripts for Bro:
-  bro_rockscripts_repo: https://nuc.[STATE].cmat.lan:4000/administrator/rock-scripts.git
+  bro_rockscripts_repo: file:///srv/rocknsm
 
 
   ###############################################################################
@@ -350,60 +389,38 @@ ___
 
 ___
 
-1.  Create the following directory
+1.  Create the following directory. This will give the deployment script to put the dashboards and scripts.
+
   ```
   sudo mkdir -p /srv/rocknsm/support
   ```
 
-1. `wget` the following files from the nuc to aid in the deployment of ROCK
-
-  1. Grab the rock scripts
-    ```
-    sudo wget http://10.1.10.19:4000/administrator/rock-scripts/archive/master.tar.gz
-    ```
-
-  1. Rename the file.
-    ```
-    sudo mv master.tar.gz rock-scripts_master.tar.gz
-    ```
-
-  1. Grab the rock dashboards
-
-    ```
-    sudo wget http://10.1.10.19:4000/administrator/rock-dashboards/archive/master.tar.gz
-    ```
-
-  1. Rename the file
-    ```
-    sudo mv master.tar.gz rock-dashboards_master.tar.gz
-    ```
-
-1. Copy them to the need directory
-  ```
-  cd
-  ```
-  ```
-  sudo cp ~/rock-dashboards_master.tar.gz /srv/rocknsm/support/rock-dashboards_master.tar.gz
-  ```
-  ```
-  sudo cp ~/rock-scripts_master.tar.gz /srv/rocknsm/support/rock-scripts_master.tar.gz
-  ```
-
-
-1. Navigate to the correct directory and deploy
+1. Deploy against the config file you just created. So if you used the config file for the sensor lets deploy that.
 
   ```
-  cd /opt/rocknsm
-  ```
-
+  sudo ansible-playbooks -l rock /opt/rocknsm/rock/playbooks/deploy-rock.yml
   ```
 
   It should complete with **no** errors
 
 
-___
+1. Adjust the config file `/etc/rocknsm/config.yml` so that data tier can be deployed
+  ```
+  sudo vi /etc/rocknsm.config.yml
+  ```
+1. Copy one of the generated config files to use as the base for your data deployment. My recommendation is es1.[state].cmat.lan
 
+  ```
+  sudo scp admin@es1.[state].cmat.lan:/etc/rocknsm/config.yml /etc/rocknsm/config.yml
+  ```
 
+1. Deploy against the config file you just created. So if you used the config file for the sensor lets deploy that.
+
+  ```
+  sudo ansible-playbooks -l rock /opt/rocknsm/rock/playbooks/deploy-rock.yml
+  ```
+
+  It should complete with **no** errors
 
 1. Open the following ports on the firewall for the elastic machines
 
@@ -411,7 +428,6 @@ ___
   - 9200 TCP - Elasticsearch
   - 5601 TCP - Only on the elasticsearch node that has kibana installed, Likely es1.[STATE].cmat.lan
   - 22 TCP - SSH Access
-
 
   ```
   sudo firewall-cmd --add-port=9300/tcp --permanent
@@ -424,25 +440,6 @@ ___
   ```
 
 1. Restart services with `rock_stop` and the `rock_start`
-
-1. Deploy more nodes as needed.
-
-1. Open the following ports on the firewall for the elastic machines
-
-  - 9300 TCP - Node coordination (I am sure elastic has abetter name for this)
-  - 9200 TCP - Elasticsearch
-  - 5601 TCP - Only on the elasticsearch node that has kibana installed, Likely es1.[STATE].cmat.lan
-  - 22 TCP - SSH Access
-
-
-  ```
-  sudo firewall-cmd --add-port=9300/tcp --permanent
-  ```
-  Reload the firewall config
-
-  ```
-  sudo firewall-cmd --reload
-  ```
 
 1. Restart the stack using `rock_stop` and `rock_start`
 
