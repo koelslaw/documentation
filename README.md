@@ -32,6 +32,7 @@ To walk through the build steps, [check out the README](./topics/README.md).
           - [Hardware Requirements](rocknsm-requirements.md)
           - [RockNSM Sensor](rocknsm-sensor.md)
           - [RockNSM Data Node](rocknsm-datanode.md)
+          - [RockNSM 2.3.0 Deployment](rocknsm2-3-0/README.md)
           - [Connecting the Sensor to the Data Node](rocknsm-configuration.md)
           - [Usage](rocknsm-usage.md)
         - [CAPES](./capes/README.md)

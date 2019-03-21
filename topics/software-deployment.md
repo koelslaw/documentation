@@ -10,6 +10,7 @@ Here we will begin the deployment of that software onto the stack.
 1. [RHEL DNS Server](dns/README.md)
 1. [RockNSM Data Node](rocknsm/README.md)
 1. [RockNSM Sensor Bare Metal](rocknsm/README.md)
+1. [RockNSM 2.3.0 Node Deployment](rocknsm2-3-0/README.md)
 1. [CAPES](capes/README.md)
 1. [GRASSMARLIN](grassmarlin/README.md)
 
