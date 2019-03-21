@@ -84,6 +84,8 @@ ___
 
 1. Generate a hosts.ini file that so ansible knows where to deploy things `sudo vi /etc/rocknsm/hosts.ini`
 
+  > NOTE: If not already done then log into every server that rock will be deployed to so that the key can be added to the ssh hosts file.
+
 1. Insert the following text. These will tell the script what to deploy and where
 ---
 ```

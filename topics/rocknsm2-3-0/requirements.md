@@ -13,4 +13,4 @@ Here's a starting point to get you moving:
 | Storage  | 256GB, with 200+ of that dedicated to /data, SSD preferred      |
 | Network  | 2 gigabit interfaces, one for management and one for collection |
 
-Move on to the [ROCK NSM Node Preperation](rocknsm-NodePrep.md).
+Move on to the [ROCK NSM Node Preperation](rocknsm-Node-Deploy.md).
