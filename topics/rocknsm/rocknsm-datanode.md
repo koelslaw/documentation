@@ -291,7 +291,34 @@ ___
 
 ---
 
-##### /etc/logstash/conf.d/logstash-100-input-kafka-bro.conf
+##### logstash-100-input.conf
+```
+input {
+    kafka {
+    topics => ["bro-raw"]
+    add_field => { "[@metadata][stage]" => "broraw_kafka" }
+    # Set this to one per kafka partition to scale up
+    #consumer_threads => 4
+    group_id => "bro_logstash"
+    bootstrap_servers => "sensor.mo.cmat.lan:9092"
+    codec => json
+    auto_offset_reset => "earliest"
+    }
+    file {
+        codec => "json"
+        path => "/data/suricata/eve.json"
+        add_field => { "[@metadata][stage]" => "suricata_eve" }
+    }
+    file {
+        codec => "json"
+        path => "/data/fsf/rockout.log"
+        add_field => { "[@metadata][stage]" => "fsf" }
+    }
+}
+```
+---
+
+##### logstash-100-input-kafka-bro.conf
 ```
 input {
  kafka {
@@ -300,17 +327,15 @@ input {
    # Set this to one per kafka partition to scale up
    #consumer_threads => 4
    group_id => "bro_logstash"
-   bootstrap_servers => "sensor.[STATE].cmat.lan:9092"
+   bootstrap_servers => "sensor.mo.cmat.lan:9092"
    codec => json
    auto_offset_reset => "earliest"
  }
 }
 ```
-
 ---
 
-##### /etc/logstash/conf.d/logstash-100-input-kafka-fsf.conf
-
+##### logstash-100-input-kafka-fsf.conf
 ```
 input {
  kafka {
@@ -319,17 +344,15 @@ input {
    # Set this to one per kafka partition to scale up
    #consumer_threads => 4
    group_id => "fsf_logstash"
-   bootstrap_servers => "sensor.[STATE].cmat.lan:9092"
+   bootstrap_servers => "sensor.mo.cmat.lan:9092"
    codec => json
    auto_offset_reset => "earliest"
  }
 }
 ```
+---
 
-___
-
-##### /etc/logstash/conf.d/logstash-100-input-kafka-suricata.conf
-
+##### logstash-100-input-kafka-suricata.conf
 ```
 input {
  kafka {
@@ -338,17 +361,194 @@ input {
    # Set this to one per kafka partition to scale up
    #consumer_threads => 4
    group_id => "suricata_logstash"
-   bootstrap_servers => "sensor.[STATE].cmat.lan:9092"
+   bootstrap_servers => "sensor.mo.cmat.lan:9092"
    codec => json
    auto_offset_reset => "earliest"
  }
 }
 ```
+---
 
-___
+##### logstash-500-kafka-bro.conf
+```
+filter {
+  if [@metadata][stage] == "broraw_kafka" {
+    # Tags will determine if there is some sort of parse failure
+    if ![tags] {
+      # Set the timestamp
+      date { match => [ "ts", "ISO8601" ] }
 
-##### /etc/logstash/conf.d/logstash-999-output-es-bro.conf
+      # move metadata to new field
+      mutate {
+        rename => {
+          "@stream" => "[@meta][stream]"
+          "@system" => "[@meta][system]"
+          "@proc"   => "[@meta][proc]"
+        }
+      }
 
+      # Rename ID field from file analyzer logs
+      if [@meta][stream] in ["pe", "x509", "files"] {
+      mutate { rename => { "id" => "fuid" } }
+      mutate {
+      add_field => { "[@meta][event_type]" => "file" }
+      add_field => { "[@meta][id]" => "%{fuid}" }
+      }
+      } else if [@meta][stream] in ["intel", "notice", "notice_alarm", "signatures", "traceroute"] {
+        mutate { add_field => { "[@meta][event_type]" => "detection" } }
+      } else if [@meta][stream] in [ "capture_loss", "cluster", "communication", "loaded_scripts", "packet_filter", "prof", "reporter", "stats", "stderr", "stdout" ] {
+        mutate { add_field => { "[@meta][event_type]" => "diagnostic" } }
+      } else if [@meta][stream] in ["netcontrol", "netcontrol_drop", "netcontrol_shunt", "netcontrol_catch_release", "openflow"] {
+        mutate { add_field => { "[@meta][event_type]" => "netcontrol" } }
+      } else if [@meta][stream] in ["known_certs", "known_devices", "known_hosts", "known_modbus", "known_services", "software"] {
+        mutate { add_field => { "[@meta][event_type]" => "observations" } }
+      } else if [@meta][stream] in ["barnyard2", "dpd", "unified2", "weird"] {
+        mutate { add_field => { "[@meta][event_type]" => "miscellaneous" } }
+      } else {
+
+        # Network type
+        mutate {
+          convert => {
+          "id_orig_p" => "integer"
+          "id_resp_p" => "integer"
+          }
+          add_field => {
+            "[@meta][event_type]" => "network"
+            "[@meta][id]" => "%{uid}"
+            "[@meta][orig_host]" => "%{id_orig_h}"
+            "[@meta][orig_port]" => "%{id_orig_p}"
+            "[@meta][resp_host]" => "%{id_resp_h}"
+            "[@meta][resp_port]" => "%{id_resp_p}"
+          }
+        }
+        geoip {
+          source => "id_orig_h"
+          target => "[@meta][geoip_orig]"
+        }
+        geoip {
+          source => "id_resp_h"
+          target => "[@meta][geoip_resp]"
+        }
+      }
+
+      # Tie related records
+      mutate { add_field => { "[@meta][related_ids]" => [] }}
+      if [uid] {
+        mutate { merge => {"[@meta][related_ids]" => "uid" }}
+      }
+      if [fuid] {
+        mutate { merge => {"[@meta][related_ids]" => "fuid" }}
+      }
+      if [related_fuids] {
+        mutate { merge => { "[@meta][related_ids]" => "related_fuids" }}
+      }
+      if [orig_fuids] {
+        mutate { merge => { "[@meta][related_ids]" => "orig_fuids" }}
+      }
+      if [resp_fuids] {
+        mutate { merge => { "[@meta][related_ids]" => "resp_fuids" }}
+      }
+      if [conn_uids] {
+        mutate { merge => { "[@meta][related_ids]" => "conn_uids" }}
+      }
+      if [cert_chain_fuids] {
+        mutate { merge => { "[@meta][related_ids]" => "cert_chain_fuids" }}
+      }
+
+      # Nest the entire document
+      ruby {
+        code => "
+          require 'logstash/event'
+
+          logtype = event.get('[@meta][stream]')
+          ev_hash = event.to_hash
+          meta_hash = ev_hash['@meta']
+          timestamp = ev_hash['@timestamp']
+
+          # Cleanup duplicate info
+          #meta_hash.delete('stream')
+          ev_hash.delete('@meta')
+          ev_hash.delete('@timestamp')
+          ev_hash.delete('tags')
+
+          result = {
+          logtype => ev_hash,
+          '@meta' => meta_hash,
+          '@timestamp' => timestamp
+          }
+          event.initialize( result )
+        "
+      }
+      mutate { add_field => {"[@metadata][stage]" => "broraw_kafka" } }
+    }
+    else {
+      mutate { add_field => { "[@metadata][stage]" => "_parsefailure" } }
+    }
+  }
+}
+```
+---
+
+##### logstash-500-suricata-es.conf
+```
+filter {
+    if [@metadata][stage] == "suricata_eve" {
+    # Tags will determine if there is some sort of parse failure
+        if ![tags] {
+             mutate { remove_field => ["path"] }
+        }
+        else {
+            mutate { add_field => { "[@metadata][stage]" => "_parsefailure" } }
+        }
+    }
+}
+```
+---
+##### logstash-999-output.conf
+```
+output {
+    if [@metadata][stage] == "broraw_kafka" {
+        kafka {
+        codec => json
+        topic_id => "bro-clean"
+        bootstrap_servers => "sensor.mo.cmat.lan:9092"
+        }
+
+        elasticsearch {
+            hosts => ["127.0.0.1"]
+            index => "bro-%{+YYYY.MM.dd}"
+            document_type => "%{[@meta][event_type]}"
+            manage_template => false
+        }
+    }
+    else if [@metadata][stage] == "suricata_eve" {
+        #stdout { codec => rubydebug }
+        elasticsearch {
+            hosts => ["127.0.0.1"]
+            index => "suricata-%{+YYYY.MM.dd}"
+            document_type => "%{event_type}"
+        }
+    }
+    else if [@metadata][stage] == "fsf" {
+        #stdout { codec => rubydebug }
+        elasticsearch {
+            hosts => ["127.0.0.1"]
+            index => "fsf-%{+YYYY.MM.dd}"
+            document_type => "fsf"
+        }
+    }
+    else if [@metadata][stage] == "_parsefailure" {
+        elasticsearch {
+            hosts => ["127.0.0.1"]
+            index => "parse-failures-%{+YYYY.MM.dd}"
+            document_type => "_parsefailure"
+        }
+    }
+}
+```
+---
+
+###### logstash-999-output-es-bro.conf
 ```
 output {
    if [@metadata][stage] == "broraw_kafka" {
@@ -359,7 +559,7 @@ output {
 #        }
 
        elasticsearch {
-           hosts => ["es[#].[STATE].cmat.lan","es[#].[STATE].cmat.lan","es[#].[STATE].cmat.lan"]
+           hosts => ["es1.mo.cmat.lan","es2.mo.cmat.lan","es3.mo.cmat.lan"]
            index => "bro-%{[@meta][event_type]}-%{+YYYY.MM.dd}"
            template => "/opt/rocknsm/rock/playbooks/files/es-bro-mappings.json"
            document_type => "_doc"
@@ -367,11 +567,9 @@ output {
    }
 }
 ```
+---
 
-___
-
-##### /etc/logstash/conf.d/logstash-999-output-es-fsf.conf
-
+##### logstash-999-output-es-fsf.conf
 ```
 output {
  if [@metadata][stage] == "fsfraw_kafka" {
@@ -382,7 +580,7 @@ output {
 #    }
 
    elasticsearch {
-     hosts => ["es[#].[STATE].cmat.lan","es[#].[STATE].cmat.lan","es[#].[STATE].cmat.lan"]
+     hosts => ["es1.mo.cmat.lan","es2.mo.cmat.lan","es3.mo.cmat.lan"]
      index => "fsf-%{+YYYY.MM.dd}"
      manage_template => false
      document_type => "_doc"
@@ -390,11 +588,9 @@ output {
  }
 }
 ```
+---
 
-___
-
-##### /etc/logstash/conf.d/logstash-999-output-es-suricata.conf
-
+##### logstash-999-output-es-suricata.conf
 ```
 output {
  if [@metadata][stage] == "suricataraw_kafka" {
@@ -405,7 +601,7 @@ output {
 #    }
 
    elasticsearch {
-     hosts => ["es[#].[STATE].cmat.lan","es[#].[STATE].cmat.lan","es[#].[STATE].cmat.lan"]
+     hosts => ["es1.mo.cmat.lan","es2.mo.cmat.lan","es3.mo.cmat.lan"]
      index => "suricata-%{+YYYY.MM.dd}"
      manage_template => false
      document_type => "_doc"
@@ -413,8 +609,7 @@ output {
  }
 }
 ```
-
-___
+---
 
 ##### /etc/elasticsearch/elasticsearch.yml
 
@@ -436,7 +631,7 @@ ___
 #
 # Use a descriptive name for your cluster:
 #
-cluster.name: es[#]
+cluster.name: rocknsm
 #
 # ------------------------------------ Node ------------------------------------
 #
