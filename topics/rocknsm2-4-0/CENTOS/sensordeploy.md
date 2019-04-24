@@ -1,4 +1,4 @@
-# RockNSM Data Node
+# RockNSM Deploymenmt
 This will cover the deployment of the RockNSM sensor/data node elements. This installation is for the ROCKNSM iso.
 
 ## Prereqs
@@ -81,6 +81,7 @@ Generate a hosts.ini file that so ansible knows where to deploy things sudo vi /
 
 1. Insert the following text. These will tell the script what to deploy and where
 
+
 ```
 sensor.[state].cmat.lan ansible_host=10.[state].10.21 ansible_connection=local
 es1.[state].cmat.lan ansible_host=10.[state].10.25 ansible_connection=local
@@ -154,7 +155,9 @@ web
 [logstash:children]
 sensors
 ```
-Most of the Rock configuration is now automated and can be called from anywhere on the os. Below are the options. Run `sudo rock ssh-config` to setup all the hosts prior to deploying.  
+
+Most of the Rock configuration is now automated and can be called from anywhere on the os. Below are the options. Run `sudo rock ssh-config` to setup all the hosts prior to deploying.
+  
 ```
 [admin@sensor ~]$ sudo rock help
 Usage: /sbin/rock COMMAND [options]
@@ -192,26 +195,26 @@ Options:
 1. Start the interactive text interface for setup using `sudo rock tui`
 
 1. Select "Select Interfaces". This allows you to choose which interface that you will manage and capture with.
-![](../../../../images/installationtype.png){#id .class width=70%}
+![](../../../images/installationtype.png){#id .class width=70%}
 
 1. Choose you management interface
-![](../../../../images/mgmtinterface.png){#id .class width=70%}
+![](../../../images/mgmtinterface.png){#id .class width=70%}
 
 1. Choose you capture interface(s).
-![](../../../../images/captureinterface.png){#id .class width=70%}
+![](../../../images/captureinterface.png){#id .class width=70%}
 > NOTE: Any interface you set for cature will spawn a Bro/Zeek, Surcata, and FSF process. So if you dont intend on using the interface do not set it for capture.
 
 1. You will then be forwarded to the interface summary screen. make sure all the things are to your satisfaction
 ![](../../../images/interfacesummary.png){#id .class width=70%}
 
 1. Once it has returned to the installation setup screen then choose the  "Offline/Online" installation option. This tells the installation playbook where to pull the packages. As these kits are meant to be offline we will choose the offline installation option.
-![](../../../images/installation type.png){#id .class width=70%}
+![](../../../images/installationtype.png){#id .class width=70%}
 
 1. Choose "No" for the offline installation.
 ![](../../../images/installationselection.png){#id .class width=70%}
 
 1. Once it has returned to the installation setup screen then choose the  "Choose Components" installation option.
-![](../../../images/installation type.png){#id .class width=70%}
+![](../../../images/installationtype.png){#id .class width=70%}
 
 1. Here is where you decide what capabilities your sensor will have. If you are low on resources the the recommendation is to disable docket and stenographer. Otherwise just enable everything.
 ![](../../../images/RockComponnents.png){#id .class width=70%}
