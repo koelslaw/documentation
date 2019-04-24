@@ -147,5 +147,5 @@ Packets arrive at the Gigamon Visibility Platform at network ports and are direc
   - Link Failure Propagation: Checked
 9. At this point if you ssh into your sensor.[state].cmat.lan machine will start recieving traffic.
 
-
 Move onto [Network Configuration](../network/README.md)
+Move onto [ER Span Tunnel Config](../gigamon/erspan.md)

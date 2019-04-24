@@ -1,0 +1,2 @@
+# ERSPAN Tunneling
+This a very CPU and bandwidth intensive process. It serves the same function as a normal span port on a switch but is routes it over Layer 3 UDP instead of staying on layer 2 like a normal. If possible, it is better to have the kit located in the same location as the network being responded to. In that way you are just forwarding the user interface traffic over a remote connection.
