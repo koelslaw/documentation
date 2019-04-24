@@ -274,6 +274,6 @@ Physical Port Assignments to VLANs
 |50  |Internal to switch  |Management interface for wireless AP|
 |60  |Internal to switch  |DHCP Pool for Clients|
 
-![](../images/netlayout.png){#id .class width=70%}  
+![](../images/netlayout.png)  
 
 Move onto [Hardware Configuration](hardware-configuration.md)

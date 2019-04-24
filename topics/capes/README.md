@@ -105,7 +105,7 @@ That said, there is a deploy script for each of the services that you should be 
     1. Click `Begin Installation`
     1. We're not going to set a Root passphrase because you will never, ever need it. Ever. Not setting a passphrase locks the Root account.
     1. Create a user from the [../platform-management.md](Platform Management) page, but ensure that you toggle the `Make this user administrator` checkbox
-    ![](../../images/admin-user.jpg){#id .class width=70%}
+    ![](../../images/admin-user.jpg)
     1. Once the installation is done, click the `Reboot` button in the bottom right to...well...reboot
     1. Login using the account you created during the Anaconda setup
 

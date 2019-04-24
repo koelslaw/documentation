@@ -16,7 +16,7 @@ If you have not already done so, press the chassis power button to turn it on. T
 1. Connect a network cable to one of the management ports on the back of the CMC.
 
 > Note: There are redundant management interfaces. Either one will work. If you only have 1 plugged in, you'll get a warning when you log into the webUI but it isn't a problem. To make the warning go away, plug the CMC into [an appropriate switch port in VLAN10](../hardware-assembly.md).
-![](../../images/cmc-management.png){#id .class width=70%}
+![](../../images/cmc-management.png)
 > Management port highlighted purple  
 
 1. Set your local IP address to be in the same subnet as the management IP you configured above.
@@ -25,15 +25,15 @@ If you have not already done so, press the chassis power button to turn it on. T
 
 In the CMC, go to the I/O Module Overview. In the line for the `R1-2210 VRTX 10Gb Switch`, click the `Launch I/O Module GUI`.
 
-![](../../images/cmc-gui-launch.png){#id .class width=70%}
+![](../../images/cmc-gui-launch.png)
 
-![](../../images/cmc-network-administrator.png){#id .class width=70%}
+![](../../images/cmc-network-administrator.png)
 
 ## Add VLANs
 
 Expand in the sidebar to `Switching -> VLAN -> VLAN Membership`. Then click `Add` to create new VLANs on the switch.
 
-![](../../images/cmc-vlan-membership.png){#id .class width=70%}
+![](../../images/cmc-vlan-membership.png)
 
 Add the following VLANs:
 
@@ -44,26 +44,26 @@ Add the following VLANs:
 
 ## Create Link Aggregation Groups (LAGs)
 
-![](../../images/cmc-lag-membership.png){#id .class width=70%}
+![](../../images/cmc-lag-membership.png)
 
 Create LAG groups with LACP for each of the internal server slots, and also the external 10G ports. This should result in a configuration that looks like the following:
 
-![](../../images/cmc-lag-configuration.png){#id .class width=70%}
+![](../../images/cmc-lag-configuration.png)
 
 ## Configure VLAN Trunking and Access ports
 
 The LAG for the sensor blades (1 and 2) will be access ports in VLAN 10. You have to remove VLAN 1 from the VLAN list first, then you can set it to 10. The resulting configuration should look like this.
 
-![](../../images/cmc-access-port.png){#id .class width=70%}
+![](../../images/cmc-access-port.png)
 
 The LAG for the hypervisor blades and external LAG will operate in trunk mode with no native VLANs.
 
-![](../../images/cmc-trunk-settings.png){#id .class width=70%}
+![](../../images/cmc-trunk-settings.png)
 
 The end result summary should look like the following.
 
 > Note:: You can change the VLAN in this view to see the settings per each VLAN. `T` means that VLAN will be tagged on that port. `U` means it will be untagged on that port. Blank means it is an access port in that VLAN. A trunk port should have all VLANs that you wish to pass with a setting of `T`.
 
-![](../../images/cmc-final-vlan-membership.png){#id .class width=70%}
+![](../../images/cmc-final-vlan-membership.png)
 
 Move onto [Software Deployment](../software-deployment.md)  

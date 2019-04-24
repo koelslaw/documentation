@@ -46,7 +46,7 @@ When you browse to Gitea for the first time, you'll enter a post-installation co
 * Use the explicit IP of the Gitea server instead of `localhost` for the `Domain` and `Application URL` fields  
 * Under `Server and other Services Settings` check the `Disable Avatar Service` box  
 
-![gitea install](img/install.png){#id .class width=70%}
+![gitea install](img/install.png)
 
 ##### Configure SSH Usage
 

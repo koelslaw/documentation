@@ -1,9 +1,9 @@
 # System Arch
 
 ## Rock Specific Arch
-![](../images/single_architecture-2.png){#id .class width=70%}
+![](../images/single_architecture-2.png)
 
 ## CMAT Data Flow
-![](../images/cmatdataflow.jpg){#id .class width=70%}
+![](../images/cmatdataflow.jpg)
 
 Move onto [Software Components](software-components.md)

@@ -8,15 +8,15 @@ These CLI functions are accomplished with `rockctl  {start|stop|status}`.
 
 - `rockctl status`
 
-![](https://asciinema.org/a/z9qgFqFTr9HoeSMpX2gKWXqng.png){#id .class width=70%}
+![](https://asciinema.org/a/z9qgFqFTr9HoeSMpX2gKWXqng.png)
 
 - `rockctl start`
 
-![](https://asciinema.org/a/QAxK2iiWEw2bFRKUc5JFri3n9.png){#id .class width=70%}
+![](https://asciinema.org/a/QAxK2iiWEw2bFRKUc5JFri3n9.png)
 
 - `rockctl stop`
 
-![](https://asciinema.org/a/ME56ahRQrj3qmrynGzCc47GyM.png){#id .class width=70%}
+![](https://asciinema.org/a/ME56ahRQrj3qmrynGzCc47GyM.png)
 
 ## Key web interfaces
 

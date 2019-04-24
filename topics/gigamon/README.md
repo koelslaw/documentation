@@ -6,7 +6,7 @@ Before you start, ensure that your Gigamon is [properly racked](../hardware-asse
 
 1. With a Mac or Linux system, connect a Console cable to the Console port of the Gigamon  
 
-![](../../images/gigamon-console.png){#id .class width=70%}  
+![](../../images/gigamon-console.png)  
 
 > Console port highlighted purple
 
@@ -75,7 +75,7 @@ tap.[state].cmat.lan (config) # username admin|monitor|operator password
 # Initial Configuration (WebUI)
 9. Connect a network cable to the management port on the front of the Gigamon
 
-![](../../images/gigamon-management.png){#id .class width=70%}
+![](../../images/gigamon-management.png)
 
 > Management port highlighted purple  
 
@@ -89,20 +89,20 @@ It should be noted, these next steps...are silly. Don't blame us.
 
 13. You will notice that the interfaces are not configured and it is not inherently obvious how to enable them.
 
-![](../../images/gigamon-unconfigured.png){#id .class width=70%}  
+![](../../images/gigamon-unconfigured.png)  
 
 > Unconfigured Gigamon interfaces
 
 14. You can either right-click on the image and select `Configure` or switch from "Chassis View" to "List View" and then select your interfaces and `Configure` them.
 
-![](../../images/gigamon-rightclick-configure.png){#id .class width=70%}  
+![](../../images/gigamon-rightclick-configure.png)  
 
-![](../../images/gigamon-menu-configure.png){#id .class width=70%}  
+![](../../images/gigamon-menu-configure.png)  
 
 > Configuration options for the interfaces
 
 15. Your interfaces should all have come up as Network Ports
-![](../../images/gigamon-configured.png){#id .class width=70%}
+![](../../images/gigamon-configured.png)
 > Configured Gigamon interfaces
 
 ## Port Types
