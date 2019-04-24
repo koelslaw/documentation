@@ -24,16 +24,17 @@ To walk through the build steps, [check out the README](./topics/README.md).
     - [Network Configuration](network/README.md)
     - [Dell R840 Configuration](dell/README.md)
 - [Software Deployment](./topics/software-deployment.md)
-    -  Infrastructure
+    - Infrastructure
         - [ESXi](vmware/README.md)
     - Passive Software Deployment
         - [RHEL DNS Server](./dns/README.md)
         - [RockNSM](./rocknsm/README.md)
           - [Hardware Requirements](rocknsm-requirements.md)
-          - [RockNSM Sensor](rocknsm-sensor.md)
-          - [RockNSM Data Node](rocknsm-datanode.md)
-          - [RockNSM 2.3.0 Deployment](rocknsm2-3-0/README.md)
-          - [Connecting the Sensor to the Data Node](rocknsm-configuration.md)
+          - [Rock NSM 2.2.x](./topics/rocknsm/rocknsm2-2-0/README.md)
+          - [Rock NSM 2.3.x](./topics/rocknsm/rocknsm2-3-0/README.md)
+          - Rock NSM 2.4.x
+            - [Rock NSM 2.4.x (CENTOS)](./topics/rocknsm/rocknsm2-4-0/CENTOS/README.md)
+            - [Rock NSM 2.4.x (RHEL)](./topics/rocknsm/rocknsm2-4-0/RHEL/README.md)
           - [Usage](rocknsm-usage.md)
         - [CAPES](./capes/README.md)
         - [GRASSMARLIN](./grassmarlin/README.md)
