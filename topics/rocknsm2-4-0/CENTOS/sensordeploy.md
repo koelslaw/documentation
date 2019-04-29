@@ -63,6 +63,33 @@ Install OS in accordance with RHEL Documentation
 #### Sync the Clocks across all machines
 Due to the nature of virtual machines we have to keep the VMs and Baremetal equipment in sync. To this we set the sensor as the authority for time for the rest of the kit. We do this for a couple of reasons the biggest being that its is where the time-based data is generated from zeek(Bro), FSF, and Suricata. Aligning the rest of the stack along this guideline keeps us from writing events in the future. all events should be written in UTC to help with response across timezones. This is done via chrony.
 
+1. If you have any time-based services running turn them off. Otherwise continue if this a new installation as we have not deployed ROCK yet.
+
+1. If not already installed then install chrony
+```
+sudo yum install chrony
+```
+
+1. Edit the config file with `vi`
+```
+sudo vi /etc/chrony.conf
+```
+
+1. **Time Server (Likely Sensor)** Uncomment/edit the following line in the the `/etc/chrony.conf`
+```
+allow 10.[state].10.0/24  
+```
+
+1. **Time Cleint (Everything not the Sensor Server)** Uncomment all the time servers and point it to `sensor.[state].cmat.lan` or the IP address.
+```
+server 192.0.2.1 iburst
+```
+
+1. Start and enable the service.
+```
+sudo systemctl enable --now chronyd
+```
+
 1. Add ntp to the firewall on sensor
 ```
 sudo firewall-cmd --add-service=ntp --zone=work --permanent
@@ -71,6 +98,10 @@ sudo firewall-cmd --add-service=ntp --zone=work --permanent
 1. Reload the firewall
 ```
 sudo firewall-cmd --reload
+```
+1. Verify on all the applicable clients that they can talk to the server for time.
+```
+ chronyc sources
 ```
 
 #### Deployment of Rock across All Machines
@@ -87,6 +118,8 @@ sensor.[state].cmat.lan ansible_host=10.[state].10.21 ansible_connection=local
 es1.[state].cmat.lan ansible_host=10.[state].10.25 ansible_connection=local
 es2.[state].cmat.lan ansible_host=10.[state].10.26 ansible_connection=local
 es3.[state].cmat.lan ansible_host=10.[state].10.27 ansible_connection=local
+# If you have any other sensor or data nodes then you would place them in the list above.
+
 
 [rock]
 sensor.[state].cmat.lan
@@ -157,7 +190,7 @@ sensors
 ```
 
 Most of the Rock configuration is now automated and can be called from anywhere on the os. Below are the options. Run `sudo rock ssh-config` to setup all the hosts prior to deploying.
-  
+
 ```
 [admin@sensor ~]$ sudo rock help
 Usage: /sbin/rock COMMAND [options]
@@ -234,7 +267,7 @@ Options:
 
   - 9300 TCP - Node coordination (I am sure elastic has abetter name for this)
   - 9200 TCP - Elasticsearch
-  - 5601 TCP - Only on the elasticsearch node that has kibana installed, Likely es1.[STATE].cmat.lan
+  - 5601 TCP - Only on the Elasticsearch node that has Kibana installed, Likely es1.[STATE].cmat.lan
   - 22 TCP - SSH Access
   ```
   sudo firewall-cmd --add-port=9300/tcp --permanent
@@ -248,13 +281,46 @@ sudo firewall-cmd --reload
 1. Ensure the following ports on the firewall are open for the sensor
   - 1234 tcp/udp - NTP
   - 22 TCP - SSH Access
+  - 9092 TCP - Kafka
   ```
-  sudo firewall-cmd --add-port=9300/tcp --permanent
+  sudo firewall-cmd --add-port=22/tcp --permanent
   ```
 
 1. Reload the firewall config
 ```
 sudo firewall-cmd --reload
+```
+
+1. Check the Suricata `threads` per interface. This is so Suricata doesn't compete with bro for cpu threads
+```
+%YAML 1.1
+---
+default-rule-path: "/var/lib/suricata/rules"
+rule-files:
+  - suricata.rules
+
+af-packet:
+  - interface: em4
+    threads: 4   <--------
+    cluster-id: 99
+    cluster-type: cluster_flow
+    defrag: yes
+    use-mmap: yes
+    mmap-locked: yes
+    #rollover: yes
+    tpacket-v3: yes
+    use-emergency-flush: yes
+  - interface: em3
+    threads: 4 <---------
+    cluster-id: 98
+    cluster-type: cluster_flow
+    defrag: yes
+    use-mmap: yes
+    mmap-locked: yes
+    #rollover: yes
+    tpacket-v3: yes
+    use-emergency-flush: yes
+default-log-dir: /data/suricata
 ```
 
 
