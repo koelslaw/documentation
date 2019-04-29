@@ -300,7 +300,7 @@ input {
     # Set this to one per kafka partition to scale up
     #consumer_threads => 4
     group_id => "bro_logstash"
-    bootstrap_servers => "sensor.mo.cmat.lan:9092"
+    bootstrap_servers => "sensor.[state].cmat.lan:9092"
     codec => json
     auto_offset_reset => "earliest"
     }
@@ -327,7 +327,7 @@ input {
    # Set this to one per kafka partition to scale up
    #consumer_threads => 4
    group_id => "bro_logstash"
-   bootstrap_servers => "sensor.mo.cmat.lan:9092"
+   bootstrap_servers => "sensor.[state].cmat.lan:9092"
    codec => json
    auto_offset_reset => "earliest"
  }
@@ -344,7 +344,7 @@ input {
    # Set this to one per kafka partition to scale up
    #consumer_threads => 4
    group_id => "fsf_logstash"
-   bootstrap_servers => "sensor.mo.cmat.lan:9092"
+   bootstrap_servers => "sensor.[state].cmat.lan:9092"
    codec => json
    auto_offset_reset => "earliest"
  }
@@ -361,7 +361,7 @@ input {
    # Set this to one per kafka partition to scale up
    #consumer_threads => 4
    group_id => "suricata_logstash"
-   bootstrap_servers => "sensor.mo.cmat.lan:9092"
+   bootstrap_servers => "sensor.[state].cmat.lan:9092"
    codec => json
    auto_offset_reset => "earliest"
  }
@@ -511,7 +511,7 @@ output {
         kafka {
         codec => json
         topic_id => "bro-clean"
-        bootstrap_servers => "sensor.mo.cmat.lan:9092"
+        bootstrap_servers => "sensor.[state].cmat.lan:9092"
         }
 
         elasticsearch {
@@ -559,7 +559,7 @@ output {
 #        }
 
        elasticsearch {
-           hosts => ["es1.mo.cmat.lan","es2.mo.cmat.lan","es3.mo.cmat.lan"]
+           hosts => ["es1.[state].cmat.lan","es2.[state].cmat.lan","es3.[state].cmat.lan"]
            index => "bro-%{[@meta][event_type]}-%{+YYYY.MM.dd}"
            template => "/opt/rocknsm/rock/playbooks/files/es-bro-mappings.json"
            document_type => "_doc"
@@ -580,7 +580,7 @@ output {
 #    }
 
    elasticsearch {
-     hosts => ["es1.mo.cmat.lan","es2.mo.cmat.lan","es3.mo.cmat.lan"]
+     hosts => ["es1.[state].cmat.lan","es2.[state].cmat.lan","es3.[state].cmat.lan"]
      index => "fsf-%{+YYYY.MM.dd}"
      manage_template => false
      document_type => "_doc"
@@ -601,7 +601,7 @@ output {
 #    }
 
    elasticsearch {
-     hosts => ["es1.mo.cmat.lan","es2.mo.cmat.lan","es3.mo.cmat.lan"]
+     hosts => ["es1.[state].cmat.lan","es2.[state].cmat.lan","es3.[state].cmat.lan"]
      index => "suricata-%{+YYYY.MM.dd}"
      manage_template => false
      document_type => "_doc"
@@ -735,7 +735,7 @@ server.host: "0.0.0.0"
 #server.maxPayloadBytes: 1048576
 
 # The Kibana server's name.  This is used for display purposes.
-#server.name: "10.1.10.27"
+#server.name: "10.[state].10.27"
 
 # The URL of the Elasticsearch instance to use for all your queries.
 elasticsearch.url: "http://0.0.0.0:9200"
@@ -1063,7 +1063,7 @@ sudo mkdir -p /srv/rocknsm/support
 
   1. Grab the rock scripts
     ```
-    sudo wget http://10.1.10.19:4000/administrator/rock-scripts/archive/master.tar.gz
+    sudo wget http://10.[state].10.19:4000/administrator/rock-scripts/archive/master.tar.gz
     ```
 
   1. Rename the file.
@@ -1074,7 +1074,7 @@ sudo mkdir -p /srv/rocknsm/support
   1. Grab the rock dashboards
 
     ```
-    sudo wget http://10.1.10.19:4000/administrator/rock-dashboards/archive/master.tar.gz
+    sudo wget http://10.[state].10.19:4000/administrator/rock-dashboards/archive/master.tar.gz
     ```
 
   1. Rename the file
@@ -1368,7 +1368,7 @@ server.host: "0.0.0.0"
 #server.maxPayloadBytes: 1048576
 
 # The Kibana server's name.  This is used for display purposes.
-#server.name: "10.1.10.27"
+#server.name: "10.[state].10.27"
 
 # The URL of the Elasticsearch instance to use for all your queries.
 elasticsearch.url: "http://0.0.0.0:9200"

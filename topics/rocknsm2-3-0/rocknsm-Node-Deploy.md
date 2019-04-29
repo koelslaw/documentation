@@ -90,18 +90,18 @@ ___
 ---
 ```
 [all]
-sensor.mo.cmat.lan ansible_host=10.1.10.21 ansible_connection=local
-es1.mo.cmat.lan ansible_host=10.1.10.25 ansible_connection=local
-es2.mo.cmat.lan ansible_host=10.1.10.26 ansible_connection=local
-es3.mo.cmat.lan ansible_host=10.1.10.27 ansible_connection=local
+sensor.[state].cmat.lan ansible_host=10.[state].10.21 ansible_connection=local
+es1.[state].cmat.lan ansible_host=10.[state].10.25 ansible_connection=local
+es2.[state].cmat.lan ansible_host=10.[state].10.26 ansible_connection=local
+es3.[state].cmat.lan ansible_host=10.[state].10.27 ansible_connection=local
 
 [rock]
-sensor.mo.cmat.lan ansible_host=10.1.10.21 ansible_connection=local
+sensor.[state].cmat.lan ansible_host=10.[state].10.21 ansible_connection=local
 
 [web]
-es1.mo.cmat.lan ansible_host=10.1.10.25 ansible_connection=local
-es2.mo.cmat.lan ansible_host=10.1.10.26 ansible_connection=local
-es3.mo.cmat.lan ansible_host=10.1.10.27 ansible_connection=local
+es1.[state].cmat.lan ansible_host=10.[state].10.25 ansible_connection=local
+es2.[state].cmat.lan ansible_host=10.[state].10.26 ansible_connection=local
+es3.[state].cmat.lan ansible_host=10.[state].10.27 ansible_connection=local
 
 [sensors:children]
 rock
@@ -122,7 +122,7 @@ sensors
 sensors
 
 [zookeeper]
-sensor.mo.cmat.lan ansible_host=10.1.10.21 ansible_connection=local
+sensor.[state].cmat.lan ansible_host=10.[state].10.21 ansible_connection=local
 
 [elasticsearch:children]
 es_masters

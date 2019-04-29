@@ -47,7 +47,7 @@ clock calendar-valid
 !
 !
 !
-ip host switch.[State].cmat.lan 10.1.10.3
+ip host switch.[State].cmat.lan 10.[state].10.3
 !
 !
 !
@@ -167,13 +167,13 @@ interface GigabitEthernet0/0/1
 interface GigabitEthernet0/0/1.2
  description xr_routing
  encapsulation dot1Q 2
- ip address 10.1.2.1 255.255.255.0
+ ip address 10.[state].2.1 255.255.255.0
  ip nat inside
 !
 interface GigabitEthernet0/0/1.20
  description Active Network
  encapsulation dot1Q 20
- ip address 10.1.20.1 255.255.255.0
+ ip address 10.[state].20.1 255.255.255.0
 !
 interface GigabitEthernet0
  vrf forwarding Mgmt-intf
@@ -183,8 +183,8 @@ interface GigabitEthernet0
 !
 router eigrp 100
  network 0.0.0.0
- network 10.1.2.0 0.0.0.255
- network 10.1.20.0 0.0.0.255
+ network 10.[state].2.0 0.0.0.255
+ network 10.[state].20.0 0.0.0.255
  redistribute static
  redistribute connected
  passive-interface GigabitEthernet0/0/0

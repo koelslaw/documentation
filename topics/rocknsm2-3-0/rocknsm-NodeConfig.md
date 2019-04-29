@@ -253,7 +253,7 @@ server.host: "0.0.0.0"
 #server.maxPayloadBytes: 1048576
 
 # The Kibana server's name.  This is used for display purposes.
-#server.name: "10.1.10.27"
+#server.name: "10.[state].10.27"
 
 # The URL of the Elasticsearch instance to use for all your queries.
 elasticsearch.url: "http://0.0.0.0:9200"
@@ -599,7 +599,7 @@ server.host: "0.0.0.0"
 #server.maxPayloadBytes: 1048576
 
 # The Kibana server's name.  This is used for display purposes.
-#server.name: "10.1.10.27"
+#server.name: "10.[state].10.27"
 
 # The URL of the Elasticsearch instance to use for all your queries.
 elasticsearch.url: "http://0.0.0.0:9200"
