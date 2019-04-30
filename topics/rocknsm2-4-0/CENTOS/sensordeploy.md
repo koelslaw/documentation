@@ -13,7 +13,7 @@ When you boot the installer, called Anaconda. Before it boots, press and append 
 
   net.ifnames=0 vga=791
 
-Install OS in accordance with RHEL Documentation
+Install CENTOS in accordance with RHEL Documentation
 
 ---
 
@@ -327,4 +327,4 @@ default-log-dir: /data/suricata
 
 1. Restart services with `sudo rock stop` and the `sudo rock start`
 
-Move onto [USAGE](../topics/rocknsm/rocknsm2-4-0/CENTOS/rocknsm-usage.md)
+Move onto [USAGE](../rocknsm-usage.md)
