@@ -1,4 +1,4 @@
-# RockNSM Deploymenmt
+# RockNSM Deployment
 This will cover the deployment of the RockNSM sensor/data node elements. This installation is for the ROCKNSM iso.
 
 ## Prereqs
@@ -291,7 +291,7 @@ sudo firewall-cmd --reload
 sudo firewall-cmd --reload
 ```
 
-1. Check the Suricata `threads` per interface. This is so Suricata doesn't compete with bro for cpu threads
+1. Check the Suricata `threads` per interface. This is so Suricata doesn't compete with bro for cpu threads in `etc/suricata/rock-overrides.yml`
 ```
 %YAML 1.1
 ---
@@ -310,17 +310,6 @@ af-packet:
     #rollover: yes
     tpacket-v3: yes
     use-emergency-flush: yes
-  - interface: em3
-    threads: 4 <---------
-    cluster-id: 98
-    cluster-type: cluster_flow
-    defrag: yes
-    use-mmap: yes
-    mmap-locked: yes
-    #rollover: yes
-    tpacket-v3: yes
-    use-emergency-flush: yes
-default-log-dir: /data/suricata
 ```
 
 
