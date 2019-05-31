@@ -80,6 +80,16 @@ sudo vi /etc/chrony.conf
 allow 10.[state].10.0/24  
 ```
 
+1. Add ntp to the firewall on sensor
+```
+sudo firewall-cmd --add-service=ntp --zone=work --permanent
+```
+
+1. Reload the firewall
+```
+sudo firewall-cmd --reload
+```
+
 1. **Time Cleint (Everything not the Sensor Server)** Uncomment all the time servers and point it to `sensor.[state].cmat.lan` or the IP address.
 ```
 server 192.0.2.1 iburst
@@ -225,6 +235,8 @@ Options:
 --tags, -t <tags>                  Only run plays and tasks tagged with these values
 --verbose, -v                      Increase verbosity of ansible-playbook
 ```
+1. Setup you ssh access to you machine using sudo rock ssh-config command or using sudo rock tui for the Text user interfaces
+
 1. Start the interactive text interface for setup using `sudo rock tui`
 
 1. Select "Select Interfaces". This allows you to choose which interface that you will manage and capture with.
@@ -260,7 +272,7 @@ Options:
 
 1. Once it has returned to the installation setup screen then choose the  "Run Installer" installation option.
 
-1. Setup you ssh access to you machine using sudo rock ssh-config command or using sudo rock tui for the Text user interfaces
+
 **It should complete with no errors**
 
 1. Ensure the following ports on the firewall are open for the data nodes
