@@ -19,29 +19,36 @@ To walk through the build steps, [check out the README](./topics/README.md).
 - [Hardware Components](./topics/hardware-components.md)
 - [Hardware Assembly](./topics/hardware-assembly.md)
 - [Hardware Configuration](./topics/hardware-configuration.md)
-    - [Intel Nuc Configuration](nuc/README.md)
-    - [Gigamon Configuration](gigamon/README.md)
-    - [Network Configuration](network/README.md)
-    - [Dell R840 Configuration](dell/README.md)
+  - [Intel Nuc Configuration](nuc/README.md)
+  - [Gigamon Configuration](gigamon/README.md)
+  - [Network Configuration](network/README.md)
+  - [Dell R840 Configuration](dell/README.md)
 - [Software Deployment](./topics/software-deployment.md)
-    - Infrastructure
-        - [ESXi](vmware/README.md)
-    - Passive Software Deployment
-        - [RHEL DNS Server](./dns/README.md)
-        - [RockNSM](./rocknsm/README.md)
-          - [Hardware Requirements](rocknsm-requirements.md)
-          - [Rock NSM 2.2.x](./topics/rocknsm2-2-0/README.md)
-          - [Rock NSM 2.3.x](./topics/rocknsm2-3-0/README.md)
-          - Rock NSM 2.4.x
-            - [Rock NSM 2.4.x (CENTOS)](./topics/rocknsm2-4-0/CENTOS/README.md)
-            - [Rock NSM 2.4.x (RHEL)](./topics/rocknsm2-4-0/RHEL/README.md)
-          - [Usage](rocknsm-usage.md)
-        - [CAPES](./capes/README.md)
-        - [GRASSMARLIN](./grassmarlin/README.md)
-    - Active Software Deployment
-        - [OpenVAS](./openvas/README.md)
-        - [Nmap](./nmap/README.md)
-        - [BlueScope](./bluescope/README.md)
+  - Infrastructure
+    - [ESXi](vmware/README.md)
+  - Passive Software Deployment
+    - [RHEL DNS Server](./dns/README.md)
+    - [RockNSM](./rocknsm/README.md)
+      - [Hardware Requirements](rocknsm-requirements.md)
+      - [Rock NSM 2.2.x](./topics/rocknsm2-2-0/README.md)
+      - [Rock NSM 2.3.x](./topics/rocknsm2-3-0/README.md)
+      - Rock NSM 2.4.x
+        - [Rock NSM 2.4.x (CENTOS)](./topics/rocknsm2-4-0/CENTOS/README.md)
+        - [Rock NSM 2.4.x (RHEL)](./topics/rocknsm2-4-0/RHEL/README.md)
+      - [Usage](rocknsm-usage.md)
+    - [CAPES](./capes/README.md)
+    - [GRASSMARLIN](./grassmarlin/README.md)
+  - Active Software Deployment
+    - [ACAS](./acas/README.md) - *Not opensource but **may** be available*
+    - [OpenVAS](./openvas/README.md)
+    - [Nmap](./nmap/README.md)
+    - [BlueScope](./bluescope/README.md) *Not opensource but **may** be available*
+  - Other Tools **MAY NOT BE PASSIVE IN NATURE**
+    - Reverse Engineering
+      - [Ghidra](./ghidra/README.md)
+    - Windows Event Logging with native Tools
+      - [WEFFLES](https://blogs.technet.microsoft.com/jepayne/2017/12/08/weffles/)
+
 - [APPDX1 Network Layout](./topics/network/network-layout.md)
 - [APPDX2 Function Check](./topics/function-check.md)
 - [APPDX3 Platform Management (IPs, hostnames, creds, etc.)](./topics/platform-management.md)
