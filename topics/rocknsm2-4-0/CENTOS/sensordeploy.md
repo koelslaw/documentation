@@ -136,8 +136,6 @@ sensor.[state].cmat.lan
 
 [web]
 es1.[state].cmat.lan
-es2.[state].cmat.lan
-es3.[state].cmat.lan
 
 [sensors:children]
 rock
