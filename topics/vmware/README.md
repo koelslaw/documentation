@@ -109,7 +109,7 @@ Virtual Machine Port Group for a Standard Switch
 1. Customize the VM  
   - CPU: `2`  
   - Memory: `3 GB`,  Reserved
-  - Hard disk 1: `50 GB`  
+  - Hard disk 1: `500 GB`  
   - SCSI Controller 0: Leave default  
   - SATA Controller 0: Leave default  
   - USB controller 1:  Leave default  
