@@ -7,39 +7,39 @@ Prereqs:
 
 ## Disable FIPS to allow Deployment on all components
 
-1. Remove the dracut-fips* packages
+- Remove the dracut-fips* packages
 ```
 sudo yum remove dracut-fips\*
 ```
 
-1. Backup existing FIPS initramfs
+- Backup existing FIPS initramfs
 ```
 sudo mv -v /boot/initramfs-$(uname -r).img{,.FIPS-bak}
 ```
 
-1. Run dracut to rebuild the initramfs
+- Run dracut to rebuild the initramfs
 ```
 sudo dracut
 ```
 
-1. Run Grubby
+- Run Grubby
 ```
 sudo grubby --update-kernel=ALL --remove-args=fips=1
 ```
 
-1. Carefully up date the grub config file setting fips=0
+-  Carefully up date the grub config file setting fips=0
 ```
 sudo vi /etc/default/grub
 ```
 
-1. Reboot the VM
+-  Reboot the VM
 ```
 sudo reboot
 ```
 
-1. Log back in...
+-  Log back in...
 
-1. Confirm that fips is disabled by
+-  Confirm that fips is disabled by
 ```
 sysctl crypto.fips_enabled
 ```
@@ -48,20 +48,25 @@ If it returns 0 then it has been properly disabled
 
 
 ## Installation
+for all the installation machines mount the iso. transfer the contents to each of the machines.
 
-1. Mount the iso if you have not already done so to `/mnt`
-
-1. Copy the folders form the mounted device to `/srv/rocknsm`
-
-1. Create the a place for your pet ROCK to live
+-  Mount the iso if you have not already done so to `/mnt`
 ```
-sudo mkdir -p /usr/share/rock
+mount -t iso9660 -o loop path/to/image.iso /mnt
 ```
 
-1. Git Clone or Copy the rocknsm repo to the `/usr/share/rock` directory
+-  Copy the folders form the mounted device to `/srv/rocknsm`
+```
+cp -r /mnt/* /srv/rocknsm/.
+```
 
-1. create a repo file for the local repo Server
+-  Git Clone or Copy the rocknsm repo to the `/usr/share/rock` directory
+```
+sudo git clone https://github.com/rocknsm/rock.git
+```
 
+-  **If** not deploying from the nuc, create a repo file for the local repo Server
+___
 ```
 sudo bash -c 'cat > /etc/yum.repos.d/local-repos.repo <<EOF
 [copr-rocknsm-2.1]
@@ -108,24 +113,26 @@ enabled=1
 
 EOF'
 ```
+___
 
-1. Install Ansible to coordinate the installation of the Sensor
+-  Install Ansible to coordinate the installation of the Sensor
 ```
 sudo yum install ansible
 ```
 
-1. Ensure the latest version of markupsafe is installed also
+-  Ensure the latest version of markupsafe is installed also
 ```
 sudo yum install python2-markupsafe
 ```
 
-1. copy the hosts file from the git repo and set the host to:
+-  copy the hosts file from the git repo and set the host to:
+___
 
 ```
-sensor.[state].cmat.lan ansible_host=10.[state].10.21 ansible_connection=local
-es1.[state].cmat.lan ansible_host=10.[state].10.25 ansible_connection=local
-es2.[state].cmat.lan ansible_host=10.[state].10.26 ansible_connection=local
-es3.[state].cmat.lan ansible_host=10.[state].10.27 ansible_connection=local
+sensor.[state].cmat.lan ansible_host=10.[state].10.21 ansible_connection=ssh  ansible_user=admin
+es- [state].cmat.lan ansible_host=10.[state].10.25 ansible_connection=ssh  ansible_user=admin
+es2.[state].cmat.lan ansible_host=10.[state].10.26 ansible_connection=ssh  ansible_user=admin
+es3.[state].cmat.lan ansible_host=10.[state].10.27 ansible_connection=ssh  ansible_user=admin
 # If you have any other sensor or data nodes then you would place them in the list above.
 
 
@@ -194,26 +201,34 @@ web
 [logstash:children]
 sensors
 ```
+___
 
-1. Change Directory into `usr/share/rock/bin`
+- Change Directory into `usr/share/rock/bin`
 
-1. Run `sudo ./rock ssh-config` to setup ssh on all the host you will use for the deployment. It uses the host from the previously created `host.ini`
+- remove/comment the following steps in the follwoing playbook files:
+  - for adding entries to the /etc/hosts `/usr/share/rock/roles/common/tasks/configure.yml`
+  - disable and enable shard allocation in `/usr/share/rock/roles/elasticsearch/tasks/restart.yml`
+  - ensure that you edit the playbook in `/etc/elasticsearch/elastisearch.yml` and change
+   `es_node_name: "{{ ansible_hostname }}"` to `{{ inventory_hostname }}`
+  - comment out the step `update-suricata source index` in the file `/usr/ahRE/rock/roles/suricata/tasks/main.yml`
 
-1. Run `sudo ./rock genconfig` to generate config file. Unless you are doing something really off the beaten path of a normal deployment you should not need to edit this file.
+- Run `sudo ./rock ssh-config` to setup ssh on all the host you will use for the deployment. It uses the host from the previously created `host.ini`
 
-1. Disable/move the local repo to make sure everything comes from the mounted iso
+- Run `sudo ./rock genconfig` to generate config file. Unless you are doing something really off the beaten path of a normal deployment you should not need to edit this file.
+
+- Disable/move the local repo to make sure everything comes from the mounted iso
 ```
 sudo mv /etc/yum.repos.d/local-repos.repo ~/
 ```
 
-1. Ensure you are in the `/usr/share/rock/bin/` directory.
+- Ensure you are in the `/usr/share/rock/bin/` directory.
 
-1. Fire off the installation
+- Fire off the installation
 ```
 sudo ./rock deploy-offline
 ```
 
-1. Ensure the following ports on the firewall are open for the data nodes
+- Ensure the following ports on the firewall are open for the data nodes
   - 9300 TCP - Node coordination (I am sure elastic has abetter name for this)
   - 9200 TCP - Elasticsearch
   - 5601 TCP - Only on the Elasticsearch node that has Kibana installed, Likely es1.[STATE].cmat.lan
@@ -223,12 +238,12 @@ sudo ./rock deploy-offline
   sudo firewall-cmd --add-port=9300/tcp --permanent
   ```
 
-1. Reload the firewall config
+- Reload the firewall config
 ```
 sudo firewall-cmd --reload
 ```
 
-1. Ensure the following ports on the firewall are open for the sensor
+- Ensure the following ports on the firewall are open for the sensor
   - 1234 tcp/udp - NTP
   - 22 TCP - SSH Access
   - 9092 TCP - Kafka
@@ -237,12 +252,12 @@ sudo firewall-cmd --reload
   sudo firewall-cmd --add-port=22/tcp --permanent
   ```
 
-1. Reload the firewall config
+- Reload the firewall config
 ```
 sudo firewall-cmd --reload
 ```
 
-1. Check the Suricata `threads` per interface. This is so Suricata doesn't compete with bro for cpu threads in `/etc/suricata/rock-overrides.yml`
+- Check the Suricata `threads` per interface. This is so Suricata doesn't compete with bro for cpu threads in `/etc/suricata/rock-overrides.yml`
 
 ```yml
 %YAML 1.1
@@ -265,6 +280,6 @@ af-packet:
 default-log-dir: /data/suricata
 ```
 
-1. Restart services with `sudo rock stop` and the `sudo rock start`
+- Restart services with `sudo rock stop` and the `sudo rock start`
 
 Move onto [USAGE](../rocknsm-usage.md)
