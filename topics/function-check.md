@@ -11,6 +11,7 @@
   - BRO (use broctl instead)
   - Suricata
 1. Make sure there are logs in `/data/bro/current/`
+  -if you are having issues try `bro -a local` to see if the config file is good.
 1. Run `/opt/kafka/bin/kafka-console-consumer.sh --from-beginning --topic bro-raw --bootstrap-server sensor.[state].cmat.lan:9092` and ensure kafka is creating topics
 1. log into `es1.[state].cmat.lan` and run a `sudo systemctl status SOMESERVICE` ensure that all the installed portions of the sensor return no errors. Also ensure that there are no errors in the files in  `/var/log/` ,  `tailf` is really handy for this
   - Logstash
