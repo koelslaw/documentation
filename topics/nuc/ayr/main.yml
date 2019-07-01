@@ -1,0 +1,7 @@
+# register the system?
+repo_autosync: false
+crontab_day: '*'
+crontab_hour: '*'
+crontab_minute: '*'
+crontab_month: '*'
+crontab_weekday: '*'
