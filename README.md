@@ -19,33 +19,33 @@ To walk through the build steps, [check out the README](./topics/README.md).
 - [Hardware Components](./topics/hardware-components.md)
 - [Hardware Assembly](./topics/hardware-assembly.md)
 - [Hardware Configuration](./topics/hardware-configuration.md)
-  - [Intel Nuc Configuration](nuc/README.md)
-  - [Gigamon Configuration](gigamon/README.md)
-  - [Network Configuration](network/README.md)
-  - [Dell R840 Configuration](dell/README.md)
+  - [Intel Nuc Configuration](./topics/nuc/README.md)
+  - [Gigamon Configuration](./topics/gigamon/README.md)
+  - [Network Configuration](./topics/network/README.md)
+  - [Dell R840 Configuration](./topics/dell/README.md)
 - [Software Deployment](./topics/software-deployment.md)
   - Infrastructure
-    - [ESXi](vmware/README.md)
+    - [ESXi](./topics/vmware/README.md)
   - Passive Software Deployment
-    - [RHEL DNS Server](./dns/README.md)
-    - [RockNSM](./rocknsm/README.md)
-      - [Hardware Requirements](rocknsm-requirements.md)
+    - [RHEL DNS Server](./topics/dns/README.md)
+    - [RockNSM](./topics/rocknsm/README.md)
+      - [Hardware Requirements](./topics/rocknsm-requirements.md)
       - [Rock NSM 2.2.x](./topics/rocknsm2-2-0/README.md)
       - [Rock NSM 2.3.x](./topics/rocknsm2-3-0/README.md)
       - Rock NSM 2.4.x
         - [Rock NSM 2.4.x (CENTOS)](./topics/rocknsm2-4-0/CENTOS/README.md)
         - [Rock NSM 2.4.x (RHEL)](./topics/rocknsm2-4-0/RHEL/README.md)
-      - [Usage](rocknsm-usage.md)
-    - [CAPES](./capes/README.md)
-    - [GRASSMARLIN](./grassmarlin/README.md)
+      - [Usage](./topics/rocknsm-usage.md)
+    - [CAPES](./topics/capes/README.md)
+    - [GRASSMARLIN](./topics/grassmarlin/README.md)
   - Active Software Deployment
-    - [ACAS](./acas/README.md) - *Not opensource but **may** be available*
-    - [OpenVAS](./openvas/README.md)
-    - [Nmap](./nmap/README.md)
+    - [ACAS](./topics/acas/README.md) - *Not opensource but **may** be available*
+    - [OpenVAS](./topics/openvas/README.md)
+    - [Nmap](./topics/nmap/README.md)
     - [BlueScope](./bluescope/README.md) *Not opensource but **may** be available*
   - Other Tools **MAY NOT BE PASSIVE IN NATURE**
     - Reverse Engineering
-      - [Ghidra](./ghidra/README.md)
+      - [Ghidra](./topics/ghidra/README.md)
     - Windows Event Logging with native Tools
       - [WEFFLES](https://blogs.technet.microsoft.com/jepayne/2017/12/08/weffles/)
 
