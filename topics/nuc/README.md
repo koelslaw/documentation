@@ -38,6 +38,13 @@ We are going to deploy the initial configuration for the Nuc. This will configur
   ```
   wget -q -O - https://updates.atomicorp.com/installers/atomic | sh
   ``` 
+  Sync all the repos using version 2 above. After that is done then add the following packages to the atomic repo under the `/var/www/html/general_mirror/atomic/RPMS/`:
+
+  - Perl-File-Remove
+        - `wget https://centos.pkgs.org/7/openfusion-x86_64/perl-File-Remove-1.52-1.of.el7.noarch.rpm`
+  - Perl-Parse-RecDescent
+      - `wget https://mirror.centos.org/centos/7/os/x86_64/Packages/perl-Parse-RecDescent-1.967009-5.el7.noarch.rpm`
+  - resync the repos using AYR (Version 2) if necessary
 
 - Clone the mozarkite github repo. If you cannot access check with d2ie to ensure you have authorization to be on di2e. Also check with technical SME to ensure you have access to the git repo also. If you don't have git already installed use `sudo yum install git`.
 

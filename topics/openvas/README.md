@@ -7,7 +7,7 @@ OpenVAS is a framework of several services and tools offering a comprehensive an
 - Build a [virtual machine on the Active virtual network](../vmware/README.md#Create-the-Active-Virtual-Machine)  
 - Install OS in accordance with [Rhel Documentation](../rhel/README.md)
 - Enable only the `rhel-7-server-rpms` and `atomic` repos. `epel` will really throw things of if its enabled.
-- Download and install the following packages to prep for OpenVAS installation:
+- Download and install the following packages to prep for OpenVAS installation this can either be done from the internet if available or from the nuc repo:
     - Perl-File-Remove
         - `wget https://centos.pkgs.org/7/openfusion-x86_64/perl-File-Remove-1.52-1.of.el7.noarch.rpm`
         - `sudo rpm -vi perl-File-Remove-1.52-1.of.el7.noarch.rpm`
