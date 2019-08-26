@@ -2,7 +2,6 @@
 
 OpenVAS is a framework of several services and tools offering a comprehensive and powerful vulnerability scanning and vulnerability management solution. The framework is part of Greenbone Networks' commercial vulnerability management solution from which developments are contributed to the Open Source community since 2009.
 
-> Note: While the differences are small between CENTOS and RHEL there are differences. In this case, unless there is a mission critical need to install RHEL, I recommend installing CENTOS. The packages needed for install are not available in the RHEL repos. Yuo have a couple of courses of action here. If you have to use RHEL then you can either add the centos repos or use the instructions below for the necessary packages
 ## Installation
 - Build a [virtual machine on the Active virtual network](../vmware/README.md#Create-the-Active-Virtual-Machine)  
 - Install OS in accordance with [Rhel Documentation](../rhel/README.md)
@@ -12,10 +11,27 @@ OpenVAS is a framework of several services and tools offering a comprehensive an
         - `wget https://centos.pkgs.org/7/openfusion-x86_64/perl-File-Remove-1.52-1.of.el7.noarch.rpm`
         - `sudo rpm -vi perl-File-Remove-1.52-1.of.el7.noarch.rpm`
     - Perl-Parse-RecDescent
-        - `wget https://mirror.centos.org/centos/7/os/x86_64/Packages/perl-Parse-RecDescent-1.967009-5.el7.noarch.rpm` 
-        - `sudo rpm -vi perl-Parse-RecDescent-1.967009-5.el7.noarch.rpm` 
+        - `wget https://mirror.centos.org/centos/7/os/x86_64/Packages/perl-Parse-RecDescent-1.967009-5.el7.noarch.rpm`
+        - `sudo rpm -vi perl-Parse-RecDescent-1.967009-5.el7.noarch.rpm`
 - Install the following tools if not already installed, install the following: `wget` and `net-tools`,
+- Install some support packages that take care of pdf reporting:
+  ```
+  yum install texlive-changepage texlive-titlesec perl-Tk perl-Digest-MD5
+  ```
+  ```
+  mkdir -p /usr/share/texlive/texmf-local/tex/latex/comment
+  ```
+  ```
+  cd /usr/share/texlive/texmf-local/tex/latex/comment
+  ```
+  ```
+  wget http://mirror.utexas.edu/ctan/macros/latex/contrib/comment/community.sty
+  ```
+  ```
+  chmod 644 comment.sty
+  ```
 - Install OpenVAS `sudo yum install openvas`
+
 - Remove, or comment out, the check for SELinux being turned off on line 49 - 56, **because only animals turn off SELinux**  
 ```
 vi /bin/openvas-setup
@@ -72,7 +88,8 @@ unixsocket /run/redis/redis.sock
 unixsocketperm 700
 ```
 
-- Rebuild the NVT database  
+## Rebuild the NVT database
+By far the easiest way to update the NVT database is to do with an internet connection. That may not always be possible so if you haven't taken the time to configure the Nuc to grab the updates for you then may now is a good time otherwise if an internet connection is available then by all means update the definitions.  
 ```
 sudo systemclt start redis.service
 openvasmd --rebuild

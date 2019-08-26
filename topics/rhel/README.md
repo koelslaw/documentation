@@ -123,8 +123,9 @@ This is meant to help those who need a step-by-step build of RHEL.
 
 > For every machine except the NUC and capes (which uses elastic 5 instead of 6) need the following rpm repo file needs to be created.
 
-1. Add local repos to RHEL.
+1. Add local repos to RHEL if using v1 of nuc deployment use this one otherwise use v2.
 
+##### V1
   ```
   sudo bash -c 'cat > /etc/yum.repos.d/local-repos.repo <<EOF
   [copr-rocknsm-2.1]
@@ -166,6 +167,54 @@ This is meant to help those who need a step-by-step build of RHEL.
   [local-rock2]
   name: elastic
   baseurl=http://10.[state octet].10.19/rock2/
+  gpgcheck=0
+  enabled=1
+
+  EOF'
+  ```
+
+##### V2
+  ```
+  sudo bash -c 'cat > /etc/yum.repos.d/local-repos.repo <<EOF
+  [copr-rocknsm-2.1]
+  name: copr rocknms repo
+  baseurl=http://10.[state octet].10.19/general_mirror/copr-rocknsm-2.1/
+  gpgcheck=0
+  enabled=1
+
+  [local-epel]
+  name: Extra packages For Enterprise Linux Local Repo
+  baseurl=http://10.[state octet].10.19/general_mirror/epel/
+  gpgcheck=0
+  enabled=1
+
+  [local-rhel-7-server-extras-rpmsx86_64]
+  name: local rhel 7 server extras
+  baseurl=http://10.[state octet].10.19/general_mirror/rhel-7-server-extras-rpms/
+  gpgcheck=0
+  enabled=1
+
+  [local-rhel-7-server-optional-rpmsx86_64]
+  name: local rhel 7 server optional
+  baseurl=http://10.[state octet].10.19/general_mirror/rhel-7-server-optional-rpms/
+  gpgcheck=0
+  enabled=1
+
+  [local-rhel-7-server-rpmsx86_64]
+  name: local rhel 7 server rpms
+  baseurl=http://10.[state octet].10.19/general_mirror/rhel-7-server-rpms/
+  gpgcheck=0
+  enabled=1
+
+  [local-elastic-6.x]
+  name: elastic
+  baseurl=http://10.[state octet].10.19/general_mirror/elastic-6.x/
+  gpgcheck=0
+  enabled=1
+
+  [local-rock2]
+  name: elastic
+  baseurl=http://10.[state octet].10.19/general_mirror/rock2/
   gpgcheck=0
   enabled=1
 

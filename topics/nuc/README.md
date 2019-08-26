@@ -25,35 +25,43 @@ We are going to deploy the initial configuration for the Nuc. This will configur
 
 - The next script is meant to take some of the work on setting up the nuc. Using the script also ensures the rest of the kit has what it needs to function.
 
- There are 2 versions of this deployment. Unless something specific is needed then I recommend using version 2. Which is known as "AYR" (Alternate Yum Repository).
- - [Version 1](..topics/nuc/v1/README.md) (Soon to be deprecated, cause openvas)
- - [Version 2](..topics/nuc/v2/ayr/README.md)
-  - Openvas needs to be configured prior to start due to the project agnostic nature of AYR. To prep the nuc to host the Repos use:
-  - elevate to root using `sudo -s`
+ -There are 2 versions of this deployment. Unless something specific is needed then I recommend using version 2. Which is known as "AYR" (Alternate Yum Repository).
+   - [Version 1](..topics/nuc/v1/README.md) (Soon to be deprecated, because of openvas)
+   - [Version 2](..topics/nuc/v2/ayr/README.md)
+    - Openvas needs to be configured prior to start due to the project agnostic nature of AYR. To prep the nuc to host the Repos use:
+    - elevate to root using `sudo -s`
 
-  ```
-  yum -y install wget net-tools
-  ```
-  then
-  ```
-  wget -q -O - https://updates.atomicorp.com/installers/atomic | sh
-  ``` 
-  Sync all the repos using version 2 above. After that is done then add the following packages to the atomic repo under the `/var/www/html/general_mirror/atomic/RPMS/`:
+    ```
+    yum -y install wget net-tools
+    ```
+    then
+    ```
+    wget -q -O - https://updates.atomicorp.com/installers/atomic | sh
+    ```
+    Sync all the repos using version 2 above. After that is done then add the following packages to the atomic repo under the `/var/www/html/general_mirror/atomic/RPMS/`:
 
-  - Perl-File-Remove
-        - `wget https://centos.pkgs.org/7/openfusion-x86_64/perl-File-Remove-1.52-1.of.el7.noarch.rpm`
-  - Perl-Parse-RecDescent
-      - `wget https://mirror.centos.org/centos/7/os/x86_64/Packages/perl-Parse-RecDescent-1.967009-5.el7.noarch.rpm`
-  - resync the repos using AYR (Version 2) if necessary
+    - Perl-File-Remove
+          - `wget https://centos.pkgs.org/7/openfusion-x86_64/perl-File-Remove-1.52-1.of.el7.noarch.rpm`
+    - Perl-Parse-RecDescent
+        - `wget https://mirror.centos.org/centos/7/os/x86_64/Packages/perl-Parse-RecDescent-1.967009-5.el7.noarch.rpm`
+    - resync the repos using AYR (Version 2) if necessary
+
 
 - Clone the mozarkite github repo. If you cannot access check with d2ie to ensure you have authorization to be on di2e. Also check with technical SME to ensure you have access to the git repo also. If you don't have git already installed use `sudo yum install git`.
 
-  ```
-  sudo git clone https://di2euserfirstname.lastname@bitbucket.di2e.net/scm/mozarkite/mozarkite-docs.git
-  ```
+```
+sudo git clone https://di2euserfirstname.lastname@bitbucket.di2e.net/scm/mozarkite/mozarkite-docs.git
+```
+
 ## Download Iso images
 While you dont have to have these it will make it easier if you need them in the future. `curl` or `scp` onto the nuc into the `var/www/html/iso` directory
  - RHEL - DVD iso (Should have this one already downloaded from Nuc installation)
  - ESXi ISO
+
+## Add Docker Images
+>NOTE: This is the rough outline of what needs to happen to support CAPES v2.
+
+**If** you are deploying version 2 of CAPES or Version 3 of rock then you will need to add docker to the nuc. This will serve as the base for your docker builds. If you have not already done so add enable the "extras" repository on you RHEL or CENTOS installation and sync. This will make it available to the rest of the stack. After docker is installe dthen `docker pull` each of the containers for ROCK and CAPES
+
 
 Move onto [Gigamon Configuration](../gigamon/README.md)
