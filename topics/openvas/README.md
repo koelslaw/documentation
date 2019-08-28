@@ -6,30 +6,10 @@ OpenVAS is a framework of several services and tools offering a comprehensive an
 - Build a [virtual machine on the Active virtual network](../vmware/README.md#Create-the-Active-Virtual-Machine)  
 - Install OS in accordance with [Rhel Documentation](../rhel/README.md)
 - Enable only the `rhel-7-server-rpms` and `atomic` repos. `epel` will really throw things of if its enabled.
-- Download and install the following packages to prep for OpenVAS installation this can either be done from the internet if available or from the nuc repo:
-    - Perl-File-Remove
-        - `wget https://centos.pkgs.org/7/openfusion-x86_64/perl-File-Remove-1.52-1.of.el7.noarch.rpm`
-        - `sudo rpm -vi perl-File-Remove-1.52-1.of.el7.noarch.rpm`
-    - Perl-Parse-RecDescent
-        - `wget https://mirror.centos.org/centos/7/os/x86_64/Packages/perl-Parse-RecDescent-1.967009-5.el7.noarch.rpm`
-        - `sudo rpm -vi perl-Parse-RecDescent-1.967009-5.el7.noarch.rpm`
-- Install the following tools if not already installed, install the following: `wget` and `net-tools`,
-- Install some support packages that take care of pdf reporting:
-  ```
-  yum install texlive-changepage texlive-titlesec perl-Tk perl-Digest-MD5
-  ```
-  ```
-  mkdir -p /usr/share/texlive/texmf-local/tex/latex/comment
-  ```
-  ```
-  cd /usr/share/texlive/texmf-local/tex/latex/comment
-  ```
-  ```
-  wget http://mirror.utexas.edu/ctan/macros/latex/contrib/comment/community.sty
-  ```
-  ```
-  chmod 644 comment.sty
-  ```
+## Prep on the Nuc
+- Ensure AYR has been run.
+- Ensure openvas-offline tool has been run.
+
 - Install OpenVAS `sudo yum install openvas`
 
 - Remove, or comment out, the check for SELinux being turned off on line 49 - 56, **because only animals turn off SELinux**  
