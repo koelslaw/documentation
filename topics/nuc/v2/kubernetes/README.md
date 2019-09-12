@@ -117,3 +117,31 @@ sudo echo '1' > /proc/sys/net/bridge/bridge-nf-call-iptables
 sudo -s
 sudo yum install kubelet
 sudo yum install kubeadm
+
+### Set SELinux contexts:
+
+- for kubernetes files
+mkdir -p /etc/kubernetes/
+chcon -R -t svirt_sandbox_file_t /etc/kubernetes/
+
+- for etcd files
+mkdir -p /var/lib/etcd
+chcon -R -t svirt_sandbox_file_t /var/lib/etcd
+
+- Start kubeadm:
+kubeadm config images pull
+kubeadm init
+
+- Set the kubectl context:
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+- Install network, this step can be varied depending on which networking provider you want to install, here I have installed weave net. For other providers see here.
+kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
+
+- Also use master node as worker node.
+kubectl taint nodes --all node-role.kubernetes.io/master-
+Finally list nodes or wait until node is ready.
+
+kubectl get nodes
