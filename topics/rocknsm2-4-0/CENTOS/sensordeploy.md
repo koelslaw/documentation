@@ -18,42 +18,43 @@ Install CENTOS in accordance with RHEL Documentation
 ---
 
 #### Disable FIPS to allow Deployment on all components
+> NOTE: if you didnt DISA STIG the machine then you do not need to do this.
 
-1. Disable FIPS
+- Disable FIPS
 
-  1. Remove the dracut-fips* packages
+  - Remove the dracut-fips* packages
   ```
   sudo yum remove dracut-fips\*
   ```
 
-  1. Backup existing FIPS initramfs
+  - Backup existing FIPS initramfs
   ```
   sudo mv -v /boot/initramfs-$(uname -r).img{,.FIPS-bak}
   ```
 
-  1. Run dracut to rebuild the initramfs
+  - Run dracut to rebuild the initramfs
   ```
   sudo dracut
   ```
 
-  1. Run Grubby
+  - Run Grubby
   ```
   sudo grubby --update-kernel=ALL --remove-args=fips=1
   ```
 
-  1. Carefully up date the grub config file setting fips=0
+  - Carefully up date the grub config file setting fips=0
   ```
   sudo vi /etc/default/grub
   ```
 
-  1. Reboot the VM
+  - Reboot the VM
   ```
   sudo reboot
   ```
 
-  1. Log back in...
+  - Log back in...
 
-  1. Confirm that fips is disabled by
+  - Confirm that fips is disabled by
   ```
   sysctl crypto.fips_enabled
   ```
@@ -63,55 +64,70 @@ Install CENTOS in accordance with RHEL Documentation
 #### Sync the Clocks across all machines
 Due to the nature of virtual machines we have to keep the VMs and Baremetal equipment in sync. To this we set the sensor as the authority for time for the rest of the kit. We do this for a couple of reasons the biggest being that its is where the time-based data is generated from zeek(Bro), FSF, and Suricata. Aligning the rest of the stack along this guideline keeps us from writing events in the future. all events should be written in UTC to help with response across timezones. This is done via chrony.
 
-1. If you have any time-based services running turn them off. Otherwise continue if this a new installation as we have not deployed ROCK yet.
+- If you have any time-based services running turn them off. Otherwise continue if this a new installation as we have not deployed ROCK yet.
 
-1. If not already installed then install chrony
+- If not already installed then install chrony
 ```
 sudo yum install chrony
 ```
 
-1. Edit the config file with `vi`
+- Edit the config file with `vi`
 ```
 sudo vi /etc/chrony.conf
 ```
 
-1. **Time Server (Likely Sensor)** Uncomment/edit the following line in the the `/etc/chrony.conf`
+- **Time Server (Likely Sensor)** Uncomment/edit the following line in the the `/etc/chrony.conf`
 ```
 allow 10.[state].10.0/24  
 ```
 
-1. Add ntp to the firewall on sensor
+- Add ntp to the firewall on sensor
 ```
 sudo firewall-cmd --add-service=ntp --zone=work --permanent
 ```
 
-1. Reload the firewall
+- Reload the firewall
 ```
 sudo firewall-cmd --reload
 ```
 
-1. **Time Cleint (Everything not the Sensor Server)** Uncomment all the time servers and point it to `sensor.[state].cmat.lan` or the IP address.
+- **Time Cleint (Everything not the Sensor Server)** Uncomment all the time servers and point it to `sensor.[state].cmat.lan` or the IP address.
 ```
 server 192.0.2.1 iburst
 ```
 
-1. Start and enable the service.
+- Start and enable the service.
 ```
 sudo systemctl enable --now chronyd
 ```
 
-1. Add ntp to the firewall on sensor
+- Add ntp to the firewall on sensor
 ```
 sudo firewall-cmd --add-service=ntp --zone=work --permanent
 ```
 
-1. Reload the firewall
+- Reload the firewall
 ```
 sudo firewall-cmd --reload
 ```
-1. Verify on all the applicable clients that they can talk to the server for time.
+- Verify on all the applicable clients that they can talk to the server for time.
 ```
- chronyc sources
+chronyc sources
+```
+
+#### Mount the iso.
+For all the installation machines mount the iso. transfer the contents to each of the machines.
+
+-  Download the iso from the nuc if you have it there already.
+
+-   Mount the iso if you have not already done so to `/mnt`
+```
+mount -t iso9660 -o loop path/to/image.iso /mnt
+```
+
+-  Copy the folders form the mounted device to `/srv/rocknsm`
+```
+cp -r /mnt/* /srv/rocknsm/.
 ```
 
 #### Deployment of Rock across All Machines
@@ -120,7 +136,7 @@ Generate a hosts.ini file that so ansible knows where to deploy things sudo vi /
 
 > NOTE: If not already done then log into every server that rock will be deployed to so that the key can be added to the ssh hosts file.
 
-1. Insert the following text. These will tell the script what to deploy and where
+- Insert the following text. These will tell the script what to deploy and where
 
 
 ```
@@ -197,6 +213,31 @@ web
 sensors
 ```
 
+### Hotfixes for iso.
+
+- Change Directory into `usr/share/rock/bin`
+
+- remove/comment the following steps in the follwoing playbook files:
+  - for adding entries to the /etc/hosts `/usr/share/rock/roles/common/tasks/configure.yml`
+  - disable and enable shard allocation in `/usr/share/rock/roles/elasticsearch/tasks/restart.yml`
+  - ensure that you edit the playbook in `/etc/elasticsearch/elastisearch.yml` and change
+   `es_node_name: "{{ ansible_hostname }}"` to `{{ inventory_hostname }}`
+  - comment out the step `update-suricata source index` in the file `/usr/share/rock/roles/suricata/tasks/main.yml`
+
+- Run `sudo ./rock ssh-config` to setup ssh on all the host you will use for the deployment. It uses the host from the previously created `host.ini`. Or jsut log into each machine.
+
+- Disable/move the local repo to make sure everything comes from the mounted iso if it is already present.
+```
+sudo mv /etc/yum.repos.d/local-repos.repo ~/
+```
+
+
+- In the `/etc/elasticsearch/elasticsearch.yml` file Change `discovery.zen.ping.unicast.hosts` to `discovery.seed_hosts`. Configure this setting on all Nodes as follows:
+```
+discovery.seed_hosts: ["es1.[state].cmat.lan", "es2.[state].cmat.lan", "es3.[state].cmat.lan"]
+```
+
+### Back to the normal Installation
 Most of the Rock configuration is now automated and can be called from anywhere on the os. Below are the options. Run `sudo rock ssh-config` to setup all the hosts prior to deploying.
 
 ```
@@ -233,47 +274,48 @@ Options:
 --tags, -t <tags>                  Only run plays and tasks tagged with these values
 --verbose, -v                      Increase verbosity of ansible-playbook
 ```
-1. Setup you ssh access to you machine using sudo rock ssh-config command or using sudo rock tui for the Text user interfaces
+- Setup you ssh access to you machine using sudo rock ssh-config command or using sudo rock tui for the Text user interfaces
 
-1. Start the interactive text interface for setup using `sudo rock tui`
+- Start the interactive text interface for setup using `sudo rock tui`
 
-1. Select "Select Interfaces". This allows you to choose which interface that you will manage and capture with.
+- Select "Select Interfaces". This allows you to choose which interface that you will manage and capture with.
 ![](../../../images/installationtype.png)
 
-1. Choose you management interface
+- Choose you management interface
 ![](../../../images/mgmtinterface.png)
 
-1. Choose you capture interface(s).
+- Choose you capture interface(s).
 ![](../../../images/captureinterface.png)
 > NOTE: Any interface you set for cature will spawn a Bro/Zeek, Surcata, and FSF process. So if you dont intend on using the interface do not set it for capture.
 
-1. You will then be forwarded to the interface summary screen. make sure all the things are to your satisfaction
+- You will then be forwarded to the interface summary screen. make sure all the things are to your satisfaction
 ![](../../../images/interfacesummary.png)
 
-1. Once it has returned to the installation setup screen then choose the  "Offline/Online" installation option. This tells the installation playbook where to pull the packages. As these kits are meant to be offline we will choose the offline installation option.
+- Once it has returned to the installation setup screen then choose the  "Offline/Online" installation option. This tells the installation playbook where to pull the packages. As these kits are meant to be offline we will choose the offline installation option.
 ![](../../../images/installationtype.png)
 
-1. Choose "No" for the offline installation.
+- Choose "No" for the offline installation.
 ![](../../../images/installationselection.png)
 
-1. Once it has returned to the installation setup screen then choose the  "Choose Components" installation option.
+- Once it has returned to the installation setup screen then choose the  "Choose Components" installation option.
 ![](../../../images/installationtype.png)
 
-1. Here is where you decide what capabilities your sensor will have. If you are low on resources the the recommendation is to disable docket and stenographer. Otherwise just enable everything.
+- Here is where you decide what capabilities your sensor will have. If you are low on resources the the recommendation is to disable docket and stenographer. Otherwise just enable everything.
 ![](../../../images/RockComponnents.png)
 
 
-1. Once it has returned to the installation setup screen then choose the  "Choose enabled services" installation option. This needs to match the installed components unless you have a specific reason to do so.
+- Once it has returned to the installation setup screen then choose the  "Choose enabled services" installation option. This needs to match the installed components unless you have a specific reason to do so.
 ![](../../../images/bootupservices.png)
 
-1. This will write the config to the ansible deployment script.
+- This will write the config to the ansible deployment script.
 
-1. Once it has returned to the installation setup screen then choose the  "Run Installer" installation option.
+- Once it has returned to the installation setup screen then choose the  "Run Installer" installation option.
 
 
 **It should complete with no errors**
 
-1. Ensure the following ports on the firewall are open for the data nodes
+
+- Ensure the following ports on the firewall are open for the data nodes
 
   - 9300 TCP - Node coordination (I am sure elastic has abetter name for this)
   - 9200 TCP - Elasticsearch
@@ -283,12 +325,12 @@ Options:
   sudo firewall-cmd --add-port=9300/tcp --permanent
   ```
 
-1. Reload the firewall config
+- Reload the firewall config
 ```
 sudo firewall-cmd --reload
 ```
 
-1. Ensure the following ports on the firewall are open for the sensor
+- Ensure the following ports on the firewall are open for the sensor
   - 1234 tcp/udp - NTP
   - 22 TCP - SSH Access
   - 9092 TCP - Kafka
@@ -296,12 +338,12 @@ sudo firewall-cmd --reload
   sudo firewall-cmd --add-port=22/tcp --permanent
   ```
 
-1. Reload the firewall config
+- Reload the firewall config
 ```
 sudo firewall-cmd --reload
 ```
 
-1. Check the Suricata `threads` per interface. This is so Suricata doesn't compete with bro for cpu threads in `etc/suricata/rock-overrides.yml`
+- Check the Suricata `threads` per interface. This is so Suricata doesn't compete with bro for cpu threads in `etc/suricata/rock-overrides.yml`
 ```
 %YAML 1.1
 ---
@@ -324,6 +366,6 @@ af-packet:
 
 
 
-1. Restart services with `sudo rock stop` and the `sudo rock start`
+- Restart services with `sudo rock stop` and the `sudo rock start`
 
 Move onto [USAGE](../rocknsm-usage.md)
