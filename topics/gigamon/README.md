@@ -118,7 +118,9 @@ Packets arrive at the Gigamon Visibility Platform at network ports and are direc
 
 > Note:	Tool ports only allow data output to a connected tool. Any data arriving at the tool port from an external source will be discarded. In addition, a tool port’s Link Status must be up for packets to be sent out of the port.
 
+Deployment Scenarios:
+[ER Span Tunnel Config](./topics/gigamon/erspan.md)
+[Inline Tap Config](./topics/gigamon/inline_tap.md)
+[Normal SPAN port from local switch](./topics/gigamon/span_termination.md)
 
-Move onto [ER Span Tunnel Config](../gigamon/erspan.md)
-Move onto [Inline Tap Config](../gigamon/inline_tap.md)
-Move onto [Normal SPAN port from local switch](../gigamon/span_termination.md)
+Move onto [Networking Configuration](./topics/network/README.md)

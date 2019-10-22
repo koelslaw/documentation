@@ -35,7 +35,10 @@ To walk through the build steps, [check out the README](./topics/README.md).
       - Rock NSM 2.4.x
         - [Rock NSM 2.4.x (CENTOS)](./topics/rocknsm2-4-0/CENTOS/README.md)
         - [Rock NSM 2.4.x (RHEL)](./topics/rocknsm2-4-0/RHEL/README.md)
-      - [Usage](./topics/rocknsm-usage.md)
+      - Rock NSM 2.5.x (Pending)
+        - [Rock NSM 2.5.x (CENTOS)](./topics/rocknsm2-5-0_Pending/CENTOS/README.md)
+        - [Rock NSM 2.5.x (RHEL)](./topics/rocknsm2-5-0_Pending/RHEL/README.md)
+      - [Usage](./topics/rocknsm/README.md)
     - [CAPES](./topics/capes/README.md)
     - [GRASSMARLIN](./topics/grassmarlin/README.md)
   - Active Software Deployment
@@ -49,6 +52,7 @@ To walk through the build steps, [check out the README](./topics/README.md).
     - Windows Event Logging with native Tools
       - [WEFFLES](https://blogs.technet.microsoft.com/jepayne/2017/12/08/weffles/)
 
+- [Preflight](./topics/deployment/README.md)
 - [APPDX1 Network Layout](./topics/network/network-layout.md)
 - [APPDX2 Function Check](./topics/function-check.md)
 - [APPDX3 Platform Management (IPs, hostnames, creds, etc.)](./topics/platform-management.md)

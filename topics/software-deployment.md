@@ -13,7 +13,9 @@ Here we will begin the deployment of that software onto the stack.
 1. [RockNSM 2.2.0 Node Deployment](rocknsm2-2-0/README.md)
 1. [RockNSM 2.3.0 Node Deployment](rocknsm2-3-0/README.md)
 1. [RockNSM 2.4.0 Node Deployment](rocknsm2-4-0/README.md)
-1. [CAPES](capes/README.md)
+1. [RockNSM 2.5.0 Node Deployment...Pending](rocknsm2-5-0_Pending/README.md)
+1. [CAPESv1](capes/README.md)
+1. [CAPESv2...Pending](capes/README.md)
 1. [GRASSMARLIN](grassmarlin/README.md)
 
 ## Active Software Deployment Order

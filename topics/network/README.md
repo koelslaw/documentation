@@ -102,5 +102,3 @@ For Specific Configuration examples see the [Switch](../switch/README.md) Config
 
 Move onto [Dell Server R840 Configuration](../dell/README.md)
 or **if** installed,
-
-Move onto [Dell Chassis Management Console (CMC) Configuration](cmc-configuration.md)
