@@ -23,9 +23,9 @@ gpgcheck=0
 enabled=1
 
 
-[copr-rocknsm-2.1]
+[copr-rocknsm-2.4]
 name: copr rocknms repo
-baseurl=http://10.[state].10.19/copr-rocknsm-2.1/
+baseurl=http://10.[state].10.19/copr-rocknsm-2.4/
 gpgcheck=0
 enabled=1
 

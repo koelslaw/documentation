@@ -26,7 +26,7 @@ sudo yum update
 ################################
 #create rock repos
 
-sudo yum-config-manager --add-repo https://copr.fedorainfracloud.org/coprs/g/rocknsm/rocknsm-2.1/repo/epel-7/group_rocknsm-rocknsm-2.1-epel-7.repo
+sudo yum-config-manager --add-repo https://copr.fedorainfracloud.org/coprs/g/rocknsm/rocknsm-2.4/repo/epel-7/group_rocknsm-rocknsm-2.[X]-epel-7.repo
 
 #Create Elastic Repo
 sudo rpm --import https://artifacts.elastic.co/GPG-KEY-elasticsearch
@@ -149,7 +149,7 @@ sudo curl -l http://opensource.wandisco.com/centos/7/git/x86_64/wandisco-git-rel
 # Creation of repo structure
 sudo yum install yum-utils createrepo httpd -y
 sudo rpm --import /etc/pki/rpm-gpg/*
-sudo reposync -n -l --repoid=epel --repoid=atomic --repoid=rhel-7-server-rpms --repoid=rhel-7-server-optional-rpms --repoid=rhel-7-server-extras-rpms --repoid=elastic-6.x --repoid=group_rocknsm-rocknsm-2.1 --download_path=/var/www/html --downloadcomps --download-metadata
+sudo reposync -n -l --repoid=epel --repoid=atomic --repoid=rhel-7-server-rpms --repoid=rhel-7-server-optional-rpms --repoid=rhel-7-server-extras-rpms --repoid=elastic-6.x --repoid=group_rocknsm-rocknsm-2.X --download_path=/var/www/html --downloadcomps --download-metadata
 cd /var/www/html/epel
 sudo createrepo -v  /var/www/html/epel -g comps.xml
 cd /var/www/html/rhel-7-server-rpms
@@ -164,10 +164,12 @@ cd /var/www/html/atomic-testing
 sudo createrepo -v  /var/www/html/atomic-testing
 cd /var/www/html/epel
 sudo createrepo -v  /var/www/html/epel -g comps.xml
-cd /var/www/html/group_rocknsm-rocknsm-2.1
+#Ensure yuo enter the version yuo wish to use.
+cd /var/www/html/group_rocknsm-rocknsm-2.[X}
 sudo createrepo -v  /var/www/html/elastic-6.x -g comps.xml
 cd /var/www/html/elastic-6.x
-sudo createrepo -v  /var/www/html/copr-rocknsm-2.1
+#Ensure you put in the cersion you want
+sudo createrepo -v  /var/www/html/copr-rocknsm-2.[x]
 sudo createrepo -v /var/www/html/rock2
 sudo createrepo -v /var/www/html/capes
 # Adjust the SELinux context for Apache

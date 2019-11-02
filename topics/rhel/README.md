@@ -123,14 +123,14 @@ This is meant to help those who need a step-by-step build of RHEL.
 
 > For every machine except the NUC and capes (which uses elastic 5 instead of 6) need the following rpm repo file needs to be created.
 
-1. Add local repos to RHEL if using v1 of nuc deployment use this one otherwise use v2.
+1. Add local repos to RHEL if using v1 of nuc deployment use this one otherwise use v2. Ensure you set the correct version of rock.
 
 ##### V1
   ```
   sudo bash -c 'cat > /etc/yum.repos.d/local-repos.repo <<EOF
-  [copr-rocknsm-2.1]
-  name: copr rocknms repo
-  baseurl=http://10.[state octet].10.19/copr-rocknsm-2.1/
+  [copr-rocknsm-2.[x]]
+  name: copr rocknmxs repo
+  baseurl=http://10.[state octet].10.19/copr-rocknsm-2.[x]/
   gpgcheck=0
   enabled=1
 
@@ -176,9 +176,9 @@ This is meant to help those who need a step-by-step build of RHEL.
 ##### V2
   ```
   sudo bash -c 'cat > /etc/yum.repos.d/local-repos.repo <<EOF
-  [copr-rocknsm-2.1]
+  [copr-rocknsm-2.[x]]
   name: copr rocknms repo
-  baseurl=http://10.[state octet].10.19/general_mirror/copr-rocknsm-2.1/
+  baseurl=http://10.[state octet].10.19/general_mirror/copr-rocknsm-2.[x]/
   gpgcheck=0
   enabled=1
 
