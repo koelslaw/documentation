@@ -11,7 +11,7 @@ This will cover the deployment of the RockNSM sensor/data node elements. This in
 
 When you boot the installer, called Anaconda. Before it boots, press and append the following, which disables physical NIC naming and sets the screen resolution that is better for VMware.
 
-  net.ifnames=0 vga=791
+  `net.ifnames=0 vga=791 biosdevname=0`
 
 Install CENTOS in accordance with RHEL Documentation
 
