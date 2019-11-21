@@ -124,16 +124,17 @@ chronyc sources
 ​
 ​
 ```
-sensor.[state].cmat.lan ansible_host=<IP ADDRESS> ansible_connection=ssh
-es1.[state].cmat.lan ansible_host=<IP ADDRESS> ansible_connection=ssh
-es2.[state].cmat.lan ansible_host=<IP ADDRESS> ansible_connection=ssh
-es3.[state].cmat.lan ansible_host=<IP ADDRESS> ansible_connection=ssh
-es1.[state].cmat.lan ansible_host=<IP ADDRESS> ansible_connection=ssh
-es2.[state].cmat.lan ansible_host=<IP ADDRESS> ansible_connection=ssh
-es3.[state].cmat.lan ansible_host=<IP ADDRESS> ansible_connection=ssh
-es1.[state].cmat.lan ansible_host=<IP ADDRESS> ansible_connection=ssh
-es2.[state].cmat.lan ansible_host=<IP ADDRESS> ansible_connection=ssh
-es3.[state].cmat.lan ansible_host=<IP ADDRESS> ansible_connection=ssh
+sensor.[state].cmat.lan ansible_host=10.[state].10.21 ansible_connection=ssh
+es1.[state].cmat.lan ansible_host=10.[state].10.25 ansible_connection=ssh
+es2.[state].cmat.lan ansible_host=10.[state].10.26 ansible_connection=ssh
+es3.[state].cmat.lan ansible_host=10.[state].10.27 ansible_connection=ssh
+es4.[state].cmat.lan ansible_host=10.[state].10.28 ansible_connection=ssh
+es5.[state].cmat.lan ansible_host=10.[state].10.29 ansible_connection=ssh
+es6.[state].cmat.lan ansible_host=10.[state].10.30 ansible_connection=ssh
+es7.[state].cmat.lan ansible_host=10.[state].10.31 ansible_connection=ssh
+es8.[state].cmat.lan ansible_host=10.[state].10.32 ansible_connection=ssh
+es9.[state].cmat.lan ansible_host=10.[state].10.33 ansible_connection=ssh
+es10.[state].cmat.lan ansible_host=10.[state].10.34 ansible_connection=ssh
 # If you have any other sensor or data nodes then you would place them in the list above.
 ​
 ​
@@ -170,13 +171,13 @@ es_data
 es_ingest
 ​
 [es_masters]
-es[1:9]mocyber.lan
+es[1:10]mocyber.lan
 ​
 [es_data]
-es[1:9]mocyber.lan
+es[1:10]mocyber.lan
 ​
 [es_ingest]
-es[1:9]mocyber.lan
+es[1:10]mocyber.lan
 ​
 [elasticsearch:vars]
 # Disable all node roles by default
@@ -282,4 +283,4 @@ af-packet:
     use-emergency-flush: yes
 ```
 ​
-- make sure Suricata has been restarted.
+- make sure Suricata has been restarted. If it complains, check permissions in `etc/suricata/rock-overides.yml`
