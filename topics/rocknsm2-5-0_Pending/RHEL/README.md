@@ -19,6 +19,18 @@ The sensor has the network security monitoring and data shipping elements:
 - Elastic Logstash
 - Elastic Beats
 
+## Pre-deployment on all machines
+
+- Even thought this is RHEL we are going to use the CENTOS iso to bootstrap our deployment. This is to ensure a stable deployment with no bleeding edge stuff that may be included if you clone the git repo.
+
+- Download the latest 2.5.X iso if you haven't already downloaded it to the nuc. If you have already `scp` or `rsync` it over to the all the machinces that will be part of your sensor.
+
+-  Mount it using
+```
+sudo mount -o loop /home/admin/rocknsm-<ROCK VERSION HERE>.-1902.iso /mnt
+```
+
+
 ## Build Steps
 1. [Hardware Requirements](rocknsm-requirements.md)
 1. [RockNSM Deployment](sensordeploy.md)

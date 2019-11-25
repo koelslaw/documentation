@@ -19,7 +19,7 @@ When you boot the installer, called Anaconda. Before it boots, press and append 
 Install os in accordance with [RHEL Docs](../topics/rhel/README.md)
 
 #### Disable FIPS to allow Deployment on all components
-> NOTE: if you didnt DISA STIG the machine then you do not need to do this.
+> NOTE: if you didn't DISA STIG the machine then you do not need to do this.
 ​
 
 - Disable FIPS
@@ -209,19 +209,19 @@ sensors
 ### Hotfixes for rock iso for a multinode deploy.
 ​
 - remove/comment the following steps in the following playbook files:
-  - for adding entries to the /etc/hosts `/usr/share/rock/roles/common/tasks/configure.yml`
-  - ensure that you edit the playbook in `/usr/share/rock/roles/elasticsearch/templates/elasticsearch.yml.j2` and change
+  - for adding entries to the /etc/hosts `/mnt/rock/roles/common/tasks/configure.yml`
+  - ensure that you edit the playbook in `/mnt/rock/roles/elasticsearch/templates/elasticsearch.yml.j2` and change
    `es_node_name: "{{ ansible_hostname }}"` to `{{ inventory_hostname }}`
-  - disable step `Configure firewall ports for internal elastic communication` as we have already done this in predeploy in `/usr/share/rock/roles/elasticsearch/tasks/before.yml`
+  - disable step `Configure firewall ports for internal elastic communication` as we have already done this in predeploy in `/mnt/rock/roles/elasticsearch/tasks/before.yml`
 ​
-  - disable step `Determine if Elasticsearch needs to be restarted`  in `/usr/share/rock/roles/elasticsearch/tasks/before.yml`
+  - disable step `Determine if Elasticsearch needs to be restarted`  in `/mnt/rock/roles/elasticsearch/tasks/before.yml`
   - disable step `Enable and start filebeat` in
-  `/usr/share/rock/roles/filebeat/tasks/main.yml`
+  `/mnt/rock/roles/filebeat/tasks/main.yml`
 ​
-  - disable subtask `notify: Enable and restart lighttpd` that is a part of `Install ROCK lighttpd configuration` in `/usr/share/rock/roles/lighttpd/tasks/main.yml`
+  - disable subtask `notify: Enable and restart lighttpd` that is a part of `Install ROCK lighttpd configuration` in `/mnt/rock/roles/lighttpd/tasks/main.yml`
 ​
   - disable step `Download RockNSM elastic configs` in
-  `/usr/share/rock/roles/kibana/tasks/main.yml` as it ignores the offline flag and they already present
+  `/mnt/rock/roles/kibana/tasks/main.yml` as it ignores the offline flag and they already present
 ​
 ### Installation
 Most of the Rock configuration is now automated and can be called from anywhere on the os.

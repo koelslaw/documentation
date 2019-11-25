@@ -40,9 +40,8 @@ Options:
 
 ## Key web interfaces
 
-https://localhost - Kibana web interface
+https://10.[state].cmat.lan - Kibana web interface
 
-https://localhost:8443 - Docket - web interface for pulling PCAP from the sensor (must be enabled in config)
-> localhost is the data node management IP address from the [../platform-management.md](Platform Management) page
+https://10.[state].cmat.lan/app/docket
 
 Move onto [CAPES](../capes/README.md)

@@ -9,7 +9,7 @@ Here's a starting point to get you moving:
 | RESOURCE | RECOMMENDATION                                                  |
 |----------|-----------------------------------------------------------------|
 | CPU      | 4 or more physical cores                                        |
-| Memory   | 16GB (8GB is doable, 16 is better)                              |
+| Memory   | 16GB (10GB is doable, 16 is better)                              |
 | Storage  | 256GB, with 200+ of that dedicated to /data, SSD preferred      |
 | Network  | 2 gigabit interfaces, one for management and one for collection |
 
