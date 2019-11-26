@@ -11,3 +11,41 @@ The main purpose of Passive Vulnerability Scanner (PVS) is to monitor network tr
 
 ### Security Center
 Security Center (SC) is the central management console for the configuration of Nessus & PVS. SC can collect scan data from all PVS and Nessus instances to provide custom dashboard and reports. One of the neat features of SC is the ability to roll-up SC instances for reporting purposes. This allows the DoD to deploy SC at various levels with all of them reporting to one or more main SC instances. As you can imagine, this reporting capability can be very beneficial as leadership now has the ability to view policy, vulnerability compliance, and total IT assets across the enterprise. Assessing the security posture of the DoD’s infrastructure is now easier than ever.
+
+### Installation
+Substitute Nesssus and ACAS as needed.
+
+> If you are using commercial Nessus then use the link below. Download the rpm package to the NUC when it connected to the internet.
+ https://www.tenable.com/downloads/api/v1/public/pages/nessus/downloads/10197/download?i_agree_to_tenable_license_agreement=true
+
+- You can download it via command line with:
+```
+sudo wget -O nessus.rpm https://www.tenable.com/downloads/api/v1/public/pages/nessus/downloads/10197/download?i_agree_to_tenable_license_agreement=true
+```
+
+- Install using:
+```
+sudo rpm -ivh Nessus-<version number>-es6.x86_64.rpm
+```
+
+- Open the firewall using
+```
+firewall-cmd --add-port=8834/tcp --permanent
+firewall-cmd --reload
+```
+
+- Now, we are ready to start Nessus:
+```
+sudo systemctl start nessusd
+```
+
+- Connect to the scanner using your browser with the following url:
+```
+https://10.[state octet].20.2:8834
+```
+
+- Create an account:
+
+- Register your scanner with the activation code
+
+- Once you have entered your activation code Nessus will start initializing. This can take some time.
