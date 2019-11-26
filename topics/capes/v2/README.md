@@ -4,6 +4,7 @@ This is the repo for containerized CAPES. This will replace the non-containerize
 
 ## Requirements
 * Clean CentOS system
+* internet connection
 
 To deploy
 ```
