@@ -211,6 +211,23 @@ sensors
   - ensure that you edit the playbook in `/usr/share/rock/roles/elasticsearch/templates/elasticsearch.yml.j2` and change
    `es_node_name: "{{ ansible_hostname }}"` to `{{ inventory_hostname }}`
   - disable step `Configure firewall ports for internal elastic communication` as we have already done this in predeploy in `/usr/share/rock/roles/elasticsearch/tasks/before.yml`
+  - Ensure the following ports on the firewall are open for the Elastic nodes
+    - 9300 TCP - Node coordination (I am sure elastic has abetter name for this)
+    - 9200 TCP - Elasticsearch
+    - 5601 TCP - Only on the Elasticsearch node that has Kibana installed, Likely es1.[STATE].cmat.lan
+    - 22 TCP - SSH Access
+  - Reload the firewall config
+
+  - Ensure the following ports on the firewall are open for the sensor
+    - 1234 tcp/udp - NTP
+    - 22 TCP - SSH Access
+    - 9092 TCP - Kafka
+
+EXAMPLE:
+```
+sudo firewall-cmd --add-port=9300/tcp --permanent
+sudo firewall-cmd --reload
+```
 ​
   - disable step `Determine if Elasticsearch needs to be restarted`  in `/usr/share/rock/roles/elasticsearch/tasks/before.yml`
   - disable step `Enable and start filebeat` in
