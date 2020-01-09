@@ -2,6 +2,27 @@
 
 OpenVAS is a framework of several services and tools offering a comprehensive and powerful vulnerability scanning and vulnerability management solution. The framework is part of Greenbone Networks' commercial vulnerability management solution from which developments are contributed to the Open Source community since 2009.
 
+## Create the Active Virtual Machine for OpenVAS
+- Log into ESXi
+- Select `Create/Register VM`  
+  - Name: `OpenVAS`  
+  - Compatibility: Leave default  
+  - Guest OS Family: `Linux`  
+  - Guest OS Version: `Red Hat Enterprise Linux 7 (64-bit)`  
+- Select your storage  
+- Customize the VM  
+  - CPU: `4`  
+  - Memory: `8 GB` , Reserved
+  - Hard disk 1: `50 GB`  
+  - SCSI Controller 0: Leave default  
+  - SATA Controller 0: Leave default  
+  - USB controller 1:  Leave default  
+  - Network Adapter: `Active`, ensure that `Connect` is enabled  
+  - CD/DVD Drive 1: `Datastore ISO file`, select the RHEL ISO you uploaded above, ensure that `Connect` is enabled  
+  - Video Card:  Leave default  
+- Review your settings  
+- Click Finish  
+
 ## Installation
 - Build a [virtual machine on the Active virtual network](../vmware/README.md#Create-the-Active-Virtual-Machine)  
 - Install OS in accordance with [Rhel Documentation](../rhel/README.md)

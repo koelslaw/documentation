@@ -278,33 +278,44 @@ Options:
 
 - Start the interactive text interface for setup using `sudo rock tui`
 
+
 - Select "Select Interfaces". This allows you to choose which interface that you will manage and capture with.
+
 ![](../../../images/installationtype.png)
 
 - Choose you management interface
+
 ![](../../../images/mgmtinterface.png)
 
 - Choose you capture interface(s).
+
 ![](../../../images/captureinterface.png)
+
 > NOTE: Any interface you set for cature will spawn a Bro/Zeek, Surcata, and FSF process. So if you dont intend on using the interface do not set it for capture.
 
 - You will then be forwarded to the interface summary screen. make sure all the things are to your satisfaction
+
 ![](../../../images/interfacesummary.png)
 
 - Once it has returned to the installation setup screen then choose the  "Offline/Online" installation option. This tells the installation playbook where to pull the packages. As these kits are meant to be offline we will choose the offline installation option.
+
 ![](../../../images/installationtype.png)
 
 - Choose "No" for the offline installation.
+
 ![](../../../images/installationselection.png)
 
 - Once it has returned to the installation setup screen then choose the  "Choose Components" installation option.
+
 ![](../../../images/installationtype.png)
 
 - Here is where you decide what capabilities your sensor will have. If you are low on resources the the recommendation is to disable docket and stenographer. Otherwise just enable everything.
+
 ![](../../../images/RockComponnents.png)
 
 
 - Once it has returned to the installation setup screen then choose the  "Choose enabled services" installation option. This needs to match the installed components unless you have a specific reason to do so.
+
 ![](../../../images/bootupservices.png)
 
 - This will write the config to the ansible deployment script.
