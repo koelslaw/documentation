@@ -18,3 +18,5 @@ The CMAT kits will use the following network standard: `10.[KIT].[VLAN].[HOST]`
 |10.[state].20.1 | [VLAN 20 Gateway (Active)](#active-table)   |
 |10.[state].50.1 | VLAN 50 Gateway (Remote)                    |
 |10.[state].60.1 | VLAN 60 Gateway (Remote)                    |
+
+- Move to [Dell R840 Configuration](../dell/README.md)
