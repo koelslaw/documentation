@@ -102,7 +102,9 @@ It should be noted, these next steps...are silly. Don't blame us.
 > Configuration options for the interfaces
 
 15. Your interfaces should all have come up as Network Ports
+
 ![](../../images/gigamon-configured.png)
+
 > Configured Gigamon interfaces
 
 ## Port Types

@@ -1,9 +1,9 @@
 # RCDcap
 
 ## Description
-RCDCap is a packet processing framework. At its core, it incorporates basic mechanisms for local and remote capturing and decapsulation of packets (CISCO ERSPAN and HP ERM are supported). It can be extended to support many types of packet-based traffic analysis by creating plug-ins and loading them in the main application. It includes many optimizations to ensure high performance traffic processing. Some of them are: multithreaded traffic processing; explicit thread pinning; configurable packet burst processing; support for PF_PACKET and PF_RING. It can be also used to inject the processed traffic to a TAP device or regular physical Ethernet interface. Its basic functuonalities make it a viable solution for preprocessing CISCO ERSPAN and HP ERM traffic which can be handed to some other application. In our case, Gigamon
+RCDCap is a packet processing framework. At its core, it incorporates basic mechanisms for local and remote capturing and decapsulation of packets (CISCO ERSPAN and HP ERM are supported). It can be extended to support many types of packet-based traffic analysis by creating plug-ins and loading them in the main application. It includes many optimizations to ensure high-performance traffic processing. Some of them are: multithreaded traffic processing, explicit thread pinning; configurable packet burst processing; support for PF_PACKET, and PF_RING. It can also be used to inject the processed traffic to a TAP device or regular physical Ethernet interface. Its basic functionalities make it a viable solution for preprocessing CISCO ERSPAN and HP ERM traffic, which can be handed to some other application. In our case, Gigamon
 
-RCDCap offers its own set of plug-ins for doing different types of traffic analysis. Notably, it has its own plug-in for analysing NDP, ARP, DHCP and DHCPv6 traffic.
+RCDCap offers its own set of plug-ins for doing different types of traffic analysis. Notably, it has its plug-in for analyzing NDP, ARP, DHCP, and DHCPv6 traffic.
 
 Features:
 - CISCO ERSPAN decapsulation
@@ -21,7 +21,7 @@ Features:
 - Plug-in: DHCP, DHCPv6, NDP and ARP monitor
 
 
-Preq:
+Prereq:
 - Rhel Installed / STiG'd
 - DNS
 - NUC Configured
@@ -29,7 +29,7 @@ Preq:
 
 
 
-1. Downlaod the latest version of RCDCap
+1. Download the latest version of RCDCap
 
   ```
   sudo wget https://sourceforge.net/projects/rcdcap/files/RCDCap-0.9.0-Source.tar.bz2/download -o rcpcap.tar.bz2
@@ -70,7 +70,7 @@ outside the extracted source folder) and type:
   sudo cpack -D CPACK_RPM_PACKAGE_DEBUG=1 -D CPACK_RPM_SPEC_INSTALL_POST="/bin/true" -G RPM
   ```
 
-1. The build for this tool is a little rough around the edgeds. I tries to create a directory that is not required during installation. We are going to `rpmrebuild` the new rpm we just built.  
+1. The build for this tool is a little rough around the edges. I tried to create a directory that is not required during installation. We are going to `rpmrebuild`, the new rpm we just built.  
 
   ```
   sudo rpmrebuild -pve ~/RCDCap-0.9.0-Source/RCDCap-0.9.0-Linux.rpm 

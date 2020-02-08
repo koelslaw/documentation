@@ -1,5 +1,5 @@
 # DNS Server for Kit
-At this point we have used static assignments for all the components of the kit. To make it easier to find stuff and allow some forms of automation we will be setting up a dns server first.
+Up to this point, we have used static assignments for all the components of the kit. To make it easier to find stuff and allow some forms of automation, we will be setting up a DNS server first.
 
 ## Create the RHEL DNS
 - Log into ESXi
@@ -24,9 +24,9 @@ At this point we have used static assignments for all the components of the kit.
 - Click Finish  
 
 ## Prereqs
- - RHEL installed with static ip set during installation according to [RHEL Documentation](../rhel/README.md)
+ - RHEL installed with static IP set during installation according to [RHEL Documentation](../rhel/README.md)
   - If you forgot to set a static of need to change use `sudo nmtui`
-- Logged in via `ssh` or via the ESXi Console
+- Logged in via `ssh` or the ESXi Console
 
 ### Dnsmasq
 
@@ -34,11 +34,11 @@ At this point we have used static assignments for all the components of the kit.
   ```
   sudo yum install dnsmasq
   ```
-- Configure the dnsmasq config files so dnsmaq will answer dns queries.
+- Configure the dnsmasq config files so dnsmasq will answer DNS queries.
   ```
   sudo vi /etc/dnsmasq.conf
   ```
-- Add the following lines to the end of the config file. This binds it to the localhost and also its own static ip. It also disables DHCP as the switch is already handling any DHCP we need.
+- Add the following lines to the end of the config file. This binds it to the localhost and also its static IP. It also disables DHCP as the switch is already handling any DHCP we need.
   ```
   listen-address=127.0.0.1
   listen-address=10.[state].10.20
@@ -46,7 +46,7 @@ At this point we have used static assignments for all the components of the kit.
   ```
 - Add the following addresses to the end of the /etc/hosts files using `sudo vi /etc/hosts`
 
-   > NOTE: Any other dns entries you wish to have, go here  
+   > NOTE: Any other DNS entries you wish to have, go here  
 
 ```
 127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4

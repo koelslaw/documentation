@@ -7,13 +7,13 @@
 
 Download RHEL from the RedHat partner portal.
 
-Now it's time to create a bootable USB drive with that fresh RHEL build.  Let's look at few options.   
+Now it's time to create a bootable USB drive with that fresh RHEL build.  Let's look at a few options.   
 
 ### CLI
 
 If you live in the terminal, use `dd` to apply the image.  These instructions are for using a terminal in macOS.  If you're in a different environment, google is your friend.  
 
-:warning: Take CAUTION when using these commands by ENSURING you're writing to the correct disk / partition! :warning:
+:warning: Take CAUTION when using these commands by ENSURING you are writing to the correct disk/partition! :warning:
 
 1. once you've inserted a USB get the drive ID:  
 `diskutil list`  
@@ -24,19 +24,19 @@ If you live in the terminal, use `dd` to apply the image.  These instructions ar
 3. write the image to drive:  
 `sudo dd bs=8M if=path/to/rhel.iso of=/dev/disk#`  
 
-If this is done on a Mac, you could get a popup once the operation is complete asking you to `Initialize, Ignore, Eject` the disk. You want to `Ignore` or `Eject`. `Initialize` will add a partition to it that will allow Mac to read the disk, and make it unbootable.  
+If this is done on a Mac, you could get a popup once the operation is complete asking you to `Initialize, Ignore, Eject` the disk. You want to `Ignore` or `Eject`. `Initialize` will add a partition to it that will allow Mac to read the disk and make it unbootable.  
 ![](../../images/mac-initialize-ignore-eject.png)  
 
 ### Via GUI
 
-macOS:  if using the terminal is currently a barrier to getting things rolling, [etcher.io](http://etcher.io) is an excellent GUI burning utility.  
+macOS:  if using the terminal is a barrier to getting things rolling, [etcher.io](http://etcher.io) is an excellent GUI burning utility.  
 
 Windows:  there are several great tools to apply a bootable image in MS land, but we recommend [rufus](https://rufus.akeo.ie/).  
 
 ## Install RHEL
 
 ### Partition Schemes for Each RHEL Device
-Use the Platform Management doc and the table below to confiure the RHEL OSs. If they need to be in a specific volume group then they will be denoted inside `()` otherwise assume it is part of the default `rhel` volume group
+Use the Platform Management doc and the table below to configure the RHEL OSs. If they need to be in a specific volume group, then they will be denoted inside `()` otherwise assume it is part of the default `rhel` volume group
 
 | Device            |  /     | /tmp     | /var/log/audit | /boot  | /home          | /swap | /var           | /data               | /data/stenographer | /data/kafka|
 |--|--|--|--|--|--|--|--|--|--|--|
@@ -56,7 +56,7 @@ Use the Platform Management doc and the table below to confiure the RHEL OSs. If
 
 This is meant to help those who need a step-by-step build of RHEL.
 
->NOTE: Capes has its own installation criteria, please refer to [Capes Installation](capes/README.md).
+>NOTE: Capes has its installation criteria, please refer to [Capes Installation](capes/README.md).
 
 1. Attach or insert the media and power on  
 1. Press `F10` to enter the boot menu  
@@ -75,7 +75,7 @@ This is meant to help those who need a step-by-step build of RHEL.
     - Click `Select Profile`  
     - Click `Done`  
 1. Next click `Installation Destination`  
-    - Select the hard disk you want to install RHEL to, likely it is already selected unless you have more than 1 drive  
+    - Select the hard disk you want to install RHEL to, likely it is already selected unless you have more than one drive  
       - Click `Automatic Partitioning` and then click the checkbox that says `I would like to make additional space.`
       - Click `Done`  
       - There will be a popup window, in the bottom right, click `Delete All` and then `Reclaim Space`  
@@ -87,19 +87,19 @@ This is meant to help those who need a step-by-step build of RHEL.
       - Under `Device type` select `lvm`.
       - **If** required, Create any additional volume groups
           - Under the `Volume Group` select `Create New Volume Group`
-          - Give it the required name (OS,FAST,FASTER)
+          - Give it the required name (OS, FAST, FASTER)
           - Assign the appropriate disks according to above Volume Group Table
           - Hit `Save`
       - Click on the `Red Hat Enterprise Linux Installation` carrot to dropdown your current partitions  
-      - Click on `/home` and change the size to desired size and click `Update Settings`  
-      - Click on `/` and change the size to desired size and click `Update Settings`  
-      - Click on the `+` and set the mount point to `/var/log/audit` and set the `Desired Capacity` to desired size  
-      - Click on the `+` and set the mount point to `/tmp` and set the `Desired Capacity` to desired size  
+      - Click on `/home` and change the size to the desired size and click `Update Settings`  
+      - Click on `/` and change the size to the desired size and click `Update Settings`  
+      - Click on the `+` and set the mount point to `/var/log/audit` and set the `Desired Capacity` to the desired size  
+      - Click on the `+` and set the mount point to `/tmp` and set the `Desired Capacity` to the desired size  
       - Click on the `+` and set the mount point to `/var` and leave the `Desired Capacity` blank
-      - **If** required, Click on the `+` and set the mount point to `/data` and set to desired size
-      - **If** required, Click on the `+` and set the mount point to `/data/stenographer` and and set to desired size
-      - **If** required, Click on the `+` and set the mount point to `/data/kafka` and and set to desired size
-      - Check partitions against above table  
+      - **If** required, Click on the `+` and set the mount point to `/data` and set to the desired size
+      - **If** required, Click on the `+` and set the mount point to `/data/stenographer` and set to the desired size
+      - **If** required, Click on the `+` and set the mount point to `/data/kafka` and set to the desired size
+      - Check partitions against the above table  
         - Click `Done`  
     - Click `Accept Changes`  
 1. Click `kdump`  
@@ -121,9 +121,9 @@ This is meant to help those who need a step-by-step build of RHEL.
 1. Login using the account you created during the Anaconda setup  
 
 
-> For every machine except the NUC and capes (which uses elastic 5 instead of 6) need the following rpm repo file needs to be created.
+> For every machine except the NUC and capes (which uses elastic 5 instead of 6), need the following rpm repo file needs to be created.
 
-1. Add local repos to RHEL if using v1 of nuc deployment use this one otherwise use v2. Ensure you set the correct version of rock.
+1. Add local repositories to RHEL if using v1 of nuc deployment use this one otherwise use v2. Ensure you set the correct version of rock.
 
 ##### V1
   ```
@@ -221,4 +221,4 @@ This is meant to help those who need a step-by-step build of RHEL.
   EOF'
   ```
 
-1. Continue installation...
+1. Continue installation

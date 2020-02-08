@@ -1,9 +1,9 @@
 # Preflight Checklist for Kit Deployment
 
 ## Software Preflight
-1. Ensure suricata has the latest signatures on nuc so they can be forwarded to suricata on the stack
+1. Ensure Suricata has the latest signatures on nuc so they can be forwarded to Suricata on the stack
 2. Ensure Lastest Repo Sync is completed
-3. Complete function check prior to deployment just in case anything needs to be fixed while internet access is availble
+3. Complete function check before deployment just in case anything needs to be fixed while internet access is available
 
 
 ## Hardware Preflight

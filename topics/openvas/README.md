@@ -26,7 +26,7 @@ OpenVAS is a framework of several services and tools offering a comprehensive an
 ## Installation
 - Build a [virtual machine on the Active virtual network](../vmware/README.md#Create-the-Active-Virtual-Machine)  
 - Install OS in accordance with [Rhel Documentation](../rhel/README.md)
-- Enable only the `rhel-7-server-rpms` and `atomic` repos. `epel` will really throw things of if its enabled.
+- Enable only the `rhel-7-server-rpms` and `atomic` repositories. `epel` will throw things off if it is enabled.
 ## Prep on the Nuc
 - Ensure AYR has been run.
 - Ensure openvas-offline tool has been run.
@@ -38,7 +38,7 @@ OpenVAS is a framework of several services and tools offering a comprehensive an
 vi /bin/openvas-setup
 :set nu
 ...
-49 # Test for selinux
+49 # Test for SELinux
 50 SELINUX=$(getenforce)
 51 if [ "$SELINUX" != "Disabled" ]; then
 52        echo "Error: Selinux is set to ($SELINUX)"
@@ -90,7 +90,7 @@ unixsocketperm 700
 ```
 
 ## Rebuild the NVT database
-By far the easiest way to update the NVT database is to do with an internet connection. That may not always be possible so if you haven't taken the time to configure the Nuc to grab the updates for you then may now is a good time otherwise if an internet connection is available then by all means update the definitions.  
+By far, the easiest way to update the NVT database is to do with an internet connection. That may not always be possible, so if you haven't taken the time to configure the Nuc to grab the updates for you, then may now is a good time; otherwise, if an internet connection is available, then, by all means, update the definitions.  
 ```
 sudo systemclt start redis.service
 openvasmd --rebuild

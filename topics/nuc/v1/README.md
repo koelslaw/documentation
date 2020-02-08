@@ -1,6 +1,6 @@
 # Intel Nuc Configuration
 
-The intel Nuc is an important part of the kits initial setup and maintx. It is used as your:
+The intel Nuc is an essential part of the initial setup and maintenance. It is used as your:
 - RPM repo
 - Documentation Repo
 - Generally to build/rebuild and maintain the kit
@@ -10,22 +10,22 @@ The intel Nuc is an important part of the kits initial setup and maintx. It is u
 - [RHEL](../rhel/README.md) Installed
 > Note: if necessary, these steps can be replicated to work with [CentOS Minimal](http://mirror.mobap.edu/centos/7.5.1804/isos/x86_64/CentOS-7-x86_64-Minimal-1804.iso).
 
-- Network connection to Internet
+- Network connection to the Internet
 
 ## Deploy Initial Configuration
-We are going to deploy the initial configuration for the Nuc. This will configure the nuc as a repository to build the rest of the kit, as well as to store documentation.  
+We are going to deploy the initial configuration for the Nuc. This will configure the Nuc as a repository to build the rest of the kit, as well as to store documentation.  
 
-1. Before that we need some upstream packages for installation. To get those we need to grab the our RHEL subscription.
+1. Before that, we need some upstream packages for installation. To get those, we need to grab our RHEL subscription.
 
   ```
   sudo subscription-manager register --username [see Platform Management] --password [see Platform Management] --auto-attach
   ```
 
-  Congrats! You have access to the RHEL RPM Repos. By extension so does the rest of the stack.
+  Congrats! You have access to the RHEL RPM Repos. By extension, so does the rest of the stack.
 
-2. The next script is meant to take some of the work on setting up the nuc. Using the script also ensures the rest of the kit has what it needs to function.
+2. The next script is meant to take some of the work on setting up the Nuc. Using the script also ensures the rest of the kit has what it needs to function.
 
-3. Clone the mozarkite github repo. If you cannot access check with d2ie to ensure you have authorization to be on di2e. Also check with technical SME to ensure you have access to the git repo also. If you don't have git already installed use `sudo yum install git`.
+3. Clone the mozarkite GitHub repo. If you cannot access di2e, check with d2ie to ensure you have the authorization to be on di2e. Also, check with technical SME to ensure you have access to the git repo also. If you don't have git already installed using `sudo yum install git`.
 
   ```
   sudo git clone https://di2euserfirstname.lastname@bitbucket.di2e.net/scm/mozarkite/mozarkite-docs.git
@@ -50,7 +50,7 @@ When you browse to Gitea for the first time, you'll enter a post-installation co
 
 ##### Configure SSH Usage
 
-Gitea provides the ability to perform git functions via http or ssh.  In order to enable `ssh` complete the following steps:  
+Gitea provides the ability to perform git functions via http or ssh.  To enable `ssh` complete the following steps:  
 
 * edit gitea's app.ini file  
 `sudo vi /opt/gitea/custom/conf/app.ini`  
@@ -63,9 +63,8 @@ make the following changes & additions to the `[server]` section:
 `SSH_LISTEN_PORT  = 4001`     # set this to any available port that is **NOT 22**  
 
 here's an example (showing only the `[server]` section):  
-```
-...
 
+```
 [server]
 LOCAL_ROOT_URL   = http://localhost:4000/
 SSH_DOMAIN       = <ip>
@@ -81,8 +80,8 @@ LFS_CONTENT_PATH = /opt/gitea/data/lfs
 LFS_JWT_SECRET   = xxxxxxxxxxxxxxxxxxx
 OFFLINE_MODE     = false
 
-...:
 ```
+
 ##### Wrapping it up
 ```
 sudo firewall-cmd --add-port=4001/tcp --permanent
@@ -91,7 +90,7 @@ sudo systemctl restart gitea
 sudo systemctl restart sshd
 ```
 
-Once the post installation steps have been completed then we need to clone a few git repos to ensure we have what we need to build ROCK. Navigate to `10.[state].10.19:4000` or `nuc.[STATE].cmat.lan:4000` if you already have dns setup in accordance with the documentation.
+Once the post-installation steps have been completed, then we need to clone a few git repos to ensure we have what we need to build ROCK. Navigate to '10.[state].10.19:4000` or `nuc.[STATE].cmat.lan:4000` if you already have DNS set up in accordance with the documentation.
 
 Mirror the following Repositories in gitea
 
@@ -105,7 +104,7 @@ Mirror the following Repositories in gitea
 
 
 ## Download Iso images
-While you dont have to have these it will make it easier if you need them in the future. `curl` or `scp` onto the nuc into the `var/www/html/iso` directory
+While you don't have to have these, it will make it easier if you need them in the future. `curl` or `scp` onto the Nuc into the `var/www/html/iso` directory
  - RHEL - DVD iso (Should have this one already downloaded from Nuc installation)
  - ESXi ISO
 

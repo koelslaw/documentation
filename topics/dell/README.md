@@ -7,7 +7,7 @@
 
 ### Configure iDRAC for Both Servers
 
-Once power has been connected to the servers setup they should automatically boot the lifecycle controllers. If not, hit `F10`.
+Once power has been connected to the servers, they should automatically boot the lifecycle controllers. If not, hit `F10`.
 
 
 - Navigate to -> `System Setup`
@@ -36,7 +36,7 @@ Once power has been connected to the servers setup they should automatically boo
 - Click `Finish`, Again.
 - Click `Yes` to save the IDRAC configuration, and `ok`
 - This should return you to the System Setup page
-- **Repeat for other server**
+- **Repeat for other servers**
 
 ___
 
@@ -62,7 +62,7 @@ ___
 
 ![](../../images/configure for raid.png)
 
->NOTE: **If** the disks have had previously installed OS on them do a cryptographic wipe prior to creating the raid arrays.
+>NOTE: **If** the disks have had previously installed OS on them, do a cryptographic wipe before creating the raid arrays.
 
 - Select Create Virtual disk
 
@@ -139,7 +139,7 @@ ___
 
 ![](../../images/configure for raid.png)
 
-> NOTE: **If** the disks have had previously installed OS on them do a cryptographic wipe prior to creating the raid arrays.
+> NOTE: **If** the disks have had previously installed OS on them, do a cryptographic wipe before creating the raid arrays.
 
 - Select Create Virtual disk
 
@@ -196,7 +196,7 @@ ___
 
   ![](../../images/IMG_20190105_095721.jpg)
 
-At this point you have finished. the NVME drives will be standalone and not in a RAID Configuration.
+At this point, you have finished. The NVME drives will be standalone and not in a RAID Configuration.
 
 
 - When Configuration is finished exit Lifecycle Controller and Install OS via the iDRAC or Installation Media

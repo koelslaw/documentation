@@ -9,7 +9,7 @@ This will cover the deployment of the RockNSM sensor/data node elements. This in
 ### Install OS
 > NOTE: add flags to Anaconda Preinstall **IF** any of the nodes are Virtual Machines
 
-When you boot the installer, called Anaconda. Before it boots, press and append the following, which disables physical NIC naming and sets the screen resolution that is better for VMware.
+When you boot the installer, called Anaconda. Before it boots, press the interupt key and append the following, which disables physical NIC naming and sets the screen resolution that is better for VMware.
 
   `net.ifnames=0 vga=791 biosdevname=0`
 
@@ -54,17 +54,17 @@ Install CENTOS in accordance with RHEL Documentation
 
   - Log back in...
 
-  - Confirm that fips is disabled by
+  - Confirm that FIPS is disabled by
   ```
   sysctl crypto.fips_enabled
   ```
 
-    if it returns 0 then it has been properly disabled
+    if it returns 0, then it has been properly disabled
 
 #### Sync the Clocks across all machines
-Due to the nature of virtual machines we have to keep the VMs and Baremetal equipment in sync. To this we set the sensor as the authority for time for the rest of the kit. We do this for a couple of reasons the biggest being that its is where the time-based data is generated from zeek(Bro), FSF, and Suricata. Aligning the rest of the stack along this guideline keeps us from writing events in the future. all events should be written in UTC to help with response across timezones. This is done via chrony.
+Due to the nature of virtual machines we have to keep the VMs and Baremetal equipment in sync. We set the sensor as the authority for time for the rest of the kit. We do this for a couple of reasons, the biggest being that it is where the time-based data is generated from Zeek(Bro), FSF, and Suricata. Aligning the rest of the stack along this guideline keeps us from writing events in the future. All events should be written in UTC to help with response across timezones. All of this is done via chrony.
 
-- If you have any time-based services running turn them off. Otherwise continue if this a new installation as we have not deployed ROCK yet.
+> NOTE: If you have any time-based services that are running, turn them off. Otherwise, continue if this a new installation as we have not deployed ROCK yet.
 
 - If not already installed then install chrony
 ```
@@ -76,7 +76,7 @@ sudo yum install chrony
 sudo vi /etc/chrony.conf
 ```
 
-- **Time Server (Likely Sensor)** Uncomment/edit the following line in the the `/etc/chrony.conf`
+- **Time Server (Likely Sensor)** Uncomment/edit the following line in the `/etc/chrony.conf`
 ```
 allow 10.[state].10.0/24  
 ```
@@ -91,7 +91,7 @@ sudo firewall-cmd --add-service=ntp --zone=work --permanent
 sudo firewall-cmd --reload
 ```
 
-- **Time Cleint (Everything not the Sensor Server)** Uncomment all the time servers and point it to `sensor.[state].cmat.lan` or the IP address.
+- **Time Client (Everything not the Sensor Server)** Uncomment all the time servers and point it to `sensor.[state].cmat.lan` or the IP address.
 ```
 server 192.0.2.1 iburst
 ```
@@ -116,7 +116,7 @@ chronyc sources
 ```
 
 #### Mount the iso.
-For all the installation machines mount the iso. transfer the contents to each of the machines.
+For all the installation machines, mount the iso. Transfer the contents to each of the machines.
 
 -  Download the iso from the nuc if you have it there already.
 
@@ -131,10 +131,10 @@ cp -r /mnt/* /srv/rocknsm/.
 ```
 
 #### Deployment of Rock across All Machines
-> NOTE: The new playbooks in 2.4.0 are made to handle multi node deployments. We will be able to deploy several machines at the same time.
+> NOTE: The new playbooks in 2.4.0 are made to handle multi-node deployments. We will be able to deploy several machines at the same time.
 Generate a hosts.ini file that so ansible knows where to deploy things sudo vi /etc/rocknsm/hosts.ini
 
-> NOTE: If not already done then log into every server that rock will be deployed to so that the key can be added to the ssh hosts file.
+> NOTE: If not already done, then log into every server that rock will be deployed to so that the key can be added to the ssh hosts file.
 
 - Insert the following text. These will tell the script what to deploy and where
 
@@ -217,14 +217,14 @@ sensors
 
 - Change Directory into `usr/share/rock/bin`
 
-- remove/comment the following steps in the follwoing playbook files:
+- remove/comment the following steps in the following playbook files:
   - for adding entries to the /etc/hosts `/usr/share/rock/roles/common/tasks/configure.yml`
   - disable and enable shard allocation in `/usr/share/rock/roles/elasticsearch/tasks/restart.yml`
   - ensure that you edit the playbook in `/etc/elasticsearch/elastisearch.yml` and change
    `es_node_name: "{{ ansible_hostname }}"` to `{{ inventory_hostname }}`
   - comment out the step `update-suricata source index` in the file `/usr/share/rock/roles/suricata/tasks/main.yml`
 
-- Run `sudo ./rock ssh-config` to setup ssh on all the host you will use for the deployment. It uses the host from the previously created `host.ini`. Or jsut log into each machine.
+- Run `sudo ./rock ssh-config` to setup ssh on all the hosts you will use for the deployment. It uses the host from the previously created `host.ini`. Or just log into each machine.
 
 - Disable/move the local repo to make sure everything comes from the mounted iso if it is already present.
 ```
@@ -279,25 +279,25 @@ Options:
 - Start the interactive text interface for setup using `sudo rock tui`
 
 
-- Select "Select Interfaces". This allows you to choose which interface that you will manage and capture with.
+- Select "Select Interfaces". This allows you to choose which interface you will manage and capture with.
 
 ![](../../../images/installationtype.png)
 
-- Choose you management interface
+- Choose your management interface
 
 ![](../../../images/mgmtinterface.png)
 
-- Choose you capture interface(s).
+- Choose your capture interface(s).
 
 ![](../../../images/captureinterface.png)
 
-> NOTE: Any interface you set for cature will spawn a Bro/Zeek, Surcata, and FSF process. So if you dont intend on using the interface do not set it for capture.
+> NOTE: Any interface you set for capture will spawn a Bro/Zeek, Suricata, and FSF process. So if you don't intend on using the interface do not set it for capture.
 
 - You will then be forwarded to the interface summary screen. make sure all the things are to your satisfaction
 
 ![](../../../images/interfacesummary.png)
 
-- Once it has returned to the installation setup screen then choose the  "Offline/Online" installation option. This tells the installation playbook where to pull the packages. As these kits are meant to be offline we will choose the offline installation option.
+- Once it has returned to the installation setup screen, choose the  "Offline/Online" installation option. This tells the installation playbook where to pull the packages. As these kits are meant to be offline, we will choose the offline installation option.
 
 ![](../../../images/installationtype.png)
 
@@ -309,12 +309,12 @@ Options:
 
 ![](../../../images/installationtype.png)
 
-- Here is where you decide what capabilities your sensor will have. If you are low on resources the the recommendation is to disable docket and stenographer. Otherwise just enable everything.
+- Here is where you decide what capabilities your sensor will have. If you are low on resources the recommendation is to disable docket and stenographer. Otherwise, just enable everything.
 
 ![](../../../images/RockComponnents.png)
 
 
-- Once it has returned to the installation setup screen then choose the  "Choose enabled services" installation option. This needs to match the installed components unless you have a specific reason to do so.
+- Once it has returned to the installation setup screen, then choose the  "Choose enabled services" installation option. This needs to match the installed components unless you have a specific reason to do so.
 
 ![](../../../images/bootupservices.png)
 
@@ -328,7 +328,7 @@ Options:
 
 - Ensure the following ports on the firewall are open for the data nodes
 
-  - 9300 TCP - Node coordination (I am sure elastic has abetter name for this)
+  - 9300 TCP - Node coordination (I am sure elastic has a better name for this)
   - 9200 TCP - Elasticsearch
   - 5601 TCP - Only on the Elasticsearch node that has Kibana installed, Likely es1.[STATE].cmat.lan
   - 22 TCP - SSH Access
