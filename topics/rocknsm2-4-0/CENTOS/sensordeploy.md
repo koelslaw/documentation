@@ -9,7 +9,7 @@ This will cover the deployment of the RockNSM sensor/data node elements. This in
 ### Install OS
 > NOTE: add flags to Anaconda Preinstall **IF** any of the nodes are Virtual Machines
 
-When you boot the installer, called Anaconda. Before it boots, press the interupt key and append the following, which disables physical NIC naming and sets the screen resolution that is better for VMware.
+When you boot the installer, called Anaconda. Before it boots, press the interrupt key and append the following, which disables physical NIC naming and sets the screen resolution that is better for VMware.
 
   `net.ifnames=0 vga=791 biosdevname=0`
 
@@ -18,7 +18,7 @@ Install CENTOS in accordance with RHEL Documentation
 ---
 
 #### Disable FIPS to allow Deployment on all components
-> NOTE: if you didnt DISA STIG the machine then you do not need to do this.
+> NOTE: if you didn't DISA STIG the machine, then you do not need to do this.
 
 - Disable FIPS
 
@@ -52,17 +52,16 @@ Install CENTOS in accordance with RHEL Documentation
   sudo reboot
   ```
 
-  - Log back in...
+  - Log back in
 
   - Confirm that FIPS is disabled by
   ```
   sysctl crypto.fips_enabled
   ```
-
-    if it returns 0, then it has been properly disabled
+If it returns 0, then it has been properly disabled
 
 #### Sync the Clocks across all machines
-Due to the nature of virtual machines we have to keep the VMs and Baremetal equipment in sync. We set the sensor as the authority for time for the rest of the kit. We do this for a couple of reasons, the biggest being that it is where the time-based data is generated from Zeek(Bro), FSF, and Suricata. Aligning the rest of the stack along this guideline keeps us from writing events in the future. All events should be written in UTC to help with response across timezones. All of this is done via chrony.
+Due to the nature of virtual machines, we have to keep the VMs and Baremetal equipment in sync. We set the sensor as the authority for time for the rest of the kit. We do this for a couple of reasons, the biggest being that it is where the time-based data is generated from Zeek(Bro), FSF, and Suricata. Aligning the rest of the stack along this guideline keeps us from writing events in the future. All events should be written in UTC to help with the response across timezones. All of this is done via chrony.
 
 > NOTE: If you have any time-based services that are running, turn them off. Otherwise, continue if this a new installation as we have not deployed ROCK yet.
 
@@ -115,7 +114,7 @@ sudo firewall-cmd --reload
 chronyc sources
 ```
 
-#### Mount the iso.
+#### Mount the iso
 For all the installation machines, mount the iso. Transfer the contents to each of the machines.
 
 -  Download the iso from the nuc if you have it there already.
@@ -134,7 +133,7 @@ cp -r /mnt/* /srv/rocknsm/.
 > NOTE: The new playbooks in 2.4.0 are made to handle multi-node deployments. We will be able to deploy several machines at the same time.
 Generate a hosts.ini file that so ansible knows where to deploy things sudo vi /etc/rocknsm/hosts.ini
 
-> NOTE: If not already done, then log into every server that rock will be deployed to so that the key can be added to the ssh hosts file.
+> NOTE: If not already done, then log into every server that rock will be deployed so that the key can be added to the ssh hosts file.
 
 - Insert the following text. These will tell the script what to deploy and where
 
@@ -213,7 +212,7 @@ web
 sensors
 ```
 
-### Hotfixes for iso.
+### Hotfixes for iso
 
 - Change Directory into `usr/share/rock/bin`
 
@@ -238,7 +237,7 @@ discovery.seed_hosts: ["es1.[state].cmat.lan", "es2.[state].cmat.lan", "es3.[sta
 ```
 
 ### Back to the normal Installation
-Most of the Rock configuration is now automated and can be called from anywhere on the os. Below are the options. Run `sudo rock ssh-config` to setup all the hosts prior to deploying.
+Most of the Rock configuration is now automated and can be called from anywhere on the os. Below are the options. Run `sudo rock ssh-config` to setup all the hosts before deploying.
 
 ```
 [admin@sensor ~]$ sudo rock help
@@ -246,7 +245,7 @@ Usage: /sbin/rock COMMAND [options]
 Commands:
 setup               Launch TUI to configure this host for deployment
 tui                 Alias for setup
-ssh-config          Configure hosts in inventory to use key-based auth (multinode)
+ssh-config          Configure hosts in inventory to use key-based auth (multi-node)
 deploy              Deploy selected ROCK components
 deploy-offline      Same as deploy --offline (Default ISO behavior)
 deploy-online       Same as deploy --online
@@ -274,7 +273,7 @@ Options:
 --tags, -t <tags>                  Only run plays and tasks tagged with these values
 --verbose, -v                      Increase verbosity of ansible-playbook
 ```
-- Setup you ssh access to you machine using sudo rock ssh-config command or using sudo rock tui for the Text user interfaces
+- Setup you ssh access to your machine using sudo rock ssh-config command or using sudo rock tui for the Text user interfaces
 
 - Start the interactive text interface for setup using `sudo rock tui`
 
@@ -291,7 +290,7 @@ Options:
 
 ![](../../../images/captureinterface.png)
 
-> NOTE: Any interface you set for capture will spawn a Bro/Zeek, Suricata, and FSF process. So if you don't intend on using the interface do not set it for capture.
+> NOTE: Any interface you set for capture will spawn a Bro/Zeek, Suricata, and FSF process. So if you don't intend on using the interface, do not set it for capture.
 
 - You will then be forwarded to the interface summary screen. make sure all the things are to your satisfaction
 
@@ -305,11 +304,11 @@ Options:
 
 ![](../../../images/installationselection.png)
 
-- Once it has returned to the installation setup screen then choose the  "Choose Components" installation option.
+- Once it has returned to the installation setup screen, then choose the  "Choose Components" installation option.
 
 ![](../../../images/installationtype.png)
 
-- Here is where you decide what capabilities your sensor will have. If you are low on resources the recommendation is to disable docket and stenographer. Otherwise, just enable everything.
+- Here is where you decide what capabilities your sensor will have. If you are low on resources, the recommendation is to disable docket and stenographer. Otherwise, just enable everything.
 
 ![](../../../images/RockComponnents.png)
 
@@ -320,7 +319,7 @@ Options:
 
 - This will write the config to the ansible deployment script.
 
-- Once it has returned to the installation setup screen then choose the  "Run Installer" installation option.
+- Once it has returned to the installation setup screen, then choose the  "Run Installer" installation option.
 
 
 **It should complete with no errors**
@@ -336,7 +335,7 @@ Options:
   sudo firewall-cmd --add-port=9300/tcp --permanent
   ```
 
-- Reload the firewall config
+- Reload the firewall-config
 ```
 sudo firewall-cmd --reload
 ```
@@ -349,7 +348,7 @@ sudo firewall-cmd --reload
   sudo firewall-cmd --add-port=22/tcp --permanent
   ```
 
-- Reload the firewall config
+- Reload the firewall-config
 ```
 sudo firewall-cmd --reload
 ```

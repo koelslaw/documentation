@@ -23,7 +23,7 @@ ___
 
 ### OS Prep for deployment All Nodes (DATA and Sensor)
 
-1. Perform system update and enable daily updates
+- Perform system update and enable daily updates
   ```
   sudo yum update -y
   sudo yum install -y yum-cron
@@ -33,60 +33,60 @@ ___
   ```
 
 #### Disable FIPS to allow Deployment
-1. Disable FIPS
-  1. Install dracut
+- Disable FIPS
+  - Install dracut
     ```
     sudo yum install dracut
     ```
 
-  1. Remove the dracut-fips* packages
+  - Remove the dracut-fips* packages
     ```
     sudo yum remove dracut-fips\*
     ```
 
-  1. Backup existing FIPS initramfs
+  - Backup existing FIPS initramfs
     ```
     sudo mv -v /boot/initramfs-$(uname -r).img{,.FIPS-bak}
     ```
 
-  1. Run `dracut` to rebuild the initramfs
+  - Run `dracut` to rebuild the initramfs
     ```
     sudo dracut
     ```
 
-  1. Run Grubby
+  - Run Grubby
     ```
     sudo grubby --update-kernel=ALL --remove-args=fips=1
     ```
 
-  1. **Carefully** up date the grub config file setting `fips=0`
+  - **Carefully** update the grub config file setting `fips=0`
     ```
     sudo vi /etc/default/grub
     ```
 
-  1. Reboot the VM
+  - Reboot the VM
     ```
     sudo reboot
     ```
 
-1. Log back in...
+- Log back in
 
-1. Confirm that fips is disabled by
+- Confirm that fips is disabled by
   ```
   sysctl crypto.fips_enabled
   ```
-  if it returns `0` then it has been properly disabled
+  If it returns `0`, then it has been properly disabled.
 
 
 ### Deployment of Rock across RHEL Machines
 
-  > NOTE: The new playbooks in 2.3.0 are made to handle multi node deployments. We will be able to deploy several machines at the same time.
+  > NOTE: The new playbooks in 2.3.0 are made to handle multi-node deployments. We will be able to deploy several machines at the same time.
 
-1. Generate a hosts.ini file that so ansible knows where to deploy things `sudo vi /etc/rocknsm/hosts.ini`
+- Generate a hosts.ini file that so ansible knows where to deploy things `sudo vi /etc/rocknsm/hosts.ini`
 
-  > NOTE: If not already done then log into every server that rock will be deployed to so that the key can be added to the ssh hosts file.
+  > NOTE: If not already done, then log into every server that rock will be deployed so that the key can be added to the ssh hosts file.
 
-1. Insert the following text. These will tell the script what to deploy and where
+- Insert the following text. These will tell the script what to deploy and where
 ---
 ```
 [all]
@@ -178,45 +178,45 @@ ansible_ssh_user={see platform management}
 
 ---
 
-1. Make a place for the rock iso to live.
+- Make a place for the rock iso to live.
 
   ```
   sudo mkdir -p /srv/rocknsm
   ```
 
-1. Deploy the Rock iso to all the the machines in the playbook to prepare for the deployment of rock NSM
+- Deploy the Rock iso to all the machines in the playbook to prepare for the deployment of rock NSM
 
   ```
   sudo ansible-playbook rockISOPrep.yml
   ```
 
-1. Navigate to the rock bin directory
+- Navigate to the rock bin directory
   ```
   cd /srv/rocknsm/
   ```
 
-1. Copy the contents of the mounted iso so that it can be used for the installation
+- Copy the contents of the mounted iso so that it can be used for the installation
 
   ```
   sudo cp -r /mnt/* /srv/rocknsm
   ```  
 
-1. Look at the directory using `ls` to ensure that it copied the information fromt he mounted iso image.
+- Look at the directory using `ls` to ensure that it copied the information from the mounted iso image.
 
-1. Generate defaults for rock to deploy with
+- Generate defaults for ROCK to deploy with
   ```
   sudo ansible-playbook /opt/rocknsm/rock/playbooks/generate-defaults.yml
   ```
-> NOTE: this generates a config file on the end user machine. The config file on the remote machine isnt what actually gets used for the deployment. The config file on the nuc is the one that gets used for the deployment. These generated config files are useful in making sure you have the correct setting for each of you servers.
+> NOTE: this generates a config file on the end-user machine. The config file on the remote computer isn't what gets used for the deployment. The config file on the nuc is the one that gets used for this implementation. These generated config files are useful in making sure you have the correct setting for each of your servers.
 
-1. Copy one of the generated config files to use as the base for your deployment. My recommendation is sensor.[state].cmat.lan
+- Copy one of the generated config files to use as the base for your deployment. My recommendation is the sensor.[state].cmat.lan
 
   ```
   sudo scp admin@sensor.[state].cmat.lan:/etc/rocknsm/config.yml /etc/rocknsm/config.yml
   ```
-> NOTE: change the parameters for each part of the deployment. in this case it will be 3 parts: sensor, data tier w/o kibana, data tier w/ Kibana
+> NOTE: change the parameters for each part of the deployment. In this case, it will be three parts: sensor, data tier w/o kibana, data tier w/ Kibana
 
-1. Edit the `/etc/rocknsm/config.yml`
+- Edit the `/etc/rocknsm/config.yml`
   ```
   sudo vi /etc/rocknsm.config.yml
   ```
@@ -256,7 +256,7 @@ ansible_ssh_user={see platform management}
   # Set hostname and fqdn in inventory file
 
   # Set the number of CPUs assigned to Bro:
-  bro_cpu: 6  # put in value even though bro is not enabled on a data node
+  bro_cpu: 6  # put in value even though Bro/Zeek is not enabled on a data node
 
   # Set the Elasticsearch cluster name:
   es_cluster_name: {{ es_cluster_name }} # the name of the cluster of elasticsearch nodes
@@ -265,7 +265,7 @@ ansible_ssh_user={see platform management}
   es_node_name: {{ es_node_name }} # unique name for this node in the cluster of elastic nodes
 
   # Set the value of Elasticsearch memory:
-  es_mem: 6 # Memory attached to this node for elasticsearch
+  es_mem: 6 # Memory attached to this node for Elasticsearch
 
 
   ###############################################################################
@@ -391,40 +391,40 @@ ansible_ssh_user={see platform management}
 
 ___
 
-1.  Create the following directory. This will give the deployment script to put the dashboards and scripts.
+-  Create the following directory. This will give the deployment script to put the dashboards and scripts.
 
   ```
   sudo mkdir -p /srv/rocknsm/support
   ```
 
-1. Deploy against the config file you just created. So if you used the config file for the sensor lets deploy that.
+- Deploy against the config file you just created. So if you used the config file for the sensor, let's deploy that.
 
   ```
   sudo ansible-playbooks -l rock /opt/rocknsm/rock/playbooks/deploy-rock.yml
   ```
 
-  It should complete with **no** errors
+  It should complete with **no** errors.
 
 
-1. Adjust the config file `/etc/rocknsm/config.yml` so that data tier can be deployed
+- Adjust the config file `/etc/rocknsm/config.yml` so that data tier can be deployed
   ```
   sudo vi /etc/rocknsm.config.yml
   ```
-1. Copy one of the generated config files to use as the base for your data deployment. My recommendation is es1.[state].cmat.lan
+- Copy one of the generated config files to use as the base for your data deployment. My recommendation is es1.[state].cmat.lan
 
   ```
   sudo scp admin@es1.[state].cmat.lan:/etc/rocknsm/config.yml /etc/rocknsm/config.yml
   ```
 
-1. Deploy against the config file you just created. So if you used the config file for the sensor lets deploy that.
+- Deploy against the config file you just created. So if you used the config file for the sensor, let us deploy that.
 
   ```
   sudo ansible-playbooks -l rock /opt/rocknsm/rock/playbooks/deploy-rock.yml
   ```
 
-  It should complete with **no** errors
+  It should complete with **no** errors.
 
-1. Open the following ports on the firewall for the elastic machines
+- Open the following ports on the firewall for the elastic machines
 
   - 9300 TCP - Node coordination (I am sure elastic has abetter name for this)
   - 9200 TCP - Elasticsearch
@@ -435,14 +435,14 @@ ___
   sudo firewall-cmd --add-port=9300/tcp --permanent
   ```
 
-1. Reload the firewall config
+- Reload the firewall-config
 
   ```
   sudo firewall-cmd --reload
   ```
 
-1. Restart services with `rock_stop` and the `rock_start`
+- Restart services with `rock_stop` and the `rock_start`
 
-1. Restart the stack using `rock_stop` and `rock_start`
+- Restart the stack using `rock_stop` and `rock_start`
 
 Move onto [USAGE](rocknsm-usage.md)

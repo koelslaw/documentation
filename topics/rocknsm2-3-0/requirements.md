@@ -1,8 +1,8 @@
 # Hardware Requirements
 
-The analysis of live network data is a resource intensive task. The bottom line
-is this: if you throw hardware at ROCK it will use it, and use it well. The higher
-the [IOPS](https://en.wikipedia.org/wiki/IOPS) the better.
+The analysis of live network data is a resource-intensive task. The bottom line
+is this: if you throw hardware at ROCK, it will use it, and use it well. The higher
+the [IOPS](https://en.wikipedia.org/wiki/IOPS), the better.
 
 Here's a starting point to get you moving:
 

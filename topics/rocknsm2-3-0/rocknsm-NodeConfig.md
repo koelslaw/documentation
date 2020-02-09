@@ -1,6 +1,6 @@
 # Node Configuration
 
-1. The following files need to be edited in `vi` they can be copy and pasted. Just make sure you replace [state] with your state. Also replace `[#]` with the appropriate number for the elastic cluster `1,2, or 3`
+- The following files need to be edited in `vi`. They can be copy and pasted. Just make sure you replace [state] with your state. Also, replace `[#]` with the appropriate number for the elastic cluster `1, 2, or 3`.
 
 ---
 
