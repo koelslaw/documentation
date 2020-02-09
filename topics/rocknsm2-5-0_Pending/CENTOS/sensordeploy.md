@@ -4,8 +4,8 @@ This will cover the deployment of the RockNSM sensor/data node elements. This in
 ## Prereqs
  - ESXi installed if you need it
  - ROCK NSM already installed but not deployed
- - Already SSHd into all systems that need deployed
- - DNS Setup or sync'd `/etc/hosts` file
+ - Already SSHd into all systems that need to be deployed
+ - DNS Setup or synced `/etc/hosts` file
  - Connectivity to all servers
 ### Install OS
 > NOTE: add flags to Anaconda Preinstall **IF** any of the nodes are Virtual Machines
@@ -17,7 +17,7 @@ When you boot the installer, called Anaconda. Before it boots, press and append 
 ​
 ​
 #### Disable FIPS to allow Deployment on all components
-> NOTE: if you didnt DISA STIG the machine then you do not need to do this.
+> NOTE: if you didn't DISA STIG the machine, then you do not need to do this.
 ​
 
 - Disable FIPS
@@ -52,7 +52,7 @@ When you boot the installer, called Anaconda. Before it boots, press and append 
   sudo reboot
   ```
 ​
-  - Log back in...
+  - Log back in.
 ​
   - Confirm that fips is disabled by
   ```
@@ -62,9 +62,9 @@ When you boot the installer, called Anaconda. Before it boots, press and append 
     if it returns 0 then it has been properly disabled
 ​
 #### Sync the Clocks across all machines
-Due to the nature of virtual machines we have to keep the VMs and Baremetal equipment in sync. To this we set the sensor as the authority for time for the rest of the kit. We do this for a couple of reasons the biggest being that its is where the time-based data is generated from zeek(Bro), FSF, and Suricata. Aligning the rest of the stack along this guideline keeps us from writing events in the future. all events should be written in UTC to help with response across timezones. This is done via chrony.
+Due to the nature of virtual machines, we have to keep the VMs and Baremetal equipment in sync. To this, we set the sensor as the authority for time for the rest of the kit. We do this for a couple of reasons, the biggest being that it is where the time-based data is generated from Zeek(Bro), FSF, and Suricata. Aligning the rest of the stack along this guideline keeps us from writing events in the future. All events should be written in UTC to help with the response across timezones. This is done via chrony.
 ​
-- If you have any time-based services running turn them off. Otherwise continue if this a new installation as we have not deployed ROCK yet.
+- If you have any time-based services running, turn them off. Otherwise, continue if this a new installation as we have not deployed ROCK yet.
 ​
 - If not already installed then install chrony, this should be done on the iso
 ```
@@ -81,7 +81,7 @@ sudo vi /etc/chrony.conf
 allow <IPRANGE>/CIDR  
 ```
 ​
-- Add ntp to the firewall on sensor
+- Add ntp to the firewall on the sensor
 ```
 sudo firewall-cmd --add-service=ntp --zone=work --permanent
 ```
@@ -91,7 +91,7 @@ sudo firewall-cmd --add-service=ntp --zone=work --permanent
 sudo firewall-cmd --reload
 ```
 ​
-- **Time Cleint (Everything not the Sensor Server)** Uncomment all the time servers and point it to `sensor.[state].cmat.lan` or the IP address.
+- **Time Client (Everything not the Sensor Server)** Uncomment all the time servers and point it to `sensor.[state].cmat.lan` or the IP address.
 ```
 server <SENSOR IP ADDRESS> iburst
 ```
@@ -101,7 +101,7 @@ server <SENSOR IP ADDRESS> iburst
 sudo systemctl enable --now chronyd
 ```
 ​
-- Add ntp to the firewall on sensor
+- Add ntp to the firewall on the sensor
 ```
 sudo firewall-cmd --add-service=ntp --zone=work --permanent
 ```
@@ -117,7 +117,7 @@ chronyc sources
 ​
 #### Deployment of Rock across All Machines
 ​
-> NOTE: If not already done then log into every server that rock will be deployed to so that the key can be added to the ssh hosts file.
+> NOTE: If not already done, then log into every server that rock will be deployed so that the key can be added to the ssh hosts file.
 
 ​
 - Insert the following text into `/etc/rocknsm/host.ini`. These will tell the script what to deploy and where
@@ -216,7 +216,7 @@ sensors
     - 9200 TCP - Elasticsearch
     - 5601 TCP - Only on the Elasticsearch node that has Kibana installed, Likely es1.[STATE].cmat.lan
     - 22 TCP - SSH Access
-  - Reload the firewall config
+  - Reload the firewall-config
 
   - Ensure the following ports on the firewall are open for the sensor
     - 1234 tcp/udp - NTP
@@ -243,31 +243,31 @@ Most of the Rock configuration is now automated and can be called from anywhere 
 ​
 - Start the interactive text interface for setup using `sudo rock tui`
 ​
-- Select "Select Interfaces". This allows you to choose which interface that you will manage and capture with.
+- Select "Select Interfaces". This allows you to choose which interface you will manage and capture with.
 ​
-- Choose you management interface
+- Choose your management interface
 ​
-- Choose you capture interface(s).
+- Choose your capture interface(s).
 ​
-> NOTE: Any interface you set for capture will spawn a Bro/Zeek, Suricata, and FSF process. So if you don't intend on using the interface do not set it for capture.
+> NOTE: Any interface you set for capture will spawn a Bro/Zeek, Suricata, and FSF process. So if you don't intend on using the interface, do not set it for capture.
 ​
 
 - You will then be forwarded to the interface summary screen. make sure all the things are to your satisfaction
 ​
-- Once it has returned to the installation setup screen then choose the  "Offline/Online" installation option. This tells the installation playbook where to pull the packages. As these kits are meant to be offline we will choose the offline installation option.
+- Once it has returned to the installation setup screen, then choose the  "Offline/Online" installation option. This tells the installation playbook where to pull the packages. As these kits are meant to be offline, we will choose the offline installation option.
 ​
 - Choose "No" for the offline installation.
 ​
-- Once it has returned to the installation setup screen then choose the  "Choose Components" installation option.
+- Once it has returned to the installation setup screen, then choose the  "Choose Components" installation option.
 ​
-- Here is where you decide what capabilities your sensor will have. If you are low on resources the the recommendation is to disable docket and stenographer. Otherwise just enable everything.
+- Here is where you decide what capabilities your sensor will have. If you are low on resources, the recommendation is to disable docket and stenographer. Otherwise, just enable everything.
 ​
 ​
-- Once it has returned to the installation setup screen then choose the  "Choose enabled services" installation option. This needs to match the installed components unless you have a specific reason to do so.
+- Once it has returned to the installation setup screen, then choose the  "Choose enabled services" installation option. This needs to match the installed components unless you have a specific reason to do so.
 ​
 - This will write the config to the ansible deployment script.
 ​
-- Once it has returned to the installation setup screen then choose the  "Run Installer" installation option.
+- Once it has returned to the installation setup screen, then choose the  "Run Installer" installation option.
 ​
 ​
 **It should complete with no errors**
@@ -279,7 +279,7 @@ sudo systemctl start filebeat
 sudo systemctl enable filebeat
 ```
 ​
-- Check the Suricata `threads` per interface. This is so Suricata doesn't compete with bro for cpu threads in `etc/suricata/rock-overrides.yml`
+- Check the Suricata `threads` per interface. This is so Suricata doesn't compete with bro for CPU threads in `etc/suricata/rock-overrides.yml`
 ```
 %YAML 1.1
 ​
