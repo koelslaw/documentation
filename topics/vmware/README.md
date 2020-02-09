@@ -10,13 +10,13 @@ VMware ESXi is a purpose-built bare-metal hypervisor that installs directly onto
 
 Download ESXi from the VMWare portal.
 
-Now it's time to create a bootable USB drive with that fresh ESXi build.  Let's look at few options.   
+Now it's time to create a bootable USB drive with that fresh ESXi build.  Let's look at a few options.   
 
 ### CLI
 
 If you live in the terminal, use `dd` to apply the image.  These instructions are for using a terminal in macOS.  If you're in a different environment, Google is your friend.  
 
-:warning: Take CAUTION when using these commands by ENSURING you're writing to the correct disk / partition! :warning:
+:warning: Take CAUTION when using these commands by ENSURING you're writing to the correct disk/partition! :warning:
 
 - once you've inserted a USB, get the drive ID:  
 `diskutil list`  
@@ -27,7 +27,7 @@ If you live in the terminal, use `dd` to apply the image.  These instructions ar
 - write the image to drive:  
 `sudo dd bs=8M if=path/to/esxi.iso of=/dev/disk#`  
 
-If this is done on a Mac, you could get a popup once the operation is complete asking you to `Initialize, Ignore, Eject` the disk. You want to `Ignore` or `Eject`. `Initialize` will add a partition to it that will allow Mac to read the disk, and make it unbootable.  
+If this is done on a Mac, you could get a popup once the operation is complete asking you to `Initialize, Ignore, Eject` the disk. You want to `Ignore` or `Eject`. `Initialize` will add a partition to it that will allow Mac to read the disk and make it unbootable.  
 ![](../../images/mac-initialize-ignore-eject.png)  
 
 ### Via GUI
@@ -57,9 +57,9 @@ If this is done on a Mac, you could get a popup once the operation is complete a
 - Enter the `IPv4 Address`, `Subnet Mask`, and `Default Gateway`, and press `Enter`
 - Go down and select `DNS Configuration`  
 - Enter your DNS and hostname information from the [Platform Management](../platform-management.md) page and press `Enter`  
-- Press `esc`, then `Y` to save your changes and restart your management interface  
+- Press `ESC`, then `Y` to save your changes and restart your management interface  
 - Go down and select `Test Management Network` and ping your gateway IP from the [Platform Management](../platform-management.md) page to validate the settings  
-- Press `esc` to log out  
+- Press `ESC` to log out  
 
 # Upload Media to Datastore
 > Note: this could be a bit different, specifically around the Storage considerations. I recommend you update the documentation with your specific environment.  

@@ -7,6 +7,7 @@ This will cover the deployment of the RockNSM sensor/data node elements. This in
  - Already SSHd into all systems that need to be deployed
  - DNS Setup or synced `/etc/hosts` file
  - Connectivity to all servers
+
 ### Install OS
 > NOTE: add flags to Anaconda Preinstall **IF** any of the nodes are Virtual Machines
 ​

@@ -1,22 +1,22 @@
 # Router Setup
-Here is a short list of useful commands to setup router.
+Here is a short list of useful commands to set up the router.
 
 ## Show Enable
->NOTE: At any point you may enter a question mark '?' for help. Use ctrl-c to abort configuration dialog at any prompt. Default settings are in square brackets '[ ]'.
+>NOTE: At any point, you may enter a question mark '?' for help. Use ctrl-c to abort configuration dialog at any prompt. Default settings are in square brackets '[ ]'.
 When presented with the —-System Configuration Dialog—-
 Would you like to enter the initial configuration dialog? [yes/no]: no
 Would you like to terminate autoinstall? [yes]: <enter>
-If presented with a blank screen press <return>. You are looking for the Router> prompt 
+If presented with a blank screen press <return>. You are looking for the `Router>` prompt.
 
 ## Enter a hostname for the router:
 1. Router>Enable
 1. Router#Config terminal
-1. Router(config)#hostname gateway.xx (xx is state dependent. See list at end of document for your state’s information)
+1. Router(config)#hostname gateway.xx (xx is state-dependent. See the list at the end of document for your state’s information)
 
 ## Setting Domain Name:
 Gateway.XX(config)#ip domain-name cmat.lan
 > NOTE: The following sections assume you are at the Router> prompt. If you are at the
-gateway.hi(config)# prompt you should ignore the first two steps of each section.
+gateway.XX(config)# prompt, you should ignore the first two steps of each section.
 
 ## Set local user and password:
 - Router>Enable

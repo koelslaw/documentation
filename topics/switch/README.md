@@ -2,8 +2,8 @@
 
 ## Switch Config for the Cisco Switch 3850–NM-4-10G
 
- At any point you may enter a question mark '?' for help. Use ctrl-c to abort configuration dialog at any prompt. Default settings are in square brackets '[ ]'. 
-
+At any point, you may enter a question mark '?' for help. Use ctrl-c to abort configuration dialog at any prompt. Default settings are in square brackets '[ ]'. 
+ 
 ### Enter a hostname for the Switch:
 - Switch>Enable
 - Switch#Config terminal

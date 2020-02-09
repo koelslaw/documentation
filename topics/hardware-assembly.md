@@ -3,7 +3,7 @@ The CMAT kit contains [several hardware assets](../hardware-components.md).
 
 
 ## Prereqs
-- 2 people (Cases are pront ro tipping when servers have castor wheels installed)
+- Two people (Cases are prone to tipping when servers have castor wheels installed)
 - case on floor
 
 # A Note about Rack Units (U's)
@@ -15,7 +15,7 @@ ___
 
 ## Step 1 - Disassemble Case
 
-1. Remove doors from case - front and back
+1. Remove doors from the case - front and back
 
 2. Turn knobs until unlatched
 
@@ -26,11 +26,11 @@ ___
 
 ## Step 2 - Installation of Cisco Switch - U1
 
-1. Attach front brackets (included) to both sides using 4 mounting holes (front and rear) and 4 short-set screws per side
+1. Attach front brackets (included) to both sides using four mounting holes (front and rear) and four short-set screws per side
 
-2. Installing power supply into switch
+2. Installing the power supply into the switch
 
-3. Remove blanking from back right of switch using squeeze handles
+3. Remove blanking from the back right of the switch using squeeze handles
 
 4. Insert power supply with letters facing up until latched into place
 
@@ -38,15 +38,15 @@ ___
 
 7. Release two set screws from expansion plate right front and remove expansion plate
 
-8. Insert network module and tighten captive bolts on front of network module (Do not over tighten)
+8. Insert the network module and tighten captive bolts on the front of network module (Do not over tighten)
 
 9. Installation of 4 SFPs
 
-10. Insert all SFP-10G-SR modules into available SFP slots on bottom right of switch
+10. Insert all SFP-10G-SR modules into available SFP slots on the bottom right of the switch
 
 11. Mount switch to case
 
-12. From front mount the switch into u3 and install 2 screws per side to attach switch to Case (use the assistance of two people)
+12. From front mount the switch into u3 and install two screws per side to attach the switch to Case (use the assistance of two people)
 
 ## Step 3 - Install Server - U2 & U3
 
@@ -64,7 +64,7 @@ rack flanges.
 latch locks into place.
 
 4. For the front end piece, rotate the latch outward and pull the
-rail forward until the pins slide into the flange, and release the
+rail forward until the pins slide into the flange and release the
 latch to secure the rail in place.
 
 5. Repeat the preceding steps to install the right rail.
@@ -91,7 +91,7 @@ and sliding the system out of the rack.
 
 > NOTE: If applicable, use a Phillips #2 screwdriver to
 unscrew the captive screws that secure the system to
-the rack.To secure the rails to a square hole or unthreaded round
+the rack. To secure the rails to a square hole or unthreaded round
 hole rack for shipping or in unstable environments, install the
 supplied screws to the rails.
 
@@ -105,15 +105,15 @@ screwdriver to secure the back of the rails to the rack.
 
 ## Step 4 - Installation of Cisco Edge Router - U4
 
-1. Remove two set screws from each side on the back of router
+1. Remove two set screws from each side on the back of the router
 
-2. Place bracket past extending of the rear of the router and attach with four screws into side of router.
+2. Place bracket past extending of the rear of the router and attach with four screws into the side of the router.
 
-3. Insert router with the rear facing the front of the case and mount to case with four
+3. Insert router with the rear-facing the front of the case and mount to the case with four
 
 ## Step 5 - Installation of Middle Atlantic Power Supply - U5
 
-1. Insert 4 screws to secure power supply to case
+1. Insert four screws to secure the power supply to the case
 
 ```
 ┌────────────────────────────────────┐
@@ -134,7 +134,7 @@ ___
 # Case 2
 
 ## Step 1 - Dissemble Case
-1. Remove doors from case - front and back
+1. Remove doors from the case - front and back
 
 2. Turn knobs until unlatched
 
@@ -144,23 +144,23 @@ ___
 
 ## Step 2 - Installation of Gigamon - U1
 
-1. Attach front brackets (included) to both sides using 4 lower mounting holes and 4 short-set screws per side
+1. Attach front brackets (included) to both sides using four lower mounting holes and four short-set screws per side
 
-2. Attach rear hanging brackets from rear of case in U3
+2. Attach rear hanging brackets from the rear of case in U3
 
-3. Gigamon has 3 silver slide mounts on each side towards the rear of device
+3. Gigamon has three silver slide mounts on each side towards the rear of the device
 
-5. From front to back of case, insert slide mounts into rear mounts in U3
+5. From front to the back of the case, insert slide mounts into rear mounts in U3
 
 6. Above step may take some wiggling, side-to-side, of Gigamon
 
-7. From front, insert 2 screws per side to attach device to case
+7. From the front, insert two screws per side to attach the device to the case
 
 4. Installation of the Tap
 
-8. Release thumb screw on far left expansion port to remove cover
+8. Release thumb screw on far left expansion port to remove the cover
 
-9. Release thumb screw on tap prior to installation
+9. Release thumb screw on tap before installation
 
 10. Insert tap into expansion slot (should not require much force)
 
@@ -168,15 +168,15 @@ ___
 
 12. Installation of 5 SFPs
 
-13. Insert SFP 503 - 1G single mode - into slot x12
+13. Insert SFP 503 - 1G single-mode - into slot x12
 
-14. Insert SFP 502 - 1G multi mode - into slot x10
+14. Insert SFP 502 - 1G multi-mode - into slot x10
 
 15. Insert SFP 501 - 1G copper - into slot X8
 
-16. Insert SFP 533 - 10G single mode - into slot X11
+16. Insert SFP 533 - 10G single-mode - into slot X11
 
-17. Insert SFP 532 - 10G multi mode - into slot X9
+17. Insert SFP 532 - 10G multi-mode - into slot X9
 
 18. Install Power Cords
 
@@ -194,7 +194,7 @@ rack flanges.
 latch locks into place.
 
 4. For the front end piece, rotate the latch outward and pull the
-rail forward until the pins slide into the flange, and release the
+rail forward until the pins slide into the flange and release the
 latch to secure the rail in place.
 
 5. Repeat the preceding steps to install the right rail.
@@ -224,7 +224,7 @@ and sliding the system out of the rack.
 
 > NOTE: If applicable, use a Phillips #2 screwdriver to
 unscrew the captive screws that secure the system to
-the rack.To secure the rails to a square hole or unthreaded round
+the rack. To secure the rails to a square hole or unthreaded round
 hole rack for shipping or in unstable environments, install the
 supplied screws to the rails.
 
@@ -234,7 +234,7 @@ screwdriver to secure the back of the rails to the rack.
 
 ## Step 4 - Installation of Middle Atlantic Power Supply - U4
 
-1. Insert 4 screws to secure power supply to case
+1. Insert four screws to secure the power supply to the case
 
 ```
 ┌────────────────────────────────────┐
