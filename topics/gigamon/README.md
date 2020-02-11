@@ -125,4 +125,4 @@ Deployment Scenarios:
 - [Inline Tap Config](./topics/gigamon/inline_tap.md)
 - [Normal SPAN port from local switch](./topics/gigamon/span_termination.md)
 
-Move onto [Networking Configuration](./topics/network/network-layout.md)
+Move onto [Networking Configuration](/topics/network/network-layout.md)
