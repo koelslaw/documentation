@@ -111,4 +111,4 @@ These are the major components of the CMAT kit.
 │                        │
 └────────────────────────┘
 ```
-Move onto [Hardware Assembly](hardware-assembly.md)
+Move onto [Hardware Assembly](/topics/hardware/hardware-assembly.md)

@@ -6,4 +6,4 @@
 ## CMAT Data Flow
 ![](../images/cmatdataflow.jpg)
 
-Move onto [Software Components](software-components.md)
+Move onto [Software Components](/topics/software_overview/software-components.md)
