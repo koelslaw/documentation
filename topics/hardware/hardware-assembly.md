@@ -276,4 +276,4 @@ Physical Port Assignments to VLANs
 
 ![](../images/netlayout.png)  
 
-Move onto [Hardware Configuration](hardware-configuration.md)
+Move onto [Hardware Configuration](/topics/hardware/hardware-configuration.md)

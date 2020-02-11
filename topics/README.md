@@ -11,10 +11,10 @@ When tailoring this documentation, you should replace `[state]` and `[state octe
 | Washington | WA                    | 4           |
 
 ## Build Steps
-- [Hardware Components](hardware-components.md)  
-- [Hardware Assembly](hardware-assembly.md)  
-- [Hardware Configuration](hardware-configuration.md)  
-- [Software Deployment](software-deployment.md)  
+- [Hardware Components](/topics/hardware/hardware-components.md)  
+- [Hardware Assembly](/topics/hardware/hardware-assembly.md)  
+- [Hardware Configuration](/topics/hardware/hardware-configuration.md)  
+- [Software Deployment](/software_overview/software-deployment.md)  
 - [Post Installation](post-install.md)  
 
 [Platform Management (IPs, hostnames, creds, etc.)](platform-management.md)

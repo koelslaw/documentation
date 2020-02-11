@@ -23,4 +23,4 @@ Here we will begin the deployment of that software onto the stack.
 - [Nmap](nmap/README.md)
 - [BlueScope](bluescope/README.md)
 
-Move onto [Post-Installation Function Check](function-check.md)
+Move onto [Post-Installation Function Check](../maintx_check/function-check.md)

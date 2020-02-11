@@ -66,4 +66,4 @@ The result summary should look like the following.
 
 ![](../../images/cmc-final-vlan-membership.png)
 
-Move onto [Software Deployment](../software-deployment.md)  
+Move onto [Software Deployment](../software_overview/software-deployment.md)  

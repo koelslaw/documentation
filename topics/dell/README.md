@@ -203,4 +203,4 @@ At this point, you have finished. The NVME drives will be standalone and not in 
 
   ![](../../images/lifecyclecontroller.png)
 
-Proceed to [Software Deployment](../software-deployment.md)
+Proceed to [Software Deployment](../software_overview/software-deployment.md)
