@@ -4,13 +4,13 @@ Before you start, ensure that your Gigamon is [properly racked](../hardware-asse
 
 # Initial Configuration (Console)
 
-1. With a Mac or Linux system, connect a Console cable to the Console port of the Gigamon  
+- With a Mac or Linux system, connect a Console cable to the Console port of the Gigamon  
 
 ![](../../images/gigamon-console.png)  
 
 > Console port highlighted purple
 
-2. Connect your Console cable and go into your Terminal program (Terminal, iTerm, etc.)
+- Connect your Console cable and go into your Terminal program (Terminal, iTerm, etc.)
 ```
 ls /dev/*usb*
 crw-rw-rw-  1 root  wheel   20, 115 Nov 29 15:06 /dev/cu.usbserial-A105LRRY (this could be slightly different on your system)
@@ -26,8 +26,8 @@ Parity: None
 Stop Bits: 1
 Flow Control: None
 ```
-3. This will ask you to log in with the [default credentials](../credentials.md)
-4. As soon as you log in, you'll be asked to enter the `Initial Configuration`, let's do that.
+- This will ask you to log in with the [default credentials](../credentials.md)
+- As soon as you log in, you'll be asked to enter the `Initial Configuration`, let's do that.
 
 > Note: You need to change the hostnames, octets, and insert your passwords from the [Platform Management page](../platform-management.md) before inputting this into the Gigamon.
 
@@ -40,29 +40,29 @@ GigaVUE-OS configuration wizard
 
 Do you want to use the wizard for initial configuration? yes
 
-1. Hostname: tap.[state].cmat.lan
-2. Management Interface <eth0> : eth0
-3. Use DHCP on eth0 interface: no
-4. Use zeroconf on eth0 interface: no
-5. Primary IPv4 address and masklen: 10.[state].10.5/24
-6. Default gateway: 10.[state].10.1
-7. Primary DNS server: 10.[state].10.20
-8. Domain name: cmat.lan
-9. Enable IPv6: no
-10. Enable secure cryptography: no
-11. Enable secure passwords: yes
-12. Minimum password length: 16
-13. Admin password: [password from Platform Management]
-14. Cluster enable: no
-15. Box-id for the chassis: 1
+- Hostname: tap.[state].cmat.lan
+- Management Interface <eth0> : eth0
+- Use DHCP on eth0 interface: no
+- Use zeroconf on eth0 interface: no
+- Primary IPv4 address and masklen: 10.[state].10.5/24
+- Default gateway: 10.[state].10.1
+- Primary DNS server: 10.[state].10.20
+- Domain name: cmat.lan
+- Enable IPv6: no
+- Enable secure cryptography: no
+- Enable secure passwords: yes
+- Minimum password length: 16
+- Admin password: [password from Platform Management]
+- Cluster enable: no
+- Box-id for the chassis: 1
 
 To change an answer, enter the step number to return to.
 Otherwise hit <enter> to save changes and exit.
 ```
-5. Hit enter to save your configuration
-6. You'll be presented with a summary of your configuration changes. You can go back and make any adjustments as necessary.  
-7. If you decided not to change your default passphrase, you can do so in the webUI  
-8. If you decided to change your default passphrase, I **strongly** recommend you hop over to the webUI and make sure you can log in  
+- Hit enter to save your configuration
+- You'll be presented with a summary of your configuration changes. You can go back and make any adjustments as necessary.  
+- If you decided not to change your default passphrase, you can do so in the webUI  
+- If you decided to change your default passphrase, I **strongly** recommend you hop over to the webUI and make sure you can log in  
 
 > In the event that your passphrase isn't working, you should reset here before you logout of the console
 
@@ -73,27 +73,27 @@ tap.[state].cmat.lan (config) # username admin|monitor|operator password
 ```
 
 # Initial Configuration (WebUI)
-9. Connect a network cable to the management port on the front of the Gigamon
+- Connect a network cable to the management port on the front of the Gigamon
 
 ![](../../images/gigamon-management.png)
 
 > Management port highlighted purple  
 
-10. Set your local IP address to be in the same network as the management IP you configured above.
-11. Point your browser to the management IP you set above. See the [platform management](../platform-management.md) page for exact address and credentials.
+- Set your local IP address to be in the same network as the management IP you configured above.
+- Point your browser to the management IP you set above. See the [platform management](../platform-management.md) page for exact address and credentials.
 
 ## Enabling Interfaces
 It should be noted, these next steps...are silly. Don't blame us.
 
-12. Once you're logged in, click on the `Chassis` from the toolbar on the left
+- Once you're logged in, click on the `Chassis` from the toolbar on the left
 
-13. You will notice that the interfaces are not configured and it is not inherently obvious how to enable them.
+- You will notice that the interfaces are not configured and it is not inherently obvious how to enable them.
 
 ![](../../images/gigamon-unconfigured.png)  
 
 > Unconfigured Gigamon interfaces
 
-14. You can either right-click on the image and select `Configure` or switch from "Chassis View" to "List View" and then select your interfaces and `Configure` them.
+- You can either right-click on the image and select `Configure` or switch from "Chassis View" to "List View" and then select your interfaces and `Configure` them.
 
 ![](../../images/gigamon-rightclick-configure.png)  
 
@@ -101,7 +101,7 @@ It should be noted, these next steps...are silly. Don't blame us.
 
 > Configuration options for the interfaces
 
-15. Your interfaces should all have come up as Network Ports
+- Your interfaces should all have come up as Network Ports
 
 ![](../../images/gigamon-configured.png)
 

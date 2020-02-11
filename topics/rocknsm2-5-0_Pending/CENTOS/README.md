@@ -20,6 +20,6 @@ The sensor has the network security monitoring and data shipping elements:
 - Elastic Beats
 
 ## Build Steps
-1. [Hardware Requirements](rocknsm-requirements.md)
-1. [RockNSM Deployment](sensordeploy.md)
-1. [Usage](rocknsm-usage.md)
+- [Hardware Requirements](rocknsm-requirements.md)
+- [RockNSM Deployment](sensordeploy.md)
+- [Usage](rocknsm-usage.md)

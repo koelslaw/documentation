@@ -24,7 +24,7 @@ There are 2 type of Elastic Nodes. There are 3 nodes total. two of the node will
 ___
 
 #### "ELK" Node
-1. Perform system update and enable daily updates
+- Perform system update and enable daily updates
   ```
   sudo yum update -y
   sudo yum install -y yum-cron
@@ -34,67 +34,67 @@ ___
   ```
 
 ##### Preparation for Rock Deployment
-1. Disable FIPS
-  1. Install dracut
+- Disable FIPS
+  - Install dracut
     ```
     sudo yum install dracut
     ```
 
-  1. Remove the dracut-fips* packages
+  - Remove the dracut-fips* packages
     ```
     sudo yum remove dracut-fips\*
     ```
 
-  1. Backup existing FIPS initramfs
+  - Backup existing FIPS initramfs
     ```
     sudo mv -v /boot/initramfs-$(uname -r).img{,.FIPS-bak}
     ```
 
-  1. Run `dracut` to rebuild the initramfs
+  - Run `dracut` to rebuild the initramfs
     ```
     sudo dracut
     ```
 
-  1. Run Grubby
+  - Run Grubby
     ```
     sudo grubby --update-kernel=ALL --remove-args=fips=1
     ```
 
-  1. **Carefully** up date the grub config file setting `fips=0`
+  - **Carefully** up date the grub config file setting `fips=0`
     ```
     sudo vi /etc/default/grub
     ```
 
-  1. Reboot the VM
+  - Reboot the VM
     ```
     sudo reboot
     ```
 
-1. Log back in...
+- Log back in...
 
-1. Confirm that fips is disabled by
+- Confirm that fips is disabled by
   ```
   sysctl crypto.fips_enabled
   ```
   if it returns `0` then it has been properly disabled
 
-1. Install the Rock NSM dependencies
+- Install the Rock NSM dependencies
 
   ```
   sudo yum install jq GeoIP geopipupdate tcpreplay tcpdump bats policycoreutils-python htop vim git tmux nmap-ncat logrotate perl-LWP-Protocol-https perl-Sys-Syslog perl-Crypt-SSLeay perl-Archive-Tar java-1.8.0-openjdk-headless filebeat ansible
   ```
 
-1. Make a place for ROCK to live
+- Make a place for ROCK to live
   ```
   mkdir /opt/rocknsm/
   ```
 
-1. Navigate there so we can clone the Rock NSM repo there
+- Navigate there so we can clone the Rock NSM repo there
   ```
   cd /opt/rocknsm/  
   ```
 
-1. Clone the Rock NSM repo from the NUC
+- Clone the Rock NSM repo from the NUC
   ```
   sudo git clone http://10.[state].10.19:4000/administrator/rock.git
   ```
@@ -103,24 +103,24 @@ ___
   sudo git clone http://nuc.[state].cmat.lan:4000/administrator/rock.git
   ```
 
-1. Navigate to the rock bin directory
+- Navigate to the rock bin directory
   ```
   cd /opt/rocknsm/rock/bin
   ```
 
-1. Generate defaults for rock to deploy with
+- Generate defaults for rock to deploy with
   ```
   sudo sh generate_defaults.sh
   ```
 
-1. Edit the `/etc/rocknsm/config.yml`
+- Edit the `/etc/rocknsm/config.yml`
   ```
   sudo vi /etc/rocknsm.config.yml
   ```
 
 > NOTE: The config file and deploy playbook at thier current state is mean tto autmate the build of everything on a single machine and generic hardware. some "wrench turning" in the background will have to be done so that the cmat kit will deploy correctly. At this point the playbooks will handle most of the rock specific config and we will have to tke care of the elastic parts
 
-1. Change the config to the following:
+- Change the config to the following:
   Replace the `[#]` with the number of the cluster. In this case of the ELK cluster it will be `1`.
 
   ```yml
@@ -219,35 +219,35 @@ ___
   enable_fsf: False
   ```
 
-1.  Create the following directory
+-  Create the following directory
   ```
   sudo mkdir -p /srv/rocknsm/support
   ```
 
-1. `wget` the following files from the nuc to aid in the deployment of ROCK
+- `wget` the following files from the nuc to aid in the deployment of ROCK
 
-  1. Grab the rock scripts
+  - Grab the rock scripts
     ```
     sudo wget http://10.[state].10.19:4000/administrator/rock-scripts/archive/master.tar.gz
     ```
 
-  1. Rename the file.
+  - Rename the file.
     ```
     sudo mv master.tar.gz rock-scripts_master.tar.gz
     ```
 
-  1. Grab the rock dashboards
+  - Grab the rock dashboards
 
     ```
     sudo wget http://10.[state].10.19:4000/administrator/rock-dashboards/archive/master.tar.gz
     ```
 
-  1. Rename the file
+  - Rename the file
     ```
     sudo mv master.tar.gz rock-dashboards_master.tar.gz
     ```
 
-1. Copy them to the need directory
+- Copy them to the need directory
 
   ```
   cd
@@ -259,35 +259,35 @@ ___
   ```
   sudo cp ~/rock-scripts_master.tar.gz /srv/rocknsm/support/rock-scripts_master.tar.gz
   ```
-1. Comment the entire `setup yum repos` section out of the `/opt/rocknsm/rock/playbooks/roles/sensor-common/tasks/configure.yml` playbook in order to deploy rock correctly. We have our own. to block comment out use the following method
-  1. Crtl-v
+- Comment the entire `setup yum repos` section out of the `/opt/rocknsm/rock/playbooks/roles/sensor-common/tasks/configure.yml` playbook in order to deploy rock correctly. We have our own. to block comment out use the following method
+  - Crtl-v
 
-  1. Make your Selection
+  - Make your Selection
 
-  1. Type `:s/^/#/`
+  - Type `:s/^/#/`
 
-1. With the current setup, the ansible script doesn't play nicely with the shell script wrapper. So we will deploy the ansible script directly.
+- With the current setup, the ansible script doesn't play nicely with the shell script wrapper. So we will deploy the ansible script directly.
 
-1. Navigate to the /opt/rocknsm/rock/playbooks
+- Navigate to the /opt/rocknsm/rock/playbooks
 
   ```
   cd /opt/rocknsm/rock/playbooks
   ```
 
-1. And then deploy
+- And then deploy
 
   ```
   sudo ansible-playbook -K deploy-rock.yml
   ```
   It should complete with **no** errors
 
-1. Copy the following files for logstash
+- Copy the following files for logstash
 
   ```
   sudo -cp /opt/rocknsm/rock/plabooks/files/logstash-500-* /etc/logstash/conf.d/.
   ```
 
-1. The following files need to be edited in `vi` they can be copy and pasted. Just make sure you replace [state] with your state. Also replace `[#]` with the appropriate number for the elastic cluster `1,2, or 3`
+- The following files need to be edited in `vi` they can be copy and pasted. Just make sure you replace [state] with your state. Also replace `[#]` with the appropriate number for the elastic cluster `1,2, or 3`
 
 ---
 
@@ -828,7 +828,7 @@ elasticsearch.url: "http://0.0.0.0:9200"
 
 ___
 
-1. Open the following ports on the firewall for the elastic machines
+- Open the following ports on the firewall for the elastic machines
 
   - 9300 TCP - Node coordination (I am sure elastic has abetter name for this)
   - 9200 TCP - Elasticsearch
@@ -840,21 +840,21 @@ ___
   sudo firewall-cmd --add-port=9300/tcp --permanent
   ```
 
-1. Reload the firewall config
+- Reload the firewall config
 
   ```
   sudo firewall-cmd --reload
   ```
 
-1. Restart services with `rock_stop` and the `rock_start`
+- Restart services with `rock_stop` and the `rock_start`
 
-1. Deploy more nodes as needed.
+- Deploy more nodes as needed.
 
 ____________________________________________________________
 ____________________________________________________________
 
 #### "EL" Node
-1. Perform system update and enable daily updates
+- Perform system update and enable daily updates
 ```
 sudo yum update -y
 sudo yum install -y yum-cron
@@ -865,67 +865,67 @@ sudo yum sintall wget
 
 ##### Preparation for Rock Deployment
 
-1. Disable FIPS
+- Disable FIPS
 
-  1. Install dracut
+  - Install dracut
   ```
   sudo yum install dracut
   ```
 
-  1. Remove the dracut-fips* packages
+  - Remove the dracut-fips* packages
   ```
   sudo yum remove dracut-fips\*
   ```
 
-  1. Backup existing FIPS initramfs
+  - Backup existing FIPS initramfs
   ```
   sudo mv -v /boot/initramfs-$(uname -r).img{,.FIPS-bak}
   ```
 
-  1. Run `dracut` to rebuild the initramfs
+  - Run `dracut` to rebuild the initramfs
   ```
   sudo dracut
   ```
 
-  1. Run Grubby
+  - Run Grubby
   ```
   sudo grubby --update-kernel=ALL --remove-args=fips=1
   ```
 
-  1. **Carefully** up date the grub config file setting `fips=0`
+  - **Carefully** up date the grub config file setting `fips=0`
   ```
   sudo vi /etc/default/grub
   ```
 
-  1. Reboot the VM
+  - Reboot the VM
   ```
   sudo reboot
   ```
 
-1. Log back in...
+- Log back in...
 
-1. Confirm that fips is disabled by
+- Confirm that fips is disabled by
   ```
   sysctl crypto.fips_enabled
   ```
   if it returns `0` then it has been properly disabled
 
-1. Install the Rock NSM dependencies
+- Install the Rock NSM dependencies
   ```
   sudo yum install jq GeoIP geopipupdate tcpreplay tcpdump bats policycoreutils-python htop vim git tmux nmap-ncat logrotate perl-LWP-Protocol-https perl-Sys-Syslog perl-Crypt-SSLeay perl-Archive-Tar java-1.8.0-openjdk-headless filebeat ansible
   ```
 
-1. Make a place for ROCK to live
+- Make a place for ROCK to live
   ```
   mkdir /opt/rocknsm/
   ```
 
-1. Navigate there so we can clone the Rock NSM repo there
+- Navigate there so we can clone the Rock NSM repo there
   ```
   cd /opt/rocknsm/  
   ```
 
-1. Clone the Rock NSM repo from the NUC
+- Clone the Rock NSM repo from the NUC
   ```
   sudo git clone http://10.[state].10.19:4000/administrator/rock.git
   ```
@@ -934,23 +934,23 @@ sudo yum sintall wget
   sudo git clone http://nuc.[state].cmat.lan:4000/administrator/rock.git
   ```
 
-1. Navigate to the rock bin directory
+- Navigate to the rock bin directory
   ```
   cd /opt/rocknsm/bin
   ```
 
-1. Generate defaults for rock to deploy with
+- Generate defaults for rock to deploy with
   ```
   sudo sh generate_defaults.sh
   ```
 
-1. Edit the `/etc/rocknsm/config.yml`
+- Edit the `/etc/rocknsm/config.yml`
   ```
   sudo vi /etc/rocknsm.config.yml
   ```
 > NOTE: The config file and deploy playbook at thier current state is mean tto autmate the build of everything on a single machine and generic hardware. some "wrench turning" in the background will have to be done so that the cmat kit will deploy correctly. At this point the playbooks will handle most of the rock specific config and we will have to tke care of the elastic parts
 
-1. Change the config to the following:
+- Change the config to the following:
   Replace the `[#]` with the number of the cluster. In this case of the ELK cluster it will be `1`.
 
 ___
@@ -1054,35 +1054,35 @@ enable_fsf: False
 
 ___
 
-1.  Create the following directory
+-  Create the following directory
 ```
 sudo mkdir -p /srv/rocknsm/support
 ```
 
-1. `wget` the following files from the nuc to aid in the deployment of ROCK
+- `wget` the following files from the nuc to aid in the deployment of ROCK
 
-  1. Grab the rock scripts
+  - Grab the rock scripts
     ```
     sudo wget http://10.[state].10.19:4000/administrator/rock-scripts/archive/master.tar.gz
     ```
 
-  1. Rename the file.
+  - Rename the file.
     ```
     sudo mv master.tar.gz rock-scripts_master.tar.gz
     ```
 
-  1. Grab the rock dashboards
+  - Grab the rock dashboards
 
     ```
     sudo wget http://10.[state].10.19:4000/administrator/rock-dashboards/archive/master.tar.gz
     ```
 
-  1. Rename the file
+  - Rename the file
     ```
     sudo mv master.tar.gz rock-dashboards_master.tar.gz
     ```
 
-1. Copy them to the need directory
+- Copy them to the need directory
   ```
   cd
   ```
@@ -1093,29 +1093,29 @@ sudo mkdir -p /srv/rocknsm/support
   sudo cp ~/rock-scripts_master.tar.gz /srv/rocknsm/support/rock-scripts_master.tar.gz
   ```
 
-1. Comment the entire `setup yum repos` section out of the `/opt/rocknsm/rock/playbooks/roles/sensor-common/tasks/configure.yml` playbook in order to deploy rock correctly. We have our own. to block comment out use the following method
-  1. Crtl-v
+- Comment the entire `setup yum repos` section out of the `/opt/rocknsm/rock/playbooks/roles/sensor-common/tasks/configure.yml` playbook in order to deploy rock correctly. We have our own. to block comment out use the following method
+  - Crtl-v
 
-  1. Make your Selection
+  - Make your Selection
 
-  1. Type `:s/^/#/`
+  - Type `:s/^/#/`
 
-1. With the current setup, the Ansible script doesn't play nicely with the shell script wrapper. So we will deploy the ansible script directly.
+- With the current setup, the Ansible script doesn't play nicely with the shell script wrapper. So we will deploy the ansible script directly.
 
-1. Navigate to the /opt/rocknsm/rock/playbooks
+- Navigate to the /opt/rocknsm/rock/playbooks
 
   ```
   cd opt/rocknsm/rock/playbooks
   ```
 
-1. And then deploy
+- And then deploy
 
   ```
   sudo ansible-playbook -K deploy-rock.yml
   ```
   It should complete with **no** errors
 
-1. The following files need to be edited in `vi` they can be copy and pasted. Just make sure you replace [state] with your state.
+- The following files need to be edited in `vi` they can be copy and pasted. Just make sure you replace [state] with your state.
 
 ___
 
@@ -1461,7 +1461,7 @@ elasticsearch.url: "http://0.0.0.0:9200"
 
 ___
 
-1. Open the following ports on the firewall for the elastic machines
+- Open the following ports on the firewall for the elastic machines
 
   - 9300 TCP - Node coordination (I am sure elastic has abetter name for this)
   - 9200 TCP - Elasticsearch
@@ -1478,6 +1478,6 @@ ___
   sudo firewall-cmd --reload
   ```
 
-1. Restart the stack using `rock_stop` and `rock_start`
+- Restart the stack using `rock_stop` and `rock_start`
 
 Move onto [USAGE](rocknsm-usage.md)

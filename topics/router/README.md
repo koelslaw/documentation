@@ -9,9 +9,9 @@ Would you like to terminate autoinstall? [yes]: <enter>
 If presented with a blank screen press <return>. You are looking for the `Router>` prompt.
 
 ## Enter a hostname for the router:
-1. Router>Enable
-1. Router#Config terminal
-1. Router(config)#hostname gateway.xx (xx is state-dependent. See the list at the end of document for your state’s information)
+- Router>Enable
+- Router#Config terminal
+- Router(config)#hostname gateway.xx (xx is state-dependent. See the list at the end of document for your state’s information)
 
 ## Setting Domain Name:
 Gateway.XX(config)#ip domain-name cmat.lan

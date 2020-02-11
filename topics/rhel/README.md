@@ -15,13 +15,13 @@ If you live in the terminal, use `dd` to apply the image.  These instructions ar
 
 :warning: Take CAUTION when using these commands by ENSURING you are writing to the correct disk/partition! :warning:
 
-1. once you've inserted a USB get the drive ID:  
+- once you've inserted a USB get the drive ID:  
 `diskutil list`  
 
-2. unmount the target drive so you can write to it:  
+- unmount the target drive so you can write to it:  
 `diskutil unmountDisk /dev/disk#`  
 
-3. write the image to drive:  
+- write the image to drive:  
 `sudo dd bs=8M if=path/to/rhel.iso of=/dev/disk#`  
 
 If this is done on a Mac, you could get a popup once the operation is complete asking you to `Initialize, Ignore, Eject` the disk. You want to `Ignore` or `Eject`. `Initialize` will add a partition to it that will allow Mac to read the disk and make it unbootable.  
@@ -58,23 +58,23 @@ This is meant to help those who need a step-by-step build of RHEL.
 
 >NOTE: Capes has its installation criteria, please refer to [Capes Installation](capes/README.md).
 
-1. Attach or insert the media and power on  
-1. Press `F10` to enter the boot menu  
-1. Select the media  
-1. Boot into Anaconda (the Linux install wizard)  
-1. Select your language  
-1. Start at the bottom-left, `Network & Host Name`  
+- Attach or insert the media and power on  
+- Press `F10` to enter the boot menu  
+- Select the media  
+- Boot into Anaconda (the Linux install wizard)  
+- Select your language  
+- Start at the bottom-left, `Network & Host Name`  
     - There is the `Host Name` box at the bottom of the window, enter the hostname for the installation from the [Platform Management](../platform-management.md) page.  
     - Switch the toggle to enable your NIC  
       - Click `Configure`  
       - Go to `IPv4 Settings` and change the Method from `Automatic` to `Manual`. Click `Add` and set  
         - the IP address from the [Platform Management](../platform-management.md) page    
     - Click `Done` in the top left  
-1. Next the `Security Profile` in the lower right  
+- Next the `Security Profile` in the lower right  
     - Select `DISA STIG`  
     - Click `Select Profile`  
     - Click `Done`  
-1. Next click `Installation Destination`  
+- Next click `Installation Destination`  
     - Select the hard disk you want to install RHEL to, likely it is already selected unless you have more than one drive  
       - Click `Automatic Partitioning` and then click the checkbox that says `I would like to make additional space.`
       - Click `Done`  
@@ -102,28 +102,28 @@ This is meant to help those who need a step-by-step build of RHEL.
       - Check partitions against the above table  
         - Click `Done`  
     - Click `Accept Changes`  
-1. Click `kdump`  
+- Click `kdump`  
     - Uncheck `Enable kdump`  
     - Click `Done`  
-1. `Installation Source` should say `Local media` and `Software Selection` should say `Minimal install` - no need to change this  
-1. Validate `Software Selection` says `Minimal Install`  
-1. Click `Date & Time`  
+- `Installation Source` should say `Local media` and `Software Selection` should say `Minimal install` - no need to change this  
+- Validate `Software Selection` says `Minimal Install`  
+- Click `Date & Time`  
     - `Region` should be changed to `Etc`  
     - `City` should be changed to `Coordinated Universal Time`  
     - `Network Time` should be toggled on  
     - Click `Done`
 
-1. Click `Begin Installation`  
-1. We're not going to set a Root passphrase because you will not need it. Not setting a passphrase locks the Root account, which is what we want.  
-1. Create a user, but ensure that you toggle the `Make this user administrator` checkbox. Use the [Platform Management](../platform-management.md) page for the user designation.  
-1. Once the installation is done, click the `Reboot` button in the bottom right to...well...reboot  
-1. Remove the USB device  
-1. Login using the account you created during the Anaconda setup  
+- Click `Begin Installation`  
+- We're not going to set a Root passphrase because you will not need it. Not setting a passphrase locks the Root account, which is what we want.  
+- Create a user, but ensure that you toggle the `Make this user administrator` checkbox. Use the [Platform Management](../platform-management.md) page for the user designation.  
+- Once the installation is done, click the `Reboot` button in the bottom right to...well...reboot  
+- Remove the USB device  
+- Login using the account you created during the Anaconda setup  
 
 
 > For every machine except the NUC and capes (which uses elastic 5 instead of 6), need the following rpm repo file needs to be created.
 
-1. Add local repositories to RHEL if using v1 of nuc deployment use this one otherwise use v2. Ensure you set the correct version of rock.
+- Add local repositories to RHEL if using v1 of nuc deployment use this one otherwise use v2. Ensure you set the correct version of rock.
 
 ##### V1
   ```
@@ -221,4 +221,4 @@ This is meant to help those who need a step-by-step build of RHEL.
   EOF'
   ```
 
-1. Continue installation
+- Continue installation

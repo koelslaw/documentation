@@ -5,7 +5,7 @@ This will cover the deployment of the RockNSM sensor elements.
  -DNS setup
 
 ## Sensor Installation
-1. Perform system update and enable daily updates
+- Perform system update and enable daily updates
 ```
 sudo yum update -y
 sudo yum install -y yum-cron wget
@@ -16,60 +16,60 @@ sudo yum install wget
 
 ### Preparation for Rock Deployment
 
-1. Disable FIPS
-  1. Install dracut
+- Disable FIPS
+  - Install dracut
   ```
   sudo yum install dracut
   ```
-  1. Remove the dracut-fips* packages
+  - Remove the dracut-fips* packages
   ```
   sudo yum remove dracut-fips\*
   ```
-  1. Backup existing FIPS initramfs
+  - Backup existing FIPS initramfs
   ```
   sudo mv -v /boot/initramfs-$(uname -r).img{,.FIPS-bak}
   ```
-  1. Run `dracut` to rebuild the initramfs
+  - Run `dracut` to rebuild the initramfs
   ```
   sudo dracut
   ```
-  1. Run Grubby
+  - Run Grubby
   ```
   sudo grubby --update-kernel=ALL --remove-args=fips=1
   ```
-  1. **Carefully** up date the grub config file setting `fips=0`
+  - **Carefully** up date the grub config file setting `fips=0`
   ```
   sudo vi /etc/default/grub
   ```
-  1. Reboot the VM
+  - Reboot the VM
   ```
   sudo reboot
   ```
 
-1. Log back in...
+- Log back in...
 
-1. Confirm that fips is disabled by
+- Confirm that fips is disabled by
   ```
   sysctl crypto.fips_enabled
   ```
   if it returns `0` then it has been properly disabled
 
-1. Install the Rock NSM dependencies
+- Install the Rock NSM dependencies
 
   ```
   sudo yum install jq GeoIP geopipupdate tcpreplay tcpdump bats policycoreutils-python htop vim git tmux nmap-ncat logrotate perl-LWP-Protocol-https perl-Sys-Syslog perl-Crypt-SSLeay perl-Archive-Tar java-1.8.0-openjdk-headless filebeat ansible
   ```
-1. Make a place for ROCK to live
+- Make a place for ROCK to live
   ```
   mkdir /opt/rocknsm
   ```
 
-1. Navigate there so we can clone the Rock NSM repo there
+- Navigate there so we can clone the Rock NSM repo there
   ```
   cd /opt/rocknsm  
   ```
 
-1. Clone the Rock NSM repo from the NUC
+- Clone the Rock NSM repo from the NUC
   ```
   sudo git clone http://10.[state].10.19:4000/administrator/rock.git
   ```
@@ -77,22 +77,22 @@ sudo yum install wget
   ```
   sudo git clone http://nuc.[state].cmat.lan:4000/administrator/rock.git
   ```
-1. Navigate to the rock bin directory
+- Navigate to the rock bin directory
   ```
   cd /opt/rocknsm/rock/bin
   ```
-1. Generate defaults for rock to deploy with
+- Generate defaults for rock to deploy with
   ```
   sudo sh generate_defaults.sh
   ```
 
-1. Edit the `/etc/rocknsm/config.yml`
+- Edit the `/etc/rocknsm/config.yml`
   ```
   sudo vi /etc/rocknsm/config.yml
   ```
 > NOTE: The config file and deploy playbook at their current state is mean to automate the build of everything on a single machine and generic hardware. some "wrench turning" in the background will have to be done so that the cmat kit will deploy correctly. At this point the playbooks will handle most of the rock specific config and we will have to take care of the elastic parts
 
-1. Change the `/etc/rocknsm/config.yml` config to the following:
+- Change the `/etc/rocknsm/config.yml` config to the following:
 
 ___
 
@@ -194,39 +194,39 @@ enable_fsf: True
 ```
 ___
 
-1.  Create the following directory
+-  Create the following directory
 ```
 sudo mkdir -p /srv/rocknsm/support
 ```
 
-1. `wget` the following files from the nuc to aid in the deployment of ROCK
+- `wget` the following files from the nuc to aid in the deployment of ROCK
 
-  1. cd to the user's /home directory
+  - cd to the user's /home directory
     ```
     cd    
     ```
 
-  1. Grab the rock scripts
+  - Grab the rock scripts
     ```
     sudo wget http://10.[state].10.19:4000/administrator/rock-scripts/archive/master.tar.gz
     ```
 
-  1. Rename the file.
+  - Rename the file.
     ```
     sudo mv master.tar.gz rock-scripts_master.tar.gz
     ```
 
-  1. Grab the rock dashboards
+  - Grab the rock dashboards
     ```
     sudo wget http://10.[state].10.19:4000/administrator/rock-dashboards/archive/master.tar.gz
     ```
 
-  1. Rename the file
+  - Rename the file
     ```
     sudo mv master.tar.gz rock-dashboards_master.tar.gz
     ```
 
-1. Copy them to the need directory
+- Copy them to the need directory
 
   ```
   cd
@@ -239,27 +239,27 @@ sudo mkdir -p /srv/rocknsm/support
   sudo cp ~/rock-scripts_master.tar.gz /srv/rocknsm/support/rock-scripts_master.tar.gz
   ```
 
-1. Comment the entire `setup yum repos` section out of the `/opt/rocknsm/rock/playbooks/roles/sensor-common/tasks/configure.yml` playbook in order to deploy rock correctly. We have our own. to block comment out use the following method
-  1. Crtl-v
+- Comment the entire `setup yum repos` section out of the `/opt/rocknsm/rock/playbooks/roles/sensor-common/tasks/configure.yml` playbook in order to deploy rock correctly. We have our own. to block comment out use the following method
+  - Crtl-v
 
-  1. Make your Selection
+  - Make your Selection
 
-  1. Type `:s/^/#/`
+  - Type `:s/^/#/`
 
-1. With the current setup, the Ansible script doesn't play nicely with the shell script wrapper. So we will deploy the ansible script directly.
+- With the current setup, the Ansible script doesn't play nicely with the shell script wrapper. So we will deploy the ansible script directly.
 
-1. Navigate to the /opt/rocknsm/rock/playbooks`
+- Navigate to the /opt/rocknsm/rock/playbooks`
   ```
   cd /opt/rocknsm/rock/playbooks
   ```
 
-1. And then deploy
+- And then deploy
   ```
   sudo ansible-playbook -K deploy-rock.yml
   ```
   It should complete with **no** errors
 
-1. The following files need to be edited in `vi` they can be copy and pasted. Just make sure you replace [state] with your state.
+- The following files need to be edited in `vi` they can be copy and pasted. Just make sure you replace [state] with your state.
 
 ___
 
@@ -349,9 +349,9 @@ transaction.state.log.min.isr=1
 # Messages are immediately written to the filesystem but by default we only fsync() to sync
 # the OS cache lazily. The following configurations control the flush of data to disk.
 # There are a few important trade-offs here:
-#    1. Durability: Unflushed data may be lost if you are not using replication.
-#    2. Latency: Very large flush intervals may lead to latency spikes when the flush does occur as there will be a lot of data to flush.
-#    3. Throughput: The flush is generally the most expensive operation, and a small flush interval may lead to exceessive seeks.
+#    - Durability: Unflushed data may be lost if you are not using replication.
+#    - Latency: Very large flush intervals may lead to latency spikes when the flush does occur as there will be a lot of data to flush.
+#    - Throughput: The flush is generally the most expensive operation, and a small flush interval may lead to exceessive seeks.
 # The settings below allow one to configure the flush policy to flush data after a period of time or
 # every N messages (or both). This can be done globally and overridden on a per-topic basis.
 
@@ -454,7 +454,7 @@ event bro_init() &priority=-5
 }
 
 ```
-1. Change the suricata threads per interface so suricata doesnt compete with bro for threads
+- Change the suricata threads per interface so suricata doesnt compete with bro for threads
 ```
 %YAML 1.1
 ---
@@ -488,7 +488,7 @@ default-log-dir: /data/suricata
 
 ```
 
-1. Open the following ports on the firewall for the sensor
+- Open the following ports on the firewall for the sensor
 
   - 9092 TCP - Kafka
 
@@ -500,6 +500,6 @@ default-log-dir: /data/suricata
   ```
   sudo firewall-cmd --reload
   ```
-1. Restart Rock with `rock_stop` and `rock_start`
+- Restart Rock with `rock_stop` and `rock_start`
 
 Move onto [Rock NSM Data Node](rocknsm-datanode.md)

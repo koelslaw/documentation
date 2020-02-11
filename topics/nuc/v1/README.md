@@ -15,7 +15,7 @@ The intel Nuc is an essential part of the initial setup and maintenance. It is u
 ## Deploy Initial Configuration
 We are going to deploy the initial configuration for the Nuc. This will configure the Nuc as a repository to build the rest of the kit, as well as to store documentation.  
 
-1. Before that, we need some upstream packages for installation. To get those, we need to grab our RHEL subscription.
+- Before that, we need some upstream packages for installation. To get those, we need to grab our RHEL subscription.
 
   ```
   sudo subscription-manager register --username [see Platform Management] --password [see Platform Management] --auto-attach
@@ -23,9 +23,9 @@ We are going to deploy the initial configuration for the Nuc. This will configur
 
   Congrats! You have access to the RHEL RPM Repos. By extension, so does the rest of the stack.
 
-2. The next script is meant to take some of the work on setting up the Nuc. Using the script also ensures the rest of the kit has what it needs to function.
+- The next script is meant to take some of the work on setting up the Nuc. Using the script also ensures the rest of the kit has what it needs to function.
 
-3. Clone the mozarkite GitHub repo. If you cannot access di2e, check with d2ie to ensure you have the authorization to be on di2e. Also, check with technical SME to ensure you have access to the git repo also. If you don't have git already installed using `sudo yum install git`.
+- Clone the mozarkite GitHub repo. If you cannot access di2e, check with d2ie to ensure you have the authorization to be on di2e. Also, check with technical SME to ensure you have access to the git repo also. If you don't have git already installed using `sudo yum install git`.
 
   ```
   sudo git clone https://di2euserfirstname.lastname@bitbucket.di2e.net/scm/mozarkite/mozarkite-docs.git
@@ -34,7 +34,7 @@ We are going to deploy the initial configuration for the Nuc. This will configur
 
 :warning: The next action will result in large downloads. I would not recommend completing the following action unless you have a decent internet connection and/or some time. :warning:
 
-4. Run the deploy Nuc Script
+- Run the deploy Nuc Script
   ```
   sudo sh ~/mozarkite-docs/topics/nuc/deploy-nuc.sh
   ```

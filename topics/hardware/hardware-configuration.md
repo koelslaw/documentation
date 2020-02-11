@@ -13,10 +13,10 @@ Consult the [Platform Management](platform-management.md) page to to get all the
 
 
 ## Table of Contents
-1. [Intel Nuc Configuration](nuc/README.md)
-2. [Gigamon Configuration](gigamon/README.md)
-3. [Network Configuration](network/README.md)
-4. [Dell R840 Configuration](dell/README.md)
+- [Intel Nuc Configuration](nuc/README.md)
+- [Gigamon Configuration](gigamon/README.md)
+- [Network Configuration](network/README.md)
+- [Dell R840 Configuration](dell/README.md)
 
 Move to [Software Deployment](platform-management.md)
 

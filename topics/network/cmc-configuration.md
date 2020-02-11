@@ -3,9 +3,9 @@
 If you have not already done so, press the chassis power button to turn it on. The LCD screen displays a series of initialization screens as it turns on. When it is ready, the Language Setup screen is displayed.
 
 # Initial Configuration (LCD Panel)
-1. Select a language from the options in the dialog box. The following message is displayed on the enclosure screen: `Configure Enclosure?`
-1. Press the center button to continue to the `CMC Network Settings` screen.
-1. Configure the CMC network settings for your environment:
+- Select a language from the options in the dialog box. The following message is displayed on the enclosure screen: `Configure Enclosure?`
+- Press the center button to continue to the `CMC Network Settings` screen.
+- Configure the CMC network settings for your environment:
 - Network speed `1000`
 - Duplex mode `Auto`
 - Network mode `static`
@@ -13,15 +13,15 @@ If you have not already done so, press the chassis power button to turn it on. T
 - DNS settings [refer to the Platform Management page](../platform-management.md)
 
 # Initial Configuration (WebUI)
-1. Connect a network cable to one of the management ports on the back of the CMC.
+- Connect a network cable to one of the management ports on the back of the CMC.
 
 > Note: There are redundant management interfaces. Either one will work. If you only have one plugged in, you'll get a warning when you log into the WebUI, but it isn't a problem. To make the warning go away, plug the CMC into [an appropriate switch port in VLAN10](../hardware-assembly.md).
 ![](../../images/cmc-management.png)
 > Management port highlighted purple  
 
-1. Set your local IP address to be in the same subnet as the management IP you configured above.
-1. Point your browser to the management IP you set above. See the [Platform Management](../platform-management.md) page for exact address and credentials.
-1. Login with the default credentials stored on the [Platform Management page](../platform-management.md). This will bring you to the Dell switch home screen.
+- Set your local IP address to be in the same subnet as the management IP you configured above.
+- Point your browser to the management IP you set above. See the [Platform Management](../platform-management.md) page for exact address and credentials.
+- Login with the default credentials stored on the [Platform Management page](../platform-management.md). This will bring you to the Dell switch home screen.
 
 In the CMC, go to the I/O Module Overview. In the line for the `R1-2210 VRTX 10Gb Switch`, click the `Launch I/O Module GUI`.
 

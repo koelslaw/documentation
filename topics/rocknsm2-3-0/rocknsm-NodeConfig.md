@@ -346,7 +346,7 @@ elasticsearch.url: "http://0.0.0.0:9200"
 
 ___
 
-1. The following files need to be edited in `vi` they can be copy and pasted. Just make sure you replace [state] with your state.
+- The following files need to be edited in `vi` they can be copy and pasted. Just make sure you replace [state] with your state.
 
 ___
 

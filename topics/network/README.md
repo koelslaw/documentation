@@ -91,13 +91,13 @@ The entire running configuration is stored in the [config directory](../../confi
 For Specific Configuration examples see the [Switch](../switch/README.md) Configuration
 
 ## Initial Switch Configuration (WebUI)
-1. Connect a network cable to the management port on the front of the switch
+- Connect a network cable to the management port on the front of the switch
 ![](../../images/switch-management.png)
 > Management port highlighted purple  
 
-2. Set your local IP address to be in the same subnet as the management IP you configured above  
+- Set your local IP address to be in the same subnet as the management IP you configured above  
 
-3. Point your browser to the management IP from the [Platform Management page](../platform-management.md) page  
+- Point your browser to the management IP from the [Platform Management page](../platform-management.md) page  
 
 
 Move onto [Dell Server R840 Configuration](../dell/README.md)

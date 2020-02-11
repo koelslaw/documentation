@@ -49,5 +49,5 @@ Testing
 ```
 
 ## Hardware Maintx
-1. Cleaning of fan assemblies
-2. Tightening of all screws
+- Cleaning of fan assemblies
+- Tightening of all screws

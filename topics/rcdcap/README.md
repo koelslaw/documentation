@@ -29,19 +29,19 @@ Prereq:
 
 
 
-1. Download the latest version of RCDCap
+- Download the latest version of RCDCap
 
   ```
   sudo wget https://sourceforge.net/projects/rcdcap/files/RCDCap-0.9.0-Source.tar.bz2/download -o rcpcap.tar.bz2
   ```
 
-1. "Unzip" the file
+- "Unzip" the file
 
   ```
   sudo tar xjf rcdcap.tar.bz2
   ```
 
-1. Prepare the environment to compile RCDCap
+- Prepare the environment to compile RCDCap
 
   ```
   sudo yum groupinstall "Development Tools"
@@ -51,7 +51,7 @@ Prereq:
   sudo yum install boost-devel libpcap-devel libstdc++-static cmake rpmrebuild
   ```
 
-1. Change into the project top directory(the directory
+- Change into the project top directory(the directory
 outside the extracted source folder) and type:
 
   ```
@@ -70,27 +70,27 @@ outside the extracted source folder) and type:
   sudo cpack -D CPACK_RPM_PACKAGE_DEBUG=1 -D CPACK_RPM_SPEC_INSTALL_POST="/bin/true" -G RPM
   ```
 
-1. The build for this tool is a little rough around the edges. I tried to create a directory that is not required during installation. We are going to `rpmrebuild`, the new rpm we just built.  
+- The build for this tool is a little rough around the edges. I tried to create a directory that is not required during installation. We are going to `rpmrebuild`, the new rpm we just built.  
 
   ```
   sudo rpmrebuild -pve ~/RCDCap-0.9.0-Source/RCDCap-0.9.0-Linux.rpm 
   ```
 
-1. Find the lines that contain the directories `/man/` and `/man1` and delete those lines.
+- Find the lines that contain the directories `/man/` and `/man1` and delete those lines.
 
-1. Finally, install the package that you have just rebuilt:
+- Finally, install the package that you have just rebuilt:
 
   ```
   sudo rpm -ihv RCDCap-*.rpm
   ```
 
-1. Ensure it starts without errors
+- Ensure it starts without errors
 
   ```
   sudo LD_LIBRARY_PATH=/usr/lib rcdcap -i {recieving interface} --erspan -t tap0
   ```
 
-1. Remove the packages we used to compile
+- Remove the packages we used to compile
 
   ```
   sudo yum groupremove "Development Tools"

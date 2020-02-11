@@ -4,23 +4,23 @@ The CMAT kit contains [several software tool suites](software-components.md).
 Here we will begin the deployment of that software onto the stack.
 
 ## Infrastructure
-1. [ESXi](vmware/README.md)
+- [ESXi](vmware/README.md)
 
 ## Passive Software Deployment Order
-1. [RHEL DNS Server](dns/README.md)
-1. [RockNSM Data Node](rocknsm/README.md)
-1. [RockNSM Sensor Bare Metal](rocknsm/README.md)
-1. [RockNSM 2.2.0 Node Deployment](rocknsm2-2-0/README.md)
-1. [RockNSM 2.3.0 Node Deployment](rocknsm2-3-0/README.md)
-1. [RockNSM 2.4.0 Node Deployment](rocknsm2-4-0/README.md)
-1. [RockNSM 2.5.0 Node Deployment...Pending](rocknsm2-5-0_Pending/README.md)
-1. [CAPESv1](capes/README.md)
-1. [CAPESv2...Pending](capes/README.md)
-1. [GRASSMARLIN](grassmarlin/README.md)
+- [RHEL DNS Server](dns/README.md)
+- [RockNSM Data Node](rocknsm/README.md)
+- [RockNSM Sensor Bare Metal](rocknsm/README.md)
+- [RockNSM 2.2.0 Node Deployment](rocknsm2-2-0/README.md)
+- [RockNSM 2.3.0 Node Deployment](rocknsm2-3-0/README.md)
+- [RockNSM 2.4.0 Node Deployment](rocknsm2-4-0/README.md)
+- [RockNSM 2.5.0 Node Deployment...Pending](rocknsm2-5-0_Pending/README.md)
+- [CAPESv1](capes/README.md)
+- [CAPESv2...Pending](capes/README.md)
+- [GRASSMARLIN](grassmarlin/README.md)
 
 ## Active Software Deployment Order
-1. [OpenVAS](openvas/README.md)
-1. [Nmap](nmap/README.md)
-1. [BlueScope](bluescope/README.md)
+- [OpenVAS](openvas/README.md)
+- [Nmap](nmap/README.md)
+- [BlueScope](bluescope/README.md)
 
 Move onto [Post-Installation Function Check](function-check.md)

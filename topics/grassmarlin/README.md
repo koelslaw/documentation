@@ -27,7 +27,7 @@ GrassMarlin v3.2 User Guide:
 - Click Finish  
 
 ## Install Instructions
-1. Install OS in accordance with [Rhel Documentation](../rhel/README.md)
+- Install OS in accordance with [Rhel Documentation](../rhel/README.md)
 
 ## Install GRASSMARLIN
 ```
