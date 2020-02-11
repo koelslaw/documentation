@@ -236,8 +236,7 @@ sudo firewall-cmd --reload
 ​
   - disable subtask `notify: Enable and restart lighttpd` that is a part of `Install ROCK lighttpd configuration` in `/usr/share/rock/roles/lighttpd/tasks/main.yml`
 ​
-  - disable step `Download RockNSM elastic configs` in
-  `/usr/share/rock/roles/kibana/tasks/main.yml` as it ignores the offline flag and they already present
+  - disable step `Download RockNSM elastic configs` in `/usr/share/rock/roles/kibana/tasks/main.yml` as it ignores the offline flag and they are already present
 ​
 ### Installation
 Most of the Rock configuration is now automated and can be called from anywhere on the os.
