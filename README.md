@@ -7,12 +7,11 @@
 </p>
 
 ## Note from the creators:
-
-This documentation was made with best effort on a short timeline. Most of the documentation is correct, but there could be nuances or minor details that still need to be adjusted to your environment. Please contribute fixes back to the project.  
-
 Since the main components of the CMAT kit is MOCYBER's ROCK platform we found it fitting to name it after MO's State Rock.
 
 As a git repo, this serves as the main source of documentation for the Cyber Mission Assurance Team (CMAT) kit. This repository does not cover the concept of operations (CONOPS) for the team but rather how to build the kit and the concepts of employing (CONEMP) the kit.
+
+This documentation was made with best effort on a short timeline. Most of the documentation is correct, but there could be nuances or minor details that still need to be adjusted to your environment. Please contribute fixes back to the project.  
 
   **Famous Quote: When you wait till the last minute then it only takes a minute. -Jeff Geiger**
 

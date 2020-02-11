@@ -182,9 +182,9 @@ ___
 
 ## Step 3 - Install Server - U2 & U3
 ### Rail and Server Installation
-Identifying the rail kit contents
+- Identifying the rail kit contents
 To install the left rail:
-- **DO NOT** Fully extend the rear sliding bracket of the rail.
+> **DO NOT** Fully extend the rear sliding bracket of the rail.
 
 - Position the rail end piece labeled FRONT facing inward and
 orient the rear end piece to align with the holes on the rear
