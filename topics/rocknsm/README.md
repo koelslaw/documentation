@@ -49,5 +49,5 @@ The sensor has the network security monitoring and data shipping elements:
     - [Rock NSM 2.4.x (CENTOS)](./topics/rocknsm2-4-0/CENTOS/README.md)
     - [Rock NSM 2.4.x (RHEL)](./topics/rocknsm2-4-0/RHEL/README.md)
   - Rock NSM 2.5.x (Pending)
-    - [Rock NSM 2.5.x (CENTOS)](./topics/rocknsm2-5-0_Pending/CENTOS/README.md)
-    - [Rock NSM 2.5.x (RHEL)](./topics/rocknsm2-5-0_Pending/RHEL/README.md)
+    - [Rock NSM 2.5.x (CENTOS)](./topics/rocknsm2-5-0/CENTOS/README.md)
+    - [Rock NSM 2.5.x (RHEL)](./topics/rocknsm2-5-0/RHEL/README.md)

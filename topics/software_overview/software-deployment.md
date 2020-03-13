@@ -13,7 +13,7 @@ Here we will begin the deployment of that software onto the stack.
 - [RockNSM 2.2.0 Node Deployment](../rocknsm2-2-0/README.md)
 - [RockNSM 2.3.0 Node Deployment](../rocknsm2-3-0/README.md)
 - [RockNSM 2.4.0 Node Deployment](../rocknsm2-4-0/README.md)
-- [RockNSM 2.5.0 Node Deployment...Pending](../rocknsm2-5-0_Pending/README.md)
+- [RockNSM 2.5.0 Node Deployment...Pending](../rocknsm2-5-0/README.md)
 - [CAPESv1](../capes/README.md)
 - [CAPESv2...Pending](../capes/README.md)
 - [GRASSMARLIN](../grassmarlin/README.md)
