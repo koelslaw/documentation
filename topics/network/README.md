@@ -39,7 +39,7 @@ Router(config)# username [username] privilege 15 secret 0 [password]
 
 You can copy and paste the provided configuration into the router console. You need to change the hostnames, octets, and insert your passwords from the [Platform Management page](../platform-management.md) before inputting this into the router.
 
-A good suggestion is to perform a "Find"  in the configuration for `[` and replace the `[comment]` with your specific environment variables.
+>NOTE: A good suggestion is to perform a "Find"  in the configuration for `[` and replace the `[comment]` with your specific environment variables.
 
 For Specific Configuration examples see the [Router](../router/README.md) Configuration
 

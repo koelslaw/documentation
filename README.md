@@ -7,20 +7,20 @@
 </p>
 
 ## Note from the creators:
-Since the main components of the CMAT kit is MOCYBER's ROCK platform we found it fitting to name it after MO's State Rock.
+Since the main components of the CMAT kit are MOCYBER's ROCK platform, we found it fitting to name it after MO's State Rock.
 
-As a git repo, this serves as the main source of documentation for the Cyber Mission Assurance Team (CMAT) kit. This repository does not cover the concept of operations (CONOPS) for the team but rather how to build the kit and the concepts of employing (CONEMP) the kit.
+As a git repo, this serves as the primary source of documentation for the Cyber Mission Assurance Team (CMAT) kit. This repository does not cover the concept of operations (CONOPS) for the team but rather how to build the equipment and the ideas of employing (CONEMP) the kit.
 
-This documentation was made with best effort on a short timeline. Most of the documentation is correct, but there could be nuances or minor details that still need to be adjusted to your environment. Please contribute fixes back to the project.  
+This documentation was made with the best effort on a short timeline. Most of the documentation is correct, but there could be nuances or minor details that still need to be adjusted to your environment. Please contribute fixes back to the project.  
 
-  **Famous Quote: When you wait till the last minute then it only takes a minute. -Jeff Geiger**
+  **Famous Quote: When you wait till the last minute, then it only takes a minute. -Jeff Geiger**
 
 
 :warning: Getting Access to the latest and greatest :warning:
 
-If you are reading this in a pdf then you are likely reading it in a quick start guide. To get the latest you need to request an account with the website below:
+If you are reading this in a pdf, then you are likely reading it in a quick start guide. To get the latest, you need to request an account with the website below:
 
-- https://www.di2e.net - and look for the MOZARKITE project
+- https://www.di2e.net - send a message to the owner -> kirk.s.koelzer.mil@mail.mil
 
 
 ## Table of Contents

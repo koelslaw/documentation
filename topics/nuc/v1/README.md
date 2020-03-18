@@ -32,7 +32,7 @@ We are going to deploy the initial configuration for the Nuc. This will configur
   ```
 
 
-:warning: The next action will result in large downloads. I would not recommend completing the following action unless you have a decent internet connection and/or some time. :warning:
+:warning: The next action will result in large downloads. I would not recommend completing the following actions unless you have a decent internet connection and/or some time. :warning:
 
 - Run the deploy Nuc Script
   ```
@@ -90,7 +90,7 @@ sudo systemctl restart gitea
 sudo systemctl restart sshd
 ```
 
-Once the post-installation steps have been completed, then we need to clone a few git repos to ensure we have what we need to build ROCK. Navigate to '10.[state].10.19:4000` or `nuc.[STATE].cmat.lan:4000` if you already have DNS set up in accordance with the documentation.
+Once the post-installation steps have been completed, then we need to clone a few git repositories to ensure we have what we need to build ROCK. Navigate to '10.[state].10.19:4000` or `nuc.[STATE].cmat.lan:4000` if you already have DNS set up in accordance with the documentation.
 
 Mirror the following Repositories in gitea
 
